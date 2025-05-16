@@ -1,0 +1,21 @@
+{
+  "name": "ffruit-navigation",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "@vue/eslint-config-typescript": "^14.5.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-vue": "^10.1.0",
+    "typescript": "^5.8.3"
+  }
+}
