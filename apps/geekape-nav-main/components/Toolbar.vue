@@ -37,13 +37,15 @@
 </template>
 
 <script>
-import BackTop from "./BackTop";
+import BackTop from './BackTop'
 export default {
   components: {
     BackTop
   },
-  data: {}
-};
+  data: function() {
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

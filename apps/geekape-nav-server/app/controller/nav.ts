@@ -1,6 +1,6 @@
-import Controller from '../core/base_controller';
-const request = require('request');
-const cheerio = require('cheerio');
+import Controller from '../core/base_controller'
+import  request  from 'request'
+const cheerio = require('cheerio')
 
 enum NAV_STATUS {
   pass,
@@ -16,7 +16,7 @@ export default class NavController extends Controller {
   async list() {
     const { ctx } = this
     const { model } = ctx
-    let { status = 0, categoryId, name } = ctx.query
+    const { status = 0, categoryId, name } = ctx.query
 
     let findParam: any = {
       status,
@@ -35,13 +35,13 @@ export default class NavController extends Controller {
       }
     }
     if (name) {
-      let reg = new RegExp(name,'i');
+      const reg = new RegExp(name,'i')
       findParam.name = {
         $regex: reg
       }
     }
 
-    await super.getList(findParam);
+    await super.getList(findParam)
   }
 
   async add() {
@@ -76,7 +76,7 @@ export default class NavController extends Controller {
   }
 
   async del() {
-    await super.remove();
+    await super.remove()
   }
 
   async edit() {
@@ -85,7 +85,7 @@ export default class NavController extends Controller {
     if (Array.isArray(tags)) {
       await this.ctx.service.tag.addMultiTag(tags)
     }
-    await super.update();
+    await super.update()
   }
 
   async audit() {
@@ -101,7 +101,7 @@ export default class NavController extends Controller {
       // 批量添加tag
       await this.ctx.service.tag.addMultiTag(tags)
     }
-    await super.update();
+    await super.update()
   }
 
   /**
@@ -111,7 +111,7 @@ export default class NavController extends Controller {
     const { request, model } = this.ctx
     try {
       const { id, categoryId } = request.query
-      let resData: any = []
+      const resData: any = []
       // 取所有子分类
       const categorys = await model.Category.find({ categoryId })
       const categoryIds = categorys.reduce((t, v) => [...t, v._id], [])
@@ -146,24 +146,24 @@ export default class NavController extends Controller {
     let res
 
     if (id) {
-      res = await super.get();
+      res = await super.get()
     } else if(keyword) {
-      let reg = new RegExp(keyword,'i');
+      const reg = new RegExp(keyword,'i')
       await super.getList({
         name: { $regex: reg },
-      }, (table)=> table.limit(10));
+      }, (table)=> table.limit(10))
     }
   }
 
   async random() {
-    await super.getRandomList();
+    await super.getRandomList()
   }
 
   async ranking() {
     const [view, star, news] = await Promise.all([
-        this.service.nav.findMaxValueList('view'),
-        this.service.nav.findMaxValueList('star'),
-        this.service.nav.findMaxValueList('createTime'),
+      this.service.nav.findMaxValueList('view'),
+      this.service.nav.findMaxValueList('star'),
+      this.service.nav.findMaxValueList('createTime'),
     ])
 
     this.success({

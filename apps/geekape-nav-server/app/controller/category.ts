@@ -1,4 +1,4 @@
-import Controller from '../core/base_controller';
+import Controller from '../core/base_controller'
 
 export default class CategoryController extends Controller {
   tableName(): string {
@@ -10,10 +10,10 @@ export default class CategoryController extends Controller {
     const { showInMenu = true } = ctx.query
     try {
       const params: any = {}
-      if (showInMenu && showInMenu !== "false") {
+      if (showInMenu && showInMenu !== 'false') {
         params.showInMenu = { $in: [null, true] }
       }
-      let data = await ctx.model.Category.find(params).limit(100000)
+      const data = await ctx.model.Category.find(params).limit(100000)
 
       const newData = ctx.service.category.formatCategoryList(data)
       this.success(newData)

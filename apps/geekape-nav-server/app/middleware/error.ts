@@ -1,1 +1,2 @@
-module.exports = require('koa-json-error');
+import KJE from 'koa-json-error'
+export default  KJE

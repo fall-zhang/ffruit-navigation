@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import type { ProFormProps } from '@ant-design/pro-form';
+import { useEffect, useRef } from 'react'
+import type { ProFormProps } from '@ant-design/pro-form'
 
 interface IProps extends ProFormProps {
   onInitialValues(values: any): object,
@@ -13,7 +13,7 @@ interface IProps extends ProFormProps {
  * @param props
  */
 export default function useGeekProForm(props: IProps) {
-  const form = useRef<any>({});
+  const form = useRef<any>({})
 
   useEffect(() => {
     if (props?.visible && props.selectedData) {
@@ -23,14 +23,14 @@ export default function useGeekProForm(props: IProps) {
         if (props.onInitialValues) {
           selectedData = props.onInitialValues(props.selectedData)
         }
-        console.log('form.current.setFieldsValue:', selectedData);
+        console.log('form.current.setFieldsValue:', selectedData)
         form.current.setFieldsValue(selectedData)
       } else {
         form.current.resetFields()
       }
 
     }
-  }, [props?.visible]);
+  }, [props?.visible])
 
 
   return {

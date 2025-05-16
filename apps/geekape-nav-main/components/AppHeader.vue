@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import AppSearch from "./AppSearch";
+import AppSearch from './AppSearch'
 export default {
-  name: "AppHeader",
+  name: 'AppHeader',
   components: {AppSearch},
   props: {
     dialogFormVisible: {
@@ -33,7 +33,7 @@ export default {
       searchType: 'station'
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

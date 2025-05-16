@@ -1,20 +1,20 @@
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
-import { PageLoading } from '@ant-design/pro-layout';
-import { notification } from 'antd';
-import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
-import RightContent from '@/components/RightContent';
-import Footer from '@/components/Footer';
-import {getPersistenceData} from "@/utils/persistence";
-import {CURRENT_USER, TOKEN} from "@/constants";
+import type { Settings as LayoutSettings } from '@ant-design/pro-layout'
+import { PageLoading } from '@ant-design/pro-layout'
+import { notification } from 'antd'
+import type { RequestConfig, RunTimeLayoutConfig } from 'umi'
+import RightContent from '@/components/RightContent'
+import Footer from '@/components/Footer'
+import {getPersistenceData} from '@/utils/persistence'
+import {CURRENT_USER, TOKEN} from '@/constants'
+import { useLocation, useNavigate } from 'react-router'
 
 // const isDev = process.env.NODE_ENV === 'development';
-const loginPath = '/user/login';
+const loginPath = '/user/login'
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
-};
+}
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -24,6 +24,8 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
+  const navigate = useNavigate()
+  const location = useLocation()
   const fetchUserInfo = async () => {
     const token = getPersistenceData(TOKEN)
     const user: any = getPersistenceData(CURRENT_USER)
@@ -33,23 +35,23 @@ export async function getInitialState(): Promise<{
         access: 'admin',
       }
     } else {
-      history.push(loginPath);
+      navigate(loginPath)
     }
-    return undefined;
-  };
+    return undefined
+  }
   // 如果是登录页面，不执行
-  if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
+  if (location.pathname !== loginPath) {
+    const currentUser = await fetchUserInfo()
     return {
       fetchUserInfo,
       currentUser,
       settings: {},
-    };
+    }
   }
   return {
     fetchUserInfo,
     settings: {},
-  };
+  }
 }
 
 /**
@@ -92,20 +94,22 @@ export async function getInitialState(): Promise<{
  */
 export const request: RequestConfig = {
   errorHandler: (error: any) => {
-    const { response } = error;
+    const { response } = error
 
     if (!response) {
       notification.error({
         description: '您的网络发生异常，无法连接服务器',
         message: '网络异常',
-      });
+      })
     }
-    throw error;
+    throw error
   },
-};
+}
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+  const navigate = useNavigate()
+  const location = useLocation()
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
@@ -114,16 +118,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
-      const { location } = history;
       // 如果没有登录，重定向到 login
       const token = getPersistenceData(TOKEN)
       if (!token && location.pathname !== loginPath) {
-        history.push(loginPath);
+        navigate(loginPath)
       }
     },
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     ...initialState?.settings,
-  };
-};
+  }
+}

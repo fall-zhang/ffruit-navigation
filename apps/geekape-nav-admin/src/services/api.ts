@@ -1,4 +1,4 @@
-import request from "@/utils/request";
+import request from '@/utils/request'
 
 export const API_LOGIN = '/api/login'
 export const API_NAV_LIST = '/api/nav/list'
@@ -14,7 +14,7 @@ export async function login(data: { username: string, password: string }) {
     url: API_LOGIN,
     method: 'POST',
     data,
-  });
+  })
 }
 
 export async function getNavList(data: any) {
@@ -22,5 +22,5 @@ export async function getNavList(data: any) {
     url: API_NAV_LIST,
     method: 'GET',
     data
-  });
+  })
 }

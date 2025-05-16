@@ -1,9 +1,9 @@
-import Vuex from "vuex";
+import Vuex from 'vuex'
 
 const store = new Vuex.Store({
   state: {
     category: [],
-    seletedMenuParentId: '',
+    seletedMenuParentId: '',        
     seletedMenuId: '',
   },
 
@@ -24,9 +24,9 @@ const store = new Vuex.Store({
 
   actions: {
   }
-});
+})
 
 
 // 需要返回一个函数
-export default () => store;
+export default () => store
 

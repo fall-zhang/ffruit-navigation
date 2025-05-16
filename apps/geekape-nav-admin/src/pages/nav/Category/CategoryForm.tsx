@@ -1,12 +1,12 @@
 import {
   ModalForm, ProFormDependency, ProFormSelect, ProFormSwitch, ProFormText,
   ProFormUploadButton,
-} from "@ant-design/pro-form";
-import useProFormItem from "@/hooks/useProFormItem";
-import useGeekProForm from "@/components/GeekProForm/useGeekProForm";
-import {API_CATEGORY, API_CATEGORY_LIST, API_NAV} from "@/services/api";
-import request from "@/utils/request";
-import {useMemo} from "react";
+} from '@ant-design/pro-form'
+import useProFormItem from '@/hooks/useProFormItem'
+import useGeekProForm from '@/components/GeekProForm/useGeekProForm'
+import {API_CATEGORY, API_CATEGORY_LIST, API_NAV} from '@/services/api'
+import request from '@/utils/request'
+import {useMemo} from 'react'
 
 export default function CategoryForm(props: any) {
   const formProps = useGeekProForm({
@@ -49,17 +49,17 @@ export default function CategoryForm(props: any) {
 
   async function onFinish(values: any) {
     const data = {
-        id: props.isEdit ? props.selectedData?._id : undefined,
-        ...values,
-      }
-      await request({
-        url: API_CATEGORY,
-        method: props.isEdit ? 'PUT' : 'POST',
-        msg: props.isEdit ? '修改成功' : '添加成功',
-        data
-      })
-      props.hide();
-      props.tableRef.reload()
+      id: props.isEdit ? props.selectedData?._id : undefined,
+      ...values,
+    }
+    await request({
+      url: API_CATEGORY,
+      method: props.isEdit ? 'PUT' : 'POST',
+      msg: props.isEdit ? '修改成功' : '添加成功',
+      data
+    })
+    props.hide()
+    props.tableRef.reload()
   }
 
   return (

@@ -3,9 +3,11 @@
     <el-row :gutter="20">
       <el-col :md="8" :sm="12">
         <el-card class="box-card" shadow="never">
-          <div slot="header" class="clearfix">
+          <template v-slot:header>
+<div  class="clearfix">
             <span>最新导航</span>
           </div>
+</template>
           <div v-for="item in data.news" class="text item">
            <nav-ranking :data="item" />
           </div>
@@ -13,9 +15,11 @@
       </el-col>
       <el-col :md="8" :sm="12">
         <el-card class="box-card" shadow="never">
-          <div slot="header" class="clearfix">
+          <template v-slot:header>
+<div  class="clearfix">
             <span>点击最多导航</span>
           </div>
+</template>
           <div v-for="item in data.view" class="text item">
             <nav-ranking :data="item" count-type="view" />
           </div>
@@ -23,9 +27,11 @@
       </el-col>
       <el-col :md="8" :sm="12">
         <el-card class="box-card" shadow="never">
-          <div slot="header" class="clearfix">
+          <template v-slot:header>
+<div  class="clearfix">
             <span>点赞最多导航</span>
           </div>
+</template>
           <div v-for="item in data.star" class="text item">
             <nav-ranking :data="item" count-type="star" />
           </div>
@@ -36,9 +42,9 @@
 </template>
 
 <script>
-import NavRanking from "./NavRanking";
+import NavRanking from './NavRanking'
 export default {
-  name: "NavRankingList",
+  name: 'NavRankingList',
   components: {NavRanking},
   props: {
     data: {

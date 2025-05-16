@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 export default {
-  name: "NavRanking",
+  name: 'NavRanking',
   props: {
     data: {
       type: Object,

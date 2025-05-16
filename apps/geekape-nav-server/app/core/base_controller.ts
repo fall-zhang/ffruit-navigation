@@ -1,4 +1,4 @@
-import { Controller } from 'egg';
+import { Controller } from 'egg'
 
 export default class CommonController extends Controller {
   tableName() {
@@ -9,14 +9,14 @@ export default class CommonController extends Controller {
       code: 1,
       msg: 'ok',
       data,
-    };
+    }
   }
   error(msg) {
     this.ctx.body = {
       code: 0,
       msg,
       data: null,
-    };
+    }
   }
 
   //添加
@@ -24,7 +24,7 @@ export default class CommonController extends Controller {
     const { request } = this.ctx
     const tableName = this.tableName()
     try {
-      const res = await this.ctx.model[tableName].create(request.body);
+      const res = await this.ctx.model[tableName].create(request.body)
       this.success(res)
     } catch (e) {
       this.error(e.message)

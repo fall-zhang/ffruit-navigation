@@ -1,4 +1,4 @@
-import {ProFormItemProps} from "@ant-design/pro-form/es/interface";
+import {ProFormItemProps} from '@ant-design/pro-form/es/interface'
 
 export default function useProFormItem<T>(props: ProFormItemProps & T): ProFormItemProps & T {
   if (props.required) {

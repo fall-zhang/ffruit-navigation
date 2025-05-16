@@ -42,7 +42,7 @@ export default {
       show: true
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

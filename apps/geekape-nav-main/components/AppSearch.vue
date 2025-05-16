@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import axios from "../plugins/axios";
-import {API_NAV} from "../api";
-import {titleCase} from "../utils/utils";
+import axios from '../plugins/axios'
+import {API_NAV} from '../api'
+import {titleCase} from '../utils/utils'
 
 const searchGather = {
   station: {
@@ -70,7 +70,7 @@ const searchGather = {
 
 
 export default {
-  name: "AppSearch",
+  name: 'AppSearch',
   props: {
 
   },
@@ -130,7 +130,7 @@ export default {
 
   mounted() {
     window.getJSONPData = function (data) {
-      return data;
+      return data
     }
   }
 }

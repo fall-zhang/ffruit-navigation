@@ -1,4 +1,4 @@
-import { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { Settings as LayoutSettings } from '@ant-design/pro-layout'
 
 const Settings: LayoutSettings & {
   pwa?: boolean;
@@ -16,6 +16,6 @@ const Settings: LayoutSettings & {
   pwa: false,
   logo: '/logo-icon.png',
   iconfontUrl: '',
-};
+}
 
-export default Settings;
+export default Settings

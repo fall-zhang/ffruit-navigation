@@ -22,26 +22,26 @@
       </div>
     </el-container>
 
-    <AddNavPopup :show.sync="showPopup" />
+    <AddNavPopup v-model:show="showPopup" />
     <CustomerServiceBtn @showLog="showLog = true" />
     <AppLog :show="showLog" @closeLog="showLog = false" />
   </el-container>
 </template>
 
 <script>
-import AppNavList from "../components/AppNavList";
+import AppNavList from '../components/AppNavList'
 
 
-import api from "~/api";
-import AppSearch from "../components/AppSearch";
-import CustomerServiceBtn from "../components/CustomerServiceBtn";
-import AppLog from "../components/AppLog";
-import layoutMixin from "../mixins/layoutMixin";
-import NavRanking from "../components/NavRanking";
-import axios from "../plugins/axios";
-import {API_NAV_RANKING} from "../api";
-import NavRankingList from "../components/NavRankingList";
-import Affiche from "../components/Affiche";
+import api from '~/api'
+import AppSearch from '../components/AppSearch'
+import CustomerServiceBtn from '../components/CustomerServiceBtn'
+import AppLog from '../components/AppLog'
+import layoutMixin from '../mixins/layoutMixin'
+import NavRanking from '../components/NavRanking'
+import axios from '../plugins/axios'
+import {API_NAV_RANKING} from '../api'
+import NavRankingList from '../components/NavRankingList'
+import Affiche from '../components/Affiche'
 export default {
   mixins: [layoutMixin],
   layout: 'second',
@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       loading: false,
-      active: "［前端］热门推荐",
+      active: '［前端］热门推荐',
       data: [],
       categorys: [],
       navRanking: {
@@ -67,27 +67,27 @@ export default {
       },
       selfIndex: 0,
       isLeftbar: true
-    };
+    }
   },
 
   methods: {
     async getCategoryList() {
-      const { data: categorys } = await this.$api.getCategoryList();
-      this.categorys = categorys;
+      const { data: categorys } = await this.$api.getCategoryList()
+      this.categorys = categorys
 
       if (Array.isArray(categorys)) {
-        const categoryId = categorys[0]._id;
-        this.findNav(categoryId);
+        const categoryId = categorys[0]._id
+        this.findNav(categoryId)
       }
     },
     dataScroll() {
-      const that = this;
-      let scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      let allSite = document.querySelectorAll(".box");
+      const that = this
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      const allSite = document.querySelectorAll('.box')
       for (let i = 0; i < allSite.length; i++) {
         if (scrollTop >= allSite[i].offsetTop) {
-          that.selfIndex = i;
+          that.selfIndex = i
         }
       }
     },
@@ -102,15 +102,15 @@ export default {
     ])
 
 
-    const id = store.state.seletedMenuParentId || categorys[0]._id;
-    const { data } = await api.findNav(id);
+    const id = store.state.seletedMenuParentId || categorys[0]._id
+    const { data } = await api.findNav(id)
     return {
       categorys,
       navRanking,
       data
-    };
+    }
   },
-};
+}
 </script>
 
 <style lang="scss">

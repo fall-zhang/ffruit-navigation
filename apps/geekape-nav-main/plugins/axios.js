@@ -27,21 +27,21 @@ myAxios.interceptors.request.use(function (config) {
     const token = storage.get('TOKEN')
     token && (config.headers.Authorization = token)
   }
-  return config;
+  return config
 }, function (error) {
 
-  return Promise.reject(error);
-});
+  return Promise.reject(error)
+})
 
 // Add a response interceptor
 myAxios.interceptors.response.use(function (response) {
-  return response.data;
+  return response.data
 }, function (error) {
   if(process.browser){
     errorHandle(error.response.status)
   }
-  return Promise.reject(error.response?.data?.message);
-});
+  return Promise.reject(error.response?.data?.message)
+})
 
 myAxios.defaults.timeout = 6000
 

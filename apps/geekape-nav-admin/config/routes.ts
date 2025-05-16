@@ -14,4 +14,4 @@
 
   {path: '/', redirect: '/nav/audit'},
   {component: './404'},
-];
+]

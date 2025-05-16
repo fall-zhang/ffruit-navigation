@@ -1,6 +1,6 @@
 module.exports = app => {
-  const mongoose = app.mongoose;
-  const Schema = mongoose.Schema;
+  const mongoose = app.mongoose
+  const Schema = mongoose.Schema
 
   const NavSchema = new Schema({
     categoryId: String,
@@ -29,6 +29,6 @@ module.exports = app => {
       type: Number,
       default: 0,
     },
-  }, { collection: 'nav' });
-  return mongoose.model('Nav', NavSchema);
-};
+  }, { collection: 'nav' })
+  return mongoose.model('Nav', NavSchema)
+}

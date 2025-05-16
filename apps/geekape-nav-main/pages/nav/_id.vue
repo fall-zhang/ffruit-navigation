@@ -99,13 +99,13 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios";
-import {API_NAV, API_NAV_RANDOM} from "../../api";
-import layoutMixin from "../../mixins/layoutMixin";
-import navActionMixin from "../../mixins/navActionMixin";
+import axios from '@/plugins/axios'
+import {API_NAV, API_NAV_RANDOM} from '../../api'
+import layoutMixin from '../../mixins/layoutMixin'
+import navActionMixin from '../../mixins/navActionMixin'
 
 export default {
-  name: "NavDetail",
+  name: 'NavDetail',
   mixins: [navActionMixin],
   head() {
     const { name, desc } = this.detail
@@ -121,7 +121,7 @@ export default {
   },
   methods: {
     async getRandomNavList() {
-      const res = await axios.get(API_NAV_RANDOM);
+      const res = await axios.get(API_NAV_RANDOM)
       this.randomNavList = res.data
     },
     handleNavStarFn() {
@@ -135,7 +135,7 @@ export default {
     const [detailRes, randomRes] = await Promise.all([
       axios.get(API_NAV + `?id=${params.id}`),
       axios.get(API_NAV_RANDOM)
-    ]);
+    ])
     return {
       detail: detailRes.data,
       randomNavList: randomRes.data

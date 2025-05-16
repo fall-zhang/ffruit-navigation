@@ -1,13 +1,13 @@
-import {Button, Popconfirm} from "antd";
-import request from "@/utils/request";
-import {API_CATEGORY, API_CATEGORY_LIST} from "@/services/api";
-import GeekProTable from "@/components/GeekProTable/GeekProTable";
-import {ActionType, ProColumns} from "@ant-design/pro-table";
-import {PlusOutlined} from "@ant-design/icons";
-import useGeekProTablePopup from "@/components/GeekProTable/useGeekProTablePopup";
-import CategoryForm from "@/pages/nav/Category/CategoryForm";
-import {useRef, useState} from "react";
-import {CategoryModel} from "@/constants/api";
+import {Button, Popconfirm} from 'antd'
+import request from '@/utils/request'
+import {API_CATEGORY, API_CATEGORY_LIST} from '@/services/api'
+import GeekProTable from '@/components/GeekProTable/GeekProTable'
+import {ActionType, ProColumns} from '@ant-design/pro-table'
+import {PlusOutlined} from '@ant-design/icons'
+import useGeekProTablePopup from '@/components/GeekProTable/useGeekProTablePopup'
+import CategoryForm from '@/pages/nav/Category/CategoryForm'
+import {useRef, useState} from 'react'
+import {CategoryModel} from '@/constants/api'
 
 
 function transformCategoryList(list: any) {
@@ -26,8 +26,8 @@ function transformCategoryList(list: any) {
 
 export default function NavAuditListPage() {
   const formProps = useGeekProTablePopup()
-  const tableRef = useRef<ActionType>();
-  const [categoryList, setCategoryList] = useState([]);
+  const tableRef = useRef<ActionType>()
+  const [categoryList, setCategoryList] = useState([])
 
   async function onRequestData() {
     const res = await request({
@@ -72,23 +72,23 @@ export default function NavAuditListPage() {
     },
   ]
   return (
-      <div>
-        <GeekProTable
-          actionRef={tableRef}
-          columns={columns}
-          pageHeaderProps={{
-            extra: <Button type='primary' onClick={()=> formProps.show()}><PlusOutlined />添加分类</Button>
-          }}
-          search={false}
-          request={onRequestData}
-          renderOptions={(text, record: CategoryModel, _, action)=> ([
-            <a onClick={()=> formProps.show({type: 'edit', data: record, action})}>编辑</a>,
-            <Popconfirm title={'确定删除吗？'} onConfirm={() => onDelete(record._id, action)}>
-              <a>删除</a>
-            </Popconfirm>,
-          ])}
-        />
-        <CategoryForm {...formProps} tableRef={tableRef.current} categoryList={categoryList} />
-      </div>
-  );
+    <div>
+      <GeekProTable
+        actionRef={tableRef}
+        columns={columns}
+        pageHeaderProps={{
+          extra: <Button type='primary' onClick={()=> formProps.show()}><PlusOutlined />添加分类</Button>
+        }}
+        search={false}
+        request={onRequestData}
+        renderOptions={(text, record: CategoryModel, _, action)=> ([
+          <a onClick={()=> formProps.show({type: 'edit', data: record, action})}>编辑</a>,
+          <Popconfirm title={'确定删除吗？'} onConfirm={() => onDelete(record._id, action)}>
+            <a>删除</a>
+          </Popconfirm>,
+        ])}
+      />
+      <CategoryForm {...formProps} tableRef={tableRef.current} categoryList={categoryList} />
+    </div>
+  )
 }

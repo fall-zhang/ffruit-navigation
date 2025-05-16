@@ -34,7 +34,7 @@
               :index="item._id"
               style="text-align: left"
             >
-              <template slot="title">
+              <template v-slot:title>
                 <i
                   :class="item.icon ? item.icon : `el-icon-eleme icon-title`"
                 ></i>
@@ -73,7 +73,7 @@
 
 <script>
 export default {
-  name: "AppNavMenus",
+  name: 'AppNavMenus',
   props: {
     show: {
       type: Boolean,
@@ -91,9 +91,9 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
-      defaultActive: "0-0",
-      selectedCategoryId: ""
-    };
+      defaultActive: '0-0',
+      selectedCategoryId: ''
+    }
   },
   computed: {
     sideBarWidth() {
@@ -121,15 +121,15 @@ export default {
         return
       }
       if (this.selectedCategoryId === parentId) {
-        document.getElementById(id).scrollIntoView();
-        return;
+        document.getElementById(id).scrollIntoView()
+        return
       }
-      this.selectedCategoryId = parentId;
-      this.$emit("handleSubMenuClick", parentId, id);
+      this.selectedCategoryId = parentId
+      this.$emit('handleSubMenuClick', parentId, id)
 
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

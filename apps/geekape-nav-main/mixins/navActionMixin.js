@@ -6,30 +6,30 @@ const navActionMixin = {
   },
   methods: {
     async addNavView(navData = {}) {
-      const { href, view, _id: id } = navData;
+      const { href, view, _id: id } = navData
 
-      await this.$api.editNav({ id, view: view + 1 });
+      await this.$api.editNav({ id, view: view + 1 })
 
-      const views = this.$storage.get("VIEWS") || {};
-      views[id] = view + 1;
-      this.$storage.set("VIEWS", views);
+      const views = this.$storage.get('VIEWS') || {}
+      views[id] = view + 1
+      this.$storage.set('VIEWS', views)
     },
     handleNavClick(navData = {}) {
-      const { href } = navData;
-      this.addNavView(navData);
-      window.open(href, "_blank");
+      const { href } = navData
+      this.addNavView(navData)
+      window.open(href, '_blank')
     },
     async handleNavStar(navData = {}, cb = ()=> {}) {
-      let { star, _id: id } = navData;
+      let { star, _id: id } = navData
 
-      const stars = this.$storage.get("STARS") || {};
-      if (stars[id]) return;
+      const stars = this.$storage.get('STARS') || {}
+      if (stars[id]) return
 
-      star++;
-      await this.$api.editNav({ id, star });
-      cb();
-      stars[id] = star;
-      this.$storage.set("STARS", stars);
+      star++
+      await this.$api.editNav({ id, star })
+      cb()
+      stars[id] = star
+      this.$storage.set('STARS', stars)
     }
   },
 }

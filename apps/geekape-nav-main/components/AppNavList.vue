@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import AppNavItem from "./AppNavItem";
-import navActionMixin from "../mixins/navActionMixin";
+import AppNavItem from './AppNavItem'
+import navActionMixin from '../mixins/navActionMixin'
 
 export default {
   name: 'AppNavList',
@@ -28,7 +28,7 @@ export default {
       default: () => []
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

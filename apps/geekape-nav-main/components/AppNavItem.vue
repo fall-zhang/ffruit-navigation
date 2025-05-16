@@ -51,7 +51,7 @@ export default {
     data: {
       type: Object,
       default: function() {
-        return {};
+        return {}
       }
     }
   },
@@ -60,7 +60,7 @@ export default {
       isStar: false,
       isView: false,
       navData: this.data
-    };
+    }
   },
   methods: {
     handleNavStar(navData) {
@@ -70,7 +70,7 @@ export default {
       })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

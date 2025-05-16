@@ -72,12 +72,12 @@
 </template>
 
 <script>
-import layoutMixin from "../mixins/layoutMixin";
-import axios from "../plugins/axios";
-import {API_NAV, API_NAV_REPTILE, API_TAG_LIST} from "../api";
+import layoutMixin from '../mixins/layoutMixin'
+import axios from '../plugins/axios'
+import {API_NAV, API_NAV_REPTILE, API_TAG_LIST} from '../api'
 
 export default {
-  name: "recommend",
+  name: 'recommend',
   data() {
     return {
       loading: false,

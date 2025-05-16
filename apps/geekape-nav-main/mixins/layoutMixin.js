@@ -1,7 +1,7 @@
-import {mapState} from "vuex";
-import AppHeader from "../components/AppHeader";
-import AppNavMenus from "../components/AppNavMenus";
-import {isMobileSize, throttle} from "../utils/utils";
+import {mapState} from 'vuex'
+import AppHeader from '../components/AppHeader'
+import AppNavMenus from '../components/AppNavMenus'
+import {isMobileSize, throttle} from '../utils/utils'
 
 const layoutMixin = {
   components: {AppHeader, AppNavMenus},
@@ -42,13 +42,13 @@ const layoutMixin = {
   },
   methods: {
     async findNav(id) {
-      this.loading = true;
-      const { data } = await this.$api.findNav(id);
-      this.data = data;
-      this.loading = false;
+      this.loading = true
+      const { data } = await this.$api.findNav(id)
+      this.data = data
+      this.loading = false
     },
     async handleSubMenuClick(parentId, id) {
-      await this.findNav(parentId);
+      await this.findNav(parentId)
     },
     toggleMenu() {
       this.showMenuType = this.showMenuType === 'none' ? 'all' : 'none'

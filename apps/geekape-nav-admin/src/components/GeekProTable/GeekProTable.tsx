@@ -1,9 +1,9 @@
-import React, { ReactNode, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import ProTable, { ProColumns, ProTableProps } from '@ant-design/pro-table';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Dropdown, Menu, PageHeaderProps } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import request from "@/utils/request";
+import React, { ReactNode, useImperativeHandle, useMemo, useRef, useState } from 'react'
+import ProTable, { ProColumns, ProTableProps } from '@ant-design/pro-table'
+import { PageHeaderWrapper } from '@ant-design/pro-layout'
+import { Dropdown, Menu, PageHeaderProps } from 'antd'
+import { DownOutlined } from '@ant-design/icons'
+import request from '@/utils/request'
 
 /**
  * 封装 ProTable 功能
@@ -34,12 +34,12 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
     children,
     renderOptions,
     ...proTableProps
-  } = props;
+  } = props
 
-  const from = useRef();
-  useImperativeHandle(ref, () => ({ from: from.current }), []);
+  const from = useRef()
+  useImperativeHandle(ref, () => ({ from: from.current }), [])
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const realColumns  = useMemo<ProColumns[]>(() => {
     if (renderOptions) {
@@ -53,7 +53,7 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
       ]
     }
     return columns
-  }, [renderOptions, columns]);
+  }, [renderOptions, columns])
 
   // useEffect(() => {
   //   if (renderOptions) {
@@ -75,10 +75,10 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
       rowKey={'_id'}
       {...proTableProps}
     />
-  );
+  )
 
   async function onRequest(params: any) {
-    setLoading(true);
+    setLoading(true)
     try {
       const { url, pageSize, current } = params
       delete params.url
@@ -94,20 +94,20 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
           ...defaultRequestData,
           ...params,
         },
-      });
-      setLoading(false);
+      })
+      setLoading(false)
       // const resData = parseListData(res);
       return {
         data: res?.data?.data,
         total: res?.data?.total,
-      };
+      }
     } catch (err) {
       console.error(err)
     }
   }
 
   if (!showPageHeader) {
-    return proTable;
+    return proTable
   }
 
   return (
@@ -115,12 +115,12 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
       {proTable}
       {children}
     </PageHeaderWrapper>
-  );
+  )
 }
 
 function formatOptions(options: any[], maxCount = 3) {
   if (options.length >= maxCount) {
-    const moreOptions = options.splice(maxCount-1);
+    const moreOptions = options.splice(maxCount-1)
 
     return [
       ...options,
@@ -139,10 +139,10 @@ function formatOptions(options: any[], maxCount = 3) {
           <DownOutlined />
         </a>
       </Dropdown>,
-    ];
+    ]
   }
 
-  return options;
+  return options
 }
 
-export default React.forwardRef(GeekProTable);
+export default React.forwardRef(GeekProTable)

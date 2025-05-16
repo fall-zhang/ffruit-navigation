@@ -16,8 +16,8 @@
 
 <script>
 
-import layoutMixin from "../mixins/layoutMixin";
-import navActionMixin from "../mixins/navActionMixin";
+import layoutMixin from '../mixins/layoutMixin'
+import navActionMixin from '../mixins/navActionMixin'
 
 export default {
   mixins: [layoutMixin, navActionMixin],

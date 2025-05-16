@@ -4,14 +4,14 @@ import {
   ProFormTextArea,
   ProFormUploadButton,
   ProFormUploadDragger
-} from "@ant-design/pro-form";
-import useProFormItem from "@/hooks/useProFormItem";
-import {Form, UploadProps} from "antd";
-import useGeekProForm from "@/components/GeekProForm/useGeekProForm";
-import {API_NAV} from "@/services/api";
-import request from "@/utils/request";
-import CategorySelect from "@/pages/nav/Category/CategorySelect";
-import TagSelect from "@/pages/nav/Tag/TagSelect";
+} from '@ant-design/pro-form'
+import useProFormItem from '@/hooks/useProFormItem'
+import {Form, UploadProps} from 'antd'
+import useGeekProForm from '@/components/GeekProForm/useGeekProForm'
+import {API_NAV} from '@/services/api'
+import request from '@/utils/request'
+import CategorySelect from '@/pages/nav/Category/CategorySelect'
+import TagSelect from '@/pages/nav/Tag/TagSelect'
 
 export default function NavListForm(props: any) {
   const formProps = useGeekProForm({

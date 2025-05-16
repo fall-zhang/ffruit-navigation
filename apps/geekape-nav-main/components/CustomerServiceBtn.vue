@@ -4,11 +4,13 @@
         <div class="feedback">
           <i class="el-icon-service"></i>
         </div>
-      <el-dropdown-menu slot="dropdown">
+      <template v-slot:dropdown>
+<el-dropdown-menu >
         <el-dropdown-item command="a">更新日志</el-dropdown-item>
         <el-dropdown-item command="b">意见反馈</el-dropdown-item>
         <el-dropdown-item command="c">联系我们</el-dropdown-item>
       </el-dropdown-menu>
+</template>
     </el-dropdown>
 
 
@@ -17,7 +19,7 @@
 
 <script>
 export default {
-  name: "CustomerServiceBtn",
+  name: 'CustomerServiceBtn',
   data() {
     return {
       show: false
@@ -25,11 +27,11 @@ export default {
   },
   methods: {
     handleCommand(command) {
-      console.log('click on item ' + command);
+      console.log('click on item ' + command)
       if (command === 'b') {
         window.open('https://support.qq.com/product/330737')
       } else if (command === 'c') {
-          window.open('https://geekape.net/about')
+        window.open('https://geekape.net/about')
       } else if (command === 'a') {
         this.$emit('showLog', true)
       }

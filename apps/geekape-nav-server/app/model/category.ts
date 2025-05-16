@@ -1,6 +1,6 @@
 module.exports = app => {
-  const mongoose = app.mongoose;
-  const Schema = mongoose.Schema;
+  const mongoose = app.mongoose
+  const Schema = mongoose.Schema
 
   const CategorySchema = new Schema({
     name: String,
@@ -20,6 +20,6 @@ module.exports = app => {
       type: Boolean,
       default: true
     },
-  }, { collection: 'category' });
-  return mongoose.model('Category', CategorySchema);
-};
+  }, { collection: 'category' })
+  return mongoose.model('Category', CategorySchema)
+}
