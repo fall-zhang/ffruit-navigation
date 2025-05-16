@@ -37,13 +37,13 @@ export default defineConfig([
   // 只对我修改的部分进行
   {
     name: 'app/files-to-lint',
-  settings: { react: { version: '18.3' } },
-    files: ['./**/*.{tsx,ts,js,mjs,jsx}', './*.{ts,js,mjs}']
+    settings: { react: { version: '18.3' } },
+    files: ['./apps/nav-admin/**/*.{tsx,ts,js,mjs,jsx}', './apps/nav-server/**/*.{tsx,ts,js,mjs,jsx}', './*.{ts,js,mjs}']
   },
   // global ignores
   {
     name: 'app/files-to-ignore',
-    ignores: ['**/temp.js', '**/.next/**', '**/node_modules/**','**/geekape-nav-main/**',]
+    ignores: ['**/temp.js', '**/.next/**', '**/node_modules/**', '**/nav-main/**']
   },
   jslint.configs.recommended,
   lintReact.configs.flat.recommended,
