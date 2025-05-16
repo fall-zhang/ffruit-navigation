@@ -1,6 +1,6 @@
 
 module.exports = {
-  mode: "universal",
+  mode: 'universal',
   telemetry: false,
   env: {
     baseUrl: process.env.root
@@ -10,44 +10,44 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: "极客猿梦导航-专注独立开发者的导航站",
+    title: '鲜果导航-新鲜开发者的导航站',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "keyword", name: "description", content: "极客猿梦导航,导航站" },
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'keyword', name: 'description', content: '极客猿梦导航,导航站' },
       {
-        hid: "description",
-        name: "description",
-        content: "专注独立开发者的导航站"
+        hid: 'description',
+        name: 'description',
+        content: '专注独立开发者的导航站'
       }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel: "stylesheet",
-        href: "//at.alicdn.com/t/font_552690_7wjaeayfows.css"
+        rel: 'stylesheet',
+        href: '//at.alicdn.com/t/font_552690_7wjaeayfows.css'
       }
     ],
     script: [
       {
-        src: "//v1.cnzz.com/z_stat.php?id=1279139494&web_id=1279139494",
-        defer: "defer"
+        src: '//v1.cnzz.com/z_stat.php?id=1279139494&web_id=1279139494',
+        defer: 'defer'
       }
     ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: { color: '#fff' },
   /*
    ** Global CSS
    */
-  css: ["element-ui/lib/theme-chalk/index.css", "@/static/styles/style.scss"],
+  css: ['element-ui/lib/theme-chalk/index.css', '@/static/styles/style.scss'],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["@/plugins/element-ui", "@/plugins/vue-inject"],
+  plugins: ['@/plugins/element-ui', '@/plugins/vue-inject'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -101,7 +101,7 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    vendor: ["axios"]
+    vendor: ['axios']
   },
 
   /*

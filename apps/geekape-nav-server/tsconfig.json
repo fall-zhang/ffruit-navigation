@@ -1,13 +1,12 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
+    "target": "es2020",
+    "module": "ES2020",
     "strict": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "charset": "utf8",
     "allowJs": false,
     "pretty": true,
     "noEmitOnError": false,

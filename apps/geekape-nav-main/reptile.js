@@ -1,11 +1,11 @@
-const request = require('request');
-const cheerio = require('cheerio');
-const mongoose = require("mongoose");
-const appConfig = require("./nuxt.config");
-var db = mongoose.connect(appConfig.env.mongoUrl, { useNewUrlParser: true });
+import axios from 'axios'
+import cheerio from 'cheerio'
+import mongoose from 'mongoose'
+import appConfig from './nuxt.config'
+import navData  from './server/model/navSchema'
+import categorySchema  from './server/model/categorySchema'
+var db = mongoose.connect(appConfig.env.mongoUrl, { useNewUrlParser: true })
 //引入数据模型模块
-const navData = require("./server/model/navSchema");
-const categorySchema = require("./server/model/categorySchema");
 
 class Reptile {
   constructor(url, type) {
@@ -26,7 +26,7 @@ class Reptile {
   }
 
   async start() {
-    request(this.url, async (error, res, body) => {
+    axios(this.url, async (error, res, body) => {
       if (!error && res.statusCode == 200) {
         const $ = cheerio.load(body)
         const $cardBlock = $('.panel')
@@ -58,7 +58,7 @@ class Reptile {
       }
 
       console.log(`${this.url}请求完成`)
-    });
+    })
   }
 }
 

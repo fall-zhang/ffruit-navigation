@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "My dazzling Nuxt.js project",
   "author": "geekape",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=develop root=http://localhost:3002/ nuxt",
     "server": "cross-env NODE_ENV=production root=http://localhost:3002/ nuxt",
     "start": "cross-env NODE_ENV=production root=http://localhost:3002/ nuxt",
+    "lint": "eslint .",
     "build": "nuxt build",
     "deploy": "sh ./deploy/index.sh",
     "generate": "nuxt generate"
