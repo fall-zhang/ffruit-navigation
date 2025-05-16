@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   write: true,
@@ -25,4 +25,4 @@ module.exports = {
   semver: [
   ],
   test: 'scripts',
-};
+}
