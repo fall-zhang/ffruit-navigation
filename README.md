@@ -7,6 +7,7 @@
   <a href="http://nav.geekape.net/">Demo</a>  |  <a href="https://github.com/geekape/geek-navigation/commits/nuxt">更新日志</a> | <a href="https://support.qq.com/product/330737">提BUG</a>
 </p>
 
+This Program fork from https://github.com/geekape/geek-navigation
 
 ## 极客猿导航截图
 
@@ -31,6 +32,7 @@
 ![Untitled](http://ww1.sinaimg.cn/large/005tC3DKgy1gtjsidmhthj31hc0qbwjh.jpg)
 
 
+可以一组一组地进行制定
 
 ## 发展历程
 
