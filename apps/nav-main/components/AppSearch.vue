@@ -10,13 +10,8 @@
     <!--    </el-tabs>-->
 
 
-    <el-autocomplete
-      v-model="state"
-      :fetch-suggestions="queryData"
-      :placeholder="placeholder"
-      @select="handleSelect"
-      suffix-icon="el-icon-search"
-    >
+    <el-autocomplete v-model="state" :fetch-suggestions="queryData" :placeholder="placeholder" @select="handleSelect"
+      suffix-icon="el-icon-search">
       <template v-slot:prepend>
         <el-select v-model="searchType" class="search-type-box">
           <el-option label="站内" value="station"></el-option>
@@ -31,10 +26,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from '../plugins/axios'
-import {API_NAV} from '../api'
-import {titleCase} from '../utils/utils'
+
 
 const searchGather = {
   station: {
@@ -97,7 +91,7 @@ export default {
     },
     async queryStation(query, cb) {
       if (query !== '') {
-        const {data} = await axios.get(API_NAV + `?keyword=${query}`)
+        const { data } = await axios.get('/api/nav' + `?keyword=${query}`)
         if (Array.isArray(data.data)) {
           const finalData = data.data.map(item => (item.value = item.name, item))
           cb(finalData)
@@ -110,7 +104,7 @@ export default {
       const res = await axios.get(`/5a1Fazu8AA54nxGko9WTAnF6hhy/su?&wd=${query}&cb=getJSONPData`)
       try {
         const data = eval(res)
-        const finalData = data.s.reduce((t, v) => [...t, {value: v}], [])
+        const finalData = data.s.reduce((t, v) => [...t, { value: v }], [])
         cb(finalData)
       } catch (e) {
         cb([])
@@ -145,11 +139,13 @@ export default {
     width: 300px;
     border-right: 1px solid #eee;
   }
-  /deep/ .el-input-group__append, /deep/ .el-input-group__prepend {
+
+  .el-input-group__append,
+  .el-input-group__prepend {
     border: 0;
   }
 
-  /deep/ .el-input__inner {
+  .el-input__inner {
     border: 0;
     box-shadow: none;
     background: #f5f7fa;
@@ -159,7 +155,7 @@ export default {
     width: 80px;
   }
 
-  /deep/ .el-select .el-input.is-focus .el-input__inner {
+  .el-select .el-input.is-focus .el-input__inner {
     border-color: #dfe1e5;
     box-shadow: 0 0 20px rgba(#000, .1);
   }
@@ -167,12 +163,13 @@ export default {
 
 @media screen and (max-width: 568px) {
   .app-search {
-      display: none;
+    display: none;
   }
 }
+
 @media screen and (min-width: 569px) {
   .app-search {
-      display: block;
+    display: block;
   }
 }
 
@@ -184,20 +181,19 @@ export default {
 //  flex-direction: column;
 //  align-items: center;
 //
-//  /deep/ .el-tabs__header,
-//  /deep/ .el-input__inner {
+//   .el-tabs__header,
+//   .el-input__inner {
 //    max-width: 600px;
 //    width: 600px;
 //    margin: auto;
 //  }
-//  /deep/ .el-tabs__nav-wrap::after {
+//   .el-tabs__nav-wrap::after {
 //    background-color: transparent;
 //  }
-//  /deep/ .el-input__inner {
+//   .el-input__inner {
 //    border-radius: 30px;
 //  }
 //  .el-tabs {
 //    margin-bottom: 20px;
 //  }
-//}
-</style>
+//}</style>

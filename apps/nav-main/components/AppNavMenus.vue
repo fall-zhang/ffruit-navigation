@@ -1,69 +1,39 @@
 <template>
-  <el-aside
-    :style="{
-      width: sideBarWidth,
-    }"
-  >
+  <el-aside :style="{
+    width: sideBarWidth,
+  }">
     <nuxt-link class="title" to="/">
-      <img
-        v-show="!isCollapse"
-        class="icon-logo"
-        width="180"
-        src="/logo-nav.png"
-      />
-      <img v-show="isCollapse" class="icon-logo" width="45" src="/logo-nav-icon.png"/>
+      <img v-show="!isCollapse" class="icon-logo" width="180" src="/logo-nav.png" />
+      <img v-show="isCollapse" class="icon-logo" width="45" src="/logo-nav-icon.png" />
 
       <!-- <span>猿梦极客导航后台</span> -->
     </nuxt-link>
 
     <slot name="sidebar">
-      <el-row>
-        <el-col :span="24">
-          <el-menu
-            class="el-menu-vertical-demo"
-            background-color="#4700f1"
-            text-color="#fff"
-            active-text-color="#a27cff"
-            :default-active="defaultActive"
-            unique-opened
-            :collapse="isCollapse"
-          >
-            <el-submenu
-              v-for="(item, index) in categorys"
-              :key="item._id"
-              :index="item._id"
-              style="text-align: left"
-            >
-              <template v-slot:title>
-                <i
-                  :class="item.icon ? item.icon : `el-icon-eleme icon-title`"
-                ></i>
-                <span slot="title">{{ item.name }}</span>
-              </template>
-              <el-menu-item
-                :index="`${index}-${idx}`"
-                v-for="(nav, idx) in item.children"
-                :key="nav._id"
-                @click="handleMenuItemClick(item._id, nav._id)"
-              >
-                <a>
-                  <i :class="nav.icon"></i>
-                  <span slot="title">{{ nav.name }}</span>
-                </a>
-              </el-menu-item>
-            </el-submenu>
-          </el-menu>
-        </el-col>
-      </el-row>
+      <el-menu class="el-menu-vertical-demo" background-color="#4700f1" text-color="#fff" active-text-color="#a27cff"
+        :default-active="defaultActive" unique-opened :collapse="isCollapse">
+        <el-sub-menu v-for="(item, index) in categorys" :key="item._id" :index="item._id" style="text-align: left">
+          <template #title>
+            <i :class="item.icon ? item.icon : `el-icon-eleme icon-title`"></i>
+            <span>{{ nav.name }}</span>
+          </template>
+          <el-menu-item :index="`${index}-${idx}`" v-for="(nav, idx) in item.children" :key="nav._id"
+            @click="handleMenuItemClick(item._id, nav._id)">
+            <a>
+              <i :class="nav.icon"></i>
+            </a>
+            <template #title>
+              <span>{{ nav.name }}</span>
+            </template>
+          </el-menu-item>
+        </el-sub-menu>
+      </el-menu>
     </slot>
 
     <div class="sidebar-fix">
       <ul>
         <li class="item" @click="$emit('showMenus')">
-          <i
-            class="el-icon-s-fold"
-            v-if="!isCollapse"
-          ></i>
+          <i class="el-icon-s-fold" v-if="!isCollapse"></i>
           <i class="el-icon-s-unfold" v-else></i>
         </li>
       </ul>
@@ -71,7 +41,8 @@
   </el-aside>
 </template>
 
-<script>
+<script lang="ts">
+import baseStore from '@/store/index'
 export default {
   name: 'AppNavMenus',
   props: {
@@ -111,10 +82,14 @@ export default {
   },
   methods: {
     handleMenuItemClick(parentId, id) {
-      this.$store.commit('saveSeletedId', {
+      baseStore.saveSeletedId({
         parentId,
         id,
       })
+      // this.$store.commit('saveSeletedId', {
+      //   parentId,
+      //   id,
+      // })
 
       if (this.$route.path.includes('/nav')) {
         this.$router.push('/')
@@ -149,7 +124,7 @@ $sidebar-w: auto;
     padding: 10px 15px;
     text-align: left;
     cursor: pointer;
-    background: $color-primary;
+    background: #4700f1;
 
     i {
       font-size: 20px;
@@ -160,15 +135,18 @@ $sidebar-w: auto;
 
 .el-aside {
   overflow: hidden;
+
   .el-menu-vertical-demo.el-menu {
     height: 100vh;
     overflow-y: auto;
     padding-bottom: 100px;
   }
+
   .el-menu--popup::-webkit-scrollbar,
   .el-menu-vertical-demo.el-menu::-webkit-scrollbar {
     /*滚动条整体样式*/
-    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+    width: 10px;
+    /*高宽分别对应横竖滚动条的尺寸*/
     height: 1px;
   }
 
@@ -177,7 +155,7 @@ $sidebar-w: auto;
     /*滚动条里面小方块*/
     border-radius: 10px;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-    background: rgba($color-primary, .2);
+    background: rgba(#4700f1, .2);
   }
 
   .el-menu--popup::-webkit-scrollbar-track,
@@ -185,10 +163,10 @@ $sidebar-w: auto;
     /*滚动条里面轨道*/
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    background: $color-primary;
+    background: #4700f1;
   }
 
-  background-color: $color-primary;
+  background-color: #4700f1;
   color: #6b7386;
   text-align: center;
   transition: all 0.5s;
@@ -198,13 +176,14 @@ $sidebar-w: auto;
   left: 0;
   bottom: 0;
   overflow: hidden;
+
   .el-submenu__title i {
     color: #fff;
   }
 
 
-  /deep/ .el-menu,
-  /deep/ .el-menu--collapse {
+  .el-menu,
+  .el-menu--collapse {
     border: 0;
   }
 
@@ -242,10 +221,12 @@ $sidebar-w: auto;
     display: none;
   }
 }
+
 @media screen and (min-width: 569px) {
   .el-aside {
     width: 70px;
   }
+
   .app-search,
   .sidebar-fix {
     display: block;

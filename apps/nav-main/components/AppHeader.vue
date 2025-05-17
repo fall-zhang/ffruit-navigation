@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import AppSearch from './AppSearch'
 export default {
   name: 'AppHeader',

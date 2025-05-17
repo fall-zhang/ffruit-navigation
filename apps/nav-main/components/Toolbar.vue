@@ -2,47 +2,34 @@
   <div class="toolbar">
     <div class="toolbar-item login">
       <el-button>
-        <nuxt-link
-          class="el-icon-s-custom icon-login icon"
-          to="/admin"
-        ></nuxt-link>
+        <nuxt-link class="el-icon-s-custom icon-login icon" to="/admin"></nuxt-link>
       </el-button>
     </div>
     <div class="toolbar-item add-nav-btn">
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="添加网站"
-        placement="left-start"
-      >
-        <el-button  @click="$emit('addWebsite')">
+      <el-tooltip class="item" effect="dark" content="添加网站" placement="left-start">
+        <el-button @click="$emit('addWebsite')">
           <i class="icon el-icon-plus"></i>
         </el-button>
       </el-tooltip>
     </div>
     <div class="toolbar-item backtop">
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="返回顶部"
-        placement="left-start"
-      >
-      <el-button>
-        <i class="icon el-icon-upload2"></i>
-      </el-button>
+      <el-tooltip class="item" effect="dark" content="返回顶部" placement="left-start">
+        <el-button>
+          <i class="icon el-icon-upload2"></i>
+        </el-button>
       </el-tooltip>
     </div>
 
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import BackTop from './BackTop'
 export default {
   components: {
     BackTop
   },
-  data: function() {
+  data: function () {
     return {}
   }
 }
@@ -51,11 +38,13 @@ export default {
 <style lang="scss" scoped>
 $min-bottom: 30px;
 $size: 40px;
+
 .toolbar {
   &-item {
     position: fixed;
     bottom: $min-bottom;
     right: 0;
+
     .el-button {
       border: 0;
       display: flex;
@@ -70,10 +59,12 @@ $size: 40px;
       border-radius: 0;
     }
   }
+
   &-item.add-nav-btn {
     bottom: 170px;
     bottom: $min-bottom + ($size + 20px) * 2;
   }
+
   &-item.login {
     bottom: $min-bottom + $size + 20px;
   }

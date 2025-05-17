@@ -8,7 +8,7 @@
   </nuxt-link>
 </template>
 
-<script>
+<script lang="ts">
 import dayjs from 'dayjs'
 
 export default {
@@ -16,7 +16,7 @@ export default {
   props: {
     data: {
       type: Object,
-      default: {}
+      default: () => ({})
     },
     countType: {
       type: String,
@@ -41,6 +41,7 @@ export default {
   display: flex;
   margin-bottom: 20px;
   cursor: pointer;
+
   .logo {
     min-width: 20px;
     width: 20px;
@@ -48,17 +49,20 @@ export default {
     border-radius: 50%;
     margin-right: 10px;
   }
+
   .name {
     flex: 1;
     font-weight: 500;
     font-size: 14px;
   }
-  .iconfont{
+
+  .iconfont {
     margin-left: 4px;
   }
+
   &:hover {
     .name {
-      color: $color-primary;
+      color: #4700f1;
     }
   }
 }

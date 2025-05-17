@@ -1,125 +1,155 @@
 <template>
-  <el-container class="user-layout">
-    <AppNavMenus
-      @handleSubMenuClick="handleSubMenuClick"
-      :categorys="category"
-      :show-menu-type="showMenuType"
-      @showMenus="toggleMenu2"
-    />
+  <el-container class="user-layout ">
+    <AppNavMenus @handleSubMenuClick="handleSubMenuClick" :categorys="categorys" :show-menu-type="showMenuType"
+      @showMenus="toggleMenu2" />
+    <!-- 
     <el-container class="body" :style="{ marginLeft: contentMarginLeft }">
-      <AppHeader
-        @handleShowPopup="showPopup = true"
-        @handleShowMenu="toggleMenu"
-      />
+      <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
       <div class="main" v-loading="loading">
         <affiche />
         <nav-ranking-list :data="navRanking" />
 
         <div class="website-wrapper" v-for="item in data" :key="item.name">
-            <p class="website-title" :id="item._id">{{ item.name }}</p>
-            <app-nav-list :list="item.list" />
-          </div>
+          <p class="website-title" :id="item._id">{{ item.name }}</p>
+          <app-nav-list :list="item.list" />
+        </div>
       </div>
-    </el-container>
-
-    <AddNavPopup v-model:show="showPopup" />
+    </el-container> -->
+    <!-- <AddNavPopup v-model:show="showPopup" /> -->
     <CustomerServiceBtn @showLog="showLog = true" />
     <AppLog :show="showLog" @closeLog="showLog = false" />
   </el-container>
 </template>
 
-<script>
-import AppNavList from '../components/AppNavList'
+<script lang="ts" setup>
+import AppNavList from '@/components/AppNavList.vue'
+import CustomerServiceBtn from '../components/CustomerServiceBtn.vue'
+import AppLog from '../components/AppLog.vue'
+// import AppHeader from '../components/AppHeader'
+import AppNavMenus from '../components/AppNavMenus.vue'
+// // import axios from 'axios'
+// import NavRankingList from '../components/NavRankingList'
+// import Affiche from '../components/Affiche'
+import useBaseStore from '@/store/index'
+import axios from 'axios'
+// state
+const loading = ref(false)
+const data = ref([])
+const categorys = ref([])
+const navRanking = ref({
+  view: [],
+  star: [],
+  news: []
+})
+const selfIndex = ref(0)
+const isLeftbar = ref(true)
+const isCollapse = ref(true)
+const showPopup = ref(false)
+const showLog = ref(false)
+const showMenuType = ref('half')
+const baseStore = useBaseStore()
 
-
-import api from '~/api'
-import AppSearch from '../components/AppSearch'
-import CustomerServiceBtn from '../components/CustomerServiceBtn'
-import AppLog from '../components/AppLog'
-import layoutMixin from '../mixins/layoutMixin'
-import NavRanking from '../components/NavRanking'
-import axios from '../plugins/axios'
-import {API_NAV_RANKING} from '../api'
-import NavRankingList from '../components/NavRankingList'
-import Affiche from '../components/Affiche'
-export default {
-  mixins: [layoutMixin],
-  layout: 'second',
-  components: {
-    Affiche,
-    NavRankingList,
-    NavRanking,
-    AppLog,
-    CustomerServiceBtn,
-    AppSearch,
-    AppNavList,
-  },
-  data() {
-    return {
-      loading: false,
-      active: '［前端］热门推荐',
-      data: [],
-      categorys: [],
-      navRanking: {
-        view: [],
-        star: [],
-        news: []
-      },
-      selfIndex: 0,
-      isLeftbar: true
+const contentMarginLeft = computed(() => {
+  if (showMenuType.value == 'half') {
+    return '70px'
+  } else if (showMenuType.value == 'all') {
+    if (isMobileSize()) {
+      return 0
+    } else {
+      return '220px'
     }
-  },
+  } else {
+    return 0
+  }
+})
 
-  methods: {
-    async getCategoryList() {
-      const { data: categorys } = await this.$api.getCategoryList()
-      this.categorys = categorys
+onMounted(() => {
+  handleResize()
+  const throttleFun = throttle(handleResize, 300)
+  window.addEventListener('reset', throttleFun)
 
-      if (Array.isArray(categorys)) {
-        const categoryId = categorys[0]._id
-        this.findNav(categoryId)
-      }
-    },
-    dataScroll() {
-      const that = this
-      const scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop
-      const allSite = document.querySelectorAll('.box')
-      for (let i = 0; i < allSite.length; i++) {
-        if (scrollTop >= allSite[i].offsetTop) {
-          that.selfIndex = i
-        }
-      }
-    },
-  },
-  mounted() {
-    this.$store.commit('saveCategory', this.categorys)
-  },
-  async asyncData({ store }) {
-    const [{ data: categorys }, { data: navRanking }] = await Promise.all([
-      api.getCategoryList(),
-      axios.get(API_NAV_RANKING)
-    ])
+  categorys.value = getLocal('category')
+  baseStore.saveCategory(categorys.value || [])
+  return () => {
+    window.removeEventListener('resize', throttleFun)
+  }
+})
+onUnmounted(() => {
+})
+// async function getCategoryList() {
+//   const { data } = await axios.get('/api/category/list')
+//   categorys.value = data
 
+//   if (Array.isArray(categorys.value)) {
+//     const categoryId = categorys.value[0]._id
+//     findNav(categoryId)
+//   }
+// }
+// function dataScroll() {
+//   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+//   const allSite = document.querySelectorAll('.box')
+//   for (let i = 0; i < allSite.length; i++) {
+//     if (scrollTop >= allSite[i].offsetTop) {
+//       selfIndex.value = i
+//     }
+//   }
+// }
+// async function findNav(id) {
 
-    const id = store.state.seletedMenuParentId || categorys[0]._id
-    const { data } = await api.findNav(id)
-    return {
-      categorys,
-      navRanking,
-      data
-    }
-  },
+// }
+async function handleSubMenuClick(parentId: string) {
+  loading.value = true
+  const { data } = await axios.get(`/api/nav/find?categoryId=${id}`)
+  data.value = data
+  loading.value = false
+}
+function toggleMenu() {
+  // showMenuType.value = showMenuType.value === 'none' ? 'all' : 'none'
+}
+function toggleMenu2() {
+  // showMenuType.value = showMenuType.value === 'all' ? 'half' : 'all'
+}
+function handleResize(event?: UIEvent) {
+  //   if (event) {
+  //     const { innerWidth } = event.target
+  //     if (innerWidth < 568) {
+  //       showMenuType.value = 'none'
+  //     } else {
+  //       showMenuType.value = 'half'
+  //     }
+  //   } else {
+  //     if (isMobileSize()) {
+  //       showMenuType.value = 'none'
+  //     } else {
+  //       showMenuType.value = 'half'
+  //     }
+  //   }
+  // }
+}
+
+async function asyncData({ store }) {
+  // const [{ data: categorys }, { data: navRanking }] = await Promise.all([
+  //   axios.get('/api/category/list'),
+  //   axios.get('/api/nav/ranking')
+  // ])
+
+  // const id = store.state.selectedMenuParentId || categorys[0]._id
+  // const { data } = await axios.get(`/api/nav/find?categoryId=${id}`)
+  // return {
+  //   categorys,
+  //   navRanking,
+  //   data
 }
 </script>
 
 <style lang="scss">
-
 .el-container {
   flex-direction: column;
 }
+
 .user-layout {
   position: relative;
+
   .footer {
     position: fixed;
     left: 200px;
@@ -128,7 +158,8 @@ export default {
     font-size: 14px;
     color: #999;
   }
-  /deep/ .el-submenu__title i {
+
+  .el-submenu__title i {
     color: #fff;
   }
 
@@ -138,16 +169,19 @@ export default {
 }
 
 
-/deep/ .el-menu--popup-right-start {
+.el-menu--popup-right-start {
   height: 500px !important;
   overflow: auto;
 }
+
 body {
   .el-menu--popup-right-start {
     background-color: #fff !important;
+
     .el-menu-item {
       background-color: #fff !important;
       color: #333 !important;
+
       &:hover {
         background-color: #ecf5ff !important;
       }

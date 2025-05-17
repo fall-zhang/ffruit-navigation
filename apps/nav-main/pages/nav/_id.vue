@@ -2,16 +2,16 @@
   <div>
     <div class="background-fx">
       <img src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-01.svg" class="shape-01"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-02.svg" class="shape-02"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-03.svg" class="shape-03"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-04.svg" class="shape-04"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-05.svg" class="shape-05"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-06.svg" class="shape-06"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-07.svg" class="shape-07"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-08.svg" class="shape-08"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-09.svg" class="shape-09"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-10.svg" class="shape-10"> <img
-      src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-11.svg" class="shape-11">
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-02.svg" class="shape-02"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-03.svg" class="shape-03"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-04.svg" class="shape-04"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-05.svg" class="shape-05"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-06.svg" class="shape-06"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-07.svg" class="shape-07"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-08.svg" class="shape-08"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-09.svg" class="shape-09"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-10.svg" class="shape-10"> <img
+        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-11.svg" class="shape-11">
     </div>
     <div class="container" v-loading="loading">
       <el-row :gutter="25" class="site-info">
@@ -19,7 +19,7 @@
           <div class="left">
             <div class="img-wrap">
               <nuxt-link to="/">
-                <el-image :src="detail.logo"/>
+                <el-image :src="detail.logo" />
               </nuxt-link>
             </div>
             <div class="tool">
@@ -50,16 +50,16 @@
             <h1 class="title">{{ detail.name }}</h1>
             <p class="desc">{{ detail.desc }}</p>
             <p class="tags" v-if="detail.tags.length">标签：
-              <span v-for="(tag, index) in detail.tags" :key="tag">{{index != 0 ? '，' : ''}}{{tag}}</span>
+              <span v-for="(tag, index) in detail.tags" :key="tag">{{ index != 0 ? '，' : '' }}{{ tag }}</span>
             </p>
             <p class="author" v-if="detail.authorName">
               <span class="el-icon-user-solid"></span>
               <span>推荐人：</span>
-              <a :href="detail.authorUrl">{{detail.authorName}}</a>
+              <a :href="detail.authorUrl">{{ detail.authorName }}</a>
             </p>
             <div class="btn-group">
               <div @click="handleNavClick(detail)" target="_blank" class="btn-link btn-group-item">链接直达<i
-                class="iconfont icon-Icons_ToolBar_ArrowRight"></i></div>
+                  class="iconfont icon-Icons_ToolBar_ArrowRight"></i></div>
               <!--              <div class="btn-moblie btn-group-item">手机查看<i class="iconfont icon-QR-code"></i></div>-->
             </div>
           </div>
@@ -88,7 +88,7 @@
 
       <el-row :gutter="20" class="site-detail">
         <el-col span="18">
-          <div class="detail">{{ detail.detail || detail.desc }}}</div>
+          <div class="detail">{{ detail.detail || detail.desc }}</div>
         </el-col>
         <el-col span="6">
           <aside></aside>
@@ -98,10 +98,9 @@
   </div>
 </template>
 
-<script>
-import axios from '@/plugins/axios'
-import {API_NAV, API_NAV_RANDOM} from '../../api'
-import layoutMixin from '../../mixins/layoutMixin'
+<script lang="ts">
+import axios from 'axios'
+// import { API_NAV, API_NAV_RANDOM } from '../../api'
 import navActionMixin from '../../mixins/navActionMixin'
 
 export default {
@@ -125,13 +124,13 @@ export default {
       this.randomNavList = res.data
     },
     handleNavStarFn() {
-      this.handleNavStar(this.detail, ()=> {
+      this.handleNavStar(this.detail, () => {
         this.isStar = true
         this.detail.star += 1
       })
     }
   },
-  async asyncData({params}) {
+  async asyncData({ params }) {
     const [detailRes, randomRes] = await Promise.all([
       axios.get(API_NAV + `?id=${params.id}`),
       axios.get(API_NAV_RANDOM)
@@ -145,7 +144,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .container {
   max-width: 1200px;
   margin: auto;
@@ -213,8 +211,9 @@ export default {
         height: 50px;
         box-shadow: 0 0 20px rgba(#000, .12);
         color: #999;
+
         &.active {
-          color: $color-primary;
+          color: #4700f1;
         }
       }
     }
@@ -243,7 +242,11 @@ export default {
   .desc {
     font-size: 16px;
     margin-bottom: 20px;
-    @include text-overflow(3)
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
   }
 
   .btn-group {
@@ -458,6 +461,7 @@ export default {
     justify-content: space-between;
     padding: 20px;
   }
+
   &-title {
     margin: 0;
   }
@@ -498,7 +502,6 @@ export default {
 
   .nav-name {
     margin: 0;
-    @include text-overflow(1);
   }
 }
 

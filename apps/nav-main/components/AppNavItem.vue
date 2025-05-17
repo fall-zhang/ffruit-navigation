@@ -45,8 +45,8 @@
   </el-col>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+export default defineComponent({
   props: {
     data: {
       type: Object,
@@ -63,14 +63,14 @@ export default {
     }
   },
   methods: {
-    handleNavStar(navData) {
+    handleNavStar() {
       this.$emit('handleNavStar', this.navData, ()=> {
         this.navData.star += 1
         this.isStar = true
       })
     }
   }
-}
+})
 </script>
 
 <style lang="scss">
@@ -117,7 +117,6 @@ export default {
   .title {
     color: #3273dc;
     font-size: 16px;
-    @include text-overflow(1);
   }
 
   .iconfont {
@@ -131,7 +130,6 @@ export default {
   .desc {
     margin-top: 5px;
 
-    @include text-overflow(1);
   }
 
   &__footer {

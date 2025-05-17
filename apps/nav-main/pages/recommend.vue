@@ -71,10 +71,9 @@
   </div>
 </template>
 
-<script>
-import layoutMixin from '../mixins/layoutMixin'
-import axios from '../plugins/axios'
-import {API_NAV, API_NAV_REPTILE, API_TAG_LIST} from '../api'
+<script lang="ts">
+import axios from 'axios'
+// import {API_NAV, API_NAV_REPTILE, API_TAG_LIST} from '../api'
 
 export default {
   name: 'recommend',
@@ -140,7 +139,7 @@ export default {
       }
     },
     async getCategorys() {
-      const { data } = await this.$api.getCategoryList()
+      const { data } = await axios.get('/api/category/list')
       this.categorys = data
     },
     async addNav(formName) {

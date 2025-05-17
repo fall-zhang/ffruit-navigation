@@ -4,23 +4,23 @@
       <el-col :md="8" :sm="12">
         <el-card class="box-card" shadow="never">
           <template v-slot:header>
-<div  class="clearfix">
-            <span>最新导航</span>
-          </div>
-</template>
-          <div v-for="item in data.news" class="text item">
-           <nav-ranking :data="item" />
+            <div class="clearfix">
+              <span>最新导航</span>
+            </div>
+          </template>
+          <div v-for="(item, index) in data.news" :key="index" class="text item">
+            <nav-ranking :data="item" />
           </div>
         </el-card>
       </el-col>
       <el-col :md="8" :sm="12">
         <el-card class="box-card" shadow="never">
           <template v-slot:header>
-<div  class="clearfix">
-            <span>点击最多导航</span>
-          </div>
-</template>
-          <div v-for="item in data.view" class="text item">
+            <div class="clearfix">
+              <span>点击最多导航</span>
+            </div>
+          </template>
+          <div v-for="(item, index) in data.view" :key="index" class="text item">
             <nav-ranking :data="item" count-type="view" />
           </div>
         </el-card>
@@ -28,11 +28,11 @@
       <el-col :md="8" :sm="12">
         <el-card class="box-card" shadow="never">
           <template v-slot:header>
-<div  class="clearfix">
-            <span>点赞最多导航</span>
-          </div>
-</template>
-          <div v-for="item in data.star" class="text item">
+            <div class="clearfix">
+              <span>点赞最多导航</span>
+            </div>
+          </template>
+          <div v-for="(item, index) in data.star" :key="index" class="text item">
             <nav-ranking :data="item" count-type="star" />
           </div>
         </el-card>
@@ -41,19 +41,19 @@
   </div>
 </template>
 
-<script>
-import NavRanking from './NavRanking'
+<script lang="ts">
+import NavRanking from './NavRanking.vue'
 export default {
   name: 'NavRankingList',
-  components: {NavRanking},
+  components: { NavRanking },
   props: {
     data: {
       type: Object,
-      default: {
+      default: () => ({
         view: [],
         star: [],
         news: []
-      }
+      })
     }
   },
 }
@@ -64,6 +64,7 @@ export default {
   .el-card {
     margin-top: 30px;
   }
+
   .el-card__header {
     span {
       font-size: 18px;
