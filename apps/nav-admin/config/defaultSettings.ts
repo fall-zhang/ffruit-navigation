@@ -15,7 +15,7 @@ const Settings: LayoutSettings & {
   title: '极客猿导航',
   pwa: false,
   logo: '/logo-icon.png',
-  iconfontUrl: '',
+  iconfontUrl: ''
 }
 
 export default Settings

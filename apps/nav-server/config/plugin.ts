@@ -8,13 +8,12 @@ const plugin: EggPlugin = {
   // },
 
   mongoose: {
-    enable: true, // 开启插件
-    package: 'egg-mongoose',
+    enable: true // 开启插件
   },
   jwt: {
     enable: true,
-    package: 'egg-jwt',
-  },
+    package: 'egg-jwt'
+  }
 }
 
 export default plugin
