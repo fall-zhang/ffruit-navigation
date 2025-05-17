@@ -4,7 +4,7 @@ import {defineConfigWithVueTs,vueTsConfigs} from '@vue/eslint-config-typescript'
 export default defineConfigWithVueTs([
   {
     name: 'app/files-to-lint',
-    files: ['apps/**/*.{mjs,js,ts,mts,tsx,vue}'],
+    files: ['apps/**/*.{mjs,js,ts,mts,tsx,vue}','*/*.{mjs,js,ts}'],
   },
 
   {
@@ -18,10 +18,13 @@ export default defineConfigWithVueTs([
     rules: {
       'no-undef': 0, // 未命名变量不报错：当未命名变量的检查交给 ts 类型检查器时使用
       'no-unused-vars': 1, // 未使用的变量
+      'no-var': 2, // 未使用的变量
       'comma-dangle': 0,
       'func-call-spacing': 1,
       'indent': ['warn',2], // 需要 function 前面加空格
       'space-before-function-paren': 0, // 需要 function 前面加空格
+      '@typescript-eslint/no-this-alias': 0, // 需要 function 前面加空格
+      'vue/multi-word-component-names': 0, // 需要 function 前面加空格
 
       quotes: [2, 'single', {
         avoidEscape: true,
