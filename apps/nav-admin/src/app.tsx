@@ -4,8 +4,8 @@ import { notification } from 'antd'
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi'
 import RightContent from '@/components/RightContent'
 import Footer from '@/components/Footer'
-import {getPersistenceData} from '@/utils/persistence'
-import {CURRENT_USER, TOKEN} from '@/constants'
+import { getPersistenceData } from '@/utils/persistence'
+import { CURRENT_USER, TOKEN } from '@/constants'
 import { useLocation, useNavigate } from 'react-router'
 
 // const isDev = process.env.NODE_ENV === 'development';
@@ -13,13 +13,13 @@ const loginPath = '/user/login'
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
-  loading: <PageLoading />,
+  loading: <PageLoading />
 }
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
-export async function getInitialState(): Promise<{
+export async function getInitialState (): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
@@ -32,11 +32,11 @@ export async function getInitialState(): Promise<{
     if (token) {
       return {
         name: JSON.parse(user)?.name,
-        access: 'admin',
+        access: 'admin'
       }
-    } else {
-      navigate(loginPath)
     }
+    navigate(loginPath)
+
     return undefined
   }
   // 如果是登录页面，不执行
@@ -45,12 +45,12 @@ export async function getInitialState(): Promise<{
     return {
       fetchUserInfo,
       currentUser,
-      settings: {},
+      settings: {}
     }
   }
   return {
     fetchUserInfo,
-    settings: {},
+    settings: {}
   }
 }
 
@@ -99,11 +99,11 @@ export const request: RequestConfig = {
     if (!response) {
       notification.error({
         description: '您的网络发生异常，无法连接服务器',
-        message: '网络异常',
+        message: '网络异常'
       })
     }
     throw error
-  },
+  }
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
@@ -114,7 +114,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
-      content: initialState?.currentUser?.name,
+      content: initialState?.currentUser?.name
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
@@ -127,6 +127,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
-    ...initialState?.settings,
+    ...initialState?.settings
   }
 }

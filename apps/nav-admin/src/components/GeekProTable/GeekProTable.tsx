@@ -1,7 +1,7 @@
 import React, { ReactNode, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import ProTable, { ProColumns, ProTableProps } from '@ant-design/pro-table'
-import { PageHeaderWrapper } from '@ant-design/pro-layout'
-import { Dropdown, Menu, PageHeaderProps } from 'antd'
+import { PageHeader, PageHeaderProps } from '@ant-design/pro-layout'
+import { Dropdown, Menu } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import request from '@/utils/request'
 
@@ -24,7 +24,7 @@ interface GeekProTableProps extends ProTableProps<any, any> {
   renderOptions?: (text: ReactNode, record: any, _: any, action: any) => ReactNode[];
 }
 
-function GeekProTable(props: GeekProTableProps, ref: any) {
+function GeekProTable (props: GeekProTableProps, ref: any) {
   const {
     showPageHeader = true,
     pageHeaderProps = {},
@@ -41,14 +41,14 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
 
   const [loading, setLoading] = useState(false)
 
-  const realColumns  = useMemo<ProColumns[]>(() => {
+  const realColumns = useMemo<ProColumns[]>(() => {
     if (renderOptions) {
       return [
         ...columns,
         {
           title: '操作',
           valueType: 'option',
-          render: (text, record, _, action)=> formatOptions(renderOptions(text, record, _, action))
+          render: (text, record, _, action) => formatOptions(renderOptions(text, record, _, action))
         }
       ]
     }
@@ -65,26 +65,11 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
   //   }
   // }, [columns, renderOptions]);
 
-  const proTable = (
-    <ProTable
-      columns={realColumns}
-      loading={loading}
-      formRef={from}
-      request={proTableProps.request || onRequest}
-      rowSelection={{type: 'checkbox'}}
-      rowKey={'_id'}
-      {...proTableProps}
-    />
-  )
 
-  async function onRequest(params: any) {
+  async function onRequest (params: any) {
     setLoading(true)
     try {
-      const { url, pageSize, current } = params
-      delete params.url
-      delete params.pageSize
-      delete params.current
-
+      const { url, pageSize, current, ...otherParam } = params
       const res: any = await request({
         url,
         ...requestParams,
@@ -92,53 +77,48 @@ function GeekProTable(props: GeekProTableProps, ref: any) {
           pageSize,
           pageNumber: current,
           ...defaultRequestData,
-          ...params,
-        },
+          ...otherParam
+        }
       })
       setLoading(false)
       // const resData = parseListData(res);
       return {
         data: res?.data?.data,
-        total: res?.data?.total,
+        total: res?.data?.total
       }
     } catch (err) {
       console.error(err)
     }
   }
+  const proTable = (
+    <ProTable
+      columns={realColumns}
+      loading={loading}
+      formRef={from}
+      request={onRequest}
+      rowSelection={{ type: 'checkbox' }}
+      rowKey={'_id'}
+      {...proTableProps}
+    />
+  )
 
   if (!showPageHeader) {
     return proTable
   }
 
   return (
-    <PageHeaderWrapper {...pageHeaderProps}>
+    <PageHeader {...pageHeaderProps}>
       {proTable}
       {children}
-    </PageHeaderWrapper>
+    </PageHeader>
   )
 }
 
-function formatOptions(options: any[], maxCount = 3) {
+function formatOptions (options: any[], maxCount = 3) {
+  console.log('🚀 ~ formatOptions ~ options:', options)
   if (options.length >= maxCount) {
-    const moreOptions = options.splice(maxCount-1)
-
     return [
-      ...options,
-      <Dropdown
-        overlay={
-          <Menu>
-            {moreOptions.map(item => (
-              <Menu.Item>{item}</Menu.Item>
-            ))}
-          </Menu>
-        }
-        trigger={['click']}
-      >
-        <a>
-          更多操作
-          <DownOutlined />
-        </a>
-      </Dropdown>,
+      ...options
     ]
   }
 

@@ -1,9 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './global.less'
+import RouterPage from './router/router'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-   
-  </StrictMode>,
+    <RouterPage />
+  </StrictMode>
 )

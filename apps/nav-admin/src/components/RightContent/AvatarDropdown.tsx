@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
-import {Avatar, Dropdown, Menu, Spin} from 'antd'
-import { history, useModel } from 'umi'
+import { Avatar, Dropdown, Menu, Spin } from 'antd'
 import { stringify } from 'querystring'
 import styles from './index.less'
 
@@ -20,14 +19,14 @@ const loginOut = async () => {
     history.replace({
       pathname: '/user/login',
       search: stringify({
-        redirect: pathname,
-      }),
+        redirect: pathname
+      })
     })
   }
 }
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
-  const { initialState, setInitialState } = useModel('@@initialState')
+  const [initialState, setInitialState] = useState('@@initialState')
 
   const onMenuClick = useCallback(
     (event: {
@@ -44,7 +43,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       }
       history.push(`/account/${key}`)
     },
-    [initialState, setInitialState],
+    [initialState, setInitialState]
   )
 
   const loading = (
@@ -53,7 +52,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         size="small"
         style={{
           marginLeft: 8,
-          marginRight: 8,
+          marginRight: 8
         }}
       />
     </span>

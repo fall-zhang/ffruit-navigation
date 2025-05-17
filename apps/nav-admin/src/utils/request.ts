@@ -1,7 +1,8 @@
-import {getPersistenceData} from '@/utils/persistence'
-import {TOKEN} from '@/constants'
-import {request as umiRequest} from 'umi'
-import {message, notification} from 'antd'
+import { getPersistenceData } from '@/utils/persistence'
+import { TOKEN } from '@/constants'
+// import { request as umiRequest } from 'umi'
+import umiRequest from 'axios'
+import { message, notification } from 'antd'
 
 // const codeMessage = {
 //   200: '服务器成功返回请求的数据。',
@@ -31,7 +32,7 @@ interface RequestOptions {
   [rest: string]: any
 }
 
-function request(params: RequestOptions): any {
+function request (params: RequestOptions): any {
   let { url, method = 'GET', headers, data, body, msg } = params
   if (!headers) {
     headers = defaultHeaders()
@@ -40,29 +41,28 @@ function request(params: RequestOptions): any {
     const urlQueryParams = new URLSearchParams(data)
     url = url + `?${urlQueryParams.toString()}`
   }
-  return new Promise((resolve, reject)=> {
+  return new Promise((resolve, reject) => {
     umiRequest(url, {
       method,
       headers,
-      data,
-      body
-    }).then(res=> {
+      data
+    }).then(res => {
       if (msg) {
         message.success(msg)
       }
       resolve(res)
-    }).catch(err=> {
+    }).catch(err => {
       console.log(new Error(err))
-      notification.error({message: err.toString()})
+      notification.error({ message: err.toString() })
       reject(err)
     })
   })
 }
 
-function defaultHeaders() {
+function defaultHeaders () {
   const token = getPersistenceData(TOKEN)
   return {
-    'Authorization': token
+    Authorization: token
   }
 }
 

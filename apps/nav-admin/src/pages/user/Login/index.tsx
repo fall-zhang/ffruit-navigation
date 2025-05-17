@@ -4,29 +4,28 @@ import {
   MobileOutlined,
   TaobaoCircleOutlined,
   UserOutlined,
-  WeiboCircleOutlined,
+  WeiboCircleOutlined
 } from '@ant-design/icons'
-import {Alert, Space, message, Tabs} from 'antd'
-import React, {useState} from 'react'
-import ProForm, {ProFormCaptcha, ProFormCheckbox, ProFormText} from '@ant-design/pro-form'
+import { Alert, Space, message, Tabs } from 'antd'
+import React, { useState } from 'react'
+import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form'
 // import {Link, history, useModel} from 'umi';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Footer from '@/components/Footer'
-import styles from './index.less'
-import {login} from '@/services/api'
-import {setPersistenceData} from '@/utils/persistence'
-import {CURRENT_USER, TOKEN} from '@/constants'
-
+import styles from './index.module.less'
+import { login } from '@/services/api'
+import { setPersistenceData } from '@/utils/persistence'
+import { CURRENT_USER, TOKEN } from '@/constants'
 
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false)
-  const {initialState, setInitialState} = useModel('@@initialState')
+  const { initialState, setInitialState } = useModel('@@initialState')
   const goto = () => {
     if (!history) return
     setTimeout(() => {
-      const {query} = history.location
-      const {redirect} = query as {
+      const { query } = history.location
+      const { redirect } = query as {
       redirect: string;
     }
       history.push(redirect || '/')
@@ -39,7 +38,7 @@ const Login: React.FC = () => {
 
     try {
       // 登录
-      const res: any = await login({username: values.username as string, password: values.password as string})
+      const res: any = await login({ username: values.username as string, password: values.password as string })
 
       if (res?.data) {
         const defaultloginSuccessMessage = '登录成功！'
@@ -47,7 +46,7 @@ const Login: React.FC = () => {
         setInitialState({
           currentUser: {
             name: values.username,
-            access: 'admin',
+            access: 'admin'
           }
         })
         goto()
@@ -81,20 +80,20 @@ const Login: React.FC = () => {
         <div className={styles.main}>
           <ProForm
             initialValues={{
-              autoLogin: true,
+              autoLogin: true
             }}
             submitter={{
               searchConfig: {
-                submitText: '登录',
+                submitText: '登录'
               },
               render: (_, dom) => dom.pop(),
               submitButtonProps: {
                 loading: submitting,
                 size: 'large',
                 style: {
-                  width: '100%',
-                },
-              },
+                  width: '100%'
+                }
+              }
             }}
             onFinish={async (values) => {
               handleSubmit(values as API.LoginParams)
@@ -105,28 +104,28 @@ const Login: React.FC = () => {
                 name="username"
                 fieldProps={{
                   size: 'large',
-                  prefix: <UserOutlined className={styles.prefixIcon}/>,
+                  prefix: <UserOutlined className={styles.prefixIcon}/>
                 }}
                 placeholder={'输入用户名'}
                 rules={[
                   {
                     required: true,
-                    message: '用户名是必填项！',
-                  },
+                    message: '用户名是必填项！'
+                  }
                 ]}
               />
               <ProFormText.Password
                 name="password"
                 fieldProps={{
                   size: 'large',
-                  prefix: <LockOutlined className={styles.prefixIcon}/>,
+                  prefix: <LockOutlined className={styles.prefixIcon}/>
                 }}
                 placeholder={'输入密码'}
                 rules={[
                   {
                     required: true,
-                    message: '密码是必填项！',
-                  },
+                    message: '密码是必填项！'
+                  }
                 ]}
               />
             </>
