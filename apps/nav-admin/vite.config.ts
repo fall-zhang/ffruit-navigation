@@ -25,14 +25,28 @@ export default defineConfig({
     port: 7788,
     proxy: {
       '^/api/.*': {
-        target: 'https://yourserver.com/',
+        target: 'http://localhost:3002',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
+      // test: {
+      //   '/api/': {
+      //     target: 'https://preview.pro.ant.design',
+      //     changeOrigin: true,
+      //     pathRewrite: { '^': '' }
+      //   }
+      // },
+      // pre: {
+      //   '/api/': {
+      //     target: 'http://localhost:3002',
+      //     changeOrigin: true,
+      //     pathRewrite: { '^': '' }
+      //   }
+      // }
     }
   },
   plugins: [
-    react(),
-   
+    react()
+
   ]
 })

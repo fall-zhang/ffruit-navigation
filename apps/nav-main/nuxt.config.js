@@ -56,15 +56,6 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/proxy',
-    [
-      '@nuxtjs/component-cache',
-      {
-        max: 10000,
-        maxAge: 1000 * 60 * 60
-      }
-    ]
   ],
 
   axios: {
