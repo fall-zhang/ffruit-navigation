@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common'
 import { NavService } from './nav.service'
 import { CreateNavDto } from './dto/create-nav.dto'
 import { UpdateNavDto } from './dto/update-nav.dto'
 import cheerio from 'cheerio'
+import { warn } from 'console'
+import mongoose from 'mongoose'
 
 const tableName = 'Nav'
 
@@ -11,28 +13,26 @@ export class NavController {
   constructor(private readonly navService: NavService) {}
 
   @Post()
-  create(@Body() createNavDto: CreateNavDto) {
-    this.ctx.request.body.status = NAV_STATUS.wait
-    this.ctx.request.body.createTime = new Date()
-    const { request } = this.ctx
+  async create(@Body() createNavDto: CreateNavDto) {
+    const createTime = new Date()
     try {
-      const res = await .create(request.body)
-      this.success(res)
+      await this.navService.create(createNavDto)
     } catch (e) {
-      this.error(e.message)
+      warn(e)
     }
-    return this.navService.create(createNavDto)
+    return {
+      code: 1,
+      msg: 'ok',
+      data:'创建成功'
+    }
   }
 
   @Get()
-  findAll() {
-    const { ctx } = this
-    const { id, keyword } = ctx.query
-
-    let res
+  findAll(@Query() findQuery:Pick<UpdateNavDto,'id'>) {
+    const { id } = findQuery
 
     if (id) {
-      await super.get()
+      await mongoose.findOne({ _id: id })
     } else if (keyword) {
       const reg = new RegExp(keyword, 'i')
       await super.getList({
@@ -164,34 +164,23 @@ export class NavController {
     return this.navService.findOne(+id)
   }
   @Get('/ranking')
-  findRanking(@Param('id') id: string) {
-    const [view, star, news] = await Promise.all([
-      this.service.nav.findMaxValueList('view'),
-      this.service.nav.findMaxValueList('star'),
-      this.service.nav.findMaxValueList('createTime')
-    ])
+  async findRanking(@Param('id') id: string) {
 
-    this.success({
+    await this.navService.findRank()
+    return {
       view,
       star,
       news
-    })
+    }
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNavDto: UpdateNavDto) {
-    this.ctx.request.body.updateTime = new Date()
-    const { tags } = this.ctx.request.body
-    if (Array.isArray(tags)) {
-      await this.ctx.service.tag.addMultiTag(tags)
-    }
-    await super.update()
+  async update(@Param('id') id: string, @Body() updateNavDto: UpdateNavDto) {
     return this.navService.update(+id, updateNavDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    await super.remove()
 
     return this.navService.remove(+id)
   }
