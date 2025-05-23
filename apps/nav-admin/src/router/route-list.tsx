@@ -15,16 +15,8 @@ import CategoryPage from '@/pages/nav/Category'
 
 export const routeList:RouteObject[] = [
   {
-    path: '/user',
-    children: [
-      {
-        path: '/user',
-        children: [
-          // name: '登录'
-          { path: '/user/login', element: <LoginPage /> }
-        ]
-      }
-    ]
+    path: '/login',
+    element: <LoginPage />
   },
   // name: '审核列表',
   { path: '/nav/audit', element: <AuditPage/> },
