@@ -1,6 +1,5 @@
 import { Button, message, notification } from 'antd'
-import defaultSettings from '../config/defaultSettings'             
-const { pwa } = defaultSettings
+const pwa = false
 const isHttps = document.location.protocol === 'https:' // if pwa is true
 
 if (pwa) {
@@ -34,9 +33,9 @@ if (pwa) {
 
         worker.postMessage(
           {
-            type: 'skip-waiting',
+            type: 'skip-waiting'
           },
-          [channel.port2],
+          [channel.port2]
         )
       }) // Refresh current page to use the updated HTML and other assets after SW has skiped waiting
 
@@ -61,7 +60,7 @@ if (pwa) {
       description: '请点击“刷新”按钮或者手动刷新页面',
       btn,
       key,
-      onClose: async () => null,
+      onClose: async () => null
     })
   })
 } else if ('serviceWorker' in navigator && isHttps) {

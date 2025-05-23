@@ -1,9 +1,7 @@
 import React, { ReactNode, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import ProTable, { ProColumns, ProTableProps } from '@ant-design/pro-table'
 import { PageHeader, PageHeaderProps } from '@ant-design/pro-layout'
-import { Dropdown, Menu } from 'antd'
-import { DownOutlined } from '@ant-design/icons'
-import request from '@/utils/request'
+import { request } from '@/utils/request'
 
 /**
  * 封装 ProTable 功能
@@ -88,6 +86,10 @@ function GeekProTable (props: GeekProTableProps, ref: any) {
       }
     } catch (err) {
       console.error(err)
+      return {
+        data: '',
+        total: ''
+      }
     }
   }
   const proTable = (
