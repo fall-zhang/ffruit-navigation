@@ -1,8 +1,8 @@
-import {PERSISTENCE_TYPE} from '@/constants'
+import { PERSISTENCE_TYPE } from '@/constants'
 
 
-export function setPersistenceData(key, value, type = PERSISTENCE_TYPE) {
-  if (typeof value != 'string') value = JSON.stringify(value)
+export function setPersistenceData (key, value, type = PERSISTENCE_TYPE) {
+  if (typeof value !== 'string') value = JSON.stringify(value)
   if (type === 'session') {
     sessionStorage.setItem(key, value)
   } else if (type === 'local') {
@@ -11,7 +11,7 @@ export function setPersistenceData(key, value, type = PERSISTENCE_TYPE) {
 }
 
 
-export function getPersistenceData(key, type = PERSISTENCE_TYPE) {
+export function getPersistenceData (key, type = PERSISTENCE_TYPE) {
   if (type === 'session') {
     return sessionStorage.getItem(key)
   } else if (type === 'local') {
@@ -20,7 +20,7 @@ export function getPersistenceData(key, type = PERSISTENCE_TYPE) {
 }
 
 
-export function clearPersistenceData(type = PERSISTENCE_TYPE) {
+export function clearPersistenceData (type = PERSISTENCE_TYPE) {
   if (type === 'session') {
     return sessionStorage.clear()
   } else if (type === 'local') {

@@ -1,7 +1,7 @@
 import { getPersistenceData } from '@/utils/persistence'
 import { TOKEN } from '@/constants'
 // import { request as umiRequest } from 'umi'
-import umiRequest from 'axios'
+import axios from 'axios'
 import { message, notification } from 'antd'
 
 // const codeMessage = {
@@ -22,48 +22,27 @@ import { message, notification } from 'antd'
 //   504: '网关超时。',
 // };
 
-interface RequestOptions {
-  url: string
-  method?: 'GET' | 'POST' | 'DELETE' | 'PUT'
-  headers?: any
-  data?: any
-  body?: any
-  msg?: string
-  [rest: string]: any
-}
-
-function request (params: RequestOptions): any {
-  let { url, method = 'GET', headers, data, body, msg } = params
-  if (!headers) {
-    headers = defaultHeaders()
+const request = axios.create({
+  baseURL: '/api',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
   }
-  if (method === 'GET' && data) {
-    const urlQueryParams = new URLSearchParams(data)
-    url = url + `?${urlQueryParams.toString()}`
-  }
-  return new Promise((resolve, reject) => {
-    umiRequest(url, {
-      method,
-      headers,
-      data
-    }).then(res => {
-      if (msg) {
-        message.success(msg)
-      }
-      resolve(res)
-    }).catch(err => {
-      console.log(new Error(err))
-      notification.error({ message: err.toString() })
-      reject(err)
-    })
-  })
-}
+})
 
-function defaultHeaders () {
+request.interceptors.request.use(res => {
   const token = getPersistenceData(TOKEN)
-  return {
+  // eslint-disable-next-line no-param-reassign
+  res.headers = {
     Authorization: token
   }
-}
+  if (res.data.msg) {
+    message.success(res.data.msg)
+  }
+  return res.data
+})
 
-export default request
+
+export {
+  request
+}
