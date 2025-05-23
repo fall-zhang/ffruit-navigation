@@ -1,6 +1,7 @@
 import {Select, SelectProps} from 'antd'
-import request from '@/utils/request'
-import {API_TAG_list} from '@/services/api'
+import { request } from '@/utils/request'
+
+import {API_TAG_LIST} from '@/apis/api'
 import {useEffect, useState} from 'react'
 import {TagModel} from '@/constants/api'
 
@@ -15,7 +16,7 @@ export default function TagSelect(props: TagSelectProps) {
   useEffect(()=> {
     async function getTagList() {
       const { data } = await request({
-        url: API_TAG_list,
+        url: API_TAG_LIST,
         method: 'GET'
       })
       if (Array.isArray(data.data)) {

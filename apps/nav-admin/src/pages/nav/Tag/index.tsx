@@ -1,22 +1,23 @@
-import {Button, Popconfirm} from 'antd'
-import request from '@/utils/request'
-import {API_TAG, API_TAG_list} from '@/services/api'
+import { Button, Popconfirm } from 'antd'
+import { request } from '@/utils/request'
+
+import { API_TAG, API_TAG_LIST } from '@/apis/api'
 import GeekProTable from '@/components/GeekProTable/GeekProTable'
-import type {ActionType, ProColumns} from '@ant-design/pro-table'
-import {PlusOutlined} from '@ant-design/icons'
+import type { ActionType, ProColumns } from '@ant-design/pro-table'
+import { PlusOutlined } from '@ant-design/icons'
 import useGeekProTablePopup from '@/components/GeekProTable/useGeekProTablePopup'
-import {useRef, useState} from 'react'
+import { useRef, useState } from 'react'
 import TagForm from '@/pages/nav/Tag/form'
 
 
-export default function NavTagListPage() {
+export default function NavTagListPage () {
   const formProps = useGeekProTablePopup()
   const tableRef = useRef<ActionType>()
   const [tagList, setTagList] = useState([])
 
-  async function onRequestData() {
+  async function onRequestData () {
     const { data } = await request({
-      url: API_TAG_list,
+      url: API_TAG_LIST,
       method: 'GET',
       data: {
         showInMenu: false
@@ -27,14 +28,14 @@ export default function NavTagListPage() {
   }
 
 
-  async function onDelete(id: string, action: any) {
+  async function onDelete (id: string, action: any) {
     await request({
       url: API_TAG,
       method: 'DELETE',
       data: {
-        id,
+        id
       },
-      msg: '删除成功',
+      msg: '删除成功'
     })
     action.reload()
   }
@@ -43,7 +44,7 @@ export default function NavTagListPage() {
     {
       title: '标签名',
       dataIndex: 'name'
-    },
+    }
   ]
   return (
     <div>
@@ -51,15 +52,15 @@ export default function NavTagListPage() {
         actionRef={tableRef}
         columns={columns}
         pageHeaderProps={{
-          extra: <Button type='primary' onClick={()=> formProps.show()}><PlusOutlined />添加标签</Button>
+          extra: <Button type='primary' onClick={() => formProps.show()}><PlusOutlined />添加标签</Button>
         }}
         search={false}
         request={onRequestData}
-        renderOptions={(text, record, _, action)=> ([
-          <a onClick={()=> formProps.show({type: 'edit', data: record, action})}>编辑</a>,
-          <Popconfirm title={'确定删除吗？'} onConfirm={() => onDelete(record._id, action)}>
+        renderOptions={(text, record, _, action) => ([
+          <a key={record._id} onClick={() => formProps.show({ type: 'edit', data: record, action })}>编辑</a>,
+          <Popconfirm key={record._id} title={'确定删除吗？'} onConfirm={() => onDelete(record._id, action)}>
             <a>删除</a>
-          </Popconfirm>,
+          </Popconfirm>
         ])}
       />
       <TagForm {...formProps} tableRef={tableRef.current} tagList={tagList} />

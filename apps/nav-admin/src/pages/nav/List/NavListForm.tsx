@@ -6,14 +6,15 @@ import {
   ProFormUploadDragger
 } from '@ant-design/pro-form'
 import useProFormItem from '@/hooks/useProFormItem'
-import {Form, UploadProps} from 'antd'
+import { Form, message, UploadProps } from 'antd'
 import useGeekProForm from '@/components/GeekProForm/useGeekProForm'
-import {API_NAV} from '@/services/api'
-import request from '@/utils/request'
+import { API_NAV } from '@/apis/api'
+import { request } from '@/utils/request'
+
 import CategorySelect from '@/pages/nav/Category/CategorySelect'
 import TagSelect from '@/pages/nav/Tag/TagSelect'
 
-export default function NavListForm(props: any) {
+export default function NavListForm (props: any) {
   const formProps = useGeekProForm({
     ...props,
     onFinish: async (values) => {
@@ -24,9 +25,9 @@ export default function NavListForm(props: any) {
       await request({
         url: API_NAV,
         method: props.isEdit ? 'PUT' : 'POST',
-        msg: props.isEdit ? '编辑成功' : '添加成功',
         data
       })
+      message.success(props.isEdit ? '编辑成功' : '添加成功')
       props.hide()
       props.tableRef?.reload()
     }
@@ -34,7 +35,7 @@ export default function NavListForm(props: any) {
   const logoProps = useProFormItem({
     name: 'logo',
     label: '网站LOGO',
-    required: true,
+    required: true
   })
   const nameProps = useProFormItem({
     name: 'name',
@@ -54,16 +55,16 @@ export default function NavListForm(props: any) {
   })
   const authorProps = useProFormItem({
     name: 'authorName',
-    label: '作者名称',
+    label: '作者名称'
   })
   const authorUrlProps = useProFormItem({
     name: 'authorUrl',
-    label: '作者网站',
+    label: '作者网站'
   })
   return (
     <DrawerForm {...props} {...formProps}>
       <ProFormDependency name={['logo']}>
-        {({ logo })=> <ProFormText {...logoProps} formItemProps={{extra: <img width={50} src={logo} />}} />}
+        {({ logo }) => <ProFormText {...logoProps} formItemProps={{ extra: <img width={50} src={logo} /> }} />}
       </ProFormDependency>
 
       <ProFormText {...nameProps} />

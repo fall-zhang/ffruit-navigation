@@ -1,10 +1,11 @@
 import React from 'react'
 import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons'
 import { Card, Typography, Alert } from 'antd'
-import { PageHeaderWrapper } from '@ant-design/pro-layout'
+import { TopNavHeader } from '@ant-design/pro-layout'
 export default (): React.ReactNode => {
+  // <TopNavHeader content={' 这个页面只有 admin 权限才能查看'}>
   return (
-    <PageHeaderWrapper content={' 这个页面只有 admin 权限才能查看'}>
+    <TopNavHeader matchMenuKeys={[]} >
       <Card>
         <Alert
           message={'更快更强的重型组件，已经发布。'}
@@ -37,6 +38,6 @@ export default (): React.ReactNode => {
         </a>
         。
       </p>
-    </PageHeaderWrapper>
+    </TopNavHeader>
   )
 }

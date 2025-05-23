@@ -1,14 +1,15 @@
-import {API_CATEGORY_LIST, API_NAV, API_NAV_LIST} from '@/services/api'
+import { API_CATEGORY_LIST, API_NAV, API_NAV_LIST } from '@/apis/api'
 import GeekProTable from '@/components/GeekProTable/GeekProTable'
-import {ProColumns} from '@ant-design/pro-table'
+import { ProColumns } from '@ant-design/pro-table'
 import useGeekProTablePopup from '@/components/GeekProTable/useGeekProTablePopup'
 import NavListForm from '@/pages/nav/List/NavListForm'
-import {Form, Popconfirm, Select} from 'antd'
-import request from '@/utils/request'
-import {useRef, useState} from 'react'
+import { Form, message, Popconfirm, Select } from 'antd'
+import { request } from '@/utils/request'
+
+import { act, useRef, useState } from 'react'
 import CategorySelect from '@/pages/nav/Category/CategorySelect'
 
-export default function NavListPage() {
+export default function NavListPage () {
   const tableRef = useRef()
   const formProps = useGeekProTablePopup()
 
@@ -16,7 +17,7 @@ export default function NavListPage() {
     {
       title: '网站名称',
       dataIndex: 'name',
-      width: 180,
+      width: 180
     },
     {
       title: '分类',
@@ -29,45 +30,49 @@ export default function NavListPage() {
       title: '网站描述',
       dataIndex: 'desc',
       search: false,
-      width: 500,
+      width: 500
     },
     {
       title: '网站链接',
       dataIndex: 'href',
-      search: false,
+      search: false
     },
     {
       title: '创建时间',
       dataIndex: 'createTime',
       search: false,
       valueType: 'dateTime'
-    },
+    }
   ]
+  const onRemove = async (record:any, action:any) => {
+    await request({
+      url: API_NAV,
+      method: 'DELETE',
+      data: {
+        id: record?._id
+      }
+    })
+    message.success('删除成功')
 
+    action.reload()
+  }
   return (
     <div>
       <GeekProTable
         actionRef={tableRef}
         columns={columns}
-        requestParams={{url: API_NAV_LIST, method: 'GET'}}
-        renderOptions={(text, record, _, action) => record.status != 2 ? [
-          <a onClick={() => formProps.show({action, data: record, type: 'edit'})}>编辑</a>,
-          <Popconfirm
-            title={'确定删除吗?'}
-            onConfirm={async () => {
-              await request({
-                url: API_NAV,
-                method: 'DELETE',
-                data: {
-                  id: record?._id
-                },
-                msg: '删除成功'
-              })
-              action.reload()
-            }}>
-            <a>删除</a>
-          </Popconfirm>,
-        ] : []}></GeekProTable>
+        requestParams={{ url: API_NAV_LIST, method: 'GET' }}
+        renderOptions={(text, record, _, action) => (record.status !== 2
+          ? [
+            <a key={'edit'} onClick={() => formProps.show({ action, data: record, type: 'edit' })}>编辑</a>,
+            <Popconfirm
+              key={'remove'}
+              title={'确定删除吗?'}
+              onConfirm={() => onRemove(record, action)}>
+              <a>删除</a>
+            </Popconfirm>
+          ]
+          : [])}></GeekProTable>
       <NavListForm {...formProps} tableRef={tableRef.current} />
     </div>
   )

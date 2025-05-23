@@ -1,6 +1,7 @@
 import {Button, Popconfirm} from 'antd'
-import request from '@/utils/request'
-import {API_CATEGORY, API_CATEGORY_LIST} from '@/services/api'
+import { request } from '@/utils/request'
+
+import {API_CATEGORY, API_CATEGORY_LIST} from '@/apis/api'
 import GeekProTable from '@/components/GeekProTable/GeekProTable'
 import {ActionType, ProColumns} from '@ant-design/pro-table'
 import {PlusOutlined} from '@ant-design/icons'
