@@ -76,3 +76,14 @@ $ pnpm run test:cov
 
 每次更改 `.prisma` 文件后，都需要运行 prisma generate 用来生成库里面的内容，之后就可以进行 crud 了 
 
+## 待办项
+
+后端常见场景
+
+- 何将返回数据进行统一包装
+- 包含 message，data，code 三个属性
+
+- [ ] 分页查询
+
+- [ ] 文件上传
+- [ ] 文件下载
