@@ -2,6 +2,7 @@
   "name": "ffruit-design",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
     "build": "vite build",
@@ -29,6 +30,8 @@
     "@ant-design/pro-form": "^2.31.7",
     "@ant-design/pro-layout": "^7.22.4",
     "@ant-design/pro-table": "^3.19.0",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.7",
     "antd": "^5.25.1",
     "axios": "^0.21.4",
@@ -42,6 +45,7 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^6.0.0",
     "react-helmet-async": "^1.3.0",
+    "react-hook-form": "^7.56.4",
     "react-router": "^6.30.0",
     "react-router-dom": "^6.30.0"
   },
@@ -59,13 +63,13 @@
     "express": "^4.21.2",
     "gh-pages": "^6.0.0",
     "jsdom-global": "^3.0.2",
+    "less": "^4.3.0",
     "lint-staged": "^10.5.4",
     "mockjs": "^1.1.0",
     "puppeteer-core": "^8.0.0",
-    "tw-animate-css": "^1.3.0",
-    "less": "^4.3.0",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7",
+    "tw-animate-css": "^1.3.0",
     "vite": "^6.3.5"
   },
   "engines": {
