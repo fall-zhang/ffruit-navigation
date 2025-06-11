@@ -1,5 +1,5 @@
 before_script:
-  - nvm use 12.13.0
+  - nvm use 20.15.0
   - node -v
 
 stages:

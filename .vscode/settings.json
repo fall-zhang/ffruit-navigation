@@ -1,7 +1,9 @@
 {
   "git.ignoreLimitWarning": true,
   "cSpell.words": [
+    "axios",
     "nuxt",
+    "oklch",
     "vite"
   ]
 }
