@@ -1,17 +1,7 @@
 <template>
   <div class="app-search">
-    <!--    <el-tabs v-model="searchType">-->
-    <!--      <el-tab-pane label="站内" name="station"></el-tab-pane>-->
-    <!--      <el-tab-pane label="百度" name="baidu"></el-tab-pane>-->
-    <!--      <el-tab-pane label="谷歌" name="google"></el-tab-pane>-->
-    <!--      <el-tab-pane label="360" name="360"></el-tab-pane>-->
-    <!--      <el-tab-pane label="必应" name="bing"></el-tab-pane>-->
-    <!--      <el-tab-pane label="搜狗" name="sogou"></el-tab-pane>-->
-    <!--    </el-tabs>-->
-
-
-    <el-autocomplete v-model="state" :fetch-suggestions="queryData" :placeholder="placeholder" @select="handleSelect"
-      suffix-icon="el-icon-search">
+    <el-autocomplete v-model="searchText" :fetch-suggestions="queryData"
+      :placeholder="searchGather[searchType]['placeholder']" @select="handleSelect" suffix-icon="el-icon-search">
       <template v-slot:prepend>
         <el-select v-model="searchType" class="search-type-box">
           <el-option label="站内" value="station"></el-option>
@@ -26,11 +16,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import axios from '../plugins/axios'
+<script lang="ts" setup>
+import axios from 'axios'
+defineOptions({
+  name: 'AppSearch'
+})
+type GatherItem = {
+  name: string
+  placeholder: string
+  root?: string
+}
 
-
-const searchGather = {
+const searchGather: Record<string, GatherItem> = {
   station: {
     name: '站内',
     placeholder: '站内搜索'
@@ -61,73 +58,57 @@ const searchGather = {
     root: 'https://www.sogou.com/web?query='
   },
 }
-
-
-export default {
-  name: 'AppSearch',
-  props: {
-
-  },
-  data() {
-    return {
-      restaurants: [],
-      state: '',
-      searchType: 'station',
-      timeout: null
-    }
-  },
-  computed: {
-    placeholder() {
-      return searchGather[this.searchType]['placeholder']
-    }
-  },
-  methods: {
-    queryData(query, cb) {
-      if (this.searchType === 'station') {
-        this.queryStation(query, cb)
-      } else {
-        this.queryBaidu(query, cb)
-      }
-    },
-    async queryStation(query, cb) {
-      if (query !== '') {
-        const { data } = await axios.get('/api/nav' + `?keyword=${query}`)
-        if (Array.isArray(data.data)) {
-          const finalData = data.data.map(item => (item.value = item.name, item))
-          cb(finalData)
-        }
-      } else {
-        cb([])
-      }
-    },
-    async queryBaidu(query, cb) {
-      const res = await axios.get(`/5a1Fazu8AA54nxGko9WTAnF6hhy/su?&wd=${query}&cb=getJSONPData`)
-      try {
-        const data = eval(res)
-        const finalData = data.s.reduce((t, v) => [...t, { value: v }], [])
-        cb(finalData)
-      } catch (e) {
-        cb([])
-      }
-    },
-
-    handleSelect(item) {
-      let url = ''
-      if (this.searchType === 'station') {
-        this.$router.push(`/nav/${item._id}`)
-      } else {
-        url = searchGather[this.searchType].root + item.value
-        window.open(url)
-      }
-    },
-  },
-
-  mounted() {
-    window.getJSONPData = function (data) {
-      return data
-    }
+const searchText = ref()
+const searchType = ref('station')
+function queryData(query: string, cb: any) {
+  if (searchType.value === 'station') {
+    queryStation(query, cb)
+  } else {
+    queryBaidu(query, cb)
   }
 }
+
+async function queryStation(query: string, cb: any) {
+  if (query !== '') {
+    const { data } = await axios.get('/api/nav' + `?keyword=${query}`)
+    if (Array.isArray(data.data)) {
+      const finalData = data.data.map((item:any) => ({
+        ...item,
+        value: item.name
+      }))
+      cb(finalData)
+    }
+  } else {
+    cb([])
+  }
+}
+async function queryBaidu(query: string, cb: any) {
+  const res = await axios.get(`/5a1Fazu8AA54nxGko9WTAnF6hhy/su?&wd=${query}&cb=getJSONPData`)
+  try {
+    const data = eval(res)
+    const finalData = data.s.reduce((t, v) => [...t, { value: v }], [])
+    cb(finalData)
+  } catch (e) {
+    cb([])
+  }
+}
+function handleSelect(item:string) {
+  const router = useRouter()
+  let url = ''
+  if (searchType.value === 'station') {
+    router.push(`/nav/${item._id}`)
+  } else {
+    url = searchGather[searchType.value].root + item.value
+    window.open(url)
+  }
+}
+
+onMounted(() => {
+  window.getJSONPData = function (data:any) {
+    return data
+  }
+})
+
 </script>
 
 <style lang="scss" scoped>

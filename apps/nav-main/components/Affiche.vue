@@ -3,33 +3,30 @@
     <el-carousel height="30px" direction="vertical" indicator-position="none">
       <el-carousel-item>
         <p class="medium">
-          鲜果导航，清新导航。<a class="link" href="https://github.com/geekape/geek-navigation" target="_blank">开源去下载</a>
+          鲜果导航，清新导航。<a class="link" href="https://github.com/" target="_blank">开源去下载</a>
         </p>
       </el-carousel-item>
       <el-carousel-item>
         <p class="medium">
-          一个好的产品要经历千锤百炼，我们需要你的建议。<a class="link" href="https://github.com/geekape/geek-navigation"
+          一个好的产品要经历千锤百炼，我们需要你的建议。<a class="link" href="https://github.com/"
             target="_blank">去围观</a>
         </p>
       </el-carousel-item>
-      <el-carousel-item>
+      <!-- <el-carousel-item>
         <p class="medium">
           支持提交网站带个人信息了，欢迎大家提交网站
         </p>
-      </el-carousel-item>
+      </el-carousel-item> -->
     </el-carousel>
-    <i class="el-icon-close" @click="show = false"></i>
+    <CircleX @click="show = false"/>
+    <i class="el-icon-close" :size="10"></i>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      show: true
-    }
-  }
-}
+<script lang="ts" setup>
+import {CircleX } from 'lucide-vue-next'
+const show =  ref(true)
+
 </script>
 
 <style lang="scss" scoped>

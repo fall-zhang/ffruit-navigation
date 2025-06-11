@@ -2,19 +2,19 @@
   <el-container class="user-layout ">
     <AppNavMenus @handleSubMenuClick="handleSubMenuClick" :categorys="categorys" :show-menu-type="showMenuType"
       @showMenus="toggleMenu2" />
-    <!-- 
     <el-container class="body" :style="{ marginLeft: contentMarginLeft }">
       <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
+      <Affiche />
+      <!-- 
       <div class="main" v-loading="loading">
-        <affiche />
         <nav-ranking-list :data="navRanking" />
 
         <div class="website-wrapper" v-for="item in data" :key="item.name">
           <p class="website-title" :id="item._id">{{ item.name }}</p>
           <app-nav-list :list="item.list" />
         </div>
-      </div>
-    </el-container> -->
+      </div> -->
+    </el-container>
     <!-- <AddNavPopup v-model:show="showPopup" /> -->
     <CustomerServiceBtn @showLog="showLog = true" />
     <AppLog :show="showLog" @closeLog="showLog = false" />
@@ -29,7 +29,7 @@ import AppLog from '../components/AppLog.vue'
 import AppNavMenus from '../components/AppNavMenus.vue'
 // // import axios from 'axios'
 // import NavRankingList from '../components/NavRankingList'
-// import Affiche from '../components/Affiche'
+import Affiche from '../components/Affiche.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
 // state
@@ -76,27 +76,7 @@ onMounted(() => {
 })
 onUnmounted(() => {
 })
-// async function getCategoryList() {
-//   const { data } = await axios.get('/api/category/list')
-//   categorys.value = data
 
-//   if (Array.isArray(categorys.value)) {
-//     const categoryId = categorys.value[0]._id
-//     findNav(categoryId)
-//   }
-// }
-// function dataScroll() {
-//   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-//   const allSite = document.querySelectorAll('.box')
-//   for (let i = 0; i < allSite.length; i++) {
-//     if (scrollTop >= allSite[i].offsetTop) {
-//       selfIndex.value = i
-//     }
-//   }
-// }
-// async function findNav(id) {
-
-// }
 async function handleSubMenuClick(parentId: string) {
   loading.value = true
   const { data } = await axios.get(`/api/nav/find?categoryId=${id}`)
@@ -148,7 +128,6 @@ async function asyncData({ store }) {
 }
 
 .user-layout {
-  position: relative;
 
   .footer {
     position: fixed;

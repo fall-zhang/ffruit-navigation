@@ -8,14 +8,16 @@ import { FeedbackModule } from './feedback/feedback.module'
 import { ReleaseModule } from './release/release.module'
 import { BacklogModule } from './backlog/backlog.module'
 import { AuthModule } from './auth/auth.module'
-
+import { MongooseModule } from '@nestjs/mongoose'
 @Module({
   controllers: [AppController],
   providers: [AppService],
   imports: [ ConfigModule.forRoot({
     envFilePath: '.env.local',
     isGlobal: true
-  }), BridgeModule, FeedbackModule, ReleaseModule, BacklogModule,AuthModule],
+  }), BridgeModule, FeedbackModule, ReleaseModule, BacklogModule,AuthModule,
+  MongooseModule.forRoot('mongodb://localhost:1')
+  ],
 })
 
 export class AppModule implements NestModule {

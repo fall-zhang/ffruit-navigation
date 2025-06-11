@@ -10,20 +10,34 @@ export class NavService {
   constructor(@InjectModel(NavigateLink.name) private navLinkModel:Model<NavigateLink>){
 
   }
-  create(createNavDto: CreateNavDto) {
-    return 'This action adds a new nav'
+  async create(createNavDto: CreateNavDto) {
+
+    const createTime = new Date()
+    const savedNav = new this.navLinkModel(createNavDto)
+    return savedNav.save()
   }
 
-  findAll() {
+  async findAll(updateNavDto:UpdateNavDto,keyword:string) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
+    const id = updateNavDto.id
+    if (id) {
+      await this.navLinkModel.findOne({ _id: id })
+    } else if (keyword) {
+      const reg = new RegExp(keyword, 'i')
+      await this.navLinkModel.find({
+        name: { $regex: reg }
+      }).limit(10)
+    }
     return `This action returns all nav`
   }
 
   findOne(id: number) {
+
     return `This action returns a #${id} nav`
   }
 
-  async update(id: number, updateNavDto: UpdateNavDto) {
+  async update(updateNavDto: UpdateNavDto) {
+    const id = updateNavDto.id
     const updateTime = new Date()
     await this.navLinkModel.updateOne({ _id: id }, updateNavDto)
     return `This action updates a #${id} nav`
@@ -32,6 +46,15 @@ export class NavService {
   async remove(id: number) {
     await this.navLinkModel.deleteOne({ _id: id })
     return `This action removes a #${id} nav`
+  }
+
+  async getRandomNav(){
+    const allData = (await this.navLinkModel.find())
+    // this.navLinkModel.
+    const dataLength = allData.length
+    const index = Math.floor(Math.random() * dataLength)
+    return allData.at(index)
+    // allData.
   }
 
   async findRank(){

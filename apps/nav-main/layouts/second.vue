@@ -1,14 +1,11 @@
 <template>
   <div>
-    <nuxt />
+    <router-view />
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
 
-export default {
-
-}
 </script>
 
 <style lang="scss" scoped>
@@ -33,10 +30,6 @@ html {
 
 p {
   margin: 0;
-}
-
-a[title="站长统计"] {
-  display: none;
 }
 
 </style>

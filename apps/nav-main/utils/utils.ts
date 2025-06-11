@@ -1,11 +1,10 @@
-export function throttle(fn, delay) {
+export function throttle(fn:any, delay:number) {
   let previous = 0
   // 使用闭包返回一个函数并且用到闭包函数外面的变量previous
-  return ()=> {
-    let args = arguments
-    let now = new Date()
+  return (...args:any[])=> {
+    const now = new Date().getTime()
     if(now - previous > delay) {
-      fn.apply(this, args)
+      fn(args)
       previous = now
     }
   }
@@ -16,7 +15,8 @@ export function isMobileSize() {
   return width < 568
 }
 
-export function titleCase(str) {
+export function titleCase(str:string) {
+  console.log('🚀 ~ titleCase ~ str:', str)
   const newStr = str.slice(0,1).toUpperCase() +str.slice(1).toLowerCase()
   return newStr
 }

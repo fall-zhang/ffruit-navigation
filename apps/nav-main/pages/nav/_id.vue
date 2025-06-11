@@ -1,19 +1,9 @@
 <template>
   <div>
     <div class="background-fx">
-      <img src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-01.svg" class="shape-01"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-02.svg" class="shape-02"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-03.svg" class="shape-03"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-04.svg" class="shape-04"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-05.svg" class="shape-05"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-06.svg" class="shape-06"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-07.svg" class="shape-07"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-08.svg" class="shape-08"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-09.svg" class="shape-09"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-10.svg" class="shape-10"> <img
-        src="https://nav.iowen.cn/wp-content/themes/onenav/images/fx/shape-11.svg" class="shape-11">
+
     </div>
-    <div class="container" v-loading="loading">
+    <div class="container">
       <el-row :gutter="25" class="site-info">
         <el-col class="item" :md="6" :xs="24">
           <div class="left">
@@ -42,11 +32,6 @@
         </el-col>
         <el-col class="item" :md="10" :xs="24">
           <div class="content">
-            <!--            <div class="category-bar">-->
-            <!--              <span class="category">素材资源</span>-->
-            <!--              >-->
-            <!--              <span class="category">LOGO设计</span>-->
-            <!--            </div>-->
             <h1 class="title">{{ detail.name }}</h1>
             <p class="desc">{{ detail.desc }}</p>
             <p class="tags" v-if="detail.tags.length">标签：
@@ -87,10 +72,10 @@
       </el-row>
 
       <el-row :gutter="20" class="site-detail">
-        <el-col span="18">
+        <el-col :span="18">
           <div class="detail">{{ detail.detail || detail.desc }}</div>
         </el-col>
-        <el-col span="6">
+        <el-col :span="6">
           <aside></aside>
         </el-col>
       </el-row>
@@ -101,11 +86,9 @@
 <script lang="ts">
 import axios from 'axios'
 // import { API_NAV, API_NAV_RANDOM } from '../../api'
-import navActionMixin from '../../mixins/navActionMixin'
 
 export default {
   name: 'NavDetail',
-  mixins: [navActionMixin],
   head() {
     const { name, desc } = this.detail
     return {
@@ -114,6 +97,7 @@ export default {
   },
   data() {
     return {
+      isStar: false,
       detail: {},
       randomNavList: [],
     }
@@ -140,6 +124,32 @@ export default {
       randomNavList: randomRes.data
     }
   },
+  async addNavView(navData = {}) {
+    const { view, _id: id } = navData
+  
+    await axios.put('/api/nav', { id, view: view + 1 })
+  
+    const views = localStorage.get('VIEWS') || {}
+    views[id] = view + 1
+    localStorage.set('VIEWS', views)
+  },
+  handleNavClick(navData = {}) {
+    const { href } = navData
+    this.addNavView(navData)
+    window.open(href, '_blank')
+  },
+  async handleNavStar(navData = {}, cb = ()=> {}) {
+    let { star, _id: id } = navData
+  
+    const stars = localStorage.get('STARS') || {}
+    if (stars[id]) return
+  
+    star++
+    await  axios.put('/api/nav', { id, star })
+    cb()
+    stars[id] = star
+    localStorage.set('STARS', stars)
+  }
 }
 </script>
 
