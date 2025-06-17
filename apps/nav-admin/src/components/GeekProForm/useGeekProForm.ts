@@ -12,7 +12,7 @@ interface IProps extends ProFormProps {
  * 2. 添加和编辑的Form逻辑处理
  * @param props
  */
-export default function useGeekProForm(props: IProps) {
+export default function useGeekProForm (props: IProps) {
   const form = useRef<any>({})
 
   useEffect(() => {
@@ -28,7 +28,6 @@ export default function useGeekProForm(props: IProps) {
       } else {
         form.current.resetFields()
       }
-
     }
   }, [props?.visible])
 

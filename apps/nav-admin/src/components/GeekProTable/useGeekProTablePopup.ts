@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react'
+import { useMemo, useState } from 'react'
 
 interface PopupShowParams {
   data?: any
@@ -6,13 +6,13 @@ interface PopupShowParams {
   action?: object
 }
 
-export default function useGeekProTablePopup() {
+export default function useGeekProTablePopup () {
   const [visible, setVisible] = useState(false)
   const [openType, setOpenType] = useState('add')
   const [tableAction, setTableAction] = useState({})
   const [selectedData, setSelectedData] = useState({})
 
-  function show(params: PopupShowParams = {}) {
+  function show (params: PopupShowParams = {}) {
     setVisible(true)
     const { data, type, action } = params
     setSelectedData({})
@@ -35,11 +35,11 @@ export default function useGeekProTablePopup() {
     }
   }
 
-  function hide() {
+  function hide () {
     setVisible(false)
   }
 
-  const isEdit = useMemo(()=> openType === 'edit', [openType])
+  const isEdit = useMemo(() => openType === 'edit', [openType])
 
   return {
     show,
