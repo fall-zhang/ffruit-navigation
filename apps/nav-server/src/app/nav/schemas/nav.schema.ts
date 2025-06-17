@@ -49,12 +49,18 @@ export class NavigateLink {
     default: 0
   })
     star: number
-  // 审核状态 1 审核 2 拒绝 3 通过
+  // 审核状态 1 审核中 2 拒绝 3 通过
   @Prop({
     type: Number,
     default: 0
   })
     status: number
+  // 访问状态 1 正常访问 2 需要代理 3 网站已停用
+  @Prop({
+    type: Number,
+    default: 0
+  })
+    accessState: number
 }
 
 export const NavSchema = SchemaFactory.createForClass(NavigateLink)

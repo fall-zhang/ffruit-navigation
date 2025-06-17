@@ -30,19 +30,33 @@ services:
 
   mongodb:
   # This image automatically creates a replica set required for transactions
-    image: prismagraphql/mongo-single-replica:4.4.3-bionic
-    container_name: less-mongo
+    image: mongo:7.0.8
+    container_name: ffruit-nav-mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: userName
       MONGO_INITDB_ROOT_PASSWORD: password123
-      INIT_WAIT_SEC: 3
     ports:
-      - 7217:27017
+      - 8217:27017
     volumes:
       - ./mongo/log/mongod.log:/var/log/mongodb/mongod.log
       - ./mongo/data:/data/db
       - ./mongo/config:/data/configdb
       # - ./mongo/config/mongod.conf:/etc/mongod.conf
+  # mongodb:
+  # # This image automatically creates a replica set required for transactions
+  #   image: prismagraphql/mongo-single-replica:4.4.3-bionic
+  #   container_name: less-mongo
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: userName
+  #     MONGO_INITDB_ROOT_PASSWORD: password123
+  #     INIT_WAIT_SEC: 3
+  #   ports:
+  #     - 8217:27017
+  #   volumes:
+  #     - ./mongo/log/mongod.log:/var/log/mongodb/mongod.log
+  #     - ./mongo/data:/data/db
+  #     - ./mongo/config:/data/configdb
+  #     # - ./mongo/config/mongod.conf:/etc/mongod.conf
 
   # less-process-page:
   #   image: crpi-p2iq39vwj4ph8h1w.cn-wulanchabu.personal.cr.aliyuncs.com/fall_default/less-process-page:0.1.0 # 镜像名称以及版本
