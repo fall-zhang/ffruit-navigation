@@ -3,7 +3,7 @@ import { API_NAV_AUDIT, API_NAV_LIST } from '@/apis/api'
 import { ProColumns } from '@ant-design/pro-table'
 import { Popconfirm, Tag, Space } from 'antd'
 import { request } from '@/utils/request'
-import { NavStatus } from '@/constants/api'
+import type { NavStatus } from '@/types/api'
 import { FC, ReactNode } from 'react'
 
 const RandomColorTag:FC<{
@@ -73,7 +73,7 @@ export default function NavAuditListPage () {
     }
   ]
 
-  async function onActionClick (id: string, action: any, status = NavStatus.pass) {
+  async function onActionClick (id: string, action: any, status: NavStatus) {
     await request({
       url: API_NAV_AUDIT,
       method: 'PUT',
@@ -89,12 +89,12 @@ export default function NavAuditListPage () {
     <GeekProTable
       columns={columns}
       requestParams={{ url: API_NAV_LIST, method: 'GET' }}
-      renderOptions={(text, record, _, action) => (record.status !== NavStatus.reject
+      renderOptions={(text, record, _, action) => (record.status !== 'reject'
         ? [
-          <Popconfirm key={record._id} title={'确定通过吗？'} onConfirm={() => onActionClick(record._id, action, 0)}>
+          <Popconfirm key={record._id} title={'确定通过吗？'} onConfirm={() => onActionClick(record._id, action, 'pass')}>
             <a>通过</a>
           </Popconfirm>,
-          <Popconfirm key={record._id} title={'确定拒绝吗？'} onConfirm={() => onActionClick(record._id, action, 2)}>
+          <Popconfirm key={record._id} title={'确定拒绝吗？'} onConfirm={() => onActionClick(record._id, action, 'reject')}>
             <a>拒绝</a>
           </Popconfirm>
         ]

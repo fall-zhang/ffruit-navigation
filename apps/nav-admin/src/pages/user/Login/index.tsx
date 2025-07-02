@@ -1,12 +1,11 @@
-import { Alert, Space, message, Tabs } from 'antd'
+import { message, Tabs } from 'antd'
 import React, { FormEvent, FormEventHandler, useState } from 'react'
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form'
-// import {Link, history, useModel} from 'umi';
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './index.module.less'
 import { login } from '@/apis/api'
 import { setPersistenceData } from '@/utils/persistence'
-import { CURRENT_USER, TOKEN } from '@/constants'
+import { CURRENT_USER, SESSION_TOKEN_KEY } from '@/const'
 import { LoginForm } from '@/components/login-form'
 import { FieldValues } from 'react-hook-form'
 
@@ -45,7 +44,7 @@ const Login: React.FC = () => {
           }
         })
         goto()
-        setPersistenceData(TOKEN, res.data)
+        setPersistenceData(SESSION_TOKEN_KEY, res.data)
         setPersistenceData(CURRENT_USER, { name: form.username })
         return
       } // 如果失败去设置用户错误信息

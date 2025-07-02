@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { Route, Navigate, createBrowserRouter, RouterProvider, BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 // 同步方式加载所有路由页面

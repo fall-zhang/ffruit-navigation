@@ -14,13 +14,7 @@ export default function TagForm (props: any) {
       return values
     }
   })
-  const nameProps = useProFormItem()
-  // {
-  //   name: 'name',
-  //   label: '标签名',
-  //   width: 'sm',
-  //   required: true
-  // }
+  const nameProps = useProFormItem({})
 
   async function onFinish (values: any) {
     const data = {

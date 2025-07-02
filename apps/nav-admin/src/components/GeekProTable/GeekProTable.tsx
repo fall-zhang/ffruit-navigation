@@ -117,7 +117,6 @@ function GeekProTable (props: GeekProTableProps, ref: any) {
 }
 
 function formatOptions (options: any[], maxCount = 3) {
-  console.log('🚀 ~ formatOptions ~ options:', options)
   if (options.length >= maxCount) {
     return [
       ...options

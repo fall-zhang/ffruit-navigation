@@ -33,6 +33,13 @@ export const routeList:RouteObject[] = [
     }
   },
 
+  {
+    path: '/',
+    async lazy () {
+      const Component = (await import('@/pages/dashboard/dashboard')).default
+      return { Component }
+    }
+  },
   { path: '/', element: <Navigate to="/nav/audit"></Navigate> },
   { element: './404' }
 

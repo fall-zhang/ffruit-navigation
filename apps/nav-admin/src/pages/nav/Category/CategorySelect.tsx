@@ -3,7 +3,7 @@ import { request } from '@/utils/request'
 
 import {API_CATEGORY_LIST} from '@/apis/api'
 import {useEffect, useState} from 'react'
-import {CategoryModel} from '@/constants/api'
+import {CategoryModel} from '@/types/api'
 
 export default function CategorySelect(props: any) {
   const [categoryList, setCategoryList] = useState<CategoryModel[]>([])

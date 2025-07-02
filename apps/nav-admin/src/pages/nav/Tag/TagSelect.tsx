@@ -3,7 +3,7 @@ import { request } from '@/utils/request'
 
 import {API_TAG_LIST} from '@/apis/api'
 import {useEffect, useState} from 'react'
-import {TagModel} from '@/constants/api'
+import {TagModel} from '@/types/api'
 
 interface TagSelectProps extends SelectProps<any> {
   valueKey?: string

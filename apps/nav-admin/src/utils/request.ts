@@ -1,6 +1,5 @@
-import { getPersistenceData } from '@/utils/persistence'
-import { TOKEN } from '@/constants'
-// import { request as umiRequest } from 'umi'
+import { getSessionData } from '@/utils/persistence'
+import { SESSION_TOKEN_KEY } from '@/const'
 import axios from 'axios'
 import { message, notification } from 'antd'
 
@@ -31,7 +30,7 @@ const request = axios.create({
 })
 
 request.interceptors.request.use(res => {
-  const token = getPersistenceData(TOKEN)
+  const token = getSessionData(SESSION_TOKEN_KEY)
   // eslint-disable-next-line no-param-reassign
   res.headers = {
     Authorization: token

@@ -10,16 +10,4 @@ export interface TagModel {
   name: string
 }
 
-
-export interface ApiResponse {
-  code: number
-  msg: string
-  data: any
-}
-
-
-export enum NavStatus {
-  pass,
-  wait,
-  reject,
-}
+export type NavStatus = 'pass'| 'wait'| 'reject'

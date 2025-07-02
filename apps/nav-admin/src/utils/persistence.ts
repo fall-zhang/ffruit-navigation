@@ -1,26 +1,24 @@
-import { PERSISTENCE_TYPE } from '@/constants'
-
-
-export function setPersistenceData (key, value, type = PERSISTENCE_TYPE) {
-  if (typeof value !== 'string') value = JSON.stringify(value)
+export function setPersistenceData (key:string, value:unknown, type = 'session') {
+  let valToStr:string
+  if (typeof value === 'string') {
+    valToStr = value
+  } else {
+    valToStr = JSON.stringify(value)
+  }
   if (type === 'session') {
-    sessionStorage.setItem(key, value)
+    sessionStorage.setItem(key, valToStr)
   } else if (type === 'local') {
-    localStorage.setItem(key, value)
+    localStorage.setItem(key, valToStr)
   }
 }
 
 
-export function getPersistenceData (key, type = PERSISTENCE_TYPE) {
-  if (type === 'session') {
-    return sessionStorage.getItem(key)
-  } else if (type === 'local') {
-    return localStorage.getItem(key)
-  }
+export function getSessionData (key:string) {
+  return sessionStorage.getItem(key)
 }
 
 
-export function clearPersistenceData (type = PERSISTENCE_TYPE) {
+export function clearPersistenceData (type = 'session') {
   if (type === 'session') {
     return sessionStorage.clear()
   } else if (type === 'local') {

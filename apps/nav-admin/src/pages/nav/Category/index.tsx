@@ -8,7 +8,7 @@ import {PlusOutlined} from '@ant-design/icons'
 import useGeekProTablePopup from '@/components/GeekProTable/useGeekProTablePopup'
 import CategoryForm from '@/pages/nav/Category/CategoryForm'
 import {useRef, useState} from 'react'
-import {CategoryModel} from '@/constants/api'
+import {CategoryModel} from '@/types/api'
 
 
 function transformCategoryList(list: any) {
