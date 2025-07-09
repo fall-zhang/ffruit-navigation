@@ -9,7 +9,7 @@ async function bootstrap () {
   app.enableVersioning({
     type: VersioningType.URI
   })
-  app.use(session({secret:'Auth_Session',name:'auth_code',cookie:{maxAge:1_000_000}}))
+  app.use(session({ secret: 'Auth_Session', name: 'auth_code', cookie: { maxAge: 1_000_000 } }))
   await app.listen(4773)
 }
 bootstrap()

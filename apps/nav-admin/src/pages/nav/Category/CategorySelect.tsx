@@ -1,16 +1,16 @@
-import {Select} from 'antd'
+import { Select } from 'antd'
 import { request } from '@/utils/request'
 
-import {API_CATEGORY_LIST} from '@/apis/api'
-import {useEffect, useState} from 'react'
-import {CategoryModel} from '@/types/api'
+import { API_CATEGORY_LIST } from '@/apis/api'
+import { useEffect, useState } from 'react'
+import { CategoryModel } from '@/types/api'
 
-export default function CategorySelect(props: any) {
+export default function CategorySelect (props: any) {
   const [categoryList, setCategoryList] = useState<CategoryModel[]>([])
   const [value, setValue] = useState('')
 
-  useEffect(()=> {
-    async function getCategoryList() {
+  useEffect(() => {
+    async function getCategoryList () {
       const res = await request({
         url: API_CATEGORY_LIST,
         method: 'GET'
@@ -21,7 +21,7 @@ export default function CategorySelect(props: any) {
     getCategoryList()
   }, [])
 
-  function onSelectChange(value: string) {
+  function onSelectChange (value: string) {
     setValue(value)
   }
 

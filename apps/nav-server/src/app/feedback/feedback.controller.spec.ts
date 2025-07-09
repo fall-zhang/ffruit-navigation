@@ -8,7 +8,7 @@ describe('FeedbackController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FeedbackController],
-      providers: [FeedbackService],
+      providers: [FeedbackService]
     }).compile()
 
     controller = module.get<FeedbackController>(FeedbackController)

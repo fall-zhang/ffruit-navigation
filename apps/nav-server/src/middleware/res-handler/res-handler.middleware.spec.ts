@@ -1,7 +1,7 @@
-import { ResHandlerMiddleware } from './res-handler.middleware';
+import { ResHandlerMiddleware } from './res-handler.middleware'
 
 describe('ResHandlerMiddleware', () => {
   it('should be defined', () => {
-    expect(new ResHandlerMiddleware()).toBeDefined();
-  });
-});
+    expect(new ResHandlerMiddleware()).toBeDefined()
+  })
+})

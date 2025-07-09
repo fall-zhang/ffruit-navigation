@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto'
 
 @Injectable()
 export class FeedbackService {
-  constructor(private prisma: PrismaService) {}
+  constructor (private prisma: PrismaService) {}
   async create (createFeedbackDto: CreateFeedbackDto) {
     console.log('🚀 ~ FeedbackService ~ create ~ createFeedbackDto:', createFeedbackDto)
     const id = randomUUID()
@@ -18,8 +18,8 @@ export class FeedbackService {
       }
     })
     return {
-      state:'success',
-      msg:'This action adds a new feedback'
+      state: 'success',
+      msg: 'This action adds a new feedback'
     }
   }
 

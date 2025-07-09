@@ -28,8 +28,8 @@ export type ErrorTrack = {
 
 
 export type PerformanceTrack = {
-programName: string // 前端监控系统
-type: 'performance'
+  programName: string // 前端监控系统
+  type: 'performance'
   message: string // '渲染正常，渲染速度为 20ms',
   time: number // 渲染时长，单位为 毫秒 ms
   deviceInfo: {

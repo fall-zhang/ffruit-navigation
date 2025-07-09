@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
-};
+}
 
 
 const menuItems: MenuProps['items'] = [

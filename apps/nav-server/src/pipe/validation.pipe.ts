@@ -1,6 +1,6 @@
 
 import { PipeTransform, Injectable, ArgumentMetadata, HttpException, HttpStatus, BadRequestException } from '@nestjs/common'
-import { z, ZodSchema } from 'zod'
+import { ZodSchema } from 'zod'
 
 @Injectable()
 export class ParseCodeTypePipe implements PipeTransform {

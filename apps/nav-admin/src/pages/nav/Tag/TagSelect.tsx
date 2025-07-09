@@ -1,20 +1,20 @@
-import {Select, SelectProps} from 'antd'
+import { Select, SelectProps } from 'antd'
 import { request } from '@/utils/request'
 
-import {API_TAG_LIST} from '@/apis/api'
-import {useEffect, useState} from 'react'
-import {TagModel} from '@/types/api'
+import { API_TAG_LIST } from '@/apis/api'
+import { useEffect, useState } from 'react'
+import { TagModel } from '@/types/api'
 
 interface TagSelectProps extends SelectProps<any> {
   valueKey?: string
 }
 
-export default function TagSelect(props: TagSelectProps) {
+export default function TagSelect (props: TagSelectProps) {
   const [tagList, setTagList] = useState<TagModel[]>([])
   const [value, setValue] = useState([])
 
-  useEffect(()=> {
-    async function getTagList() {
+  useEffect(() => {
+    async function getTagList () {
       const { data } = await request({
         url: API_TAG_LIST,
         method: 'GET'
@@ -27,7 +27,7 @@ export default function TagSelect(props: TagSelectProps) {
     getTagList()
   }, [])
 
-  function onSelectChange(value: any) {
+  function onSelectChange (value: any) {
     setValue(value)
   }
 

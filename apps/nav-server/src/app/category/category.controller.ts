@@ -5,31 +5,30 @@ import { UpdateCategoryDto } from './dto/update-category.dto'
 import mongoose from 'mongoose'
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor (private readonly categoryService: CategoryService) {}
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
+  create (@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto)
   }
 
   @Get()
-  findAll(@Query() showInMenu:boolean) {
+  findAll (@Query() showInMenu:boolean) {
     return this.categoryService.findAll()
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne (@Param('id') id: string) {
     return this.categoryService.findOne(+id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-
+  update (@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(+id, updateCategoryDto)
   }
 
   @Delete(':id')
-  remove(@Body('id') id: string) {
+  remove (@Body('id') id: string) {
     return this.categoryService.remove(+id)
   }
 }

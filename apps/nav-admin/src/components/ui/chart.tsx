@@ -11,8 +11,8 @@ export type ChartConfig = {
     label?: React.ReactNode
     icon?: React.ComponentType
   } & (
-    | { color?: string; theme?: never }
-    | { color?: never; theme: Record<keyof typeof THEMES, string> }
+    | { color?: string; theme?: never } |
+    { color?: never; theme: Record<keyof typeof THEMES, string> }
   )
 }
 
@@ -214,10 +214,10 @@ function ChartTooltipContent ({
                               }
                             )}
                             style={
-                          {
-                            '--color-bg': indicatorColor,
-                            '--color-border': indicatorColor
-                          } as React.CSSProperties
+                              {
+                                '--color-bg': indicatorColor,
+                                '--color-border': indicatorColor
+                              } as React.CSSProperties
                             }
                           />
                         )

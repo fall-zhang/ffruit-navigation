@@ -3,13 +3,13 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist','node_modules'] },
+  { ignores: ['dist', 'node_modules'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: globals.browser
     },
     plugins: {
     },
@@ -19,7 +19,7 @@ export default tseslint.config(
       'space-before-function-paren': 0, // function 前面的空格
       eqeqeq: 1, // 必须使用全等
       semi: [2, 'never'], // 语句不使用分号结尾
-      quotes: [  // 引号类型 `` "" ''
+      quotes: [ // 引号类型 `` "" ''
         2,
         'single',
         {
@@ -29,7 +29,7 @@ export default tseslint.config(
       ],
       'no-irregular-whitespace': 2, // 不能有不规则的空格
       'eol-last': 0, // 所有文件结尾必须包括换行
-      'no-else-return': 2, //如果 if 语句里面有 return 后面不能跟 else 语句
+      'no-else-return': 2, // 如果 if 语句里面有 return 后面不能跟 else 语句
       'max-lines-per-function': [ // 每个方法最多多少行
         2,
         { max: 300, skipComments: true, skipBlankLines: true }
@@ -61,6 +61,6 @@ export default tseslint.config(
       '@typescript-eslint/no-this-alias': 0, // 是否禁止 this 的别名
       '@typescript-eslint/no-unused-vars': 1, // 是否禁止 this 的别名
       indent: ['warn', 2]
-    },
-  },
+    }
+  }
 )

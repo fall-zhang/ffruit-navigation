@@ -10,4 +10,4 @@ export interface TagModel {
   name: string
 }
 
-export type NavStatus = 'pass'| 'wait'| 'reject'
+export type NavStatus = 'pass' | 'wait' | 'reject'

@@ -16,8 +16,8 @@ export function LoginForm ({
   className,
   onSubmitForm,
   ...props
-}: React.ComponentProps<'div'>&{
-onSubmitForm(form:FieldValues):void
+}: React.ComponentProps<'div'> & {
+  onSubmitForm(form:FieldValues):void
 }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   // const formRef = useRef(null)
@@ -50,7 +50,7 @@ onSubmitForm(form:FieldValues):void
                   href="#"
                   className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                 >
-                    忘记密码
+                  忘记密码
                 </a>
               </div>
               <Input type="password" {...register('password', { required: true })}/>
@@ -67,9 +67,9 @@ onSubmitForm(form:FieldValues):void
             <input type="submit" />
           </div>
           <div className="mt-4 text-center text-sm">
-              没有账户？{' '}
+            没有账户？{' '}
             <a href="#" className="underline underline-offset-4">
-                立即注册
+              立即注册
             </a>
           </div>
         </form>

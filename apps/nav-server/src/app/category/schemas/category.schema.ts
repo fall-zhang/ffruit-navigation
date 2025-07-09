@@ -1,7 +1,6 @@
 import { HydratedDocument } from 'mongoose'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 
-export type CategoryDocument = HydratedDocument<Category>;
 
 @Schema()
 export class Category {
@@ -15,17 +14,19 @@ export class Category {
     createAt: number
 
   @Prop({
-    type:String,
-    default:''
+    type: String,
+    default: ''
   })
     icon: string
+
   @Prop([{
     name: String,
     categoryId: String,
     createAt: Number,
-    showInMenu: Boolean,
+    showInMenu: Boolean
   }])
     children: object
+
   @Prop({
     type: Boolean,
     default: true
@@ -35,3 +36,5 @@ export class Category {
 export const CategorySchema = SchemaFactory.createForClass(Category)
 
 //  return mongoose.model('Category', CategorySchema)
+
+export type CategoryDocument = HydratedDocument<Category>

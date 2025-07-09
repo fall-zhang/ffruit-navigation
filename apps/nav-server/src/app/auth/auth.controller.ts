@@ -7,7 +7,7 @@ export class AuthController {
   constructor (private readonly authService: AuthService) {}
 
   @Get('/authImg')
-  getAuthCode(@Res() res:Response){
+  getAuthCode (@Res() res:Response) {
     const authCode = this.authService.getAuthCode()
     const passCode = authCode.text
     res.type('image/svg+xml')

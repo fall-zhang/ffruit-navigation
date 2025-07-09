@@ -7,6 +7,6 @@ import { NavigateLink, NavSchema } from '../nav/schemas/nav.schema'
 @Module({
   controllers: [TagController],
   providers: [TagService],
-  imports:[MongooseModule.forFeature([{ name: NavigateLink.name, schema: NavSchema }])]
+  imports: [MongooseModule.forFeature([{ name: NavigateLink.name, schema: NavSchema }])]
 })
 export class TagModule {}

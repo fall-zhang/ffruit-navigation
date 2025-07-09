@@ -1,22 +1,22 @@
-import {Button, Popconfirm} from 'antd'
+import { Button, Popconfirm } from 'antd'
 import { request } from '@/utils/request'
 
-import {API_CATEGORY, API_CATEGORY_LIST} from '@/apis/api'
+import { API_CATEGORY, API_CATEGORY_LIST } from '@/apis/api'
 import GeekProTable from '@/components/GeekProTable/GeekProTable'
-import {ActionType, ProColumns} from '@ant-design/pro-table'
-import {PlusOutlined} from '@ant-design/icons'
+import { ActionType, ProColumns } from '@ant-design/pro-table'
+import { PlusOutlined } from '@ant-design/icons'
 import useGeekProTablePopup from '@/components/GeekProTable/useGeekProTablePopup'
 import CategoryForm from '@/pages/nav/Category/CategoryForm'
-import {useRef, useState} from 'react'
-import {CategoryModel} from '@/types/api'
+import { useRef, useState } from 'react'
+import { CategoryModel } from '@/types/api'
 
 
-function transformCategoryList(list: any) {
+function transformCategoryList (list: any) {
   const newList: any = []
-  list.map(item=> {
+  list.map(item => {
     const listItem: any = { key: item._id, ...item, children: [] }
     if (Array.isArray(item.children)) {
-      item.children.map(subItem=> {
+      item.children.map(subItem => {
         listItem.children.push({ key: subItem._id, ...subItem })
       })
     }
@@ -25,12 +25,12 @@ function transformCategoryList(list: any) {
   return newList
 }
 
-export default function NavAuditListPage() {
+export default function NavAuditListPage () {
   const formProps = useGeekProTablePopup()
   const tableRef = useRef<ActionType>()
   const [categoryList, setCategoryList] = useState([])
 
-  async function onRequestData() {
+  async function onRequestData () {
     const res = await request({
       url: API_CATEGORY_LIST,
       method: 'GET',
@@ -41,18 +41,18 @@ export default function NavAuditListPage() {
     const data = transformCategoryList(res.data)
     setCategoryList(data)
     return {
-      data,
+      data
     }
   }
 
-  async function onDelete(id: string, action: any) {
+  async function onDelete (id: string, action: any) {
     await request({
       url: API_CATEGORY,
       method: 'DELETE',
       data: {
-        id,
+        id
       },
-      msg: '删除成功',
+      msg: '删除成功'
     })
     action.reload()
   }
@@ -68,9 +68,9 @@ export default function NavAuditListPage() {
       valueType: 'select',
       valueEnum: {
         true: { text: '显示', status: 'Success' },
-        false: { text: '不显示', status: 'Error' },
+        false: { text: '不显示', status: 'Error' }
       }
-    },
+    }
   ]
   return (
     <div>
@@ -78,15 +78,15 @@ export default function NavAuditListPage() {
         actionRef={tableRef}
         columns={columns}
         pageHeaderProps={{
-          extra: <Button type='primary' onClick={()=> formProps.show()}><PlusOutlined />添加分类</Button>
+          extra: <Button type='primary' onClick={() => formProps.show()}><PlusOutlined />添加分类</Button>
         }}
         search={false}
         request={onRequestData}
-        renderOptions={(text, record: CategoryModel, _, action)=> ([
-          <a onClick={()=> formProps.show({type: 'edit', data: record, action})}>编辑</a>,
+        renderOptions={(text, record: CategoryModel, _, action) => ([
+          <a onClick={() => formProps.show({ type: 'edit', data: record, action })}>编辑</a>,
           <Popconfirm title={'确定删除吗？'} onConfirm={() => onDelete(record._id, action)}>
             <a>删除</a>
-          </Popconfirm>,
+          </Popconfirm>
         ])}
       />
       <CategoryForm {...formProps} tableRef={tableRef.current} categoryList={categoryList} />

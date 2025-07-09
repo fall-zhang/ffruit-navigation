@@ -7,9 +7,9 @@ import { Model } from 'mongoose'
 
 @Injectable()
 export class TagService {
-  constructor(@InjectModel(Tag.name) private tagModel:Model<Tag>){}
+  constructor (@InjectModel(Tag.name) private tagModel:Model<Tag>) {}
 
-  async addMultiTag(tags:CreateTagDto[]) {
+  async addMultiTag (tags:CreateTagDto[]) {
     if (!Array.isArray(tags)) return
 
     try {
@@ -19,11 +19,13 @@ export class TagService {
       return err
     }
   }
-  async create(createTagDto:CreateTagDto){
+
+  async create (createTagDto:CreateTagDto) {
     const createdTag = new this.tagModel(createTagDto)
     return createdTag.save()
   }
-  async findOne(){
+
+  async findOne () {
 
   }
 }

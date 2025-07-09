@@ -1,15 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument } from 'mongoose'
 
-export type TagDocument = HydratedDocument<Tag>;
+export type TagDocument = HydratedDocument<Tag>
 @Schema()
 export class Tag {
   @Prop()
-    name: string
+  name: string
+
   @Prop()
-    parentName: string
+  parentName: string
+
   @Prop()
-    describe: string
+  describe: string
 }
 
 export const TagSchema = SchemaFactory.createForClass(Tag)

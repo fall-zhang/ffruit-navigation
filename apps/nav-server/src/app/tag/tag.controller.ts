@@ -7,15 +7,15 @@ import mongoose from 'mongoose'
 
 @Controller('tag')
 export class TagController {
-  constructor(private readonly tagService: TagService) {}
+  constructor (private readonly tagService: TagService) {}
 
   @Post()
-  create(@Body() createTagDto: CreateTagDto) {
+  create (@Body() createTagDto: CreateTagDto) {
     return this.tagService.create(createTagDto)
   }
 
   @Get()
-  async findAll(@Query() query:{
+  async findAll (@Query() query:{
     pageSize?:number
     pageNumber?:number
   }) {
@@ -31,7 +31,7 @@ export class TagController {
 
       // const total = table.find({}).then((res=>res.length))
 
-      const [data,total] = await Promise.all([TagTable.find({}).skip(skipNumber).limit(pageSize).sort({ _id: -1 }),(await TagTable.find({})).length])
+      const [data, total] = await Promise.all([TagTable.find({}).skip(skipNumber).limit(pageSize).sort({ _id: -1 }), (await TagTable.find({})).length])
 
       return {
         data,
@@ -41,7 +41,7 @@ export class TagController {
     } catch (e) {
       return {
         code: 0,
-        msg:e.message,
+        msg: e.message,
         data: null
       }
     }

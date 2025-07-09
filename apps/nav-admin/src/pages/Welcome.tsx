@@ -3,7 +3,7 @@ import { PageContainer } from '@ant-design/pro-layout'
 import { Card, Alert, Typography } from 'antd'
 import styles from './Welcome.module.less'
 
-const CodePreview: React.FC<{children:ReactNode}> = ({ children }) => (
+const CodePreview: React.FC<{ children:ReactNode }> = ({ children }) => (
   <pre className={styles.pre}>
     <code>
       <Typography.Text copyable>{children}</Typography.Text>

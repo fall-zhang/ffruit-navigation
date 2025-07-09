@@ -1,19 +1,19 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { BridgeGateway } from './bridge.gateway';
-import { BridgeService } from './bridge.service';
+import { Test, TestingModule } from '@nestjs/testing'
+import { BridgeGateway } from './bridge.gateway'
+import { BridgeService } from './bridge.service'
 
 describe('BridgeGateway', () => {
-  let gateway: BridgeGateway;
+  let gateway: BridgeGateway
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [BridgeGateway, BridgeService],
-    }).compile();
+      providers: [BridgeGateway, BridgeService]
+    }).compile()
 
-    gateway = module.get<BridgeGateway>(BridgeGateway);
-  });
+    gateway = module.get<BridgeGateway>(BridgeGateway)
+  })
 
   it('should be defined', () => {
-    expect(gateway).toBeDefined();
-  });
-});
+    expect(gateway).toBeDefined()
+  })
+})

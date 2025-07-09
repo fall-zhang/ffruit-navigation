@@ -1,7 +1,7 @@
 import { Space } from 'antd'
 import React, { useState } from 'react'
 import Avatar from './AvatarDropdown'
-export type SiderTheme = 'light' | 'dark';
+export type SiderTheme = 'light' | 'dark'
 
 const GlobalHeaderRight: React.FC = () => {
   return (

@@ -5,8 +5,7 @@ import mongoose from 'mongoose'
 
 @Injectable()
 export class LoginService {
-  async userLogin(createLoginDto: CreateLoginDto) {
-
+  async userLogin (createLoginDto: CreateLoginDto) {
     const userModule = mongoose.model('User')
     if (!userModule.findOne()) {
       // 没有管理员，默认设置一个

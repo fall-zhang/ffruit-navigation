@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose'
 import { TagDocument } from '@/app/tag/schemas/tag.schema'
 import { HydratedDocument } from 'mongoose'
 
-export type NavigateDocument = HydratedDocument<NavigateLink>;
+export type NavigateDocument = HydratedDocument<NavigateLink>
 @Schema()
 export class NavigateLink {
   @Prop()
@@ -38,23 +38,27 @@ export class NavigateLink {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Owner' })
     tag:TagDocument
-    // 页面浏览次数
+
+  // 页面浏览次数
   @Prop({
     type: Number,
     default: 0
   })
     view: number
+
   @Prop({
     type: Number,
     default: 0
   })
     star: number
+
   // 审核状态 1 审核中 2 拒绝 3 通过
   @Prop({
     type: Number,
     default: 0
   })
     status: number
+
   // 访问状态 1 正常访问 2 需要代理 3 网站已停用
   @Prop({
     type: Number,

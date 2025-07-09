@@ -5,10 +5,10 @@ import { UpdateLoginDto } from './dto/update-login.dto'
 
 @Controller('login')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor (private readonly loginService: LoginService) {}
 
   @Post()
-  async create(@Body() createLoginDto: CreateLoginDto) {
+  async create (@Body() createLoginDto: CreateLoginDto) {
     const res = await this.loginService.userLogin(createLoginDto)
     return res
   }

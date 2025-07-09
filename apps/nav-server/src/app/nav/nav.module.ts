@@ -8,7 +8,7 @@ import { NavigateLink, NavSchema } from './schemas/nav.schema'
 @Module({
   controllers: [NavController],
   providers: [NavService],
-  imports: [ListModule,MongooseModule.forFeature([{ name: NavigateLink.name, schema: NavSchema }])],
-  exports:[]
+  imports: [ListModule, MongooseModule.forFeature([{ name: NavigateLink.name, schema: NavSchema }])],
+  exports: []
 })
 export class NavModule {}

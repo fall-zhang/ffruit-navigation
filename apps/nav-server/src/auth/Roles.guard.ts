@@ -8,7 +8,7 @@ import { Observable } from 'rxjs'
 export class RulesGuard implements CanActivate {
   canActivate (
     context:ExecutionContext
-  ):boolean|Promise<boolean>|Observable<boolean> {
+  ):boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest()
     console.log('🚀 ~ AuthGuard ~ request:', request)
     // validateRequest(request)

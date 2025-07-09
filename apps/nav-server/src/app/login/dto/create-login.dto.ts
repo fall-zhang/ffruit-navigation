@@ -1,11 +1,10 @@
 import { IsString, Length } from 'class-validator'
 
 export class CreateLoginDto {
-
   @Length(5, 20)
   @IsString()
-    userName:string
+  userName:string
 
   @IsString()
-    password:string
+  password:string
 }
