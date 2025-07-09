@@ -1,73 +1,55 @@
 <template>
   <div class="container">
     <el-card>
-        <el-form ref="ruleForm" label-width="100px" :model="form" :rules="rules"  v-loading="formLoading">
+      <el-form ref="ruleForm" label-width="100px" :model="form" :rules="rules" v-loading="formLoading">
+        <el-form-item label="网站链接" prop="href">
+          <el-input placeholder="http://www.baidu.com/" v-model="form.href" :disabled="type === 'update'"
+            @blur="getNavInfo" />
+          <span style="color: red">输入链接自动爬取信息</span>
+        </el-form-item>
 
-          <el-form-item label="网站链接" prop="href">
-            <el-input placeholder="http://www.baidu.com/" v-model="form.href"  :disabled="type === 'update'" @blur="getNavInfo" />
-            <span style="color: red">输入链接自动爬取信息</span>
-          </el-form-item>
+        <el-form-item label="网站标签" prop="tags">
+          <el-select v-model="form.tags" multiple :multiple-limit="5" filterable allow-create default-first-option
+            placeholder="输入网站标签，最多5个">
+            <el-option v-for="item in tags" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="网站名称" prop="name">
+          <el-input placeholder="输入网站名称" v-model="form.name" />
+        </el-form-item>
 
-          <el-form-item label="网站标签" prop="tags">
-            <el-select
-              v-model="form.tags"
-              multiple
-              :multiple-limit="5"
-              filterable
-              allow-create
-              default-first-option
-              placeholder="输入网站标签，最多5个">
-              <el-option
-                v-for="item in tags"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="网站名称" prop="name">
-            <el-input placeholder="输入网站名称" v-model="form.name" />
-          </el-form-item>
-
-          <el-form-item label="网站logo" prop="logo">
-            <el-input placeholder="输入网站logo" v-model="form.logo" />
-            <img style="max-width: 30px;" :src="form.logo" />
-          </el-form-item>
-          <el-form-item label="网站描述" prop="desc">
-            <el-input placeholder="一句话网站描述，15个字以内" v-model="form.desc" />
-          </el-form-item>
-          <el-form-item label="网站分类" prop="categoryId">
-            <el-select v-model="form.categoryId" placeholder="请选择" filterable>
-              <el-option-group
-                v-for="group in categorys"
-                :key="group._id"
-                :label="group.name"
-              >
-                <el-option
-                  v-for="item in group.children"
-                  :key="item._id"
-                  :label="item.name"
-                  :value="item._id"
-                ></el-option>
-              </el-option-group>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="推荐人名称" prop="authorName">
-            <el-input placeholder="填写你推广的名称" v-model="form.authorName" />
-          </el-form-item>
-          <el-form-item label="推荐人网站" prop="authorUrl">
-            <el-input placeholder="填写你要推广的链接" v-model="form.authorUrl" />
-          </el-form-item>
-          <el-form-item label="网站详情" prop="detail">
-            <el-input type="textarea" placeholder="输入网站详情" v-model="form.detail" />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" :loading="loading" @click="addNav('ruleForm')">
-              提交
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
+        <el-form-item label="网站logo" prop="logo">
+          <el-input placeholder="输入网站logo" v-model="form.logo" />
+          <img style="max-width: 30px;" :src="form.logo" />
+        </el-form-item>
+        <el-form-item label="网站描述" prop="desc">
+          <el-input placeholder="一句话网站描述，15个字以内" v-model="form.desc" />
+        </el-form-item>
+        <el-form-item label="网站分类" prop="categoryId">
+          <el-select v-model="form.categoryId" placeholder="请选择" filterable>
+            <el-option-group v-for="group in categorys" :key="group._id" :label="group.name">
+              <el-option v-for="item in group.children" :key="item._id" :label="item.name"
+                :value="item._id"></el-option>
+            </el-option-group>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="推荐人名称" prop="authorName">
+          <el-input placeholder="填写你推广的名称" v-model="form.authorName" />
+        </el-form-item>
+        <el-form-item label="推荐人网站" prop="authorUrl">
+          <el-input placeholder="填写你要推广的链接" v-model="form.authorUrl" />
+        </el-form-item>
+        <el-form-item label="网站详情" prop="detail">
+          <el-input type="textarea" placeholder="输入网站详情" v-model="form.detail" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" :loading="loading" @click="addNav('ruleForm')">
+            提交
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
   </div>
 </template>
 
@@ -130,7 +112,7 @@ export default {
       const res = await axios.get(API_TAG_LIST)
       if (res.code === 1) {
         let data = res.data?.data
-        data = data.map(item=> {
+        data = data.map(item => {
           item.value = item.name
           item.label = item.name
           return item

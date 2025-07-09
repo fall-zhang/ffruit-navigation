@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="background-fx">
-
-    </div>
     <div class="container">
       <el-row :gutter="25" class="site-info">
         <el-col class="item" :md="6" :xs="24">

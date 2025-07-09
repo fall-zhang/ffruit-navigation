@@ -1,12 +1,9 @@
 <template>
-  <el-container class="user-layout ">
-    <AppNavMenus @handleSubMenuClick="handleSubMenuClick" :categorys="categorys" :show-menu-type="showMenuType"
-      @showMenus="toggleMenu2" />
-    <el-container class="body" :style="{ marginLeft: contentMarginLeft }">
-      <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
-      <Affiche />
-      <!-- 
-      <div class="main" v-loading="loading">
+  <el-container class="user-layout">
+    <!-- <AppNavMenus @handleSubMenuClick="handleSubMenuClick" :categorys="categorys" :show-menu-type="showMenuType"
+      @showMenus="toggleMenu2" /> -->
+    <el-container class="body" >
+      <!--       <div class="main" v-loading="loading">
         <nav-ranking-list :data="navRanking" />
 
         <div class="website-wrapper" v-for="item in data" :key="item.name">

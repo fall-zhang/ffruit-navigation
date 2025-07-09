@@ -1,8 +1,11 @@
 <template>
-  <div :style="{ marginLeft: contentMarginLeft }">
-    <AppNavMenus :categorys="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
-    <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
-    <router-view />
+  <div class="flex h-full w-full">
+    <AppNavMenus :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
+    <div class="grow">
+      <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
+      <router-view />
+      <Affiche />
+    </div>
   </div>
 </template>
 
