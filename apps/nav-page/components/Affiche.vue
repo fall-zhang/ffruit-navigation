@@ -2,14 +2,14 @@
   <div class="affiche" v-if="show">
     <el-carousel height="30px" direction="vertical" indicator-position="none">
       <el-carousel-item>
-        <p class="medium">
-          鲜果导航，清新导航。<a class="link" href="https://github.com/" target="_blank">开源去下载</a>
+        <p class="medium text-neutral-900">
+          鲜果导航，清新导航。
         </p>
       </el-carousel-item>
       <el-carousel-item>
-        <p class="medium">
-          一个好的产品要经历千锤百炼，我们需要你的建议。<a class="link" href="https://github.com/"
-            target="_blank">去围观</a>
+        <p class="medium text-neutral-900">
+          一个好的产品要经历千锤百炼，我们需要你的建议。
+          <a class="link" href="https://github.com/" target="_blank">提个建议</a>
         </p>
       </el-carousel-item>
       <!-- <el-carousel-item>
@@ -18,14 +18,14 @@
         </p>
       </el-carousel-item> -->
     </el-carousel>
-    <CircleX @click="show = false"/>
+    <CircleX @click="show = false" />
     <i class="el-icon-close" :size="10"></i>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {CircleX } from 'lucide-vue-next'
-const show =  ref(true)
+import { CircleX } from 'lucide-vue-next'
+const show = ref(true)
 
 </script>
 
@@ -38,10 +38,6 @@ const show =  ref(true)
   padding: 5px 15px;
   display: flex;
   align-items: center;
-
-  p.medium {
-    margin: 0;
-  }
 
   i {
     font-size: 18px;

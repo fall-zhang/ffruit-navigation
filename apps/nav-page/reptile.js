@@ -2,30 +2,30 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 import mongoose from 'mongoose'
 import appConfig from './nuxt.config'
-import navData  from './server/model/navSchema'
-import categorySchema  from './server/model/categorySchema'
-var db = mongoose.connect(appConfig.env.mongoUrl, { useNewUrlParser: true })
-//引入数据模型模块
+import navData from './server/model/navSchema'
+import categorySchema from './server/model/categorySchema'
+const db = mongoose.connect(appConfig.env.mongoUrl, { useNewUrlParser: true })
+// 引入数据模型模块
 
 class Reptile {
-  constructor(url, type) {
+  constructor (url, type) {
     this.rootUrl = 'http://chuangzaoshi.com/'
     this.url = this.rootUrl + url
     this.type = type
     this.init()
   }
 
-  async init() {
-    let categoryData = {
+  async init () {
+    const categoryData = {
       name: this.type,
-      categoryId: '',
+      categoryId: ''
     }
     const categoryDataRes = await categorySchema.create(categoryData)
     this.categoryId = categoryDataRes._id
     this.start()
   }
 
-  async start() {
+  async start () {
     axios(this.url, async (error, res, body) => {
       if (!error && res.statusCode == 200) {
         const $ = cheerio.load(body)
@@ -33,7 +33,7 @@ class Reptile {
 
         for (let i = 0; i < $cardBlock.length; i++) {
           const secondCategoryName = $('.panel-title.card').eq(i).text().trim()
-          const {_id: secondCategoryId } = await categorySchema.create({
+          const { _id: secondCategoryId } = await categorySchema.create({
             categoryId: this.categoryId,
             name: secondCategoryName
           })
@@ -50,7 +50,7 @@ class Reptile {
               name,
               href,
               desc,
-              logo,
+              logo
             }))
           }
           await Promise.all(websites)
@@ -63,15 +63,12 @@ class Reptile {
 }
 
 
-
-
-
-async function main() {
+async function main () {
   await Promise.all([
     new Reptile('index', '设计'),
     new Reptile('code', '前端'),
     new Reptile('operate', '运营'),
-    new Reptile('product', '产品'),
+    new Reptile('product', '产品')
   ])
 }
 

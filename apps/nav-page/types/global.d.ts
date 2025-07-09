@@ -1,13 +1,11 @@
 
 
-
-
 namespace window {
-  
+
 }
 
-window.getJSONPData = ()=>{
-  
+window.getJSONPData = () => {
+
 }
 
 // const getJSONPData = {

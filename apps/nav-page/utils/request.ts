@@ -13,27 +13,26 @@ const errorHandle = (status:number) => {
 
 const request = axios.create({
   baseURL: process.env.root,
-  timeout:6000
+  timeout: 6000
 })
 
-request.interceptors.request.use((config)=> {
-  if(process){
+request.interceptors.request.use((config) => {
+  if (process) {
     const token = localStorage.get('TOKEN')
-    if(token){
+    if (token) {
       config.headers.Authorization = token
     }
   }
   return config
-},  (error)=> {
-
+}, (error) => {
   return Promise.reject(error)
 })
 
 // Add a response interceptor
-request.interceptors.response.use( (response)=> {
+request.interceptors.response.use((response) => {
   return response.data
-},  (error)=> {
-  if(process){
+}, (error) => {
+  if (process) {
     errorHandle(error.response.status)
   }
   return Promise.reject(error.response?.data?.message)

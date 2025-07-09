@@ -1,27 +1,29 @@
 <template>
-  <div>
-    <el-header>
-      <div>
-        <nuxt-link to="/"><img class="header-logo" src="/logo-nav.png" /></nuxt-link>
-        <AppSearch />
-      </div>
-      <el-row type="flex">
-        <el-col>
-          <el-tooltip content="推荐网站"><nuxt-link to="/recommend"><i class="el-icon-circle-plus"></i></nuxt-link></el-tooltip>
-        </el-col>
-        <el-col class="menu-toggle-btn">
-          <i class="el-icon-menu" @click="$emit('handleShowMenu')"></i>
-        </el-col>
-      </el-row>
-    </el-header>
-  </div>
+  <el-header>
+    <div>
+      <nuxt-link to="/"><img class="header-logo" src="/logo-nav.png" /></nuxt-link>
+      <AppSearch />
+    </div>
+    <el-row type="flex">
+      <el-col>
+        <el-tooltip content="推荐网站">
+          <nuxt-link to="/recommend">
+            <ElIconPlus />
+          </nuxt-link>
+        </el-tooltip>
+      </el-col>
+      <el-col class="menu-toggle-btn">
+        <i class="el-icon-menu" @click="$emit('handleShowMenu')"></i>
+      </el-col>
+    </el-row>
+  </el-header>
 </template>
 
 <script lang="ts">
-import AppSearch from './AppSearch'
+import AppSearch from './AppSearch.vue'
 export default {
   name: 'AppHeader',
-  components: {AppSearch},
+  components: { AppSearch },
   props: {
     dialogFormVisible: {
       type: Boolean,
@@ -40,6 +42,7 @@ export default {
 .button-item {
   margin-left: 10px;
 }
+
 .el-header {
   display: flex;
   justify-content: space-between;
@@ -55,6 +58,7 @@ export default {
     flex: 1;
     cursor: pointer;
   }
+
   .arrow i {
     color: #999;
     font-size: 24px;
@@ -75,16 +79,18 @@ export default {
 
 
 @media screen and (max-width: 568px) {
+
   .header-logo,
   .menu-toggle-btn {
     display: block;
   }
 }
+
 @media screen and (min-width: 569px) {
+
   .header-logo,
   .menu-toggle-btn {
     display: none;
   }
 }
-
 </style>

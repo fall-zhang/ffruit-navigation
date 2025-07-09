@@ -1,34 +1,38 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia'
 
-const useBaseStore = defineStore('base-store',{
-  state:()=> ({
+type MenuInfo = {
+  parentId:string
+  id:string
+}
+type StateType = {
+  category:MenuInfo[],
+  selectedMenuParentId:string
+  selectedMenuId:string
+}
+
+type StateEvent = {
+  saveCategory(payload:MenuInfo[]):void
+  saveSelectedId(payload:MenuInfo):void
+}
+
+const useBaseStore = defineStore<'base-store', StateType, any, StateEvent>('base-store', {
+  state: () => ({
     category: [],
-    selectedMenuParentId: '',        
-    seletedMenuId: '',
+    selectedMenuParentId: '',
+    selectedMenuId: ''
   }),
 
   actions: {
-    saveCategory( payload:any) {
+    saveCategory (payload:MenuInfo[]) {
       localStorage.setItem('category', JSON.stringify(payload))
       this.category = payload
     },
-    saveSeletedId(payload:any) {
+    saveSelectedId (payload:MenuInfo) {
       this.selectedMenuParentId = payload?.parentId
-      this.seletedMenuId = payload?.id
+      this.selectedMenuId = payload?.id
     }
   }
 })
 
 
-// 需要返回一个函数
 export default useBaseStore
-
-
-/* text-overflow($line) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $line;
-}
- */

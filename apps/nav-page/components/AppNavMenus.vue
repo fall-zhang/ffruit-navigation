@@ -1,109 +1,81 @@
 <template>
-  <el-aside :style="{
-    width: sideBarWidth,
-  }">
+  <el-aside :class="props.showMenuType == 'half' ? 'sidebar-half' : 'sidebar-full'">
     <nuxt-link class="title" to="/">
-      <img v-show="!isCollapse" class="icon-logo" width="180" src="/logo-nav.png" />
-      <img v-show="isCollapse" class="icon-logo" width="45" src="/logo-nav-icon.png" />
-
+      <img class="w-8 h-8 " src="/favicon.svg" />
       <!-- <span>猿梦极客导航后台</span> -->
     </nuxt-link>
-
-    <slot name="sidebar">
-      <el-menu class="el-menu-vertical-demo" background-color="#4700f1" text-color="#fff" active-text-color="#a27cff"
-        :default-active="defaultActive" unique-opened :collapse="isCollapse">
-        <el-sub-menu v-for="(item, index) in categorys" :key="item._id" :index="item._id" style="text-align: left">
+    <el-menu class="el-menu-vertical-demo" background-color="#4700f1" text-color="#fff" active-text-color="#a27cff"
+      :default-active="defaultActive" unique-opened :collapse="isCollapse">
+      <el-sub-menu v-for="(item, index) in categories" :key="item._id" :index="item._id" style="text-align: left">
+        <template #title>
+          <element :is="item.icon"></element>
+          <span>{{ item.name }}</span>
+        </template>
+        <el-menu-item :index="`${index}-${idx}`" v-for="(nav, idx) in item.children" :key="nav._id"
+          @click="handleMenuItemClick(item._id, nav._id)">
+          <a>
+            <element :is="nav.icon"></element>
+          </a>
           <template #title>
-            <i :class="item.icon ? item.icon : `el-icon-eleme icon-title`"></i>
             <span>{{ nav.name }}</span>
           </template>
-          <el-menu-item :index="`${index}-${idx}`" v-for="(nav, idx) in item.children" :key="nav._id"
-            @click="handleMenuItemClick(item._id, nav._id)">
-            <a>
-              <i :class="nav.icon"></i>
-            </a>
-            <template #title>
-              <span>{{ nav.name }}</span>
-            </template>
-          </el-menu-item>
-        </el-sub-menu>
-      </el-menu>
-    </slot>
+        </el-menu-item>
+      </el-sub-menu>
+    </el-menu>
 
-    <div class="sidebar-fix">
-      <ul>
-        <li class="item" @click="$emit('showMenus')">
-          <i class="el-icon-s-fold" v-if="!isCollapse"></i>
-          <i class="el-icon-s-unfold" v-else></i>
-        </li>
-      </ul>
+    <div class="sidebar-fix cursor-pointer h-6 w-6" @click="$emit('showMenus')">
+      <el-icon-fold v-if="!isCollapse" />
+      <el-icon-unfold v-else />
     </div>
   </el-aside>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import baseStore from '@/store/index'
-export default {
-  name: 'AppNavMenus',
-  props: {
-    show: {
-      type: Boolean,
-      default: true,
-    },
-    categorys: {
-      type: Array,
-      default: () => []
-    },
-    showMenuType: {
-      type: String,
-      default: 'half'
-    }
-  },
-  data() {
-    return {
-      dialogFormVisible: false,
-      defaultActive: '0-0',
-      selectedCategoryId: ''
-    }
-  },
-  computed: {
-    sideBarWidth() {
-      if (this.showMenuType == 'half') {
-        return '70px'
-      } else if (this.showMenuType == 'all') {
-        return '220px'
-      } else {
-        return 0
-      }
-    },
-    isCollapse() {
-      return this.showMenuType === 'half'
-    }
-  },
-  methods: {
-    handleMenuItemClick(parentId, id) {
-      baseStore.saveSeletedId({
-        parentId,
-        id,
-      })
-      // this.$store.commit('saveSeletedId', {
-      //   parentId,
-      //   id,
-      // })
+import type { VueElement } from 'vue'
+const $route = useRoute()
+const $router = useRouter()
+const $emit = defineEmits(['subMenuClick', 'showMenus'])
 
-      if (this.$route.path.includes('/nav')) {
-        this.$router.push('/')
-        return
-      }
-      if (this.selectedCategoryId === parentId) {
-        document.getElementById(id).scrollIntoView()
-        return
-      }
-      this.selectedCategoryId = parentId
-      this.$emit('handleSubMenuClick', parentId, id)
+type NavItem = {
+  _id: string
+  name: string
+  icon: VueElement
+  children?:NavItem[]
+}
 
-    }
+const props = withDefaults(defineProps<{
+  show: boolean
+  categories: NavItem[],
+  showMenuType: string
+}>(), {
+  show: true,
+  showMenuType: 'half'
+})
+
+const defaultActive = ref('0-0')
+const selectedCategoryId = ref('')
+
+const isCollapse = computed(() => {
+  return props.showMenuType === 'half'
+})
+function handleMenuItemClick(parentId, id) {
+  baseStore.saveSelectedId({
+    parentId,
+    id,
+  })
+
+  if ($route.path.includes('/nav')) {
+    $router.push('/')
+    return
   }
+  if (selectedCategoryId.value === parentId) {
+    document.getElementById(id)?.scrollIntoView()
+    return
+  }
+  selectedCategoryId.value = parentId
+  $emit('subMenuClick', parentId, id)
+
 }
 </script>
 
@@ -111,15 +83,6 @@ export default {
 $sidebar-w: auto;
 
 .sidebar-fix {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-
-  ul {
-    padding: 0;
-  }
-
   .item {
     padding: 10px 15px;
     text-align: left;
@@ -134,8 +97,6 @@ $sidebar-w: auto;
 }
 
 .el-aside {
-  overflow: hidden;
-
   .el-menu-vertical-demo.el-menu {
     height: 100vh;
     overflow-y: auto;
@@ -170,12 +131,6 @@ $sidebar-w: auto;
   color: #6b7386;
   text-align: center;
   transition: all 0.5s;
-  z-index: 99;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow: hidden;
 
   .el-submenu__title i {
     color: #fff;

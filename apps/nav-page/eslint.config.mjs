@@ -1,15 +1,15 @@
 import pluginVue from 'eslint-plugin-vue'
-import {defineConfigWithVueTs,vueTsConfigs} from '@vue/eslint-config-typescript'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 
 export default defineConfigWithVueTs([
   {
     name: 'app/files-to-lint',
-    files: ['apps/**/*.{mjs,js,ts,mts,tsx,vue}','*/*.{mjs,js,ts}'],
+    files: ['apps/**/*.{mjs,js,ts,mts,tsx,vue}', '*/*.{mjs,js,ts}']
   },
 
   {
     name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**'],
+    ignores: ['**/dist/**', '**/dist-ssr/**']
   },
 
   ...pluginVue.configs['flat/essential'],
@@ -21,14 +21,14 @@ export default defineConfigWithVueTs([
       'no-var': 2, // 未使用的变量
       'comma-dangle': 0,
       'func-call-spacing': 1,
-      'indent': ['warn',2], // 需要 function 前面加空格
+      indent: ['warn', 2], // 需要 function 前面加空格
       'space-before-function-paren': 0, // 需要 function 前面加空格
       '@typescript-eslint/no-this-alias': 0, // 需要 function 前面加空格
       'vue/multi-word-component-names': 0, // 需要 function 前面加空格
 
       quotes: [2, 'single', {
         avoidEscape: true,
-        allowTemplateLiterals: true,
+        allowTemplateLiterals: true
       }],
 
       indent: ['warn', 2, { SwitchCase: 1 }], // 2 行缩进，防止与默认格式化功能冲突，关闭
@@ -54,9 +54,9 @@ export default defineConfigWithVueTs([
       'vue/max-attributes-per-line': 0,
       // ts 相关配置
       '@typescript-eslint/no-explicit-any': 1,
-      '@typescript-eslint/no-unused-vars': 1,
+      '@typescript-eslint/no-unused-vars': 1
       // 这些是适配相关的配置
       // 'vue/valid-v-for': 0 // vue 的 v-for 读取不到对应 v-for 中的内容
-    },
+    }
   }
 ])
