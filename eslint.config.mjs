@@ -4,9 +4,12 @@ import jslint from '@eslint/js'
 import lintReactHooks from 'eslint-plugin-react-hooks'
 import tslint from 'typescript-eslint'
 import { defineConfig } from 'eslint/config'
+import stylistic from '@stylistic/eslint-plugin'
+
 const defaultConfig = {
   plugins: {
     react: lintReact,
+    '@stylistic': stylistic,
     'react-hooks': lintReactHooks
   },
   settings: { react: { version: '18.3' } },

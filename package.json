@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint --fix --ext ./apps"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,7 @@
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "@stylistic/eslint-plugin": "^5.1.0",
     "@vue/eslint-config-typescript": "^14.5.0",
     "eslint": "^9.27.0",
     "eslint-plugin-import": "^2.31.0",
