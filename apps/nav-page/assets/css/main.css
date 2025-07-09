@@ -1,3 +1,7 @@
 @import "tailwindcss";
 
 @plugin "daisyui";
+
+body{
+  font-family: PingFang SC,Helvetica Neue,Microsoft YaHei,微软雅黑,Helvetica,SimSun,SimHei,NSimSun,Arial,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+}
