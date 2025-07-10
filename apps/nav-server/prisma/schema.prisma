@@ -9,13 +9,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_MONGO_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_POSTGRES_URL")
 }
 
 model Post {
   // id        Int      @id @default(auto()) @map("_id") @db.ObjectId
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int   @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String
@@ -27,7 +27,7 @@ model Post {
 }
 
 model UserFeedback {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int   @id @default(autoincrement())
   programName String // 项目名称
   type        String // feature 建议 | error 错误 | suggest 建议 
   title       String // 错误标题

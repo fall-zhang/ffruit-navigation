@@ -1,6 +1,6 @@
 ## 描述
 
-该项目作为 less-process 的后端使用
+鲜果导航的后端
 
 ## 环境配置
 
@@ -84,6 +84,6 @@ $ pnpm run test:cov
 - 包含 message，data，code 三个属性
 
 - [ ] 分页查询
-
 - [ ] 文件上传
 - [ ] 文件下载
+- [ ] 监听 schema.prisma 文件的更改，自动执行， prisma generate
