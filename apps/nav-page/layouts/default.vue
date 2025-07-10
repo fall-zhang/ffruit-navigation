@@ -1,118 +1,50 @@
 <template>
   <div class="flex h-full w-full">
-    <AppNavMenus :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
+    <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
     <div class="grow">
       <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
       <router-view />
-      <Affiche />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import AppHeader from '@/components/AppHeader.vue'
-import AppNavMenus from '@/components/AppNavMenus.vue'
+<script lang="ts" setup>
+import AppHeader from '@/components/home-page/head-section.vue'
+import LeftNavMenus from '@/components/home-page/nav-menu.vue'
 import useBaseStore from '@/store'
 import { isMobileSize } from '@/utils/utils'
-export default {
-  components: { AppHeader, AppNavMenus },
-  data() {
-    return {
-      isCollapse: true,
-      showPopup: false,
-      showLog: false,
-      // none, half, all
-      showMenuType: 'half',
-      category: [],
-      isStar: false,
-    }
-  },
-  computed: {
-    sideBarWidth() {
-      if (this.showMenuType == 'half') {
-        return '70px'
-      } else if (this.showMenuType == 'all') {
-        return '220px'
-      } else {
-        return 0
-      }
-    },
-    contentMarginLeft() {
-      if (this.showMenuType == 'half') {
-        return '70px'
-      } else if (this.showMenuType == 'all') {
-        if (isMobileSize()) {
-          return 0
-        } else {
-          return '220px'
-        }
-      } else {
-        return 0
-      }
-    },
-  },
-  methods: {
-    async addNavView(navData = {}) {
-      const { view, _id: id } = navData
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
-      await axios.put('/api/nav', { id, view: view + 1 })
+defineOptions({
+  name: 'default-layout'
+})
 
-      const views = localStorage.get('VIEWS') || {}
-      views[id] = view + 1
-      localStorage.set('VIEWS', views)
-    },
-    handleNavClick(navData = {}) {
-      const { href } = navData
-      this.addNavView(navData)
-      window.open(href, '_blank')
-    },
-    async handleNavStar(navData = {}, cb = () => { }) {
-      let { star, _id: id } = navData
-
-      const stars = localStorage.get('STARS') || {}
-      if (stars[id]) return
-
-      star++
-      await axios.put('/api/nav', { id, star })
-      cb()
-      stars[id] = star
-      localStorage.set('STARS', stars)
-    },
-    async findNav(id) {
-      this.loading = true
-      const { data } = await this.$api.findNav(id)
-      this.data = data
-      this.loading = false
-    },
-    async handleSubMenuClick(parentId, id) {
-      await this.findNav(parentId)
-    },
-    toggleMenu() {
-      this.showMenuType = this.showMenuType === 'none' ? 'all' : 'none'
-    },
-    toggleMenu2() {
-      this.showMenuType = this.showMenuType === 'all' ? 'half' : 'all'
-    },
-    handleResize() {
-      if (isMobileSize()) {
-        this.showMenuType = 'none'
-      } else {
-        this.showMenuType = 'half'
-      }
-    }
-  },
-
-  mounted() {
-    this.handleResize()
-    window.onresize = throttle(this.handleResize.bind(this), 300)
-
-    const store = useBaseStore()
-    const localCategory = localStorage.getItem('category')
-    const category = localCategory ? JSON.parse(localCategory) : []
-    store.saveCategory(category)
-    this.category = category
+function toggleMenu () {
+  showMenuType.value = showMenuType.value === 'none' ? 'all' : 'none'
+}
+function toggleMenu2 () {
+  showMenuType.value = showMenuType.value === 'all' ? 'half' : 'all'
+}
+function handleResize () {
+  if (isMobileSize()) {
+    showMenuType.value = 'none'
+  } else {
+    showMenuType.value = 'half'
   }
 }
+const showPopup = ref(false)
+const showMenuType = ref('half')
+const category = ref([])
+
+onMounted(() => {
+  handleResize()
+  window.onresize = throttle(handleResize.bind(this), 300)
+
+  const store = useBaseStore()
+  const localCategory = localStorage.getItem('category')
+  category.value = localCategory ? JSON.parse(localCategory) : []
+  store.saveCategory(category.value)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -126,17 +58,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-p {
-  margin: 0;
 }
 
 a[title="站长统计"] {

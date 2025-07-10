@@ -6,8 +6,9 @@
       <!-- <span>鲜果导航</span> -->
     </nuxt-link>
     {{ categories }}
-    <el-menu  :class="props.showMenuType == 'half' ? 'sidebar-half' : 'sidebar-full'" class="el-menu-vertical-demo grow" background-color="#4700f1" text-color="#fff" active-text-color="#a27cff" 
-      :default-active="defaultActive" unique-opened :collapse="isCollapse">
+    <el-menu :class="props.showMenuType == 'half' ? 'sidebar-half' : 'sidebar-full'" class="el-menu-vertical-demo grow"
+      background-color="#4700f1" text-color="#fff" active-text-color="#a27cff" :default-active="defaultActive"
+      unique-opened :collapse="isCollapse">
       <el-sub-menu v-for="(item, index) in categories" :key="item._id" :index="item._id" style="text-align: left">
         <template #title>
           <el-icon>
@@ -37,17 +38,16 @@
 <script lang="ts" setup>
 import useBaseStore from '@/store/index'
 import { BookIcon } from 'lucide-vue-next'
-import type {MenuProps,MenuItemProps,SubMenuProps} from 'component-plus'
+import type { MenuProps, MenuItemProps, SubMenuProps } from 'element-plus'
 import type { Component, VueElement } from 'vue'
 
-const sideBarWidth =computed(()=> {
-  if (props.showMenuType == 'half') {
+const sideBarWidth = computed(() => {
+  if (props.showMenuType === 'half') {
     return '70px'
-  } else if (props.showMenuType == 'all') {
+  } else if (props.showMenuType === 'all') {
     return '220px'
-  } else {
-    return '0'
   }
+  return '0'
 })
 const $route = useRoute()
 const $router = useRouter()
@@ -68,7 +68,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   show: true,
   showMenuType: 'half',
-  categories() {
+  categories () {
     return []
   }
 })
@@ -79,10 +79,10 @@ const selectedCategoryId = ref('')
 const isCollapse = computed(() => {
   return props.showMenuType === 'half'
 })
-function handleMenuItemClick(parentId: string, id: string) {
+function handleMenuItemClick (parentId: string, id: string) {
   baseStore.saveSelectedId({
     parentId,
-    id,
+    id
   })
 
   if ($route.path.includes('/nav')) {
@@ -95,7 +95,6 @@ function handleMenuItemClick(parentId: string, id: string) {
   }
   selectedCategoryId.value = parentId
   $emit('subMenuClick', parentId, id)
-
 }
 </script>
 
@@ -114,6 +113,10 @@ $sidebar-w: auto;
       color: #fff;
     }
   }
+}
+
+.el-menu {
+  border-right: none;
 }
 
 .el-aside {
@@ -150,6 +153,7 @@ $sidebar-w: auto;
     border-radius: 10px;
     background: #4700f1;
   }
+
   &.aside-hide {
     transform: translateX(-$sidebar-w);
   }

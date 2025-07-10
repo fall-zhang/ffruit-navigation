@@ -10,7 +10,7 @@
         <nav-ranking :data="item" />
       </div>
     </el-card>
-   
+
     <el-card header-class="box-header" class="box-card" shadow="never">
       <template v-slot:header>
         <div class="clearfix">
@@ -49,7 +49,7 @@ export default {
         news: []
       })
     }
-  },
+  }
 }
 </script>
 

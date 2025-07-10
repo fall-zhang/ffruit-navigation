@@ -1,6 +1,5 @@
 <template>
   <AppLog :show="showLog" @closeLog="showLog = false" />
-  <AddNavPopup v-model:show="showPopup" />
   <div class="user-layout w-full">
     <div class="main" v-loading="loading">
       <NavRankingList :data="navRanking" />
@@ -12,6 +11,7 @@
     </div>
     <CustomerServiceBtn @showLog="showLog = true" />
   </div>
+  <NuxtPage />
 </template>
 
 <script lang="ts" setup>
@@ -22,9 +22,15 @@ import AppLog from '../components/AppLog.vue'
 import RankList from '../components/home-page/rank-list.vue'
 // // import axios from 'axios'
 // import NavRankingList from '../components/NavRankingList'
-import Affiche from '../components/Affiche.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
+import { trpc } from '../server/trpc'
+import {useDark} from '@vueuse/core'
+
+
+trpc.getUser.query('').then(res => {
+  console.log(res)
+})
 // state
 const loading = ref(false)
 const data = ref([])
@@ -38,23 +44,9 @@ const selfIndex = ref(0)
 const isLeftbar = ref(true)
 const isCollapse = ref(true)
 const showPopup = ref(false)
-const showLog = ref(false)
+const showLog = ref(true)
 const showMenuType = ref('half')
 const baseStore = useBaseStore()
-
-const contentMarginLeft = computed(() => {
-  if (showMenuType.value == 'half') {
-    return '70px'
-  } else if (showMenuType.value == 'all') {
-    if (isMobileSize()) {
-      return 0
-    } else {
-      return '220px'
-    }
-  } else {
-    return 0
-  }
-})
 
 onMounted(() => {
   handleResize()

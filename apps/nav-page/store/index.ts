@@ -1,4 +1,8 @@
+import { useDark } from '@vueuse/core'
 import { defineStore } from 'pinia'
+const isDark = useDark({
+  
+})
 
 type MenuInfo = {
   parentId:string
