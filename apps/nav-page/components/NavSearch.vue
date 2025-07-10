@@ -1,7 +1,7 @@
 <template>
   <div class="app-search">
     <el-autocomplete v-model="searchText" :fetch-suggestions="queryData"
-      :placeholder="searchGather[searchType]['placeholder']" @select="handleSelect" suffix-icon="el-icon-search">
+                     :placeholder="searchGather[searchType]['placeholder']" @select="handleSelect" suffix-icon="el-icon-search">
       <template v-slot:prepend>
         <el-select v-model="searchType" class="search-type-box">
           <el-option label="站内" value="station"></el-option>
@@ -42,25 +42,25 @@ const searchGather: Record<string, GatherItem> = {
     placeholder: '百度搜索',
     root: 'https://www.google.com.hk/search?q='
   },
-  '360': {
+  "360": {
     name: '360',
     placeholder: '360搜索',
     root: 'https://www.so.com/s?q='
   },
-  'bing': {
+  bing: {
     name: '必应',
     placeholder: '必应搜索',
     root: 'https://cn.bing.com/search?q='
   },
-  'sogou': {
+  sogou: {
     name: '搜狗',
     placeholder: '搜狗搜索',
     root: 'https://www.sogou.com/web?query='
-  },
+  }
 }
 const searchText = ref()
 const searchType = ref('station')
-function queryData(query: string, cb: any) {
+function queryData (query: string, cb: any) {
   if (searchType.value === 'station') {
     queryStation(query, cb)
   } else {
@@ -68,7 +68,7 @@ function queryData(query: string, cb: any) {
   }
 }
 
-async function queryStation(query: string, cb: any) {
+async function queryStation (query: string, cb: any) {
   if (query !== '') {
     const { data } = await axios.get('/api/nav' + `?keyword=${query}`)
     if (Array.isArray(data.data)) {
@@ -82,7 +82,7 @@ async function queryStation(query: string, cb: any) {
     cb([])
   }
 }
-async function queryBaidu(query: string, cb: any) {
+async function queryBaidu (query: string, cb: any) {
   const res = await axios.get(`/5a1Fazu8AA54nxGko9WTAnF6hhy/su?&wd=${query}&cb=getJSONPData`)
 
   try {
@@ -93,7 +93,7 @@ async function queryBaidu(query: string, cb: any) {
     cb([])
   }
 }
-function handleSelect(item: Record<string, any>) {
+function handleSelect (item: Record<string, any>) {
   const router = useRouter()
   let url = ''
   if (searchType.value === 'station') {
@@ -112,7 +112,6 @@ function handleSelect(item: Record<string, any>) {
 
   .el-select {
     width: 300px;
-    border-right: 1px solid #eee;
   }
 
   .el-input-group__append,
@@ -123,7 +122,6 @@ function handleSelect(item: Record<string, any>) {
   .el-input__inner {
     border: 0;
     box-shadow: none;
-    background: #f5f7fa;
   }
 
   .search-type-box {
@@ -147,28 +145,4 @@ function handleSelect(item: Record<string, any>) {
     display: block;
   }
 }
-
-
-//
-//.app-search {
-//  padding: 180px 0;
-//  background: #fff;
-//  flex-direction: column;
-//  align-items: center;
-//
-//   .el-tabs__header,
-//   .el-input__inner {
-//    max-width: 600px;
-//    width: 600px;
-//    margin: auto;
-//  }
-//   .el-tabs__nav-wrap::after {
-//    background-color: transparent;
-//  }
-//   .el-input__inner {
-//    border-radius: 30px;
-//  }
-//  .el-tabs {
-//    margin-bottom: 20px;
-//  }
-//}</style>
+</style>

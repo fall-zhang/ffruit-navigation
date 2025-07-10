@@ -1,21 +1,24 @@
+<!-- 左侧系统导航 -->
 <template>
-  <el-aside class="h-dvh flex flex-col" :class="props.showMenuType == 'half' ? 'sidebar-half' : 'sidebar-full'">
+  <el-aside class="h-dvh flex flex-col" :width="sideBarWidth">
     <nuxt-link class="title" to="/">
       <img class="w-8 h-8 " src="/favicon.svg" />
       <!-- <span>鲜果导航</span> -->
     </nuxt-link>
     {{ categories }}
-    <el-menu class="el-menu-vertical-demo" background-color="#4700f1" text-color="#fff" active-text-color="#a27cff"
+    <el-menu  :class="props.showMenuType == 'half' ? 'sidebar-half' : 'sidebar-full'" class="el-menu-vertical-demo grow" background-color="#4700f1" text-color="#fff" active-text-color="#a27cff" 
       :default-active="defaultActive" unique-opened :collapse="isCollapse">
       <el-sub-menu v-for="(item, index) in categories" :key="item._id" :index="item._id" style="text-align: left">
         <template #title>
-          <element :is="item.icon"></element>
+          <el-icon>
+            <component :is="item.icon"></component>
+          </el-icon>
           <span>{{ item.name }}</span>
         </template>
         <el-menu-item :index="`${index}-${idx}`" v-for="(nav, idx) in item.children" :key="nav._id"
           @click="handleMenuItemClick(item._id, nav._id)">
           <a>
-            <element :is="nav.icon"></element>
+            <component :is="nav.icon"></component>
           </a>
           <template #title>
             <span>{{ nav.name }}</span>
@@ -34,7 +37,18 @@
 <script lang="ts" setup>
 import useBaseStore from '@/store/index'
 import { BookIcon } from 'lucide-vue-next'
+import type {MenuProps,MenuItemProps,SubMenuProps} from 'component-plus'
 import type { Component, VueElement } from 'vue'
+
+const sideBarWidth =computed(()=> {
+  if (props.showMenuType == 'half') {
+    return '70px'
+  } else if (props.showMenuType == 'all') {
+    return '220px'
+  } else {
+    return '0'
+  }
+})
 const $route = useRoute()
 const $router = useRouter()
 const $emit = defineEmits(['subMenuClick', 'showMenus'])
@@ -112,11 +126,6 @@ $sidebar-w: auto;
 
   &.sidebar-full {}
 
-
-  .el-menu-vertical-demo.el-menu {
-    flex-grow: 1;
-    overflow-y: auto;
-  }
 
   .el-menu--popup::-webkit-scrollbar,
   .el-menu-vertical-demo.el-menu::-webkit-scrollbar {

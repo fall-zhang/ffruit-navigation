@@ -1,3 +1,5 @@
+<!-- 轮播功能 -->
+
 <template>
   <div class="affiche" v-if="show">
     <el-carousel height="30px" direction="vertical" indicator-position="none">
