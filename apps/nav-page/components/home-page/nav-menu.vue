@@ -10,7 +10,7 @@
       <el-sub-menu v-for="(item, index) in categories" :key="item._id" :index="item._id" style="text-align: left">
         <template #title>
           <element :is="item.icon"></element>
-          <span>{{ item.name }}321321</span>
+          <span>{{ item.name }}</span>
         </template>
         <el-menu-item :index="`${index}-${idx}`" v-for="(nav, idx) in item.children" :key="nav._id"
           @click="handleMenuItemClick(item._id, nav._id)">
@@ -141,19 +141,6 @@ $sidebar-w: auto;
     border-radius: 10px;
     background: #4700f1;
   }
-
-
-
-  .el-submenu__title i {
-    color: #fff;
-  }
-
-
-  .el-menu,
-  .el-menu--collapse {
-    border: 0;
-  }
-
   &.aside-hide {
     transform: translateX(-$sidebar-w);
   }

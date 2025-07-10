@@ -1,21 +1,17 @@
 <template>
-  <el-container class="user-layout">
-    <!-- <AppNavMenus @handleSubMenuClick="handleSubMenuClick" :categorys="categorys" :show-menu-type="showMenuType"
-      @showMenus="toggleMenu2" /> -->
-    <el-container class="body" >
-      <!--       <div class="main" v-loading="loading">
-        <nav-ranking-list :data="navRanking" />
-
-        <div class="website-wrapper" v-for="item in data" :key="item.name">
-          <p class="website-title" :id="item._id">{{ item.name }}</p>
-          <app-nav-list :list="item.list" />
-        </div>
-      </div> -->
-    </el-container>
-    <!-- <AddNavPopup v-model:show="showPopup" /> -->
+  <AppLog :show="showLog" @closeLog="showLog = false" />
+  <AddNavPopup v-model:show="showPopup" />
+  <div class="user-layout w-full">
+    <div class="main" v-loading="loading">
+      <NavRankingList :data="navRanking" />
+      <div class="website-wrapper" v-for="item in data" :key="item.name">
+        <p class="website-title" :id="item._id">{{ item.name }}</p>
+        <AppNavList :list="item.list" />
+      </div>
+      <RankList />
+    </div>
     <CustomerServiceBtn @showLog="showLog = true" />
-    <AppLog :show="showLog" @closeLog="showLog = false" />
-  </el-container>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -23,7 +19,7 @@ import AppNavList from '@/components/AppNavList.vue'
 import CustomerServiceBtn from '../components/CustomerServiceBtn.vue'
 import AppLog from '../components/AppLog.vue'
 // import AppHeader from '../components/AppHeader'
-import AppNavMenus from '../components/AppNavMenus.vue'
+import RankList from '../components/home-page/rank-list.vue'
 // // import axios from 'axios'
 // import NavRankingList from '../components/NavRankingList'
 import Affiche from '../components/Affiche.vue'
@@ -32,7 +28,7 @@ import axios from 'axios'
 // state
 const loading = ref(false)
 const data = ref([])
-const categorys = ref([])
+const categories = ref([])
 const navRanking = ref({
   view: [],
   star: [],
@@ -65,8 +61,8 @@ onMounted(() => {
   const throttleFun = throttle(handleResize, 300)
   window.addEventListener('reset', throttleFun)
 
-  categorys.value = getLocal('category')
-  baseStore.saveCategory(categorys.value || [])
+  categories.value = getLocal('category')
+  baseStore.saveCategory(categories.value || [])
   return () => {
     window.removeEventListener('resize', throttleFun)
   }
@@ -105,15 +101,15 @@ function handleResize(event?: UIEvent) {
 }
 
 async function asyncData({ store }) {
-  // const [{ data: categorys }, { data: navRanking }] = await Promise.all([
+  // const [{ data: categories }, { data: navRanking }] = await Promise.all([
   //   axios.get('/api/category/list'),
   //   axios.get('/api/nav/ranking')
   // ])
 
-  // const id = store.state.selectedMenuParentId || categorys[0]._id
+  // const id = store.state.selectedMenuParentId || categories[0]._id
   // const { data } = await axios.get(`/api/nav/find?categoryId=${id}`)
   // return {
-  //   categorys,
+  //   categories,
   //   navRanking,
   //   data
 }

@@ -14,9 +14,9 @@ type StateEvent = {
   saveCategory(payload:MenuInfo[]):void
   saveSelectedId(payload:MenuInfo):void
 }
-
-const useBaseStore = defineStore<'base-store', StateType, any, StateEvent>('base-store', {
-  state: () => ({
+// <'base-store', StateType, any, StateEvent>
+const useBaseStore = defineStore('base-store', {
+  state: ():StateType => ({
     category: [],
     selectedMenuParentId: '',
     selectedMenuId: ''

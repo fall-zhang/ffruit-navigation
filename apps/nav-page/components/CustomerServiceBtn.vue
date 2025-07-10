@@ -1,18 +1,19 @@
 <template>
-  <div class="customer-service-btn">
-    <el-dropdown @command="handleCommand">
+  <el-dropdown @command="handleCommand">
+    <div class="customer-service-btn">
       <span class="feedback">
         <MessageCircleQuestion />
       </span>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item command="show-log">更新日志</el-dropdown-item>
-          <el-dropdown-item command="feedback">意见反馈</el-dropdown-item>
-          <el-dropdown-item command="contact">联系我们</el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
-  </div>
+    </div>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item command="show-log">更新日志</el-dropdown-item>
+        <el-dropdown-item command="feedback">意见反馈</el-dropdown-item>
+        <el-dropdown-item command="contact">联系我们</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+
 </template>
 
 <script lang="ts" setup>
@@ -20,9 +21,11 @@ import { MessageCircleQuestion } from 'lucide-vue-next'
 const emit = defineEmits(['showLog'])
 function handleCommand(command: string) {
   if (command === 'feedback') {
-    window.open('https://support.qq.com/product/330737')
+    // feedbackDialog
+    console.log('打开 feedback 弹窗')
+
   } else if (command === 'contact') {
-    window.open('https://geekape.net/about')
+    window.open('https://fallzhang.top')
   } else if (command === 'show-log') {
     emit('showLog', true)
   }

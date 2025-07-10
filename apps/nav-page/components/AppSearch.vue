@@ -72,7 +72,7 @@ async function queryStation(query: string, cb: any) {
   if (query !== '') {
     const { data } = await axios.get('/api/nav' + `?keyword=${query}`)
     if (Array.isArray(data.data)) {
-      const finalData = data.data.map((item:any) => ({
+      const finalData = data.data.map((item: any) => ({
         ...item,
         value: item.name
       }))
@@ -84,15 +84,16 @@ async function queryStation(query: string, cb: any) {
 }
 async function queryBaidu(query: string, cb: any) {
   const res = await axios.get(`/5a1Fazu8AA54nxGko9WTAnF6hhy/su?&wd=${query}&cb=getJSONPData`)
+
   try {
-    const data = eval(res)
-    const finalData = data.s.reduce((t, v) => [...t, { value: v }], [])
+    const data = eval(res.data)
+    const finalData = data.s.reduce((t: any, v: any) => [...t, { value: v }], [])
     cb(finalData)
   } catch (e) {
     cb([])
   }
 }
-function handleSelect(item:string) {
+function handleSelect(item: Record<string, any>) {
   const router = useRouter()
   let url = ''
   if (searchType.value === 'station') {
@@ -102,13 +103,6 @@ function handleSelect(item:string) {
     window.open(url)
   }
 }
-
-onMounted(() => {
-  window.getJSONPData = function (data:any) {
-    return data
-  }
-})
-
 </script>
 
 <style lang="scss" scoped>

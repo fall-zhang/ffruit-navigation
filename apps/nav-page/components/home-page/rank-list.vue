@@ -1,20 +1,20 @@
 <template>
   <div class="nav-ranking-list grid md:grid-cols-3 gap-4 w-full">
     <el-card header-class="box-header" class="box-card" shadow="never">
-      <template v-slot:header>
+      <template #header>
         <div class="clearfix">
-          <span>最新导航</span>
+          <span>知乎</span>
         </div>
       </template>
       <div v-for="(item, index) in data.news" :key="index" class="text item">
         <nav-ranking :data="item" />
       </div>
     </el-card>
-   
+
     <el-card header-class="box-header" class="box-card" shadow="never">
-      <template v-slot:header>
+      <template #header>
         <div class="clearfix">
-          <span>点击最多导航</span>
+          <span>微博</span>
         </div>
       </template>
       <div v-for="(item, index) in data.view" :key="index" class="text item">
@@ -23,9 +23,9 @@
     </el-card>
 
     <el-card header-class="box-header" class="box-card" shadow="never">
-      <template v-slot:header>
+      <template #header>
         <div class="clearfix">
-          <span>点赞最多导航</span>
+          <span>酷安</span>
         </div>
       </template>
       <div v-for="(item, index) in data.star" :key="index" class="text item">
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import NavRanking from './NavRanking.vue'
+import NavRanking from '../NavRanking.vue'
 export default {
   name: 'NavRankingList',
   components: { NavRanking },
@@ -61,7 +61,8 @@ export default {
       font-weight: 500;
     }
   }
-  .box-header{
+
+  .box-header {
     padding: 6px 12px;
   }
 }

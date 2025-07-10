@@ -12,6 +12,7 @@ export const getLocal = (key:string, defaultVal?:unknown) => {
   }
   return defaultVal
 }
+
 export const removeLocal = (key:string) => {
   localStorage.removeItem(prefix + key)
 }

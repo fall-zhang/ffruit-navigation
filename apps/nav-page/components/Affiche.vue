@@ -18,8 +18,7 @@
         </p>
       </el-carousel-item> -->
     </el-carousel>
-    <CircleX @click="show = false" />
-    <i class="el-icon-close" :size="10"></i>
+    <CircleX class="text-gray-500 " @click="show = false" />
   </div>
 </template>
 
