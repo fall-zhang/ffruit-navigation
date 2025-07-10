@@ -53,7 +53,7 @@ export class NavController {
   @Get('/reptile')
   async findReptile (@Param('url') url: string) {
     const res = await new Promise((resolve) => {
-      fetch(url).then(res=>res.json()).then((res)=>{
+      fetch(url).then(res => res.json()).then((res) => {
         if (res.error) {
           console.error('爬虫爬取失败')
           return
@@ -83,7 +83,7 @@ export class NavController {
   }
 
   @Get('/find')
-  findFind (@Param('id') id: string, @Param('categoryId') categoryId:string) {
+  async findFind (@Param('id') id: string, @Param('categoryId') categoryId:string) {
     try {
       const resData: any = []
       // 取所有子分类
@@ -99,11 +99,11 @@ export class NavController {
       })
 
       categorys.map(category => {
-        const nowNavs = navs.filter(nav => nav.categoryId == category._id)
+        const nowNaves = navs.filter(nav => nav.categoryId == category._id)
         resData.push({
           _id: category._id,
           name: category.name,
-          list: nowNavs
+          list: nowNaves
         })
       })
       this.success(resData)
@@ -117,9 +117,9 @@ export class NavController {
   async findRanking (@Param('id') id: string) {
     await this.navService.findRank()
     return {
-      view:'',
-      star:'',
-      news:''
+      view: '',
+      star: '',
+      news: ''
     }
   }
 

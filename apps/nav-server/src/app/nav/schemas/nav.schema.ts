@@ -9,62 +9,62 @@ export type NavigateDocument = HydratedDocument<NavigateLink>
 @Schema()
 export class NavigateLink {
   @Prop()
-    categoryId: string
+  categoryId: string
 
   @Prop()
-    name: string
+  name: string
 
   // 网站url
   @Prop()
-    href: string
+  href: string
 
   @Prop()
-    desc: string
+  desc: string
 
   @Prop()
-    logo: string
+  logo: string
 
   @Prop()
-    authorName: string
+  authorName: string
 
   @Prop()
-    authorUrl: string
+  authorUrl: string
 
   @Prop(Date)
-    auditTime: Date
+  auditTime: Date
 
   @Prop(Date)
-    createTime: Date
+  createTime: Date
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Owner' })
-    tag:TagDocument
+  tag:TagDocument
 
   // 页面浏览次数
   @Prop({
     type: Number,
     default: 0
   })
-    view: number
+  view: number
 
   @Prop({
     type: Number,
     default: 0
   })
-    star: number
+  star: number
 
   // 审核状态 1 审核中 2 拒绝 3 通过
   @Prop({
     type: Number,
     default: 0
   })
-    status: number
+  status: number
 
   // 访问状态 1 正常访问 2 需要代理 3 网站已停用
   @Prop({
     type: Number,
     default: 0
   })
-    accessState: number
+  accessState: number
 }
 
 export const NavSchema = SchemaFactory.createForClass(NavigateLink)
