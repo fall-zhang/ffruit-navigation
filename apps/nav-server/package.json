@@ -1,7 +1,7 @@
 {
-  "name": "outstand-nocode-backend",
+  "name": "ffruit-nav-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "The backend of ffruit navigation",
   "author": "",
   "private": true,
   "type": "commonjs",
@@ -14,6 +14,7 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "type": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

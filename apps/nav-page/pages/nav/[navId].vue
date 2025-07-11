@@ -1,153 +1,140 @@
 <template>
-  <div>
-    <div class="container">
-      <el-row :gutter="25" class="site-info">
-        <el-col class="item" :md="6" :xs="24">
-          <div class="left">
-            <div class="img-wrap">
-              <nuxt-link to="/">
-                <el-image :src="detail.logo" />
-              </nuxt-link>
-            </div>
-            <div class="tool">
-              <el-tooltip content="访问数" placement="top">
-                <div class="tool-item">
-                  <i class="iconfont icon-attentionfill"></i>
-                  <p>{{ detail.view }}</p>
-                </div>
-              </el-tooltip>
-              <div style="width: 30px"></div>
-
-              <el-tooltip content="点赞数" placement="top">
-                <div :class="`tool-item ${isStar && 'active'}`" @click="handleNavStarFn">
-                  <i class="iconfont icon-appreciatefill"></i>
-                  <p>{{ detail.star }}</p>
-                </div>
-              </el-tooltip>
-            </div>
+  <div class="container flex">
+    <div class="web-icon p-4 bg-white dark:bg-neutral-700 rounded-4xl size-40 shadow">
+      <div class="img-wrap">
+        <nuxt-link to="/">
+          <el-image :src="detail.logo" alt="失败" />
+        </nuxt-link>
+      </div>
+      <div class="tool flex h-6">
+        <el-tooltip content="访问数" placement="top">
+          <div class="tool-item">
+            <UserIcon />
+            <p>{{ detail.view }}</p>
           </div>
-        </el-col>
-        <el-col class="item" :md="10" :xs="24">
-          <div class="content">
-            <h1 class="title">{{ detail.name }}</h1>
-            <p class="desc">{{ detail.desc }}</p>
-            <p class="tags" v-if="detail.tags.length">标签：
-              <span v-for="(tag, index) in detail.tags" :key="tag">{{ index != 0 ? '，' : '' }}{{ tag }}</span>
-            </p>
-            <p class="author" v-if="detail.authorName">
-              <span class="el-icon-user-solid"></span>
-              <span>推荐人：</span>
-              <a :href="detail.authorUrl">{{ detail.authorName }}</a>
-            </p>
-            <div class="btn-group">
-              <div @click="handleNavClick(detail)" target="_blank" class="btn-link btn-group-item">链接直达<i
-                  class="iconfont icon-Icons_ToolBar_ArrowRight"></i></div>
-              <!--              <div class="btn-moblie btn-group-item">手机查看<i class="iconfont icon-QR-code"></i></div>-->
-            </div>
+        </el-tooltip>
+        <div style="width: 30px"></div>
+        <el-tooltip content="点赞数" placement="top">
+          <div :class="`tool-item ${isUserStar && 'active'}`" @click="handleNavStarFn">
+            <p>{{ detail.star }}</p>
           </div>
-        </el-col>
-        <el-col class="item" :md="8" :xs="24">
-          <div class="right">
-            <div class="app-card">
-              <div class="app-card-header">
-                <h3 class="app-card-title">随机网址</h3>
-                <div class="app-card-extra"><i class="iconfont icon-shuaxin" @click="getRandomNavList"></i></div>
-              </div>
-              <div class="app-card-content">
-                <el-row :gutter="10">
-                  <el-col span="12" v-for="item in randomNavList" :key="item._id">
-                    <nuxt-link class="nav-block" :to="`/nav/${item._id}`">
-                      <img :src="item.logo" alt="" class="nav-logo">
-                      <h4 class="nav-name">{{ item.name }}</h4>
-                    </nuxt-link>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row :gutter="20" class="site-detail">
-        <el-col :span="18">
-          <div class="detail">{{ detail.detail || detail.desc }}</div>
-        </el-col>
-        <el-col :span="6">
-          <aside></aside>
-        </el-col>
-      </el-row>
+        </el-tooltip>
+      </div>
     </div>
+    <div class="content">
+      <h1 class="title">{{ detail.name }}</h1>
+      <p class="desc">{{ detail.desc }}</p>
+      <p class="tags" v-if="detail.tags">标签：
+        <span v-for="(tag, index) in detail.tags" :key="tag">{{ index != 0 ? '，' : '' }}{{ tag }}</span>
+      </p>
+      <p class="author" v-if="detail.authorName">
+        <span class="el-icon-user-solid"></span>
+        <FileIcon />
+        <span>推荐人：</span>
+        <a :href="detail.authorUrl">{{ detail.authorName }}</a>
+      </p>
+      <div class="btn-group">
+        <div @click="handleNavClick(detail)" target="_blank" class="btn-link btn-group-item">
+          链接直达
+          <LinkIcon />
+        </div>
+        <!-- <div class="btn-moblie btn-group-item">
+          手机查看
+          <ScanQrCodeIcon />
+        </div>-->
+      </div>
+    </div>
+    <div class="right">
+      <div class="app-card">
+        <div class="app-card-header">
+          <h3 class="app-card-title">随机网址</h3>
+          <div class="app-card-extra">
+            <RotateCcwIcon @click="getRandomNavList"/>
+          </div>
+        </div>
+        <div class="app-card-content" v-for="item in randomNavList" :key="item._id">
+          <nuxt-link class="nav-block" :to="`/nav/${item._id}`">
+            <img :src="item.logo" alt="" class="nav-logo">
+            <h4 class="nav-name">{{ item.name }}</h4>
+          </nuxt-link>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail">{{ detail.detail || detail.desc }}</div>
+    <aside></aside>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import axios from 'axios'
+import { FileIcon, LinkIcon, RotateCcwIcon, UserIcon } from 'lucide-vue-next'
 // import { API_NAV, API_NAV_RANDOM } from '../../api'
-
-export default {
-  name: 'NavDetail',
-  head() {
-    const { name, desc } = this.detail
-    return {
-      title: name + ` - ${desc.slice(0, 15)}`
-    }
-  },
-  data() {
-    return {
-      isStar: false,
-      detail: {},
-      randomNavList: [],
-    }
-  },
-  methods: {
-    async getRandomNavList() {
-      const res = await axios.get(API_NAV_RANDOM)
-      this.randomNavList = res.data
-    },
-    handleNavStarFn() {
-      this.handleNavStar(this.detail, () => {
-        this.isStar = true
-        this.detail.star += 1
-      })
-    }
-  },
-  async asyncData({ params }) {
-    const [detailRes, randomRes] = await Promise.all([
-      axios.get(API_NAV + `?id=${params.id}`),
-      axios.get(API_NAV_RANDOM)
-    ])
-    return {
-      detail: detailRes.data,
-      randomNavList: randomRes.data
-    }
-  },
-  async addNavView(navData = {}) {
-    const { view, _id: id } = navData
-  
-    await axios.put('/api/nav', { id, view: view + 1 })
-  
-    const views = localStorage.get('VIEWS') || {}
-    views[id] = view + 1
-    localStorage.set('VIEWS', views)
-  },
-  handleNavClick(navData = {}) {
-    const { href } = navData
-    this.addNavView(navData)
-    window.open(href, '_blank')
-  },
-  async handleNavStar(navData = {}, cb = ()=> {}) {
-    let { star, _id: id } = navData
-  
-    const stars = localStorage.get('STARS') || {}
-    if (stars[id]) return
-  
-    star++
-    await  axios.put('/api/nav', { id, star })
-    cb()
-    stars[id] = star
-    localStorage.set('STARS', stars)
-  }
+const route = useRoute()
+console.log(route)
+route.params.navId
+defineOptions({
+  name: 'SiteDetail'
+})
+type LinkType = {
+  _id:string
+  logo:string
+  view:string
+  star:number
+  name:string
+  desc:string
+  tags:string[]
+  authorName:string
+  authorUrl:string
+  detail:string
+  href:string
 }
+const isUserStar = ref(false)
+
+const detail = ref<LinkType>({
+  logo: '',
+  view: '',
+  star: 0,
+  name: '',
+  desc: '',
+  tags: [],
+  authorName: '',
+  authorUrl: '',
+  detail: '',
+  href: '',
+  _id: ''
+})
+const randomNavList = ref<LinkType[]>([])
+async function getRandomNavList () {
+  const res = await axios.get(API_NAV_RANDOM)
+  randomNavList.value = res.data
+}
+async function handleNavStarFn () {
+  let { star, _id: id } = detail.value
+
+  const stars = localStorage.get('STARS') || {}
+  if (stars[id]) return
+
+  star++
+  await axios.put('/api/nav', { id, star })
+  isUserStar.value = true
+  detail.value.star += 1
+  stars[id] = star
+  localStorage.set('STARS', stars)
+}
+
+async function handleNavClick (navData:LinkType) {
+  const { href } = navData
+  const { view, _id: id } = navData
+
+  await axios.put('/api/nav', { id, view: view + 1 })
+
+  const views = localStorage.get('VIEWS') || {}
+  views[id] = view + 1
+  localStorage.set('VIEWS', views)
+  window.open(href, '_blank')
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -158,7 +145,6 @@ export default {
 }
 
 .placeholder {
-  background: #eee;
   min-height: 300px;
 }
 
@@ -167,11 +153,7 @@ export default {
   margin-top: 50px;
 
   .left {
-    padding: 30px 20px;
-    background: #e6e8ed;
-    border-radius: 15px;
-    position: relative;
-    box-shadow: 0 30px 20px -20px rgba(#000, .15);
+
 
     .img-wrap {
       height: 200px;
@@ -192,19 +174,7 @@ export default {
     }
 
     .tool {
-      position: absolute;
-      bottom: 20px;
-      left: calc(50% - 65px);
       display: flex;
-
-      p {
-        margin: 0;
-      }
-
-      .iconfont {
-        padding-right: 0;
-      }
-
       &-item {
         background: #f0f1f4;
         font-size: 12px;
@@ -253,7 +223,6 @@ export default {
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: $line;
   }
 
   .btn-group {
@@ -272,22 +241,7 @@ export default {
 
       &:hover {
         background: #000;
-
-        &,
-        .iconfont {
-          color: #fff;
-        }
       }
-    }
-
-    &,
-    .iconfont {
-      color: #333;
-    }
-
-    .iconfont {
-      font-size: 12px;
-      margin-left: 10px;
     }
   }
 }
@@ -482,10 +436,6 @@ export default {
     .nav-block {
       margin-bottom: 10px;
     }
-  }
-
-  .iconfont {
-    cursor: pointer;
   }
 }
 

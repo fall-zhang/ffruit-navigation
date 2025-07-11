@@ -45,7 +45,9 @@
         </el-button>
       </div>
     </el-form>
+    <LinkNotice />
   </div>
+
 </template>
 
 <script lang="ts" setup>
@@ -53,6 +55,7 @@ import axios from 'axios'
 import type { CascaderOption, FormRules } from 'element-plus'
 import { API_NAV, API_NAV_REPTILE, API_TAG_LIST } from '@/server/api'
 import { ElMessage } from 'element-plus'
+import LinkNotice from '@/components/LinkNotice.vue'
 defineOptions({
   name: 'recommend-page'
 })

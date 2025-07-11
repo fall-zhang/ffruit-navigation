@@ -9,14 +9,16 @@
       </div>
       <RankList />
     </div>
-    <CustomerServiceBtn @showLog="showLog = true" />
+    <div class="size-20 bg-amber-700"></div>
+    <QuestionBtn @showLog="showLog = true" />
   </div>
-  <NuxtPage />
+  <NuxtPage page-key="static">
+  </NuxtPage>
 </template>
 
 <script lang="ts" setup>
 import AppNavList from '@/components/AppNavList.vue'
-import CustomerServiceBtn from '../components/CustomerServiceBtn.vue'
+import QuestionBtn from '../components/QuestionBtn.vue'
 import AppLog from '../components/AppLog.vue'
 // import AppHeader from '../components/AppHeader'
 import RankList from '../components/home-page/rank-list.vue'
@@ -25,11 +27,15 @@ import RankList from '../components/home-page/rank-list.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
 import { trpc } from '../server/trpc'
-import {useDark} from '@vueuse/core'
-
+import { useDark } from '@vueuse/core'
+defineOptions({
+  name: 'home-page'
+})
 
 trpc.getUser.query('').then(res => {
   console.log(res)
+}).catch(err => {
+  console.log(err)
 })
 // state
 const loading = ref(false)
@@ -62,19 +68,19 @@ onMounted(() => {
 onUnmounted(() => {
 })
 
-async function handleSubMenuClick(parentId: string) {
+async function handleSubMenuClick (parentId: string) {
   loading.value = true
   const { data } = await axios.get(`/api/nav/find?categoryId=${id}`)
   data.value = data
   loading.value = false
 }
-function toggleMenu() {
+function toggleMenu () {
   // showMenuType.value = showMenuType.value === 'none' ? 'all' : 'none'
 }
-function toggleMenu2() {
+function toggleMenu2 () {
   // showMenuType.value = showMenuType.value === 'all' ? 'half' : 'all'
 }
-function handleResize(event?: UIEvent) {
+function handleResize (event?: UIEvent) {
   //   if (event) {
   //     const { innerWidth } = event.target
   //     if (innerWidth < 568) {
@@ -92,7 +98,7 @@ function handleResize(event?: UIEvent) {
   // }
 }
 
-async function asyncData({ store }) {
+async function asyncData ({ store }) {
   // const [{ data: categories }, { data: navRanking }] = await Promise.all([
   //   axios.get('/api/category/list'),
   //   axios.get('/api/nav/ranking')
