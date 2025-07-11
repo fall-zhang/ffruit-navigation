@@ -36,20 +36,6 @@ export class NavController {
     return this.navService.findOne(+id)
   }
 
-  @Get('/list')
-  findList (@Param() findQuery: UpdateNavDto) {
-
-    // return this.navService.findOne()
-  }
-
-  // 审核，实际上也是 update，只不过更新 status 属性
-  @Get('/audit')
-  findAudit (@Param('id'){ id, status }: UpdateNavDto) {
-    const auditTime = new Date()
-
-    return this.navService.update({ id, status })
-  }
-
   @Get('/reptile')
   async findReptile (@Param('url') url: string) {
     const res = await new Promise((resolve) => {
@@ -66,6 +52,8 @@ export class NavController {
           desc,
           href: url
         })
+      }).catch(err => {
+        console.warn(err)
       })
     })
 
@@ -87,28 +75,29 @@ export class NavController {
     try {
       const resData: any = []
       // 取所有子分类
-      const categorys = await model.Category.find({ categoryId })
+      // const categorys = await Category.find({ categoryId })
+      const categorys = []
       const categoryIds = categorys.reduce((t, v) => [...t, v._id], [])
 
-      const navs = await model.Nav.find({
-        categoryId: { $in: categoryIds },
-        $or: [
-          { status: { $exists: false } },
-          { status: 0 }
-        ]
-      })
+      const navList = []
+      // const navs = await Nav.find({
+      //   categoryId: { $in: categoryIds },
+      //   $or: [
+      //     { status: { $exists: false } },
+      //     { status: 0 }
+      //   ]
+      // })
 
-      categorys.map(category => {
-        const nowNaves = navs.filter(nav => nav.categoryId == category._id)
+      categorys.forEach(category => {
+        const nowNaves = navList.filter(nav => nav.categoryId === category._id)
         resData.push({
           _id: category._id,
           name: category.name,
           list: nowNaves
         })
       })
-      this.success(resData)
     } catch (error) {
-      this.error(error.message)
+      console.warn(error)
     }
     return this.navService.findOne(+id)
   }
@@ -125,7 +114,7 @@ export class NavController {
 
   @Patch(':id')
   async update (@Param('id') id: string, @Body() updateNavDto: UpdateNavDto) {
-    return this.navService.update(+id, updateNavDto)
+    return this.navService.update(updateNavDto)
   }
 
   @Delete(':id')

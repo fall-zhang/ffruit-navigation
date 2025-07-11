@@ -4,7 +4,7 @@ import { VersioningType } from '@nestjs/common'
 import * as session from 'express-session'
 
 import * as trpcExpress from '@trpc/server/adapters/express'
-import { appRouter,createContext } from './trpc/services'
+import { appRouter, createContext } from './trpc/services'
 
 async function bootstrap () {
   const app = await NestFactory.create(AppModule)
@@ -12,10 +12,10 @@ async function bootstrap () {
   app.enableVersioning({
     type: VersioningType.URI
   })
-  app.use('/trpc',trpcExpress.createExpressMiddleware({
-    router:appRouter,
-    createContext
-  }))
+  // app.use('/', trpcExpress.createExpressMiddleware({
+  //   router: appRouter,
+  //   createContext
+  // }))
   app.use(session({ secret: 'Auth_Session', name: 'auth_code', cookie: { maxAge: 1_000_000 } }))
   await app.listen(4773)
 }

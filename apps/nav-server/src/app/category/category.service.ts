@@ -44,7 +44,7 @@ export class CategoryService {
       const newData = this.formatCategoryList(data)
       return newData
     } catch (error) {
-      return error.message
+      return error
     }
   }
 
@@ -65,7 +65,7 @@ export class CategoryService {
       ])
       return data
     } catch (error) {
-      return error.message
+      return error
     }
   }
 

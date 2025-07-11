@@ -41,7 +41,7 @@ export class TagController {
     } catch (e) {
       return {
         code: 0,
-        msg: e.message,
+        msg: e,
         data: null
       }
     }
