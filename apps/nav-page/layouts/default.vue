@@ -1,19 +1,22 @@
 <template>
   <div class="flex h-full w-full">
     <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
-    <div class="grow">
+    <div class="grow flex flex-col">
       <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
       <router-view />
+      <div class="grow"></div>
+      <PageFooter></PageFooter>
     </div>
+    <LinkJumpNotice/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import AppHeader from '@/components/home-page/head-section.vue'
+import PageFooter from '@/components/home-page/page-footer.vue'
 import LeftNavMenus from '@/components/home-page/nav-menu.vue'
 import useBaseStore from '@/store'
 import { isMobileSize } from '@/utils/utils'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 
 defineOptions({
   name: 'default-layout'

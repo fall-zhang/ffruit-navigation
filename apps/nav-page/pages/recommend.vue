@@ -3,13 +3,13 @@
     <el-form class=" max-w-100" ref="ruleForm" label-width="100px" :model="form" :rules="rules" v-loading="formLoading">
       <el-form-item label="网站链接" prop="href">
         <el-input placeholder="http://www.baidu.com/" v-model="form.href" :disabled="form.id === 'update'"
-                  @blur="getNavInfo" />
+          @blur="getNavInfo" />
         <span style="color: red">输入链接自动爬取信息</span>
       </el-form-item>
 
       <el-form-item label="网站标签" prop="tags">
         <el-select v-model="form.tags" multiple :multiple-limit="5" filterable allow-create default-first-option
-                   placeholder="输入网站标签，最多5个">
+          placeholder="输入网站标签，最多5个">
           <el-option v-for="item in tagList" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -55,7 +55,7 @@ import axios from 'axios'
 import type { CascaderOption, FormRules } from 'element-plus'
 import { API_NAV, API_NAV_REPTILE, API_TAG_LIST } from '@/server/api'
 import { ElMessage } from 'element-plus'
-import LinkNotice from '@/components/LinkNotice.vue'
+import LinkNotice from '@/components/LinkJumpNotice.vue'
 defineOptions({
   name: 'recommend-page'
 })

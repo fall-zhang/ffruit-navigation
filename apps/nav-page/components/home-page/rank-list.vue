@@ -1,6 +1,6 @@
 <template>
   <div class="nav-ranking-list grid md:grid-cols-3 gap-4 w-full ">
-    <RankListCard title="知乎" />
+    <RankListCard class="md:hidden" title="知乎" :nvaList="newsList" />
 
     <el-card header-class="box-header" class="box-card" shadow="never">
       <template #header>
