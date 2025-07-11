@@ -61,8 +61,6 @@ export default {
       font-weight: 500;
     }
   }
-  .box-header{
-    padding: 6px 12px;
-  }
+
 }
 </style>

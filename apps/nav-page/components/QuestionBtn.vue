@@ -1,9 +1,7 @@
 <template>
   <el-dropdown @command="handleCommand">
     <div class="customer-service-btn">
-      <span class="feedback">
-        <MessageCircleQuestion />
-      </span>
+      <MessageCircleQuestion class="text-white" />
     </div>
     <template #dropdown>
       <el-dropdown-menu>
@@ -23,7 +21,6 @@ function handleCommand(command: string) {
   if (command === 'feedback') {
     // feedbackDialog
     console.log('打开 feedback 弹窗')
-
   } else if (command === 'contact') {
     window.open('https://fallzhang.top')
   } else if (command === 'show-log') {
@@ -33,14 +30,9 @@ function handleCommand(command: string) {
 </script>
 
 <style lang="scss" scoped>
-.feedback {
-  color: white;
-  outline: none;
-}
-
 .customer-service-btn {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   background: #4700f1;
   border-radius: 50%;
   display: flex;
@@ -51,11 +43,5 @@ function handleCommand(command: string) {
   right: 50px;
   bottom: 50px;
   box-shadow: 0 0 20px rgba(#4700f1, .4);
-
-  i {
-    color: #fff;
-    margin-left: 0;
-    font-size: 30px;
-  }
 }
 </style>

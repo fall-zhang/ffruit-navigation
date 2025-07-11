@@ -1,15 +1,15 @@
 <template>
   <div>
     <el-row class="website" :gutter="20">
-      <AppNavItem v-for="item in list" :data="item" :key="item._id" @handleNavClick="handleNavClick"
-        @handleNavStar="handleNavStar" />
+      <AppNavItem v-for="item in list" :data="item" :key="item._id" @navClick="handleNavClick"
+        @navStar="handleNavStar" />
     </el-row>
   </div>
 </template>
 
 <script lang="ts">
 import AppNavItem from './AppNavItem.vue'
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'AppNavList',
@@ -24,7 +24,7 @@ export default defineComponent({
   },
   data() {
     return {
-      isStar: false,
+      isStar: false
     }
   },
   methods: {
