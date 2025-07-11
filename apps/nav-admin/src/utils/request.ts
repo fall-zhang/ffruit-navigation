@@ -41,7 +41,9 @@ request.interceptors.request.use(res => {
   return res.data
 })
 
+const http = request
 
 export {
+  http,
   request
 }

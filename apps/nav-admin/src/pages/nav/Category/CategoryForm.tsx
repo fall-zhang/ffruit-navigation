@@ -6,7 +6,12 @@ import useGeekProForm from '@/components/GeekProForm/useGeekProForm'
 import { API_CATEGORY } from '@/apis/api'
 import { request } from '@/utils/request'
 
-export default function CategoryForm (props: any) {
+type CategoryProps = {
+  categoryList:any[]
+  isEdit:boolean
+  selectedData:any
+}
+export default function CategoryForm (props: CategoryProps) {
   const formProps = useGeekProForm({
     ...props,
     onInitialValues (values: any): object {
@@ -35,25 +40,14 @@ export default function CategoryForm (props: any) {
     width: 'sm'
   })
 
-  const icons = [
-    'iconfont icon-qianduan',
-    'iconfont icon-bd_jiaocheng',
-    'iconfont icon-ziyuan',
-    'iconfont icon-chanpin',
-    'iconfont icon-gongju',
-    'iconfont icon-yunying',
-    'iconfont icon-sheji'
-  ]
-
   async function onFinish (values: any) {
     const data = {
       id: props.isEdit ? props.selectedData?._id : undefined,
       ...values
     }
-    await request({
-      url: API_CATEGORY,
+    // msg: props.isEdit ? '修改成功' : '添加成功',
+    await request(API_CATEGORY, {
       method: props.isEdit ? 'PUT' : 'POST',
-      msg: props.isEdit ? '修改成功' : '添加成功',
       data
     })
     props.hide()
@@ -63,7 +57,7 @@ export default function CategoryForm (props: any) {
   return (
     <ModalForm {...props} {...formProps} onFinish={onFinish} width={350}>
       <ProFormText {...nameProps} />
-      <ProFormSelect {...categoryProps} options={props.categoryList.reduce((t, v) => [...t, { label: v.name, value: v._id }], [])}/>
+      <ProFormSelect {...categoryProps} options={props.categoryList.reduce((pre, cur) => [...pre, { label: cur.name, value: cur._id }], [])}/>
       <ProFormDependency name={['icon']}>
         {({ icon }) => <ProFormText {...categoryIconProps} formItemProps={{ extra: <i className={icon}></i> }} />}
       </ProFormDependency>

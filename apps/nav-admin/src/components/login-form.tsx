@@ -9,14 +9,14 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { FormEvent, FormEventHandler, useRef } from 'react'
+import type { ComponentProps } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 export function LoginForm ({
   className,
   onSubmitForm,
   ...props
-}: React.ComponentProps<'div'> & {
+}: ComponentProps<'div'> & {
   onSubmitForm(form:FieldValues):void
 }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
