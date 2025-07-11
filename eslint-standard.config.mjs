@@ -129,7 +129,7 @@ export default {
     '@stylistic/no-multi-spaces': 'error',
     '@stylistic/no-tabs': 'error',
     '@stylistic/quotes': ['warn', 'single', { avoidEscape: true, allowTemplateLiterals: false }],
-    '@stylistic/quote-props': ['error', 'as-needed'],
+    '@stylistic/quote-props': ['error', 'as-needed', { numbers: true }],
     '@stylistic/space-before-blocks': ['error', 'always'],
     '@stylistic/no-trailing-spaces': 'error', // 行尾不能有多余空格
     '@stylistic/no-whitespace-before-property': 'error',
@@ -138,7 +138,7 @@ export default {
     '@stylistic/semi-spacing': ['error', { before: false, after: true }],
     '@stylistic/object-curly-newline': ['error', { multiline: true, consistent: true }],
     '@stylistic/object-curly-spacing': ['error', 'always'],
-    '@stylistic/space-before-function-paren': ['error', 'always'],
+    // '@stylistic/space-before-function-paren': ['error', 'always'], // 该配置和 vue 插件的格式化冲突
     '@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
     '@stylistic/function-call-spacing': ['error', 'never'],
     '@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before', '|>': 'before' } }],
