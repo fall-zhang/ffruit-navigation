@@ -10,6 +10,7 @@ type CategoryProps = {
   categoryList:any[]
   isEdit:boolean
   selectedData:any
+  hide():void
 }
 export default function CategoryForm (props: CategoryProps) {
   const formProps = useGeekProForm({
