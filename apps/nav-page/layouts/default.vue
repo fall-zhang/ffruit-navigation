@@ -48,22 +48,10 @@ onMounted(() => {
   category.value = localCategory ? JSON.parse(localCategory) : []
   store.saveCategory(category.value)
 })
+
+onMounted(() => {
+  const isShowJumpNotice:boolean = getLocal('SHOW_JUMP_NOTICE', false)
+  const baseStore = useBaseStore()
+  baseStore.setShowJumpNotice(isShowJumpNotice)
+})
 </script>
-
-<style lang="scss" scoped>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-a[title="站长统计"] {
-  display: none;
-}
-</style>

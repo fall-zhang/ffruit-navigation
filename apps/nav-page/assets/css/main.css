@@ -5,3 +5,12 @@
 body{
   font-family: PingFang SC,Helvetica Neue,Microsoft YaHei,微软雅黑,Helvetica,SimSun,SimHei,NSimSun,Arial,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
 }
+html {
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+

@@ -1,18 +1,18 @@
 <template>
   <AppLog :show="showLog" @closeLog="showLog = false" />
   <div class="user-layout w-full">
-    <div class="main">
-      <AppNavList :list="data" />
+    <div class="w-full  flex justify-center flex-col items-center">
       <RankList />
     </div>
-    <QuestionBtn @showLog="showLog = true" />
   </div>
+  <AppNavList :linkList="data" />
+  <QuestionBtn @showLog="showLog = true" />
   <NuxtPage page-key="static">
   </NuxtPage>
 </template>
 
 <script lang="ts" setup>
-import AppNavList from '@/components/AppNavList.vue'
+import AppNavList from '@/components/nav-page/nav-list.vue'
 import QuestionBtn from '../components/QuestionBtn.vue'
 import AppLog from '../components/AppLog.vue'
 // import AppHeader from '../components/AppHeader'
@@ -22,15 +22,26 @@ import RankList from '../components/home-page/rank-list.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
 import { useDark } from '@vueuse/core'
+import type { LinkItem } from '@/types/global'
 defineOptions({
   name: 'home-page'
 })
 
 // state
 const loading = ref(false)
-const data = ref([
+const data = ref<LinkItem[]>([
   {
-    name: 64654321
+    name: '64654321',
+    id: 'fvb',
+    logo: 'dasd',
+    href: 'qwerqwer',
+    view: 0,
+    star: 0,
+    createTime: 'asdf',
+    desc: 'asdfa',
+    creatorUrl: 'aasdf',
+    creator: '',
+    tags: []
   }
 ])
 const categories = ref([])
@@ -61,7 +72,7 @@ onUnmounted(() => {
 
 async function handleSubMenuClick (parentId: string) {
   loading.value = true
-  const { data } = await axios.get(`/api/nav/find?categoryId=${id}`)
+  const { data } = await axios.get(`/api/nav/find?categoryId=${parentId}`)
   data.value = data
   loading.value = false
 }
