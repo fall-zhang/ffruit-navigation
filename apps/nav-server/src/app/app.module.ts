@@ -7,13 +7,14 @@ import { FeedbackModule } from './feedback/feedback.module'
 import { BacklogModule } from './backlog/backlog.module'
 import { NavModule } from './nav/nav.module'
 // import { MongooseModule } from '@nestjs/mongoose'
+import { HomepageInfoModule } from './homepage-info/homepage-info.module';
 @Module({
   controllers: [AppController],
   providers: [AppService],
   imports: [ConfigModule.forRoot({
     envFilePath: '.env.local',
     isGlobal: true
-  }), FeedbackModule, BacklogModule, NavModule
+  }), FeedbackModule, BacklogModule, NavModule, HomepageInfoModule
   // MongooseModule.forRoot('mongodb://localhost:1')
   ]
 })
