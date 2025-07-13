@@ -1,34 +1,15 @@
 <template>
-  <div class="nav-ranking-list grid md:grid-cols-3 gap-4 w-full ">
-    <RankListCard class="md:hidden" title="知乎" :nvaList="newsList" />
-
-    <el-card header-class="box-header" class="box-card" shadow="never">
-      <template #header>
-        <div class="clearfix">
-          <span>微博</span>
-        </div>
-      </template>
-      <div v-for="(item, index) in viewList" :key="index" class="text item">
-        <nav-ranking :data="item" count-type="view" />
-      </div>
-    </el-card>
-
-    <el-card header-class="box-header" class="box-card" shadow="never">
-      <template #header>
-        <div class="clearfix">
-          <span>酷安</span>
-        </div>
-      </template>
-      <div v-for="(item, index) in starList" :key="index" class="text item">
-        <nav-ranking :data="item" count-type="star" />
-      </div>
-    </el-card>
+  <div class="nav-ranking-list grid grid-cols-2 px-6 lg:grid-cols-3 2xl:grid-cols-4 max-w-[1536px] gap-4 w-full align-middle">
+    <RankListCard  title="知乎" :navList="newsList" />
+    <RankListCard  title="知乎" :navList="newsList" />
+    <RankListCard class="hidden lg:block" title="知乎" :navList="newsList" />
+    <RankListCard class="hidden 2xl:block" title="知乎" :navList="newsList" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import NavRanking from '../NavRanking.vue'
 import RankListCard from './rank-list-card.vue'
+import type { LinkItem } from '@/types/global'
 defineOptions({
   name: 'NavRankList'
 })
@@ -39,7 +20,21 @@ type CardInfo = {
 
 const viewList = ref([])
 const starList = ref([])
-const newsList = ref([])
+const newsList = ref<LinkItem[]>([
+  {
+    id: '',
+    logo: 'ddd',
+    name: 'asdas',
+    view: 10,
+    star: 20,
+    createTime: '',
+    href: '',
+    desc: '',
+    creatorUrl: '',
+    creator: '',
+    tags: []
+  }
+])
 
 </script>
 

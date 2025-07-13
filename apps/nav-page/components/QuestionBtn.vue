@@ -16,11 +16,14 @@
 
 <script lang="ts" setup>
 import { MessageCircleQuestion } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 const emit = defineEmits(['showLog'])
+const router = useRouter()
 function handleCommand(command: string) {
   if (command === 'feedback') {
     // feedbackDialog
-    console.log('打开 feedback 弹窗')
+    // console.log('打开 feedback 弹窗')
+    router.push('/feedback')
   } else if (command === 'contact') {
     window.open('https://fallzhang.top')
   } else if (command === 'show-log') {

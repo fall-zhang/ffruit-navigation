@@ -1,12 +1,14 @@
 <template>
-  <div class="box-header bg-neutral-800 " shadow="never">
+  <div class="min-h-80   bg-neutral-800 rounded-md border border-neutral-700 my-3" shadow="never">
     <div class="py-2 px-4 border-b border-b-neutral-600">
       <span>{{title}}</span>
     </div>
-    <div v-for="(item, index) in navList" :key="index" class="text-sm item">
-      <nuxt-link :to="`/nav/${item._id}`" class="text-neutral-300 flex mb-5 items-center cursor-pointer">
-        <el-image class="site-logo" :src="item.logo" />
+    <div class="text-sm item py-2 px-4">
+      <nuxt-link  v-for="(item, index) in navList" :key="index" :to="`/nav/${item.id}`" class="flex text-neutral-300  mb-5 items-center cursor-pointer">
+        <el-image class="site-logo" alt="13" :src="item.logo" />
         <span class="site-name">{{ item.name }}</span>
+
+        <div class="grow"></div>
         <span class=""> {{ formatAttr(item[type]) }}</span>
         <EyeIcon v-if="type == 'view'" />
         <StarIcon  v-if="type == 'star'" />
@@ -16,17 +18,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { LinkItem } from '@/types/global';
 import dayjs from 'dayjs'
 import { EyeIcon, StarIcon } from 'lucide-vue-next'
 
-type LinkItem = {
-  _id:string
-  logo:string
-  name:string
-  view:number
-  star:number
-  createTime:string
-}
 
 const props = withDefaults(defineProps<{
   title:string
@@ -44,7 +39,7 @@ const subText = () => {
 }
 function formatAttr(value:string | number) {
   if (props.type === 'createTime') {
-    return dayjs(value).format('YYYY-MM-DD')
+    return dayjs(1676243211248).format('YYYY-MM-DD')
   }
   return value
 }

@@ -1,5 +1,4 @@
 <template>
-  <button @click="showModal('http://www.baidu.com')">654654645</button>
   <dialog ref="noticeModal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box p-0">
       <div class="flex justify-between border-b border-b-neutral-600 px-4 py-3">
