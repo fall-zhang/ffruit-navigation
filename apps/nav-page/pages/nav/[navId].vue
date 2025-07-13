@@ -27,11 +27,11 @@
       <p class="tags" v-if="detail.tags">标签：
         <span v-for="(tag, index) in detail.tags" :key="tag">{{ index != 0 ? '，' : '' }}{{ tag }}</span>
       </p>
-      <p class="author" v-if="detail.authorName">
+      <p class="author" v-if="detail.creator">
         <span class="el-icon-user-solid"></span>
         <FileIcon />
-        <span>推荐人：</span>
-        <a :href="detail.authorUrl">{{ detail.authorName }}</a>
+        <span>创建人：</span>
+        <a :href="detail.creatorUrl">{{ detail.creator }}</a>
       </p>
       <div class="btn-group">
         <div @click="handleNavClick(detail)" target="_blank" class="btn-link btn-group-item">
@@ -52,8 +52,8 @@
             <RotateCcwIcon @click="getRandomNavList"/>
           </div>
         </div>
-        <div class="app-card-content" v-for="item in randomNavList" :key="item._id">
-          <nuxt-link class="nav-block" :to="`/nav/${item._id}`">
+        <div class="app-card-content" v-for="item in randomNavList" :key="item.id">
+          <nuxt-link class="nav-block" :to="`/nav/${item.id}`">
             <img :src="item.logo" alt="" class="nav-logo">
             <h4 class="nav-name">{{ item.name }}</h4>
           </nuxt-link>
@@ -61,12 +61,13 @@
       </div>
     </div>
 
-    <div class="detail">{{ detail.detail || detail.desc }}</div>
+    <div class="detail">{{ detail.desc }}</div>
     <aside></aside>
   </div>
 </template>
 
 <script lang="ts" setup>
+import type { LinkItem } from '@/types/global'
 import axios from 'axios'
 import { FileIcon, LinkIcon, RotateCcwIcon, UserIcon } from 'lucide-vue-next'
 // import { API_NAV, API_NAV_RANDOM } from '../../api'
@@ -76,41 +77,29 @@ route.params.navId
 defineOptions({
   name: 'SiteDetail'
 })
-type LinkType = {
-  _id:string
-  logo:string
-  view:string
-  star:number
-  name:string
-  desc:string
-  tags:string[]
-  authorName:string
-  authorUrl:string
-  detail:string
-  href:string
-}
+
 const isUserStar = ref(false)
 
-const detail = ref<LinkType>({
+const detail = ref<LinkItem>({
   logo: '',
-  view: '',
+  view: 0,
   star: 0,
   name: '',
   desc: '',
   tags: [],
-  authorName: '',
-  authorUrl: '',
-  detail: '',
+  creator: '',
+  creatorUrl: '',
   href: '',
-  _id: ''
+  id: '',
+  createTime: ''
 })
-const randomNavList = ref<LinkType[]>([])
+const randomNavList = ref<LinkItem[]>([])
 async function getRandomNavList () {
-  const res = await axios.get(API_NAV_RANDOM)
+  const res = await axios.get('/api/nav/random')
   randomNavList.value = res.data
 }
 async function handleNavStarFn () {
-  let { star, _id: id } = detail.value
+  let { star, id } = detail.value
 
   const stars = localStorage.get('STARS') || {}
   if (stars[id]) return
@@ -123,9 +112,9 @@ async function handleNavStarFn () {
   localStorage.set('STARS', stars)
 }
 
-async function handleNavClick (navData:LinkType) {
+async function handleNavClick (navData:LinkItem) {
   const { href } = navData
-  const { view, _id: id } = navData
+  const { view, id } = navData
 
   await axios.put('/api/nav', { id, view: view + 1 })
 

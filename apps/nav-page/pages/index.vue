@@ -1,15 +1,10 @@
 <template>
   <AppLog :show="showLog" @closeLog="showLog = false" />
   <div class="user-layout w-full">
-    <div class="main" v-loading="loading">
-      <NavRankingList :data="navRanking" />
-      <div class="website-wrapper" v-for="item in data" :key="item.name">
-        <p class="website-title" :id="item._id">{{ item.name }}</p>
-        <AppNavList :list="item.list" />
-      </div>
+    <div class="main">
+      <AppNavList :list="data" />
       <RankList />
     </div>
-    <div class="size-20 bg-amber-700"></div>
     <QuestionBtn @showLog="showLog = true" />
   </div>
   <NuxtPage page-key="static">
@@ -26,20 +21,18 @@ import RankList from '../components/home-page/rank-list.vue'
 // import NavRankingList from '../components/NavRankingList'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
-import { trpc } from '../server/trpc'
 import { useDark } from '@vueuse/core'
 defineOptions({
   name: 'home-page'
 })
 
-trpc.getUser.query('').then(res => {
-  console.log(res)
-}).catch(err => {
-  console.log(err)
-})
 // state
 const loading = ref(false)
-const data = ref([])
+const data = ref([
+  {
+    name: 64654321
+  }
+])
 const categories = ref([])
 const navRanking = ref({
   view: [],
@@ -48,8 +41,6 @@ const navRanking = ref({
 })
 const selfIndex = ref(0)
 const isLeftbar = ref(true)
-const isCollapse = ref(true)
-const showPopup = ref(false)
 const showLog = ref(true)
 const showMenuType = ref('half')
 const baseStore = useBaseStore()
