@@ -26,7 +26,7 @@
         </div>
         <div class="grow">
           <span class="website-item__icon" :class="isView && 'active'">
-            <!-- <span class="iconfont icon-attentionfill"></span> -->
+            <EyeIcon/>
             {{ navData.view }}
           </span>
           <span
@@ -34,7 +34,7 @@
             :class="isStar && 'active'"
             @click="handleNavStar(navData)"
           >
-            <!-- <span class="iconfont icon-appreciatefill"></span> -->
+            <StarIcon/>
             {{ navData.star }}
           </span>
         </div>
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import { LinkIcon } from 'lucide-vue-next'
+import { LinkIcon, EyeIcon, StarIcon } from 'lucide-vue-next'
 import type { LinkItem } from '@/types/global'
 const isStar = ref(false)
 const isView = ref(false)
@@ -93,7 +93,6 @@ defineOptions({
 .website-item {
   font-size: 12px;
   margin-bottom: 20px;
-  box-sizing: border-box;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s;

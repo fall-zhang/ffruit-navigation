@@ -125,11 +125,6 @@ $sidebar-w: auto;
   text-align: center;
   transition: all 0.5s;
 
-  &.sidebar-half {}
-
-  &.sidebar-full {}
-
-
   .el-menu--popup::-webkit-scrollbar,
   .el-menu-vertical-demo.el-menu::-webkit-scrollbar {
     /*滚动条整体样式*/

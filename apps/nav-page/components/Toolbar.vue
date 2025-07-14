@@ -12,7 +12,7 @@
         </el-button>
       </el-tooltip>
     </div>
-    <div class="toolbar-item backtop">
+    <div class="toolbar-item back-to-top">
       <el-tooltip class="item" effect="dark" content="返回顶部" placement="left-start">
         <el-button>
           <i class="icon el-icon-upload2"></i>
@@ -23,24 +23,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import BackTop from './BackTop'
-export default {
-  components: {
-    BackTop
-  },
-  data: function () {
-    return {}
-  }
-}
+<script lang="ts" setup>
+import BackTop from './BackTop.vue'
+defineOptions({
+  name: 'PageToolButton'
+})
+
 </script>
 
 <style lang="scss" scoped>
 $min-bottom: 30px;
 $size: 40px;
 
-.toolbar {
-  &-item {
+.toolbar-item {
     position: fixed;
     bottom: $min-bottom;
     right: 0;
@@ -58,14 +53,13 @@ $size: 40px;
       height: $size;
       border-radius: 0;
     }
-  }
 
-  &-item.add-nav-btn {
+  &.add-nav-btn {
     bottom: 170px;
     bottom: $min-bottom + ($size + 20px) * 2;
   }
 
-  &-item.login {
+  &.login {
     bottom: $min-bottom + $size + 20px;
   }
 }

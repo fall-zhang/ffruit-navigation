@@ -13,6 +13,7 @@
         <PlusIcon />
       </nuxt-link>
     </el-tooltip>
+    <ThemeSwitch />
     <i class="el-icon-menu" @click="$emit('handleShowMenu')"></i>
   </div>
 </template>
