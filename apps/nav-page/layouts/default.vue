@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full w-full">
+  <div class="flex h-full w-full bg-(--background) text-(--foreground)">
     <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
     <div class="grow flex flex-col">
       <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
@@ -17,10 +17,14 @@ import PageFooter from '@/components/home-page/page-footer.vue'
 import LeftNavMenus from '@/components/home-page/nav-menu.vue'
 import useBaseStore from '@/store'
 import { isMobileSize } from '@/utils/utils'
+import { useDark } from '@vueuse/core'
 
 defineOptions({
   name: 'default-layout'
 })
+// const isDark = useDark()
+// const baseStore = useBaseStore()
+// baseStore.isDarkMode = isDark.value
 
 function toggleMenu () {
   showMenuType.value = showMenuType.value === 'none' ? 'all' : 'none'

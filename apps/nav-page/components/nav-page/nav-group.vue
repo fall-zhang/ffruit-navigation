@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="nav-group">
     <div class="flex h-8 m-3 ">
       <div class="flex bg-neutral-800 rounded-full">
         <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '搜索资源' && 'bg-fuchsia-600'">搜索资源</div>
@@ -29,7 +29,10 @@ const props = defineProps<{
   groupList: Array<GroupList>
 }>()
 const currentGroup = computed(() => {
-  return props.groupList[0].navList
+  if (props.groupList.length > 0) {
+    return props.groupList[0].navList
+  }
+  return []
 })
 async function addNavView(navData:LinkItem) {
   const { view, id } = navData

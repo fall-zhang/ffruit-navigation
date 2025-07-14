@@ -1,26 +1,30 @@
 import { useDark } from '@vueuse/core'
 import { defineStore } from 'pinia'
-const isDark = useDark({
-  
-})
+
+import { onMounted } from 'vue'
+useDark()
 
 type MenuInfo = {
   parentId:string
   id:string
 }
 type StateType = {
+  isDarkMode:boolean,
+  showJumpNotice:boolean
   category:MenuInfo[],
   selectedMenuParentId:string
   selectedMenuId:string
 }
-
 type StateEvent = {
   saveCategory(payload:MenuInfo[]):void
   saveSelectedId(payload:MenuInfo):void
 }
+
 // <'base-store', StateType, any, StateEvent>
 const useBaseStore = defineStore('base-store', {
   state: ():StateType => ({
+    isDarkMode: false,
+    showJumpNotice: true,
     category: [],
     selectedMenuParentId: '',
     selectedMenuId: ''
@@ -34,9 +38,11 @@ const useBaseStore = defineStore('base-store', {
     saveSelectedId (payload:MenuInfo) {
       this.selectedMenuParentId = payload?.parentId
       this.selectedMenuId = payload?.id
+    },
+    setShowJumpNotice(newVal:boolean) {
+      this.showJumpNotice = newVal
     }
   }
 })
-
 
 export default useBaseStore

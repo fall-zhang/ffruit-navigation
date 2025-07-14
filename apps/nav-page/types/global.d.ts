@@ -17,3 +17,16 @@ export type LinkItem = {
   //
   tags:string[]
 }
+
+export type LinkGroup = {
+  id:string
+  name:string
+  navList:LinkItem[]
+}
+
+
+export type TagItem = {
+  id:string
+  name:string
+
+}

@@ -6,7 +6,6 @@
     </div>
     <div class="mt-10">
       链接列表
-      <AppNavList  :linkList="data"   />
     </div>
     <div class="mt-10">
       排名卡片
@@ -18,8 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import AppNavList from '@/components/nav-page/nav-list.vue'
-import RankList from '@/components/home-page/rank-list.vue'
 import RankListCard from '@/components/home-page/rank-list-card.vue'
 import type { LinkItem } from '@/types/global'
 
