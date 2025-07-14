@@ -1,6 +1,6 @@
 <template>
   <el-dropdown @command="handleCommand">
-    <div class="customer-service-btn">
+    <div class="customer-service-btn" @click="onGoTop">
       <MessageCircleQuestion class="text-white" />
     </div>
     <template #dropdown>
@@ -8,10 +8,17 @@
         <el-dropdown-item command="show-log">更新日志</el-dropdown-item>
         <el-dropdown-item command="feedback">意见反馈</el-dropdown-item>
         <el-dropdown-item command="contact">联系我们</el-dropdown-item>
+        <el-dropdown-item command="contact">添加网站</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
-
+  <div class="toolbar-item back-to-top">
+    <el-tooltip class="item" effect="dark" content="返回顶部" placement="left-start">
+      <el-button>
+        <i class="icon el-icon-upload2"></i>
+      </el-button>
+    </el-tooltip>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -29,6 +36,11 @@ function handleCommand(command: string) {
   } else if (command === 'show-log') {
     emit('showLog', true)
   }
+}
+
+function onGoTop() {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
 }
 </script>
 

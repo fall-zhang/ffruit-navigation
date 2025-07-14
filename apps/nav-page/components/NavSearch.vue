@@ -1,8 +1,11 @@
 <template>
   <div class="app-search">
     <el-autocomplete v-model="searchText" :fetch-suggestions="queryData"
-                     :placeholder="searchGather[searchType]['placeholder']" @select="handleSelect" suffix-icon="el-icon-search">
-      <template v-slot:prepend>
+      :placeholder="searchGather[searchType]['placeholder']" @select="handleSelect" >
+      <template #prefix>
+        <SearchIcon :size="16" />
+      </template>
+      <template #prepend>
         <el-select v-model="searchType" class="search-type-box">
           <el-option label="站内" value="station"></el-option>
           <el-option label="百度" value="baidu"></el-option>
@@ -18,6 +21,7 @@
 
 <script lang="ts" setup>
 import axios from 'axios'
+import { SearchIcon } from 'lucide-vue-next'
 defineOptions({
   name: 'AppSearch'
 })
@@ -42,7 +46,7 @@ const searchGather: Record<string, GatherItem> = {
     placeholder: '百度搜索',
     root: 'https://www.google.com.hk/search?q='
   },
-  "360": {
+  '360': {
     name: '360',
     placeholder: '360搜索',
     root: 'https://www.so.com/s?q='
