@@ -1,5 +1,7 @@
+<!-- 网站排名卡片 -->
+
 <template>
-  <div class="nav-ranking-list grid grid-cols-2 px-6 lg:grid-cols-3 2xl:grid-cols-4 max-w-[1536px] gap-4 w-full align-middle">
+  <div class="nav-ranking-list  grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-4 w-full align-middle">
     <RankListCard  title="知乎" :navList="newsList" />
     <RankListCard  title="知乎" :navList="newsList" />
     <RankListCard class="hidden lg:block" title="知乎" :navList="newsList" />
@@ -18,12 +20,10 @@ type CardInfo = {
   subList: string[]
 }
 
-const viewList = ref([])
-const starList = ref([])
 const newsList = ref<LinkItem[]>([
   {
     id: '',
-    logo: 'ddd',
+    logo: 'https://www.zhihu.com/favicon.ico',
     name: 'asdas',
     view: 10,
     star: 20,
@@ -32,7 +32,9 @@ const newsList = ref<LinkItem[]>([
     desc: '',
     creatorUrl: '',
     creator: '',
-    tags: []
+    tags: [],
+    linkGroup: '',
+    linkSubGroup: ''
   }
 ])
 

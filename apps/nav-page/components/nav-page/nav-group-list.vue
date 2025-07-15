@@ -1,60 +1,60 @@
+<!-- 对于desc 描述过长的内容, hover 时展示 tooltip -->
+
 <template>
-  <div class="flex flex-col">
-    <div class="website-item hover:shadow-sm cursor-pointer w-100 " v-for="navData in linkList" :key="navData.id" >
-      <div class="link" target="_blank" @click="handleNavClick(navData)">
+  <div class="grid w-full lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-5">
+    <div class="info-card h-24 flex items-center dark:text-neutral-200 text-neutral-900 mb-5 rounded-md p-2  overflow-hidden cursor-pointer text-xs hover:shadow-sm bg-neutral-200 dark:bg-neutral-800" v-for="navItem in linkList" :key="navItem.id" @click="onClickNavLink(navItem)" >
+      <div class="flex px-2.5 grow" >
+        <img class="rounded-full w-10 h-10" :src="navItem.logo" fit="cover" />
+        <div class="ml-2">
+          <strong class="text-base text-[#3273dc]">{{ navItem.name }}</strong>
+          <div class="mt-1">
+            {{ navItem.desc || "这个网站什么描述也没有..." }}
+          </div>
+        </div>
+      </div>
+      <div class="border-t-neutral-100 dark:border-t-neutral-900 ">
+        <!-- <div class="text-sm  flex items-center" >
+          <a :href="navItem.creatorUrl" target="_blank">
+            <span>{{ navItem.creator }}</span>
+          </a>
+        </div>
+        <div class="flex grow">
+          <span class="flex items-center" :class="isView && 'active'">
+            <EyeIcon/>
+            {{ navItem.view }}
+          </span>
+          <span
+            class="flex items-center"
+            :class="isStar && 'active'"
+            @click="handleNavStar(navItem)"
+          >
+            <StarIcon/>
+            {{ navItem.star }}
+          </span>
+        </div> -->
+      </div>
+      <div class="flex justify-end mr-4" target="_blank" @click="handleNavClick(navItem)">
         <el-tooltip content="链接直达" property="top">
           <LinkIcon />
         </el-tooltip>
       </div>
-      <nuxt-link :to="`/nav/${navData.id}`" class="info" >
-        <div class="info-header">
-          <el-image class="web-logo" :src="navData.logo" fit="cover" lazy />
-          <div class="info-header-right">
-            <strong class="title">{{ navData.name }}</strong>
-            <div class="mt-1">
-              {{ navData.desc || "这个网站什么描述也没有..." }}
-            </div>
-          </div>
-        </div>
-      </nuxt-link>
-      <div class="border-t-neutral-100 dark:border-t-neutral-900 bg-white dark:bg-black">
-        <div class="text-sm  flex items-center" v-if="navData.creatorUrl">
-          <a :href="navData.creatorUrl" target="_blank">
-            <!-- author 图标 -->
-            <span>{{ navData.creator }}</span>
-          </a>
-        </div>
-        <div class="grow">
-          <span class="website-item__icon" :class="isView && 'active'">
-            <EyeIcon/>
-            {{ navData.view }}
-          </span>
-          <span
-            class="website-item__icon"
-            :class="isStar && 'active'"
-            @click="handleNavStar(navData)"
-          >
-            <StarIcon/>
-            {{ navData.star }}
-          </span>
-        </div>
-      </div>
     </div>
+    <LinkJumpNotice ref="jumpNotice" @entry="onEntryLink" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { LinkIcon, EyeIcon, StarIcon } from 'lucide-vue-next'
 import type { LinkItem } from '@/types/global'
-const isStar = ref(false)
-const isView = ref(false)
+import useBaseStore from '@/store'
 const props = defineProps<{
   linkList: Array<LinkItem>
 }>()
 
+const jumpNoticeRef = useTemplateRef('jumpNotice')
+const baseStore = useBaseStore()
 async function addNavView(navData:LinkItem) {
   const { view, id } = navData
-
   await useFetch('/api/nav', {
     method: 'PUT',
     body: { id, view: view + 1 }
@@ -69,6 +69,8 @@ function handleNavClick(navData:LinkItem) {
   addNavView(navData)
   window.open(href, '_blank')
 }
+
+
 async function handleNavStar(navData :LinkItem) {
   const { star, id } = navData
 
@@ -83,6 +85,18 @@ async function handleNavStar(navData :LinkItem) {
   stars[id] = newStar
   localStorage.set('STARS', stars)
 }
+
+function onEntryLink(link:string) {
+  window.open(link)
+}
+function onClickNavLink(navItem:LinkItem) {
+  if (baseStore.showJumpNotice) {
+    jumpNoticeRef.value?.showModal(navItem.href)
+  } else {
+    window.open(navItem.href, '_blank')
+  }
+}
+
 defineOptions({
   name: 'AppNavList'
 })
@@ -90,58 +104,18 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
-.website-item {
-  font-size: 12px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s;
-  color: #999;
-  position: relative;
-  &:hover {
-    .link {
-      display: block;
-    }
-  }
-
-  .link {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    display: none;
-    z-index: 10;
-  }
-
+.info-card {
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 26px 40px -24px rgba(#000, .2);
     transition: all 0.3s ease;
   }
-  .title {
-    color: #3273dc;
-    font-size: 16px;
-  }
-}
-
-.info {
-  display: block;
-  transition: all 0.3s;
-  background: #fff;
-  padding: 20px 10px;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: flex-start;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-
-
-  &-header {
+  .info-header {
     display: flex;
     align-items: center;
     overflow: auto;
 
-    &-right {
+    .info-right {
       display: flex;
       flex-direction: column;
     }

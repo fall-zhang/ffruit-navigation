@@ -27,7 +27,6 @@
         </el-menu-item>
       </el-sub-menu>
     </el-menu>
-
     <!-- <div class="sidebar-fix cursor-pointer h-6 w-full bg-pink-50 m-auto pb-3" @click="$emit('showMenus')">
       <el-icon-fold v-if="!isCollapse" />
       <el-icon-unfold v-else />

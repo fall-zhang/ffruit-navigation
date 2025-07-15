@@ -8,21 +8,17 @@
         <el-dropdown-item command="show-log">更新日志</el-dropdown-item>
         <el-dropdown-item command="feedback">意见反馈</el-dropdown-item>
         <el-dropdown-item command="contact">联系我们</el-dropdown-item>
-        <el-dropdown-item command="contact">添加网站</el-dropdown-item>
+        <el-dropdown-item command="recommend">推荐网站</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
-  <div class="toolbar-item back-to-top">
-    <el-tooltip class="item" effect="dark" content="返回顶部" placement="left-start">
-      <el-button>
-        <i class="icon el-icon-upload2"></i>
-      </el-button>
-    </el-tooltip>
-  </div>
+  <AppChangeLog :show="showLog" @closeLog="showLog = false" />
 </template>
 
 <script lang="ts" setup>
 import { MessageCircleQuestion } from 'lucide-vue-next'
+import AppChangeLog from '../components/AppChangeLog.vue'
+
 import { useRouter } from 'vue-router'
 const emit = defineEmits(['showLog'])
 const router = useRouter()
@@ -33,10 +29,14 @@ function handleCommand(command: string) {
     router.push('/feedback')
   } else if (command === 'contact') {
     window.open('https://fallzhang.top')
+  } else if (command === 'recommend') {
+    router.push('/recommend')
   } else if (command === 'show-log') {
-    emit('showLog', true)
+    showLog.value = true
   }
 }
+const isInTop = ref(true)
+const showLog = ref(false)
 
 function onGoTop() {
   document.body.scrollTop = 0

@@ -8,11 +8,6 @@
       <AppSearch />
     </div>
     <div class="grow"></div>
-    <el-tooltip content="推荐网站">
-      <nuxt-link to="/recommend">
-        <PlusIcon />
-      </nuxt-link>
-    </el-tooltip>
     <ThemeSwitch />
     <i class="el-icon-menu" @click="$emit('handleShowMenu')"></i>
   </div>
