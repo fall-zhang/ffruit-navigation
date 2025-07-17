@@ -21,3 +21,4 @@ code 代码相关内容查找
 - nav 单个导航 
 - tag 导航的标签
 - track 用户信息追踪
+- homepage-info 看板首页信息

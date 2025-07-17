@@ -13,41 +13,40 @@ datasource db {
   url      = env("DATABASE_POSTGRES_URL")
 }
 
-model Post {
-  // id        Int      @id @default(auto()) @map("_id") @db.ObjectId
-  id        Int   @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  authorId  Int?
-  userEmail String?
-}
-
-model UserFeedback {
-  id          Int   @id @default(autoincrement())
-  programName String // 项目名称
-  type        String // feature 建议 | error 错误 | suggest 建议 
-  title       String // 错误标题
-  describe    String // 用户输入的详情描述
-  images      String[] // 用户的截图
-  isHandled   Boolean  @default(false)
-  // time        String
-  // handledTime DateTime @default(now())// 处理时间
-  // reportTime  DateTime @default(now())// 提交时间
-  reportUser  String // 提交用户
-  deviceName  String // 设备信息
-}
-
-model UserTrack {
-  id          Int    @id @map("_id")
+model NavLink {
+  id          Int      @id @map("_id")
+  categoryId  String
+  name        String
+  // 网站url
+  href        String
+  desc        String
+  logo        String
+  authorName  String
+  authorUrl   String
+  auditTime   DateTime
+  createTime  DateTime
+  tag         NavTag[]
+  // 页面浏览次数
+  view        Int
+  star        Int
+  // 审核状态 1 审核中 2 拒绝 3 通过
+  status      Int
+  // 访问状态 1 正常访问 2 需要代理 3 网站已停用
+  accessState Int
   programName String
 }
 
-model AppVersion {
-  id          Int    @id @map("_id")
-  programName String
-  version     String
+model NavTag {
+  id         Int       @id @default(autoincrement())
+  name       String
+  createTime DateTime
+  parentTag  DateTime
+  Name       DateTime
+  NavLink    NavLink[]
+}
+
+model Group {
+  ip       String @id
+  name     String
+  subGroup String
 }
