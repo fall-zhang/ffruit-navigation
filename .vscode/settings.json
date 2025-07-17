@@ -1,9 +1,16 @@
 {
   "git.ignoreLimitWarning": true,
   "cSpell.words": [
+    "autoincrement",
     "axios",
+    "cascader",
+    "daisyui",
+    "FFRUIT",
+    "lucide",
     "nuxt",
     "oklch",
-    "vite"
+    "trpc",
+    "vite",
+    "vueuse"
   ]
 }
