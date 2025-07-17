@@ -14,6 +14,8 @@ export type LinkItem = {
   creatorUrl:string
   // 创建用户
   creator:string
+  linkGroup:string
+  linkSubGroup:string
   //
   tags:string[]
 }
@@ -21,6 +23,8 @@ export type LinkItem = {
 export type LinkGroup = {
   id:string
   name:string
+  // 子分组的 id
+  subGroup:string
   navList:LinkItem[]
 }
 

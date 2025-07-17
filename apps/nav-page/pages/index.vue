@@ -1,24 +1,21 @@
 <template>
-  <AppLog :show="showLog" @closeLog="showLog = false" />
-  <div class="w-full flex justify-center flex-col items-center">
-    <RankList />
+  <div class="w-full justify-center flex flex-col items-center">
+    <div class="max-w-[1536px] w-full  px-6">
+      <RankList />
+      <NavGroup :groupList="groupList" />
+    </div>
   </div>
-  <NavGroup :groupList="groupList" />
-  <QuestionBtn @showLog="showLog = true" />
+  <HourTime />
   <NuxtPage page-key="static">
   </NuxtPage>
 </template>
 
 <script lang="ts" setup>
-import QuestionBtn from '../components/QuestionBtn.vue'
-import AppLog from '../components/AppLog.vue'
-// import AppHeader from '../components/AppHeader'
-import RankList from '../components/home-page/rank-list.vue'
-// // import axios from 'axios'
-// import NavRankingList from '../components/NavRankingList'
+import RankList from '../components/nav-page/rank-list.vue'
+import HourTime from '../components/home-page/hour-time.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
-import type { LinkItem } from '@/types/global'
+import type { LinkGroup, LinkItem } from '@/types/global'
 import NavGroup from '@/components/nav-page/nav-group.vue'
 defineOptions({
   name: 'home-page'
@@ -30,35 +27,72 @@ const data = ref<LinkItem[]>([
   {
     name: '64654321',
     id: 'fvb',
-    logo: 'dasd',
-    href: 'qwerqwer',
+    logo: 'http://www.baidu.com/favicon.ico',
+    href: 'http://www.baidu.com',
     view: 0,
     star: 0,
     createTime: 'asdf',
     desc: 'asdfa',
     creatorUrl: 'aasdf',
     creator: '',
-    tags: []
+    tags: [],
+    linkGroup: '',
+    linkSubGroup: ''
   }
 ])
-const groupList = ref([
+const groupList = ref<LinkGroup[]>([
   {
     id: 'string',
     name: 'string',
-    navList: []
+    subGroup: '',
+    navList: [{
+      name: '64654321',
+      id: 'fvb',
+      logo: 'http://www.baidu.com/favicon.ico',
+      href: 'http://www.baidu.com',
+      view: 0,
+      star: 0,
+      createTime: 'asdf',
+      desc: 'asdfa',
+      creatorUrl: 'aasdf',
+      creator: '',
+      tags: [],
+      linkGroup: '',
+      linkSubGroup: ''
+    }, {
+      name: '1252452',
+      id: 'fv11123b',
+      logo: 'http://www.baidu.com/favicon.ico',
+      href: 'http://www.baidu.com',
+      view: 0,
+      star: 0,
+      createTime: 'asdf',
+      desc: 'asdfa',
+      creatorUrl: 'aasdf',
+      creator: '',
+      tags: [],
+      linkGroup: '',
+      linkSubGroup: ''
+    }, {
+      name: '1252452',
+      id: '123b',
+      logo: 'http://www.baidu.com/favicon.ico',
+      href: 'http://www.baidu.com',
+      view: 0,
+      star: 0,
+      createTime: 'asdf',
+      desc: 'asdfa',
+      creatorUrl: 'aasdf',
+      creator: '',
+      tags: [],
+      linkGroup: '',
+      linkSubGroup: ''
+    }]
   }
 ])
 
 const categories = ref([])
-const navRanking = ref({
-  view: [],
-  star: [],
-  news: []
-})
-const selfIndex = ref(0)
-const isLeftbar = ref(true)
-const showLog = ref(true)
-const showMenuType = ref('half')
+
 const baseStore = useBaseStore()
 
 onMounted(() => {

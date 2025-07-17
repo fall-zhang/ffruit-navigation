@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body{
+  height: 100vh;
   font-family: PingFang SC,Helvetica Neue,Microsoft YaHei,微软雅黑,Helvetica,SimSun,SimHei,NSimSun,Arial,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
 }
 

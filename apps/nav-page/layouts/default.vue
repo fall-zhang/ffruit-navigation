@@ -1,19 +1,21 @@
 <template>
-  <div class="flex h-full w-full bg-(--background) text-(--foreground)">
-    <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" />
+  <div class="flex h-dvh w-full bg-(--background) text-(--foreground)">
+    <!-- <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" /> -->
     <div class="grow flex flex-col">
       <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
       <router-view />
       <div class="grow"></div>
       <PageFooter></PageFooter>
     </div>
+    <AppFixedButton />
     <LinkJumpNotice/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import AppHeader from '@/components/home-page/head-section.vue'
-import PageFooter from '@/components/home-page/page-footer.vue'
+import AppFixedButton from '../components/AppFixedButton.vue'
+import AppHeader from '@/components/common-section/head-section.vue'
+import PageFooter from '@/components/common-section/page-footer.vue'
 import LeftNavMenus from '@/components/home-page/nav-menu.vue'
 import useBaseStore from '@/store'
 import { isMobileSize } from '@/utils/utils'

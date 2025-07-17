@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     head: {
       title: '鲜果导航 - 有趣，新鲜的导航',
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
       ]
     }
   },
