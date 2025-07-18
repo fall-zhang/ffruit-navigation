@@ -12,11 +12,11 @@ import { CategoryModel } from '@/types/api'
 
 
 function transformCategoryList (list: any) {
-  const newList: any = []
-  list.map(item => {
+  const newList: any[] = []
+  list.foeEach(item => {
     const listItem: any = { key: item._id, ...item, children: [] }
     if (Array.isArray(item.children)) {
-      item.children.map(subItem => {
+      item.children.foeEach(subItem => {
         listItem.children.push({ key: subItem._id, ...subItem })
       })
     }
@@ -27,7 +27,7 @@ function transformCategoryList (list: any) {
 
 export default function NavAuditListPage () {
   const formProps = useGeekProTablePopup()
-  const tableRef = useRef<ActionType>()
+  const tableRef = useRef<ActionType>(null)
   const [categoryList, setCategoryList] = useState([])
 
   async function onRequestData () {
