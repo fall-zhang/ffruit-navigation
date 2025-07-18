@@ -1,8 +1,12 @@
 <template>
   <div class="">
-    <span class="text-4xl" >
-      {{ formattedTime }}
-      {{ formattedDay }}
+    <span class="flex flex-col items-center gap-1" >
+      <div class=" text-justify real-time text-6xl">
+        {{ formattedTime }}
+      </div>
+      <span class="">
+        {{ formattedDay }}
+      </span>
     </span>
   </div>
 </template>
@@ -19,7 +23,6 @@ const formattedDay = useDateFormat(useNow(), 'YYYY 年 M 月 D 日')
 const props = defineProps({
 
 })
-useTimeAgo
 
 defineExpose({
 })

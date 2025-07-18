@@ -1,13 +1,12 @@
 <template>
-  <div class="min-h-80   bg-neutral-800 rounded-md border border-neutral-700 my-3" shadow="never">
-    <div class="py-2 px-4 border-b border-b-neutral-600">
+  <div class="min-h-80 bg-neutral-200 dark:bg-neutral-800 rounded-md border border-neutral-400 dark:border-neutral-700 my-3 shadow hover:shadow-lg transition duration-400" shadow="never">
+    <div class="py-2 px-4 border-b border-neutral-400 dark:border-b-neutral-600">
       <span>{{title}}</span>
     </div>
     <div class="text-sm item py-2 px-4">
-      <nuxt-link  v-for="(item, index) in navList" :key="index" :to="`/nav/${item.id}`" class="flex text-neutral-300  mb-5 items-center cursor-pointer">
-        <el-image class="site-logo" alt="13" :src="item.logo" />
+      <nuxt-link  v-for="(item, index) in navList" :key="index" :to="`/nav/${item.id}`" class="flex text-neutral-900 dark:text-neutral-300  mb-5 items-center cursor-pointer">
+        <img  class="size-5 rounded-xl mx-2" alt="13" :src="item.logo" />
         <span class="site-name">{{ item.name }}</span>
-
         <div class="grow"></div>
         <span class=""> {{ formatAttr(item[type]) }}</span>
         <EyeIcon v-if="type == 'view'" />
@@ -18,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { LinkItem } from '@/types/global';
+import type { LinkItem } from '@/types/global'
 import dayjs from 'dayjs'
 import { EyeIcon, StarIcon } from 'lucide-vue-next'
 
@@ -47,13 +46,7 @@ function formatAttr(value:string | number) {
 
 <style lang="scss" scoped>
 .nav-ranking {
-  .site-logo {
-    min-width: 20px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
+
 
   .site-name {
     flex: 1;

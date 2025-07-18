@@ -90,7 +90,7 @@ async function queryBaidu (query: string, cb: any) {
   const res = await axios.get(`/5a1Fazu8AA54nxGko9WTAnF6hhy/su?&wd=${query}&cb=getJSONPData`)
 
   try {
-    const data = eval(res.data)
+    const data = res.data
     const finalData = data.s.reduce((t: any, v: any) => [...t, { value: v }], [])
     cb(finalData)
   } catch (e) {

@@ -1,12 +1,12 @@
 <template>
   <div class="nav-group ">
     <div class="flex h-8">
-      <div class="flex bg-neutral-800 rounded-full">
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '搜索资源' && 'bg-[#4700f1]'">搜索资源</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '网盘搜索' && 'bg-[#4700f1]'">网盘搜索</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '影视搜索' && 'bg-[#4700f1]'">影视搜索</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '音乐搜索' && 'bg-[#4700f1]'">音乐搜索</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '电子书搜索' && 'bg-[#4700f1]'">电子书搜索</div>
+      <div class="flex bg-neutral-300 dark:bg-neutral-800 rounded-full">
+        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '搜索资源' && 'bg-[#4700f1] text-white'">搜索资源</div>
+        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '网盘搜索' && 'bg-[#4700f1] text-white'">网盘搜索</div>
+        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '影视搜索' && 'bg-[#4700f1] text-white'">影视搜索</div>
+        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '音乐搜索' && 'bg-[#4700f1] text-white'">音乐搜索</div>
+        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '电子书搜索' && 'bg-[#4700f1] text-white'">电子书搜索</div>
       </div>
     </div>
     <NavGroupList class="mt-4" :link-list="currentGroup" />

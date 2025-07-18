@@ -1,4 +1,4 @@
-<!-- 左侧系统导航 -->
+<!-- 导航左侧 侧边栏 -->
 <template>
   <el-aside class="h-dvh flex flex-col" :width="sideBarWidth">
     <nuxt-link class="title" to="/">

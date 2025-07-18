@@ -1,18 +1,18 @@
 <template>
-  <dialog ref="noticeModal" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box p-0">
-      <div class="flex justify-between border-b border-b-neutral-600 px-4 py-3">
-        <h3 class="font-bold">跳转提示</h3>
+  <ElDialog v-model="dialogVisible"  modal title="跳转提示" class="fixed">
+    <div class=" p-0">
+      <!-- <div class="flex justify-between border-b border-b-neutral-600 px-4 py-3">
+        <h3 class="font-bold"></h3>
         <XIcon  class="cursor-pointer" @click="onCloseDialog"/>
-      </div>
-      <div class="p-3 flex flex-col justify-center items-center">
-        <p class="pt-1.5 text-[15px]">即将离开本站，访问第三方网站</p>
-        <a class="pt-1.5 link text-blue-700" :href="curURL" >
+      </div> -->
+      <div class="p-0 flex flex-col justify-center items-center">
+        <p class="pt-1.5 text-base">即将离开本站，访问第三方网站</p>
+        <a class="pt-1.5 link text-[#9e77f8]" :href="curURL" >
           <p>{{ curURL }}</p>
         </a>
-        <p class="pt-1.5 text-[15px]">请注意财产安全，详见：免责声明</p>
-        <div class="modal-action">
-          <div class="text-sm flex items-center">
+        <p class="pt-1.5 text-xs">请注意财产安全，详见：免责声明</p>
+        <div class="modal-action ">
+          <div class=" flex items-center  text-xs">
             下次不再提示
             <input class="ml-2" type="checkbox" />
           </div>
@@ -20,29 +20,33 @@
       </div>
       <div class="footer pb-4 flex justify-center">
         <form method="dialog">
-          <button class="btn" @click="onContinue">继续访问</button>
+          <el-button class="bg-blue-600 px-5 py-1.5 mt-3 rounded" @click="onContinue">继续访问</el-button>
         </form>
       </div>
     </div>
-  </dialog>
+  </ElDialog>
+
 </template>
 
 <script lang="ts" setup>
 import { Target, XIcon } from 'lucide-vue-next'
-const modalRef = useTemplateRef('noticeModal')
-
+// const modalRef = useTemplateRef('noticeModal')
+const dialogVisible = ref(false)
 const curURL = ref('')
 function showModal (website:string) {
   curURL.value = website
-  modalRef.value?.showModal()
+  dialogVisible.value = true
+  // modalRef.value?.showModal()
 }
 function onContinue() {
   window.open(curURL.value, '_blank')
-  modalRef.value?.close()
+  dialogVisible.value = false
+  // modalRef.value?.close()
 }
 
 function onCloseDialog() {
-  modalRef.value?.close()
+  dialogVisible.value = false
+  // modalRef.value?.close()
 }
 defineExpose({
   showModal

@@ -55,8 +55,8 @@ function onGoTop() {
   justify-content: center;
   position: fixed;
   cursor: pointer;
-  right: 50px;
-  bottom: 50px;
+  right: 40px;
+  bottom: 70px;
   box-shadow: 0 0 20px rgba(#4700f1, .4);
 }
 </style>

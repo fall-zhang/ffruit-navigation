@@ -41,13 +41,4 @@ const newsList = ref<LinkItem[]>([
 </script>
 
 <style lang="scss" scoped>
-.nav-ranking-list {
-  .el-card__header {
-    span {
-      font-size: 18px;
-      font-weight: 500;
-    }
-  }
-
-}
 </style>
