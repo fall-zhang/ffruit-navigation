@@ -10,6 +10,9 @@ type MenuInfo = {
 }
 type StateType = {
   isDarkMode:boolean,
+  /**
+   * 开启后，点击链接会提示用户注意安全
+   */
   showJumpNotice:boolean
   category:MenuInfo[],
   selectedMenuParentId:string

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-dvh w-full bg-(--background) text-(--foreground)">
+  <div class="flex h-dvh w-full bg-(--background) text-(--foreground) transition-all">
     <!-- <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" /> -->
     <div class="grow flex flex-col">
       <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
@@ -56,7 +56,7 @@ onMounted(() => {
 })
 
 onMounted(() => {
-  const isShowJumpNotice:boolean = getLocal('SHOW_JUMP_NOTICE', false)
+  const isShowJumpNotice:boolean = getLocal('SHOW_JUMP_NOTICE', true)
   const baseStore = useBaseStore()
   baseStore.setShowJumpNotice(isShowJumpNotice)
 })

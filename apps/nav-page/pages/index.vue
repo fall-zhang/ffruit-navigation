@@ -1,18 +1,19 @@
 <template>
   <div class="w-full justify-center flex flex-col items-center">
-    <div class="max-w-[1536px] w-full  px-6">
+    <div class="max-w-[1536px] w-full px-6">
       <RankList />
       <NavGroup :groupList="groupList" />
     </div>
   </div>
   <HourTime />
-  <NuxtPage page-key="static">
-  </NuxtPage>
+  <CenterSearch class="mt-3" />
+  <NuxtPage page-key="static"></NuxtPage>
 </template>
 
 <script lang="ts" setup>
 import RankList from '../components/nav-page/rank-list.vue'
 import HourTime from '../components/home-page/hour-time.vue'
+import CenterSearch from '../components/home-page/center-search.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
 import type { LinkGroup, LinkItem } from '@/types/global'
