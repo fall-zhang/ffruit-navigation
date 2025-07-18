@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
+    "lint:quiet": "eslint . --quiet",
     "lint:fix": "eslint --fix --ext ./apps"
   },
   "keywords": [],
@@ -21,6 +22,7 @@
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-tailwindcss": "4.0.0-beta.0",
     "eslint-plugin-vue": "^10.1.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.32.1",
@@ -29,6 +31,7 @@
   "dependencies": {
     "@trpc/client": "^11.4.3",
     "@trpc/server": "^11.4.3",
-    "@vueuse/core": "^13.5.0"
+    "@vueuse/core": "^13.5.0",
+    "tailwindcss": "^4.1.11"
   }
 }

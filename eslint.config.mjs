@@ -3,6 +3,7 @@ import lintReact from 'eslint-plugin-react'
 import pluginVue from 'eslint-plugin-vue'
 import jslint from '@eslint/js'
 import lintReactHooks from 'eslint-plugin-react-hooks'
+import tailwind from 'eslint-plugin-tailwindcss'
 import tslint from 'typescript-eslint'
 import { defineConfig } from 'eslint/config'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
@@ -21,14 +22,14 @@ const tsLintConfig = {
 
 const reactLintConfig = {
   name: 'app/react-files-lint',
+  settings: { react: { version: '18.3' } },
   files: ['./apps/nav-admin/**/*.{tsx,ts,js,mjs,jsx}'],
   plugins: {
     react: lintReact,
     'react-hooks': lintReactHooks
   },
-
-  settings: { react: { version: '18.3' } },
   rules: {
+    ...lintReact.configs.flat.recommended.rules,
     // 对引入的内容进行排序：是否忽略大小写
     // 'sort-imports': ["error", { "ignoreCase": false }],
     // 交给 tslint 处理
@@ -75,22 +76,49 @@ const vueLintConfig = {
   }
 }
 
+const tailwindConfig = {
+  settings: {
+    tailwindcss: {
+      // These are the default values but feel free to customize
+      callees: ['classnames', 'clsx', 'ctl', 'cn'],
+      // config: 'tailwind.config.js', // returned from `loadConfig()` utility if not provided
+      cssFiles: [
+        '**/*.css',
+        '!**/node_modules',
+        '!**/.*',
+        '!**/dist',
+        '!**/build'
+      ],
+      cssFilesRefreshRate: 5_000,
+      removeDuplicates: true,
+      skipClassAttribute: false,
+      whitelist: [],
+      tags: [], // can be set to e.g. ['tw'] for use in tw`bg-blue`
+      classRegex: '^class(Name)?$' // can be modified to support custom attributes. E.g. "^tw$" for `twin.macro`
+    }
+  },
+  rules: {
+    'tailwindcss/no-custom-classname': 0
+  }
+}
 export default defineConfig([
   // 只对我修改的部分进行
-  {
-    name: 'app/files-to-lint',
-    settings: { react: { version: '18.3' } },
-    files: ['./apps/nav-admin/**/*.{tsx,ts,js,mjs,jsx}', './apps/nav-server/**/*.{tsx,ts,js,mjs,jsx}']
-  },
+  // {
+  //   name: 'app/files-to-lint',
+  //   settings: { react: { version: '18.3' } },
+  //   files: ['./apps/nav-admin/**/*.{tsx,ts,js,mjs,jsx}', './apps/nav-server/**/*.{tsx,ts,js,mjs,jsx}']
+  // },
   // global ignores
   {
     name: 'app/files-to-ignore',
-    ignores: ['**/temp.js', '**/.next/**', '**/node_modules/**', '**/dist/**']
+    ignores: ['**/temp.js', '**/.nuxt/**', '**/node_modules/**', '**/dist/**']
   },
   jslint.configs.recommended,
   standard, // js 标准配置
-  lintReact.configs.flat.recommended,
+
   lintReact.configs.flat['jsx-runtime'],
+  ...tailwind.configs['flat/recommended'],
+  tailwindConfig,
   ...pluginVue.configs['flat/essential'],
   ...tslint.configs.recommended,
   defineConfigWithVueTs(vueTsConfigs.recommended),

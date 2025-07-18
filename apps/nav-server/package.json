@@ -12,8 +12,6 @@
     "start:dev": "nest start --watch -- -b swc && echo '成功启用 swc'",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "type": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -44,7 +42,6 @@
     "zod-i18n-map": "^2.27.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
     "@nestjs/cli": "^10.4.9",
     "@nestjs/schematics": "^10.2.3",
     "@nestjs/testing": "^10.4.15",
@@ -56,9 +53,6 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^20.17.24",
     "@types/supertest": "^6.0.2",
-    "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "@typescript-eslint/parser": "^8.26.1",
-    "eslint": "^9.22.0",
     "globals": "^15.15.0",
     "jest": "^29.7.0",
     "prisma": "^6.5.0",
@@ -68,8 +62,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.1"
+    "typescript": "^5.8.2"
   },
   "jest": {
     "moduleFileExtensions": [
