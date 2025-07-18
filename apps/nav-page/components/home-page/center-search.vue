@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-    <div class="search-input border border-neutral-300  rounded-full flex items-center w-100 h-10 text-black">
+    <div class="search-input border border-neutral-300 dark:border-0 rounded-full flex items-center w-100 h-10 text-black">
       <!-- 搜索引擎选择 -->
       <div class="engin-select w-12 px-1 cursor-pointer  h-full flex items-center justify-end hover:bg-neutral-500/30" @click="onChangeEngin">
         <img class="size-6" src="@/assets/official-icon/github.svg" />
@@ -31,14 +31,14 @@ const inputText = ref('4646464')
   // border: 2px solid transparent;
   outline: none;
   overflow: hidden;
-  background-color: #F3F3F3;
+  background-color: #bdbdbd;
   transition: all 0.5s;
 }
 
 .search-input:hover,
 .search-input:focus {
-  box-shadow: 0px 0px 0px 8px rgba(74, 150, 236, 0.2);
-  background-color: white;
+  box-shadow: 0px 0px 0px 6px rgba(74, 150, 236, 0.2), 0px 0px 8px 14px rgba(74, 150, 236, 0.2);
+  background-color: rgb(230, 230, 230);
 }
 
 </style>
