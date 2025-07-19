@@ -1,6 +1,6 @@
 <template>
-  <div class="h-16 items-center px-6 flex bg-neutral-200 dark:bg-neutral-800 shadow-xl justify-between w-full border-b-neutral-500 border-b">
-    <div class="hidden sm:flex ">
+  <div :class="twMerge(['h-16 items-center px-6 flex bg-neutral-200 dark:bg-neutral-800 shadow-xl justify-between w-full border-b-neutral-500 border-b backdrop-blur-xl',hasBgImageHeaderClass])">
+    <div class="hidden sm:flex items-center">
       <nuxt-link to="/" class="flex items-center">
         <OrangeIcon  :size="36"/>
         <h1 class="text-2xl mr-4 text-(--text-primary) font-bold">鲜果导航</h1>
@@ -8,17 +8,14 @@
       <AppSearch />
     </div>
     <div class="grow"></div>
-    <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
-      <div tabindex="0" role="button" class="    m-1  mr-2 p-1 rounded cursor-pointer hover:bg-neutral-200/30">
+    <div class="tooltip tooltip-bottom" data-tip="更换壁纸">
+      <div tabindex="0" role="button" class="    m-1  mr-2 p-1 rounded cursor-pointer hover:bg-neutral-200/30" @click="onUploadFile">
         <ImageIcon class="" height="26"  width="26"/>
       </div>
       <!-- <div >Hover</div> -->
-      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-        <li><a>Item 1</a></li>
-        <li><a>Item 2</a></li>
-      </ul>
-    </div>
 
+    </div>
+    <input ref="uploadRef" type="file" class="hidden" @change="onChangeFile" >
     <ThemeSwitch />
     <i class="el-icon-menu" @click="$emit('handleShowMenu')"></i>
   </div>
@@ -28,6 +25,35 @@
 import { ImageIcon, PictureInPictureIcon, PlusIcon } from 'lucide-vue-next'
 import AppSearch from '../NavSearch.vue'
 import { OrangeIcon } from '../icon/orange-icon'
+import { saveImageToDB } from '@/utils/image-store'
+import useBaseStore from '@/store'
+import { twMerge } from 'tailwind-merge'
+const uploadRef = useTemplateRef('uploadRef')
+const hasBgImageHeaderClass = computed(() => {
+  if (baseStore.bgImageUrl) {
+    return 'bg-transparent dark:bg-transparent bg-black/10 dark:bg-white/10 border-0'
+  }
+})
+const baseStore = useBaseStore()
+function onChangeFile(e:Event) {
+  if (!e.target) {
+    return
+  }
+  const files = (e.target as HTMLInputElement).files
+  if (!files) return
+  const selectFile = files[0]
+  // 转换为 Base64 格式
+
+  const fileUrl = URL.createObjectURL(selectFile)
+  baseStore.bgImageUrl = fileUrl
+
+  saveImageToDB(selectFile)
+}
+
+function onUploadFile() {
+  uploadRef.value?.click()
+  // 处理文件上传
+}
 
 </script>
 
