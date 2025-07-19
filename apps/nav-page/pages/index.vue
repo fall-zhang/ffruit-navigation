@@ -1,12 +1,14 @@
 <template>
   <div class="w-full justify-center flex flex-col items-center">
+    <div class="h-[60vh] flex items-center justify-center flex-col">
+      <HourTime />
+      <CenterSearch class="mt-3" />
+    </div>
     <div class="max-w-[1536px] w-full px-6">
       <RankList />
       <NavGroup :groupList="groupList" />
     </div>
   </div>
-  <HourTime />
-  <CenterSearch class="mt-3" />
   <NuxtPage page-key="static"></NuxtPage>
 </template>
 

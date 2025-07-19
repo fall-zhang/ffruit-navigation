@@ -8,13 +8,24 @@
       <AppSearch />
     </div>
     <div class="grow"></div>
+    <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
+      <div tabindex="0" role="button" class="    m-1  mr-2 p-1 rounded cursor-pointer hover:bg-neutral-200/30">
+        <ImageIcon class="" height="26"  width="26"/>
+      </div>
+      <!-- <div >Hover</div> -->
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+      </ul>
+    </div>
+
     <ThemeSwitch />
     <i class="el-icon-menu" @click="$emit('handleShowMenu')"></i>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PlusIcon } from 'lucide-vue-next'
+import { ImageIcon, PictureInPictureIcon, PlusIcon } from 'lucide-vue-next'
 import AppSearch from '../NavSearch.vue'
 import { OrangeIcon } from '../icon/orange-icon'
 

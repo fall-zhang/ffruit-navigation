@@ -1,8 +1,7 @@
 <template>
   <div class="flex h-dvh w-full bg-(--background) text-(--foreground) transition-all">
-    <!-- <LeftNavMenus show :categories="category" :show-menu-type="showMenuType" @showMenus="toggleMenu2" /> -->
     <div class="grow flex flex-col">
-      <AppHeader @handleShowPopup="showPopup = true" @handleShowMenu="toggleMenu" />
+      <AppHeader class="shrink-0"  />
       <router-view />
       <div class="grow"></div>
       <PageFooter></PageFooter>
@@ -24,16 +23,18 @@ import { useDark } from '@vueuse/core'
 defineOptions({
   name: 'default-layout'
 })
-// const isDark = useDark()
-// const baseStore = useBaseStore()
-// baseStore.isDarkMode = isDark.value
+useDark({
+  attribute: 'data-theme',
+  valueDark: 'dark',
+  valueLight: 'light'
+})
 
-function toggleMenu () {
-  showMenuType.value = showMenuType.value === 'none' ? 'all' : 'none'
-}
-function toggleMenu2 () {
-  showMenuType.value = showMenuType.value === 'all' ? 'half' : 'all'
-}
+// function toggleMenu () {
+//   showMenuType.value = showMenuType.value === 'none' ? 'all' : 'none'
+// }
+// function toggleMenu2 () {
+//   showMenuType.value = showMenuType.value === 'all' ? 'half' : 'all'
+// }
 function handleResize () {
   if (isMobileSize()) {
     showMenuType.value = 'none'

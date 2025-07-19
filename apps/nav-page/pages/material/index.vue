@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import RankListCard from '@/components/home-page/rank-list-card.vue'
+import RankListCard from '@/components/nav-page/rank-list-card.vue'
 import type { LinkItem } from '@/types/global'
 
 
@@ -33,7 +33,9 @@ const data = ref<LinkItem[]>([
     desc: 'asdfa',
     creatorUrl: 'aasdf',
     creator: '',
-    tags: []
+    tags: [],
+    linkGroup: '',
+    linkSubGroup: ''
   }
 ])
 defineOptions({

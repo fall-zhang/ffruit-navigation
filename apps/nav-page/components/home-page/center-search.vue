@@ -31,14 +31,14 @@ const inputText = ref('4646464')
   // border: 2px solid transparent;
   outline: none;
   overflow: hidden;
-  background-color: #bdbdbd;
+  background-color: #eeeeee;
   transition: all 0.5s;
 }
 
 .search-input:hover,
 .search-input:focus {
   box-shadow: 0px 0px 0px 6px rgba(74, 150, 236, 0.2), 0px 0px 8px 14px rgba(74, 150, 236, 0.2);
-  background-color: rgb(230, 230, 230);
+  background-color: #e6e6e6;
 }
 
 </style>
