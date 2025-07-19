@@ -1,6 +1,5 @@
 import { message, Tabs } from 'antd'
 import React, { FormEvent, FormEventHandler, useState } from 'react'
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './index.module.less'
 import { login } from '@/apis/api'
@@ -35,8 +34,7 @@ const Login: React.FC = () => {
       // 登录
       const res: any = await login({ username: form.username as string, password: form.password as string })
       if (res?.data) {
-        const defaultloginSuccessMessage = '登录成功！'
-        message.success(defaultloginSuccessMessage)
+        message.success('登录成功！')
         setInitialState({
           currentUser: {
             name: form.username,
@@ -70,59 +68,6 @@ const Login: React.FC = () => {
         <LoginForm onSubmitForm={handleSubmit}/>
       </div>
     </div>
-    {/* <div className={styles.main}>
-        <ProForm
-          initialValues={{
-            autoLogin: true
-          }}
-          submitter={{
-            searchConfig: {
-              submitText: '登录'
-            },
-            render: (_, dom) => dom.pop(),
-            submitButtonProps: {
-              loading: submitting,
-              size: 'large',
-              style: {
-                width: '100%'
-              }
-            }
-          }}
-          onFinish={handleSubmit}
-        >
-          <>
-            <ProFormText
-              name="username"
-              fieldProps={{
-                size: 'large',
-                prefix: <UserOutlined className={styles.prefixIcon}/>
-              }}
-              placeholder={'输入用户名'}
-              rules={[
-                {
-                  required: true,
-                  message: '用户名是必填项！'
-                }
-              ]}
-            />
-            <ProFormText.Password
-              name="password"
-              fieldProps={{
-                size: 'large',
-                prefix: <LockOutlined className={styles.prefixIcon}/>
-              }}
-              placeholder={'输入密码'}
-              rules={[
-                {
-                  required: true,
-                  message: '密码是必填项！'
-                }
-              ]}
-            />
-          </>
-        </ProForm>
-      </div> */}
-    {/* <Footer/> */}
   </div>
   )
 }
