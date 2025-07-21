@@ -15,6 +15,9 @@ export default defineNuxtConfig({
       tailwindcss() as PluginOption
     ]
   },
+  build: {
+    transpile: ['form-data']
+  },
   app: {
     head: {
       title: '鲜果导航 - 有趣，新鲜的导航',
