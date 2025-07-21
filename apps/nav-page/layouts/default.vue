@@ -1,25 +1,26 @@
 <template>
   <div class="flex h-dvh w-full bg-(--background) text-(--foreground) transition-all">
-    <div class="grow flex flex-col">
-      <AppHeader class="shrink-0"  />
+    <div class="grow flex flex-col z-100">
+      <HeadSection class="shrink-0"  />
       <router-view />
       <div class="grow"></div>
       <PageFooter></PageFooter>
+      <AppFixedButton />
+      <LinkJumpNotice/>
     </div>
-    <AppFixedButton />
-    <LinkJumpNotice/>
+    <img :src="baseStore.bgImageUrl"  class="backface-hidden object-fit fixed h-screen w-screen left-0 right-0 top-0 bottom-0 object-cover" alt="">
   </div>
 </template>
 
 <script lang="ts" setup>
 import AppFixedButton from '../components/AppFixedButton.vue'
-import AppHeader from '@/components/common-section/head-section.vue'
+import HeadSection from '@/components/common-section/head-section.vue'
 import PageFooter from '@/components/common-section/page-footer.vue'
-import LeftNavMenus from '@/components/home-page/nav-menu.vue'
 import useBaseStore from '@/store'
 import { isMobileSize } from '@/utils/utils'
 import { useDark } from '@vueuse/core'
-
+import { loadImageFromDB } from '@/utils/image-store'
+const baseStore = useBaseStore()
 defineOptions({
   name: 'default-layout'
 })
@@ -27,6 +28,18 @@ useDark({
   attribute: 'data-theme',
   valueDark: 'dark',
   valueLight: 'light'
+})
+
+onMounted(() => {
+  async function initImage() {
+    try {
+      const imageData = await loadImageFromDB()
+      baseStore.bgImageUrl = URL.createObjectURL(imageData)
+    } catch(err) {
+      baseStore.bgImageUrl = ''
+    }
+  }
+  initImage()
 })
 
 // function toggleMenu () {

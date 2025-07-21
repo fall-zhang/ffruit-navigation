@@ -18,10 +18,13 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 :root{
-  --text-primary: #4700f1;
+  --text-primary: #f1b31c;
+  --bg-primary:#e27022;
 }
 .dark{
-  --text-primary: #7032ff;
+  --text-primary: #e27022;
+  --bg-primary:#f1b31c;
+
 }
 
 
