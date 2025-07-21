@@ -1,0 +1,5 @@
+/* 该文件帮助 tailwindcss 的 vscode 插件找到需要提示的文件路径 */
+/* 不需要引入该 CSS 文件 */
+@import "tailwindcss";
+@source "./packages/nav-admin";
+@source "./packages/nav-page";

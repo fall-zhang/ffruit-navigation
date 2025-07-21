@@ -3,7 +3,7 @@ import lintReact from 'eslint-plugin-react'
 import pluginVue from 'eslint-plugin-vue'
 import jslint from '@eslint/js'
 import lintReactHooks from 'eslint-plugin-react-hooks'
-import tailwind from 'eslint-plugin-tailwindcss'
+// import tailwind from 'eslint-plugin-tailwindcss'
 import tslint from 'typescript-eslint'
 import { defineConfig } from 'eslint/config'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
@@ -81,7 +81,7 @@ const tailwindConfig = {
     tailwindcss: {
       // These are the default values but feel free to customize
       callees: ['classnames', 'clsx', 'ctl', 'cn'],
-      // config: 'tailwind.config.js', // returned from `loadConfig()` utility if not provided
+      config: 'index.css', // returned from `loadConfig()` utility if not provided
       cssFiles: [
         '**/*.css',
         '!**/node_modules',
@@ -96,9 +96,6 @@ const tailwindConfig = {
       tags: [], // can be set to e.g. ['tw'] for use in tw`bg-blue`
       classRegex: '^class(Name)?$' // can be modified to support custom attributes. E.g. "^tw$" for `twin.macro`
     }
-  },
-  rules: {
-    'tailwindcss/no-custom-classname': 0
   }
 }
 export default defineConfig([
@@ -117,7 +114,7 @@ export default defineConfig([
   standard, // js 标准配置
 
   lintReact.configs.flat['jsx-runtime'],
-  ...tailwind.configs['flat/recommended'],
+  // ...tailwind.configs['flat/recommended'],
   tailwindConfig,
   ...pluginVue.configs['flat/essential'],
   ...tslint.configs.recommended,
