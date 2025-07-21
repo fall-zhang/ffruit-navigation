@@ -1,50 +1,51 @@
 <template>
-  <div class="m-5 flex justify-center mt-10">
-    <el-form class=" max-w-100" ref="ruleForm" label-width="100px" :model="form" :rules="rules" v-loading="formLoading">
-      <el-form-item label="网站链接" prop="href">
-        <el-input placeholder="http://www.baidu.com/" v-model="form.href" :disabled="form.id === 'update'"
-          @blur="getNavInfo" />
-        <span style="color: red">输入链接自动爬取信息</span>
-      </el-form-item>
+  <div class=" flex justify-center my-6 h-full ">
+    <div class="py-8 rounded-3xl bg-neutral-100/70 dark:bg-neutral-700/70 h-full xl:w-1/2 sm:w-3/4 lg:w-2/3 flex justify-center backdrop-blur-2xl px-4">
+      <el-form class="min-w-100 w-2/3" ref="ruleForm" label-width="100px" :model="form" :rules="rules" v-loading="formLoading">
+        <el-form-item label="网站链接" prop="href">
+          <el-input placeholder="http://www.baidu.com/" v-model="form.href" :disabled="form.id === 'update'"
+            @blur="getNavInfo" />
+          <!-- <span style="color: red">输入链接自动爬取信息</span> -->
+        </el-form-item>
 
-      <el-form-item label="网站标签" prop="tags">
-        <el-select v-model="form.tags" multiple :multiple-limit="5" filterable allow-create default-first-option
-          placeholder="输入网站标签，最多5个">
-          <el-option v-for="item in tagList" :key="item.value" :label="item.label" :value="item.value">
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="网站名称" prop="name">
-        <el-input placeholder="输入网站名称" v-model="form.name" />
-      </el-form-item>
+        <el-form-item label="网站标签" prop="tags">
+          <el-select v-model="form.tags" multiple :multiple-limit="5" filterable allow-create default-first-option
+            placeholder="输入网站标签，最多5个">
+            <el-option v-for="item in tagList" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="网站名称" prop="name">
+          <el-input placeholder="输入网站名称" v-model="form.name" />
+        </el-form-item>
 
-      <!-- <el-form-item label="网站logo" prop="logo">
-        <el-input placeholder="输入网站logo" v-model="form.logo" />
-        <img style="max-width: 30px;" :src="form.logo" />
-      </el-form-item> -->
-      <el-form-item label="网站描述" prop="desc">
-        <el-input placeholder="简要描述网站，尽量在 20 个字以内" v-model="form.desc" />
-      </el-form-item>
-      <el-form-item label="网站分类" prop="categoryId">
-        <el-cascader :options="webCategories" v-model="form.categoryId" placeholder="请选择" filterable>
-
-        </el-cascader>
-      </el-form-item>
-      <el-form-item label="推荐人名称" prop="authorName">
-        <el-input  v-model="form.authorName" />
-      </el-form-item>
-      <el-form-item label="推荐人网站" prop="authorUrl">
-        <el-input placeholder="填写你要推广的链接" v-model="form.authorUrl" />
-      </el-form-item>
-      <el-form-item label="网站详情" prop="detail">
-        <el-input type="textarea" placeholder="输入网站详情" v-model="form.detail" />
-      </el-form-item>
-      <div class="flex justify-center">
-        <el-button type="primary" :loading="submitLoading" @click="onAddNav()">
-          提交
-        </el-button>
-      </div>
-    </el-form>
+        <!-- <el-form-item label="网站logo" prop="logo">
+          <el-input placeholder="输入网站logo" v-model="form.logo" />
+          <img style="max-width: 30px;" :src="form.logo" />
+        </el-form-item> -->
+        <el-form-item label="网站描述" prop="desc">
+          <el-input placeholder="简要描述网站，尽量在 20 个字以内" v-model="form.desc" />
+        </el-form-item>
+        <el-form-item label="网站分类" prop="categoryId">
+          <el-cascader :options="webCategories" v-model="form.categoryId" placeholder="请选择" filterable>
+          </el-cascader>
+        </el-form-item>
+        <el-form-item label="推荐人名称" prop="authorName">
+          <el-input  v-model="form.authorName" />
+        </el-form-item>
+        <el-form-item label="推荐人网站" prop="authorUrl">
+          <el-input placeholder="填写你要推广的链接" v-model="form.authorUrl" />
+        </el-form-item>
+        <el-form-item label="网站详情" prop="detail">
+          <el-input type="textarea" placeholder="输入网站详情" v-model="form.detail" />
+        </el-form-item>
+        <div class="flex justify-center">
+          <el-button type="primary" :loading="submitLoading" @click="onAddNav()">
+            提交
+          </el-button>
+        </div>
+      </el-form>
+    </div>
     <LinkNotice />
   </div>
 
@@ -172,3 +173,9 @@ async function getNavInfo () {
 getTags()
 getCategories()
 </script>
+
+<style>
+.dark{
+  --el-text-color-regular:#fff;
+}
+</style>

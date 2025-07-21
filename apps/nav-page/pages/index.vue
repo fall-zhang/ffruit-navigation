@@ -1,6 +1,6 @@
 <template>
   <div class="w-full justify-center flex flex-col items-center">
-    <div class="h-[60vh] flex items-center justify-center flex-col">
+    <div class="h-[35vh] flex items-center justify-end flex-col">
       <HourTime />
       <CenterSearch class="mt-3" />
     </div>

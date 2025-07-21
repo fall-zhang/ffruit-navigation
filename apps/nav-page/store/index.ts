@@ -9,6 +9,7 @@ type MenuInfo = {
   id:string
 }
 type StateType = {
+  bgImageUrl:string,
   isDarkMode:boolean,
   /**
    * 开启后，点击链接会提示用户注意安全
@@ -26,6 +27,7 @@ type StateEvent = {
 // <'base-store', StateType, any, StateEvent>
 const useBaseStore = defineStore('base-store', {
   state: ():StateType => ({
+    bgImageUrl: '',
     isDarkMode: false,
     showJumpNotice: true,
     category: [],
