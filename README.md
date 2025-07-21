@@ -9,8 +9,8 @@
 一个 typescript 全栈项目，包括以下技术
 
 - 客户端：nuxt，Vue，element-plus，+ tailwindcss，实现 SSR
-- 控制台：React + tailwindcss
-- 应用后端：nestjs + postgresql
+- 控制台：React + VueRouter + tailwindcss + shadcn
+- 应用后端：nestjs + prisma + postgresql
 
 一些计算机相关知识点
 
@@ -36,6 +36,8 @@
   - 获取 tag 等信息
 
 ## 反馈和交流
+
+- 使用和算法题同样的底部评论功能
 
 ## 项目部署
 
