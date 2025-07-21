@@ -58,12 +58,12 @@ export class NavService {
 
   async findRank () {
     // const [view, star, news] = await Promise.all([
-      // this.navLinkModel.find().sort({ view: -1 }).limit(1),
-      // this.navLinkModel.find().sort({ star: -1 }).limit(1),
-      // this.navLinkModel.find().sort({ createTime: -1 }).limit(1)
-      // this.findMaxValueList('view'),
-      // this.findMaxValueList('star'),
-      // this.findMaxValueList('createTime')
+    // this.navLinkModel.find().sort({ view: -1 }).limit(1),
+    // this.navLinkModel.find().sort({ star: -1 }).limit(1),
+    // this.navLinkModel.find().sort({ createTime: -1 }).limit(1)
+    // this.findMaxValueList('view'),
+    // this.findMaxValueList('star'),
+    // this.findMaxValueList('createTime')
     // ])
     // return {
     //   view,

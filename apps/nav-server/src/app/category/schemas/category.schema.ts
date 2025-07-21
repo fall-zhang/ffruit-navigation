@@ -5,19 +5,19 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 @Schema()
 export class Category {
   @Prop()
-    name: string
+  name: string
 
   @Prop()
-    categoryId: string
+  categoryId: string
 
   @Prop()
-    createAt: number
+  createAt: number
 
   @Prop({
     type: String,
     default: ''
   })
-    icon: string
+  icon: string
 
   @Prop([{
     name: String,
@@ -25,13 +25,13 @@ export class Category {
     createAt: Number,
     showInMenu: Boolean
   }])
-    children: object
+  children: object
 
   @Prop({
     type: Boolean,
     default: true
   })
-    showInMenu: boolean
+  showInMenu: boolean
 }
 export const CategorySchema = SchemaFactory.createForClass(Category)
 

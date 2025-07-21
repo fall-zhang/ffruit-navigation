@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
+import { Controller, Get } from '@nestjs/common'
 import { HomepageInfoService } from './homepage-info.service'
 
 @Controller('homepage-info')

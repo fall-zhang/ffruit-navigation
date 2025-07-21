@@ -5,7 +5,6 @@ import * as mongoose from 'mongoose'
 import { TagDocument } from '@/app/tag/schemas/tag.schema'
 import { HydratedDocument } from 'mongoose'
 
-export type NavigateDocument = HydratedDocument<NavigateLink>
 @Schema()
 export class NavigateLink {
   @Prop()
@@ -66,6 +65,8 @@ export class NavigateLink {
   })
   accessState: number
 }
+
+export type NavigateDocument = HydratedDocument<NavigateLink>
 
 export const NavSchema = SchemaFactory.createForClass(NavigateLink)
 // return mongoose.model('Nav', NavSchema)
