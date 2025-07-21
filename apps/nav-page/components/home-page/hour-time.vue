@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="select-none">
     <span class="flex flex-col items-center gap-1" >
       <div class=" text-justify real-time text-6xl">
         {{ formattedTime }}
