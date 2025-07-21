@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-80 bg-neutral-200 dark:bg-neutral-800 rounded-md border border-neutral-400 dark:border-neutral-700 my-3 shadow hover:shadow-lg transition duration-400" shadow="never">
+  <div class="min-h-80 bg-neutral-200/70 dark:bg-neutral-800/70 rounded-md border border-neutral-400 dark:border-neutral-700 my-3 shadow hover:shadow-lg transition backdrop-blur-xl duration-400" shadow="never">
     <div class="py-2 px-4 border-b border-neutral-400 dark:border-b-neutral-600">
       <span>{{title}}</span>
     </div>
@@ -21,6 +21,7 @@ import type { LinkItem } from '@/types/global'
 import dayjs from 'dayjs'
 import { EyeIcon, StarIcon } from 'lucide-vue-next'
 
+const withImageCardClass = ref('')
 
 const props = withDefaults(defineProps<{
   title:string
@@ -30,18 +31,17 @@ const props = withDefaults(defineProps<{
   type: 'createTime'
 })
 
-defineOptions({
-  name: 'NavRanking'
-})
-const subText = () => {
 
-}
 function formatAttr(value:string | number) {
   if (props.type === 'createTime') {
     return dayjs(1676243211248).format('YYYY-MM-DD')
   }
   return value
 }
+
+defineOptions({
+  name: 'NavRanking'
+})
 </script>
 
 <style lang="scss" scoped>

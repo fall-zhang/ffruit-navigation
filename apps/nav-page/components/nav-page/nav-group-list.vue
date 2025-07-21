@@ -2,7 +2,7 @@
 
 <template>
   <div class="grid w-full lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-5">
-    <div class="info-card h-24 flex items-center dark:text-neutral-200 text-neutral-900 mb-5 rounded-md p-2 border border-neutral-300 overflow-hidden cursor-pointer text-xs hover:shadow-sm dark:shadow-xl dark:hover:shadow-neutral-300 bg-neutral-200 dark:bg-neutral-800 dark:border-neutral-700" v-for="navItem in linkList" :key="navItem.id" @click="onClickNavLink(navItem)" >
+    <div class="info-card h-24 flex items-center dark:text-neutral-200 text-neutral-900 mb-5 rounded-md p-2 border border-neutral-300 overflow-hidden cursor-pointer text-xs hover:shadow-sm dark:shadow-xl dark:hover:shadow-neutral-300 bg-neutral-200/70 dark:bg-neutral-800/70 dark:border-neutral-700 backdrop-blur-xl"  v-for="navItem in linkList" :key="navItem.id" @click="onClickNavLink(navItem)" >
       <div class="flex px-2.5 grow" >
         <img class="rounded-full w-10 h-10" :src="navItem.logo" fit="cover" />
         <div class="ml-2">

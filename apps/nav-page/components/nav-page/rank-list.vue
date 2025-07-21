@@ -1,9 +1,9 @@
 <!-- 网站排名卡片 -->
 
 <template>
-  <div class="nav-ranking-list  grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-4 w-full align-middle">
+  <div class="nav-ranking-list  grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-4 w-full align-middle">
     <RankListCard  title="知乎" :navList="newsList" />
-    <RankListCard  title="知乎" :navList="newsList" />
+    <RankListCard class="hidden sm:block" title="知乎" :navList="newsList" />
     <RankListCard class="hidden lg:block" title="知乎" :navList="newsList" />
     <RankListCard class="hidden 2xl:block" title="知乎" :navList="newsList" />
   </div>
