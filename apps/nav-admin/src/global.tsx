@@ -72,11 +72,15 @@ if (pwa) {
       sws.forEach((sw) => {
         sw.unregister()
       })
+    }).catch(err => {
+      console.warn(err)
     })
   }
 
   serviceWorker.getRegistration().then((sw) => {
     if (sw) sw.unregister()
+  }).catch(err => {
+    console.warn(err)
   }) // remove all caches
 
   if (window.caches) {
@@ -84,6 +88,8 @@ if (pwa) {
       keys.forEach((key) => {
         caches.delete(key)
       })
+    }).catch(err => {
+      console.warn(err)
     })
   }
 }
