@@ -1,21 +1,16 @@
 <template>
-  <div class="app-search">
-    <el-autocomplete v-model="searchText" :fetch-suggestions="queryData"
-      :placeholder="searchGather[searchType]['placeholder']" @select="handleSelect" >
-      <template #prefix>
-        <SearchIcon :size="16" />
-      </template>
-      <template #prepend>
-        <el-select v-model="searchType" class="search-type-box">
-          <el-option label="站内" value="station"></el-option>
-          <el-option label="百度" value="baidu"></el-option>
-          <el-option label="谷歌" value="google"></el-option>
-          <el-option label="360" value="360"></el-option>
-          <el-option label="必应" value="bing"></el-option>
-          <el-option label="搜狗" value="sogou"></el-option>
-        </el-select>
-      </template>
-    </el-autocomplete>
+  <div class="app-search flex  h-8 overflow-hidden rounded-lg">
+    <!-- From Uiverse.io by emmanuelh-dev -->
+    <div class="flex w-2 items-center justify-center  dark:bg-neutral-600 dark:text-white bg-white text-neutral-900">
+      <!-- <SearchIcon :size="16" /> -->
+    </div>
+    <input type="text" class="w-full h-full max-w-[160px] bg-white dark:bg-neutral-600 dark:text-white pl-2 text-neutral-900 text-base  outline-0" placeholder="站内搜索" >
+    <!-- <input type="button" value="Search" class="bg-blue-500 px-2 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-blue-800 transition-colors"> -->
+    <div class="flex w-10 items-center justify-center  bg-white dark:bg-neutral-600 dark:text-white text-neutral-900" @click="onSearchNav" @keydown=" onSearchNav">
+      <SearchIcon :size="16" />
+    </div >
+    <!-- From Uiverse.io by Praashoo7 -->
+    <!-- <input type="text" autocomplete="off" name="text" class="inner-input" placeholder="Username"> -->
   </div>
 </template>
 
@@ -30,7 +25,9 @@ type GatherItem = {
   placeholder: string
   root?: string
 }
+function onSearchNav() {
 
+}
 const searchGather: Record<string, GatherItem> = {
   station: {
     name: '站内',
@@ -110,43 +107,4 @@ function handleSelect (item: Record<string, any>) {
 </script>
 
 <style lang="scss" scoped>
-.app-search {
-  display: flex;
-  justify-content: center;
-
-  .el-select {
-    width: 300px;
-  }
-
-  .el-input-group__append,
-  .el-input-group__prepend {
-    border: 0;
-  }
-
-  .el-input__inner {
-    border: 0;
-    box-shadow: none;
-  }
-
-  .search-type-box {
-    width: 80px;
-  }
-
-  .el-select .el-input.is-focus .el-input__inner {
-    border-color: #dfe1e5;
-    box-shadow: 0 0 20px rgba(#000, .1);
-  }
-}
-
-@media screen and (max-width: 568px) {
-  .app-search {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 569px) {
-  .app-search {
-    display: block;
-  }
-}
 </style>

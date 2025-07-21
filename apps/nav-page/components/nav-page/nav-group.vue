@@ -1,12 +1,8 @@
 <template>
   <div class="nav-group ">
     <div class="flex h-8">
-      <div class="flex bg-neutral-300 dark:bg-neutral-800 rounded-full">
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '搜索资源' && 'bg-[#4700f1] text-white'">搜索资源</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '网盘搜索' && 'bg-[#4700f1] text-white'">网盘搜索</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '影视搜索' && 'bg-[#4700f1] text-white'">影视搜索</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '音乐搜索' && 'bg-[#4700f1] text-white'">音乐搜索</div>
-        <div class="px-4 flex items-center rounded-full cursor-pointer" :class="activeIndex === '电子书搜索' && 'bg-[#4700f1] text-white'">电子书搜索</div>
+      <div class="flex bg-neutral-200/80 backdrop-blur-lg dark:bg-neutral-800 rounded-full">
+        <div v-for="group in groupList" class="px-4 flex items-center rounded-full cursor-pointer" :class="activeGroupId === group.id && 'bg-[#4700f1] text-white'" @click="onSelectSubGroup(group)"  :key="group.id">{{group.name}}</div>
       </div>
     </div>
     <NavGroupList class="mt-4" :link-list="currentGroup" />
@@ -17,7 +13,9 @@
 import NavGroupList from './nav-group-list.vue'
 import type { LinkItem } from '@/types/global'
 
-const activeIndex = ref('搜索资源')
+const activeGroupId = ref('')
+const activeList = ref<GroupList>()
+
 type GroupList = {
   id:string
   name:string
@@ -27,12 +25,22 @@ type GroupList = {
 const props = defineProps<{
   groupList: Array<GroupList>
 }>()
+
+watch(() => props.groupList, () => {
+  activeGroupId.value = props.groupList[0].id
+})
+
 const currentGroup = computed(() => {
   if (props.groupList.length > 0) {
     return props.groupList[0].navList
   }
   return []
 })
+
+function onSelectSubGroup(group:GroupList) {
+  activeList.value = group
+  activeGroupId.value = group.id
+}
 
 defineOptions({
   name: 'AppNavList'

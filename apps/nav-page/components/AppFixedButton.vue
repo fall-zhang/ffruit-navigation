@@ -48,7 +48,7 @@ function onGoTop() {
 .customer-service-btn {
   width: 48px;
   height: 48px;
-  background: #4700f1;
+  background: var(--bg-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -57,6 +57,6 @@ function onGoTop() {
   cursor: pointer;
   right: 40px;
   bottom: 70px;
-  box-shadow: 0 0 20px rgba(#4700f1, .4);
+  box-shadow: 0 0 20px rgba(#070707, .4);
 }
 </style>

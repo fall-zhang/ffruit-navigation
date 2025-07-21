@@ -1,11 +1,11 @@
 <template>
-  <ElDialog v-model="dialogVisible"  modal title="跳转提示" class="fixed">
-    <div class=" p-0">
-      <!-- <div class="flex justify-between border-b border-b-neutral-600 px-4 py-3">
-        <h3 class="font-bold"></h3>
-        <XIcon  class="cursor-pointer" @click="onCloseDialog"/>
-      </div> -->
-      <div class="p-0 flex flex-col justify-center items-center">
+  <dialog  ref="noticeModal" class="modal ">
+    <div class="modal-box bg-neutral-100">
+      <h3 class="text-lg font-bold flex justify-between">
+        跳转提示
+      </h3>
+      <div class=" flex flex-col justify-center items-center">
+
         <p class="pt-1.5 text-base">即将离开本站，访问第三方网站</p>
         <a class="pt-1.5 link text-[#9e77f8]" :href="curURL" >
           <p>{{ curURL }}</p>
@@ -20,33 +20,33 @@
       </div>
       <div class="footer pb-4 flex justify-center">
         <form method="dialog">
-          <el-button class="bg-blue-600 px-5 py-1.5 mt-3 rounded" @click="onContinue">继续访问</el-button>
+          <button class="btn rounded-md px-5 py-1.5 mt-3 bg-white" @click="onContinue">继续访问</button>
         </form>
       </div>
     </div>
-  </ElDialog>
+  </dialog>
 
 </template>
 
 <script lang="ts" setup>
 import { Target, XIcon } from 'lucide-vue-next'
-// const modalRef = useTemplateRef('noticeModal')
+const modalRef = useTemplateRef('noticeModal')
 const dialogVisible = ref(false)
 const curURL = ref('')
 function showModal (website:string) {
   curURL.value = website
   dialogVisible.value = true
-  // modalRef.value?.showModal()
+  modalRef.value?.showModal()
 }
 function onContinue() {
   window.open(curURL.value, '_blank')
   dialogVisible.value = false
-  // modalRef.value?.close()
+  modalRef.value?.close()
 }
 
 function onCloseDialog() {
   dialogVisible.value = false
-  // modalRef.value?.close()
+  modalRef.value?.close()
 }
 defineExpose({
   showModal

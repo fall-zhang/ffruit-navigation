@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-80 bg-neutral-200/70 dark:bg-neutral-800/70 rounded-md border border-neutral-400 dark:border-neutral-700 my-3 shadow hover:shadow-lg transition backdrop-blur-xl duration-400" shadow="never">
-    <div class="py-2 px-4 border-b border-neutral-400 dark:border-b-neutral-600">
+  <div class="min-h-80 bg-white/40 dark:bg-neutral-800/70 rounded-md border border-neutral-400 dark:border-neutral-700 my-3 shadow hover:shadow-lg transition backdrop-blur-xl duration-400" shadow="never">
+    <div class="py-2 px-4 border-b bg-white/30 dark:bg-neutral-800/50 rounded-t-md border-neutral-400 dark:border-b-neutral-600">
       <span>{{title}}</span>
     </div>
     <div class="text-sm item py-2 px-4">
