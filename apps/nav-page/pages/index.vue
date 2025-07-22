@@ -23,7 +23,14 @@ import NavGroup from '@/components/nav-page/nav-group.vue'
 defineOptions({
   name: 'home-page'
 })
+axios.get('/api').then(res => {
+  console.log(res)
+}).catch(err => {
+  console.log(err)
+})
+onMounted(() => {
 
+})
 // state
 const loading = ref(false)
 const data = ref<LinkItem[]>([

@@ -11,7 +11,7 @@
         <SearchIcon class="" color="#fff" @click="onSearch" />
       </div>
     </div>
-    <ul class="absolute top-5 -left-10 -right-10  h-22 mt-8 flex items-center gap-4 opacity-0 bg-neutral-500/40 dark:bg-neutral-800/60 backdrop-blur-xl rounded-box z-1  py-2 px-5  transition justify-between shadow-2xl" :class="showSelectEngin ? 'opacity-100':''">
+    <ul class="absolute top-5 -left-16 -right-16  h-22 mt-8 flex items-center gap-4 opacity-0 bg-neutral-500/40 dark:bg-neutral-800/60 backdrop-blur-xl rounded-box z-1  py-2 px-5  transition justify-between shadow-2xl" :class="showSelectEngin ? 'opacity-100':''">
       <li class="flex cursor-pointer justify-between flex-col items-center h-15 w-12 group" v-for="item in searchEnginList" :key="item.name" @click="onSelectEngin(item)">
         <component class="size-8" :is="item.icon" />
         <span class="text-xs group-hover:hidden bg-neutral-400  dark:bg-neutral-700 w-full text-center rounded py-0.5" >{{item.name}}</span>
