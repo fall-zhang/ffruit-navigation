@@ -32,9 +32,7 @@ const request = axios.create({
 request.interceptors.request.use(res => {
   const token = getSessionData(SESSION_TOKEN_KEY)
   // eslint-disable-next-line no-param-reassign
-  res.headers = {
-    Authorization: token
-  }
+  res.headers.Authorization = token
   if (res.data.msg) {
     message.success(res.data.msg)
   }
