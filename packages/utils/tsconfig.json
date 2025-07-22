@@ -1,0 +1,24 @@
+{
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "ES2020",
+    "strict": true,
+    "module": "ES2020",
+    "noEmit": true,
+    "paths": {},
+  },
+  "vueCompilerOptions": {
+    "target": 3.5
+  },
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {
+      // compilerOptions specified here will override those declared below,
+      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+      // different options with a single tsconfig.json.
+    }
+  }
+}
