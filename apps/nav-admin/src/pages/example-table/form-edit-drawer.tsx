@@ -19,8 +19,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { tableEditSchema } from './data-schema'
-import type { TableItemType, TableCreateType } from './data-schema'
+import { tableDataSchema, type TableItemType } from './data-schema'
 import { useEffect, useId, useRef, useState } from 'react'
 import { FormDateTimePicker } from '@/components/wrapped/Form/FormItemDateTimeISO'
 import { Controller, useForm } from 'react-hook-form'
@@ -32,7 +31,7 @@ type TableDrawer = {
   visible:boolean
   itemInfo:TableItemType
   onCancel():void
-  onSubmit(form:TableCreateType):void
+  onSubmit(form:TableItemType):void
 }
 
 export function FormEditDrawer ({ visible, itemInfo, onCancel, onSubmit }:TableDrawer) {
@@ -41,8 +40,8 @@ export function FormEditDrawer ({ visible, itemInfo, onCancel, onSubmit }:TableD
   const statusId = useId()
   const [isFileUpload, setIsFileUpload] = useState(false)
   const [fileName, setFileName] = useState('')
-  const form = useForm<TableCreateType>({
-    resolver: zodResolver(tableEditSchema),
+  const form = useForm<TableItemType>({
+    resolver: zodResolver(tableDataSchema),
     defaultValues: {
       id: null,
       status: '',
@@ -56,9 +55,9 @@ export function FormEditDrawer ({ visible, itemInfo, onCancel, onSubmit }:TableD
     Object.keys(itemInfo).forEach((key) => {
       const itemValue = itemInfo[key as keyof TableItemType]
 
-      let itemKey:keyof TableCreateType | undefined
+      let itemKey:keyof TableItemType | undefined
       if (key in form.getValues()) {
-        itemKey = key as keyof TableCreateType
+        itemKey = key as keyof TableItemType
       }
       if (!itemKey) {
         return
@@ -70,10 +69,9 @@ export function FormEditDrawer ({ visible, itemInfo, onCancel, onSubmit }:TableD
       console.log('itemKey, itemValue', itemKey, itemValue)
     })
     setIsFileUpload(false)
-    form.setValue('file', [])
   }, [form, itemInfo])
 
-  function onSubmitForm (form:TableCreateType) {
+  function onSubmitForm (form:TableItemType) {
     onSubmit(form)
   }
   function onChangeFile (files:FileList) {
@@ -81,7 +79,6 @@ export function FormEditDrawer ({ visible, itemInfo, onCancel, onSubmit }:TableD
     if (appFile) {
       setIsFileUpload(true)
       setFileName(appFile.name)
-      form.setValue('file', appFile)
     }
   }
   const fileUpload = itemInfo.filePath || isFileUpload

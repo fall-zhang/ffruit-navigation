@@ -10,7 +10,9 @@ import {
 import type {
   ColumnDef,
   ColumnFiltersState,
+  PaginationState,
   Row,
+  RowModel,
   VisibilityState
 } from '@tanstack/react-table'
 import {
@@ -52,19 +54,27 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import type { TableCreateType, TableItemType } from './data-schema'
+import type { TableItemType } from './data-schema'
 import { useEffect, useMemo, useState } from 'react'
 import { FormEditDrawer } from './form-edit-drawer'
 import { XCircleIcon } from 'lucide-react'
-import { TableHeaderOpt } from './table-header'
-import * as api from '../api/api'
-import { toast } from 'sonner'
+import { TableHeaderOpt } from './table-options'
+import * as api from './api/api'
+const initData:TableItemType[] = [{
+  id: '1321',
+  versionName: 'asgasdf',
+  status: '',
+  publishDateTime: '',
+  filePath: '',
+  lastMonthDownload: 0,
+  totalDownload: 0
+}]
 
 function getTableColumn ({
   onClickRowCommand
 }:{
   onClickRowCommand(command:string, rowInfo:TableItemType):void
-}) {
+}):ColumnDef<TableItemType>[] {
   const tableColumns: ColumnDef<TableItemType>[] = [
     {
       id: 'select',
@@ -178,7 +188,6 @@ function getTableColumn ({
       }
     }
   ]
-
   return tableColumns
 }
 
@@ -199,15 +208,8 @@ function TableRowCell ({ row }: { row: Row<TableItemType> }) {
   )
 }
 
-type TableProps = {
-  data: TableItemType[]
-  reFetchTableData():void
-}
-
-export function RichContentTable ({
-  data,
-  reFetchTableData
-}:TableProps) {
+export default function RichContentTable () {
+  const [tableData, setTableData] = useState(initData)
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false)
   const [drawerEditItem, setDrawerEditItem] = useState<TableItemType>({
     id: '',
@@ -223,34 +225,45 @@ export function RichContentTable ({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
   )
-  const [pagination, setPagination] = useState({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10
   })
   useEffect(() => {
     // 获取 release 信息
-  }, [pagination])
+    api.getReleaseTable({ }).then(res => {
 
-  function onSubmit (values: TableCreateType) {
+    }).catch(err => {
+      setTableData([
+        {
+          id: '999999999',
+          versionName: '1.2.5',
+          status: '',
+          publishDateTime: '',
+          filePath: '',
+          lastMonthDownload: 669,
+          totalDownload: 775
+        }
+      ])
+    })
+  }, [])
+
+  function onSubmit (values: TableItemType) {
     if (values.id) {
       api.patchReleaseTable({
         ...values
       }).then(res => {
         setDrawerVisible(false)
-        reFetchTableData()
+        // reFetchTableData()
       }).catch(err => {
         console.warn(err)
       })
     } else {
-      if (!values.file) {
-        toast('没有上传文件，请上传文件')
-        return
-      }
       api.postReleaseTable({
         ...values
       }).then(res => {
         setDrawerVisible(false)
-        reFetchTableData()
+        // reFetchTableData()
       }).catch(err => {
         console.warn(err)
       })
@@ -275,7 +288,7 @@ export function RichContentTable ({
           return
         }
         api.removeReleaseVersion(rowInfo.id || '').then((res) => {
-          reFetchTableData()
+          // reFetchTableData()
         }).catch(err => {
           console.warn(err)
         })
@@ -284,9 +297,9 @@ export function RichContentTable ({
     return getTableColumn({
       onClickRowCommand
     })
-  }, [reFetchTableData])
+  }, [])
   const tableInfo = useReactTable({
-    data,
+    data: tableData,
     columns: tableColumns,
     enableRowSelection: true,
     state: {
@@ -303,7 +316,6 @@ export function RichContentTable ({
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues()
@@ -357,7 +369,7 @@ export function RichContentTable ({
                   colSpan={tableColumns.length}
                   className="h-24 text-center"
                 >
-                  没有结果
+                  当前数据为空
                 </TableCell>
               </TableRow>
               )}

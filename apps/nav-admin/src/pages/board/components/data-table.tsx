@@ -103,7 +103,7 @@ import {
   TabsList,
   TabsTrigger
 } from '@/components/ui/tabs'
-
+import initData from './data.json'
 export const schema = z.object({
   id: z.number(),
   header: z.string(),
@@ -336,12 +336,8 @@ function DraggableRow ({ row }: { row: Row<z.infer<typeof schema>> }) {
   )
 }
 
-export function DataTable ({
-  data: initialData
-}: {
-  data: z.infer<typeof schema>[]
-}) {
-  const [data, setData] = React.useState(() => initialData)
+export function DataTable () {
+  const [data, setData] = React.useState(() => initData)
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})

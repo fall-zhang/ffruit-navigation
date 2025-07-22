@@ -16,7 +16,7 @@ export const TableHeaderOpt:FC<{
   tableInfo:Table<TableItemType>
   onAddNewItem():void
 }> = ({ tableInfo, onAddNewItem }) => {
-  return <div className="flex items-center gap-2">
+  return <div className="flex items-center gap-2 my-4">
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm">
