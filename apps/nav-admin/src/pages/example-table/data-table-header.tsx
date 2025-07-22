@@ -12,6 +12,16 @@ import { PlusIcon } from 'lucide-react'
 import type { Table } from '@tanstack/react-table'
 import type { TableItemType } from './data-schema'
 
+const headMap:Record<string, string> = {
+  versionName: '版本名称',
+  publishDateTime: '发布时间',
+  status: '版本状态',
+  lastMonthDownload: '上月下载量',
+  totalDownload: '总计下载量',
+  id: '',
+  filePath: ''
+}
+
 export const TableHeaderOpt:FC<{
   tableInfo:Table<TableItemType>
   onAddNewItem():void
@@ -40,7 +50,7 @@ export const TableHeaderOpt:FC<{
                 column.toggleVisibility(value)
               }
             >
-              {column.id}
+              {headMap[column.id]}
             </DropdownMenuCheckboxItem>)
           })}
       </DropdownMenuContent>
