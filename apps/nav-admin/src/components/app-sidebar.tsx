@@ -31,123 +31,95 @@ import {
   SidebarMenuItem
 } from '@/components/ui/sidebar'
 
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg'
-  },
-  navMain: [
-    {
-      title: '数据面板',
-      url: '#',
-      icon: IconDashboard
-    },
-    {
-      title: '导航管理',
-      url: '#navigator',
-      icon: IconListDetails
-    },
-    {
-      title: '标签管理',
-      url: '#tag',
-      icon: IconChartBar
-    },
-    {
-      title: 'Projects',
-      url: '#',
-      icon: IconFolder
-    },
-    {
-      title: 'Team',
-      url: '#',
-      icon: IconUsers
-    }
-  ],
-  navClouds: [
-    {
-      title: 'Capture',
-      icon: IconCamera,
-      isActive: true,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#'
-        },
-        {
-          title: 'Archived',
-          url: '#'
-        }
-      ]
-    },
-    {
-      title: 'Proposal',
-      icon: IconFileDescription,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#'
-        },
-        {
-          title: 'Archived',
-          url: '#'
-        }
-      ]
-    },
-    {
-      title: 'Prompts',
-      icon: IconFileAi,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#'
-        },
-        {
-          title: 'Archived',
-          url: '#'
-        }
-      ]
-    }
-  ],
-  navSecondary: [
-    {
-      title: 'Settings',
-      url: '#',
-      icon: IconSettings
-    },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: IconHelp
-    },
-    {
-      title: 'Search',
-      url: '#',
-      icon: IconSearch
-    }
-  ],
-  documents: [
-    {
-      name: 'Data Library',
-      url: '#',
-      icon: IconDatabase
-    },
-    {
-      name: 'Reports',
-      url: '#',
-      icon: IconReport
-    },
-    {
-      name: 'Word Assistant',
-      url: '#',
-      icon: IconFileWord
-    }
-  ]
+const userData = {
+  name: 'Admin',
+  email: 'zhangbofei@163.com',
+  avatar: '/avatars/shadcn.jpg'
 }
+// navClouds: [
+//   {
+//     title: 'Capture',
+//     icon: IconCamera,
+//     isActive: true,
+//     url: '#',
+//     items: [
+//       {
+//         title: 'Active Proposals',
+//         url: '#'
+//       },
+//       {
+//         title: 'Archived',
+//         url: '#'
+//       }
+//     ]
+//   },
+//   {
+//     title: 'Proposal',
+//     icon: IconFileDescription,
+//     url: '#',
+//     items: [
+//       {
+//         title: 'Active Proposals',
+//         url: '#'
+//       },
+//       {
+//         title: 'Archived',
+//         url: '#'
+//       }
+//     ]
+//   },
+//   {
+//     title: 'Prompts',
+//     icon: IconFileAi,
+//     url: '#',
+//     items: [
+//       {
+//         title: 'Active Proposals',
+//         url: '#'
+//       },
+//       {
+//         title: 'Archived',
+//         url: '#'
+//       }
+//     ]
+//   }
+// ],
 
+const mainNavList = [
+  {
+    title: '导航管理',
+    url: 'navigator',
+    icon: IconListDetails
+  },
+  {
+    title: '分组管理',
+    url: 'group',
+    icon: IconChartBar
+  },
+  {
+    title: '标签管理',
+    url: 'tags',
+    icon: IconDashboard
+  }
+]
+
+const helpNavList = [
+  {
+    title: 'Settings',
+    url: '#',
+    icon: IconSettings
+  },
+  {
+    title: 'Get Help',
+    url: '#',
+    icon: IconHelp
+  },
+  {
+    title: 'Search',
+    url: '#',
+    icon: IconSearch
+  }
+]
 export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -160,19 +132,19 @@ export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) 
             >
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">Nav Admin</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={mainNavList} />
+        {/* <NavDocuments items={data.documents} /> */}
+        <NavSecondary items={helpNavList} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData} />
       </SidebarFooter>
     </Sidebar>
   )

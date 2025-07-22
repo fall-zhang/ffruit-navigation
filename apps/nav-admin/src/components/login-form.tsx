@@ -64,7 +64,6 @@ export function LoginForm ({
                   Login with Google
                 </Button> */}
             </div>
-            <input type="submit" />
           </div>
           <div className="mt-4 text-center text-sm">
             没有账户？{' '}
