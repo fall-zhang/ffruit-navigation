@@ -88,34 +88,42 @@ const userData = {
 const mainNavList = [
   {
     title: '导航管理',
-    url: 'navigator',
+    url: '/navigator',
     icon: IconListDetails
   },
   {
     title: '分组管理',
-    url: 'group',
+    url: '/group',
     icon: IconChartBar
   },
   {
     title: '标签管理',
-    url: 'tags',
+    url: '/tags',
+    icon: IconDashboard
+  },
+  {
+    title: '示例表格',
+    url: '/example-table',
     icon: IconDashboard
   }
 ]
 
 const helpNavList = [
   {
-    title: 'Settings',
+    // title: 'Settings',
+    title: '设置',
     url: '#',
     icon: IconSettings
   },
   {
-    title: 'Get Help',
+    // title: 'Get Help',
+    title: '帮助',
     url: '#',
     icon: IconHelp
   },
   {
-    title: 'Search',
+    // title: 'Search',
+    title: '查找',
     url: '#',
     icon: IconSearch
   }

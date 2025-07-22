@@ -81,24 +81,28 @@ export function NavUser ({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
+            {/*  <DropdownMenuGroup>
               <DropdownMenuItem>
                 <IconUserCircle />
                 Account
+                账户
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <IconCreditCard />
                 Billing
+                钱包
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <IconNotification />
                 Notifications
+                通知
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator /> */}
             <DropdownMenuItem>
               <IconLogout />
-              Log out
+              {/* Log out */}
+              退出
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

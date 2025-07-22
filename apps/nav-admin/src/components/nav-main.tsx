@@ -9,9 +9,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from '@/components/ui/sidebar'
+import { cn } from '@/lib/utils'
 import { HomeIcon, KanbanIcon } from 'lucide-react'
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 type MenuItem = {
   title: string
@@ -27,6 +28,7 @@ export function NavMain ({
   function onClickMenuItem(menu:MenuItem) {
     navigate(menu.url)
   }
+  const location = useLocation()
   return (
     <SidebarGroup>
       <SidebarGroupLabel>导航 / 数据</SidebarGroupLabel>
@@ -34,11 +36,11 @@ export function NavMain ({
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2" onClick={() => onClickMenuItem({
             title: '首页看板',
-            url: 'board'
+            url: '/board'
           })}>
             <SidebarMenuButton
               tooltip="Quick Create"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+              className={cn('min-w-8 duration-200 ease-linear', location.pathname === '/board' && 'active:bg-primary/90 bg-primary hover:bg-primary/90 active:text-primary-foreground text-primary-foreground  hover:text-primary-foreground')}
             >
               <HomeIcon />
               <span>首页看板</span>
@@ -56,7 +58,7 @@ export function NavMain ({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title} onClick={() => onClickMenuItem(item)}>
-              <SidebarMenuButton tooltip={item.title}>
+              <SidebarMenuButton className={cn('min-w-8 duration-200 ease-linear', location.pathname === item.url && 'active:bg-primary/90 bg-primary hover:bg-primary/90 active:text-primary-foreground text-primary-foreground  hover:text-primary-foreground')} tooltip={item.title}>
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </SidebarMenuButton>
