@@ -7,6 +7,7 @@ import { setPersistenceData } from '@/utils/persistence'
 import { CURRENT_USER, SESSION_TOKEN_KEY } from '@/const'
 import { LoginForm } from '@/components/login-form'
 import { FieldValues } from 'react-hook-form'
+import { cn } from '@/lib/utils'
 
 
 const Login: React.FC = () => {
@@ -25,7 +26,6 @@ const Login: React.FC = () => {
       navigate(redirect || '/')
     }, 10)
   }
-
 
   const handleSubmit = async (form:FieldValues) => {
     setSubmitting(true)
@@ -56,20 +56,19 @@ const Login: React.FC = () => {
     setSubmitting(false)
   }
 
-  return (<div className={styles.container}>
-    <div className="flex flex-col min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className='flex flex-col items-center'>
-        <Link to="/">
-          <span className="text-neutral-200 font-bold text-3xl text-center">鲜果导航</span>
-        </Link>
-        <div className='mt-3 mb-10 text-neutral-200 text-base'>{'鲜果导航，专注独特资源导航'}</div>
-      </div>
-      <div className="w-full max-w-sm pb-16">
-        <LoginForm onSubmitForm={handleSubmit}/>
+  return (<div className={cn('flex flex-col min-h-svh w-full items-center justify-center p-6 md:p-10', styles.container)}>
+    <div className='flex flex-col items-center'>
+      <Link to="/">
+        <span className="text-neutral-200 font-bold text-3xl text-center">鲜果导航</span>
+      </Link>
+      <div className='mt-3 mb-10 text-neutral-200 text-base'>
+        {'鲜果导航，专注独特资源导航'}
       </div>
     </div>
-  </div>
-  )
+    <div className="w-full max-w-sm pb-16">
+      <LoginForm onSubmitForm={handleSubmit}/>
+    </div>
+  </div>)
 }
 
 export default Login

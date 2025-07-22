@@ -1,10 +1,5 @@
 .container {
   background-image: url('@/assets/bg.svg');
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: auto;
-
 }
 
 @media (min-width: 820px) {
@@ -12,48 +7,5 @@
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
-  }
-}
-
-.logo {
-  height: 50px;
-  margin-right: 16px;
-  vertical-align: top;
-  filter: invert(1);
-}
-
-
-.main {
-  width: 328px;
-  margin: 0 auto;
-
-  @media screen and (max-width: 820px) {
-    width: 95%;
-    max-width: 328px;
-  }
-
-  .icon {
-    margin-left: 16px;
-    color: rgba(0, 0, 0, 0.2);
-    font-size: 24px;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: color 0.3s;
-
-  }
-
-  .other {
-    margin-top: 24px;
-    line-height: 22px;
-    text-align: left;
-
-    .register {
-      float: right;
-    }
-  }
-
-  .prefixIcon {
-    color: #e7e71a;
-    font-size: 16px;
   }
 }
