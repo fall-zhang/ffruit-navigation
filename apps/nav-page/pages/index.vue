@@ -40,14 +40,23 @@ function onClickTime() {
 }
 
 onMounted(() => {
-  window.addEventListener('wheel', () => {
-    if (baseStore.navEnable === false) {
-      baseStore.navEnable = true
-      nextTick(() => {
-        window.scroll({
-          top: 20
+  window.addEventListener('wheel', (ev) => {
+    // 向下滚动
+    if (ev.deltaY > 0) {
+      if (baseStore.navEnable === false) {
+        baseStore.navEnable = true
+        nextTick(() => {
+          window.scroll({
+            top: 120,
+            behavior: 'smooth'
+          })
         })
-      })
+      }
+    // 向上滚动
+    } else {
+      if (y.value === 0) {
+        baseStore.navEnable = false
+      }
     }
   })
 })

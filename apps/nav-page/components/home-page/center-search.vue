@@ -31,7 +31,7 @@ import { XiaohongshuIcon } from '../icon/search-engin/xiaohongshu'
 import { TikTokIcon } from '../icon/search-engin/tiktok'
 import type { RenderFunction } from 'vue'
 import { GithubIcon } from '../icon/search-engin/github'
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useMagicKeys } from '@vueuse/core'
 import { twMerge } from 'tailwind-merge'
 
 const enginSelectRef = useTemplateRef('enginSelectRef')
@@ -42,6 +42,8 @@ type EnginItem = {
   shortcut:string
 }
 
+// eslint-disable-next-line camelcase
+const { alt_1, alt_2, alt_3, alt_4, alt_5, alt_6, alt_7 } = useMagicKeys()
 const searchEnginList:EnginItem[] = [
   {
     icon: BingIcon,
@@ -114,7 +116,49 @@ onMounted(() => {
   })
 })
 
-// const clickOutside =
+watch(alt_1, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[0].searchHref
+    searchEnginIcon.value = searchEnginList[0].icon
+  }
+})
+watch(alt_2, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[1].searchHref
+    searchEnginIcon.value = searchEnginList[1].icon
+  }
+})
+watch(alt_3, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[2].searchHref
+    searchEnginIcon.value = searchEnginList[2].icon
+  }
+})
+watch(alt_4, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[3].searchHref
+    searchEnginIcon.value = searchEnginList[3].icon
+  }
+})
+watch(alt_5, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[4].searchHref
+    searchEnginIcon.value = searchEnginList[4].icon
+  }
+})
+watch(alt_6, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[5].searchHref
+    searchEnginIcon.value = searchEnginList[5].icon
+  }
+})
+watch(alt_7, (v) => {
+  if (v) {
+    searchHrefText.value = searchEnginList[6].searchHref
+    searchEnginIcon.value = searchEnginList[6].icon
+  }
+})
+
 function onSearch () {
   const jumpHref = searchHrefText.value + inputSearchText.value
   window.open(jumpHref, '_blank')
