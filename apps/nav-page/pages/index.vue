@@ -1,12 +1,12 @@
 <template>
   <div class="w-full justify-center flex flex-col items-center">
     <div class="h-[35vh] flex items-center justify-end flex-col">
-      <HourTime />
+      <HourTime @click="onClickTime"/>
       <CenterSearch class="mt-3" />
     </div>
-    <div class="max-w-[1536px] w-full px-6">
+    <div  :class="twMerge('relative max-w-[1536px] h-100vh w-10/12 px-6 transition-all ',baseStore.navEnable ? 'opacity-100 translate-1.5':'pointer-events-none opacity-0')">
       <RankList />
-      <NavGroup :groupList="groupList" />
+      <NavGroup  :groupList="groupList" />
     </div>
   </div>
   <NuxtPage page-key="static"></NuxtPage>
@@ -20,36 +20,40 @@ import useBaseStore from '@/store/index'
 import axios from 'axios'
 import type { LinkGroup, LinkItem } from '@/types/global'
 import NavGroup from '@/components/nav-page/nav-group.vue'
-defineOptions({
-  name: 'home-page'
-})
+import { useWindowScroll } from '@vueuse/core'
+import { twMerge } from 'tailwind-merge'
+
+const baseStore = useBaseStore()
 axios.get('/api').then(res => {
   console.log(res)
 }).catch(err => {
   console.log(err)
 })
-onMounted(() => {
+const { y } = useWindowScroll()
+watch(() => y, (newVal) => {
+  if (newVal.value > 0) {
+    baseStore.navEnable = true
+  }
+})
+function onClickTime() {
+  baseStore.navEnable = !baseStore.navEnable
+}
 
+onMounted(() => {
+  window.addEventListener('wheel', () => {
+    if (baseStore.navEnable === false) {
+      baseStore.navEnable = true
+      nextTick(() => {
+        window.scroll({
+          top: 20
+        })
+      })
+    }
+  })
 })
 // state
 const loading = ref(false)
-const data = ref<LinkItem[]>([
-  {
-    name: '64654321',
-    id: 'fvb',
-    logo: 'http://www.baidu.com/favicon.ico',
-    href: 'http://www.baidu.com',
-    view: 0,
-    star: 0,
-    createTime: 'asdf',
-    desc: 'asdfa',
-    creatorUrl: 'aasdf',
-    creator: '',
-    tags: [],
-    linkGroup: '',
-    linkSubGroup: ''
-  }
-])
+
 const groupList = ref<LinkGroup[]>([
   {
     id: 'string',
@@ -101,22 +105,19 @@ const groupList = ref<LinkGroup[]>([
   }
 ])
 
-const categories = ref([])
+const recentVisitNavList = ref([])
 
-const baseStore = useBaseStore()
 
 onMounted(() => {
-  handleResize()
-  const throttleFun = throttle(handleResize, 300)
-  window.addEventListener('reset', throttleFun)
+  // handleResize()
+  // const throttleFun = throttle(handleResize, 300)
+  // window.addEventListener('reset', throttleFun)
 
-  categories.value = getLocal('category')
-  baseStore.saveCategory(categories.value || [])
-  return () => {
-    window.removeEventListener('resize', throttleFun)
-  }
+  recentVisitNavList.value = getLocal('category')
+  baseStore.saveCategory(recentVisitNavList.value || [])
 })
 onUnmounted(() => {
+  // window.removeEventListener('resize', throttleFun)
 })
 
 async function onSubMenuClick (parentId: string) {
@@ -126,51 +127,28 @@ async function onSubMenuClick (parentId: string) {
   loading.value = false
 }
 
-function handleResize (event?: UIEvent) {
-  //   if (event) {
-  //     const { innerWidth } = event.target
-  //     if (innerWidth < 568) {
-  //       showMenuType.value = 'none'
-  //     } else {
-  //       showMenuType.value = 'half'
-  //     }
-  //   } else {
-  //     if (isMobileSize()) {
-  //       showMenuType.value = 'none'
-  //     } else {
-  //       showMenuType.value = 'half'
-  //     }
-  //   }
-  // }
-}
-
+// function handleResize (event?: UIEvent) {
+//   if (event) {
+//     const { innerWidth } = event.target
+//     if (innerWidth < 568) {
+//       showMenuType.value = 'none'
+//     } else {
+//       showMenuType.value = 'half'
+//     }
+//   } else {
+//     if (isMobileSize()) {
+//       showMenuType.value = 'none'
+//     } else {
+//       showMenuType.value = 'half'
+//     }
+//   }
+// }
+// }
+defineOptions({
+  name: 'home-page'
+})
 </script>
 
 <style lang="scss">
-.el-container {
-  flex-direction: column;
-}
 
-
-.el-menu--popup-right-start {
-  height: 500px !important;
-  overflow: auto;
-}
-
-.main {
-  padding: 20px;
-  position: relative;
-}
-
-
-.website-wrapper {
-  .website-title {
-    font-size: 14px;
-    margin: 50px 0 20px;
-    background: #fff;
-    display: inline-block;
-    padding: 5px 10px;
-    border-top-right-radius: 15px;
-  }
-}
 </style>

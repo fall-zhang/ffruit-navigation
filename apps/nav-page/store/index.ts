@@ -15,6 +15,10 @@ type StateType = {
    * 开启后，点击链接会提示用户注意安全
    */
   showJumpNotice:boolean
+  /**
+   * 开启卡片信息以及导航功能
+   */
+  navEnable:boolean
   category:MenuInfo[],
   selectedMenuParentId:string
   selectedMenuId:string
@@ -32,7 +36,8 @@ const useBaseStore = defineStore('base-store', {
     showJumpNotice: true,
     category: [],
     selectedMenuParentId: '',
-    selectedMenuId: ''
+    selectedMenuId: '',
+    navEnable: false
   }),
 
   actions: {

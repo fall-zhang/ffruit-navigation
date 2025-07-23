@@ -64,8 +64,11 @@ onMounted(() => {
   window.onresize = throttle(handleResize.bind(this), 300)
 
   const store = useBaseStore()
-  const localCategory = localStorage.getItem('category')
-  category.value = localCategory ? JSON.parse(localCategory) : []
+  const localCategory = getLocal('category', [])
+
+  const navEnable = getLocal('navEnable', false)
+  store.navEnable = Boolean(navEnable)
+  category.value = localCategory
   store.saveCategory(category.value)
 })
 

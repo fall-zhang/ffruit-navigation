@@ -21,8 +21,6 @@ import type { LinkItem } from '@/types/global'
 import dayjs from 'dayjs'
 import { EyeIcon, StarIcon } from 'lucide-vue-next'
 
-const withImageCardClass = ref('')
-
 const props = withDefaults(defineProps<{
   title:string
   type?:'view' | 'star' | 'createTime'
