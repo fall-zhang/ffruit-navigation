@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "commit": "czg",
     "lint": "eslint .",
     "lint:quiet": "eslint . --quiet",
     "lint:fix": "eslint --fix --ext ./apps"
@@ -14,9 +15,13 @@
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.31.0",
     "@stylistic/eslint-plugin": "^5.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
+    "cz-git": "^1.11.2",
+    "czg": "^1.11.2",
     "eslint": "^9.31.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-promise": "^7.2.1",
@@ -24,13 +29,13 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-tailwindcss": "4.0.0-beta.0",
     "eslint-plugin-vue": "^10.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^10.5.4",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.37.0",
     "vue-eslint-parser": "^10.2.0"
   },
   "dependencies": {
-    "@trpc/client": "^11.4.3",
-    "@trpc/server": "^11.4.3",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   }
