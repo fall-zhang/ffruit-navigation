@@ -6,8 +6,8 @@ import { ConfigModule } from '@nestjs/config'
 import { FeedbackModule } from './feedback/feedback.module'
 import { BacklogModule } from './backlog/backlog.module'
 import { NavModule } from './nav/nav.module'
-// import { MongooseModule } from '@nestjs/mongoose'
-import { HomepageInfoModule } from './homepage-info/homepage-info.module';
+import { HomepageInfoModule } from './homepage-info/homepage-info.module'
+import { MulterModule } from '@nestjs/platform-express'
 @Module({
   controllers: [AppController],
   providers: [AppService],
@@ -15,7 +15,6 @@ import { HomepageInfoModule } from './homepage-info/homepage-info.module';
     envFilePath: '.env.local',
     isGlobal: true
   }), FeedbackModule, BacklogModule, NavModule, HomepageInfoModule
-  // MongooseModule.forRoot('mongodb://localhost:1')
   ]
 })
 

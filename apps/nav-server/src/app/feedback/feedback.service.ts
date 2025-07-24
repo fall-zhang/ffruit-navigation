@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common'
 import { CreateFeedbackDto } from './dto/create-feedback.dto'
 import { UpdateFeedbackDto } from './dto/update-feedback.dto'
 import { PrismaService } from '@/prisma.service'
-import { UserFeedback } from '@prisma/client'
 import { randomUUID } from 'crypto'
 
 @Injectable()
