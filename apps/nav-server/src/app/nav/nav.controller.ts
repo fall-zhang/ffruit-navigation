@@ -6,6 +6,7 @@ import cheerio from 'cheerio'
 import { warn } from 'console'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { createReadStream, promises as fsPromise } from 'fs'
+import { firefoxBookmarkParse, FirefoxMarkItem, getMarkGroup } from '@/utils/firefox-bookmark-parse'
 
 @Controller('nav')
 export class NavController {
@@ -28,14 +29,11 @@ export class NavController {
   @Post('/uploadFile')
   @UseInterceptors(FileInterceptor('file'))
   async createFile (@Body() createNavDto: CreateNavDto, @UploadedFile() uploadFile:Express.Multer.File) {
-    console.log('uploadFile', uploadFile)
-    uploadFile.path
-    console.log('uploadFile.path', uploadFile.path)
     // URL.createObjectURL(new Blob([]))
     try {
-      // const fileContent = await fsPromise.readFile(uploadFile.path, 'utf-8')
-      // console.log('fileContent', fileContent)
-      await this.navService.create(createNavDto)
+      const fileContent = await fsPromise.readFile(uploadFile.path, 'utf-8')
+      // fsPromise.writeFile('./护犊子.json', JSON.stringify(groupMap))
+      await this.navService.createMany(fileContent)
     } catch (e) {
       console.warn(e)
     }

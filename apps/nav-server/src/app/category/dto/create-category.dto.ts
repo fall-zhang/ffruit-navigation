@@ -1,13 +1,11 @@
 export class CreateCategoryDto {
+  id?: number
+
   name: string
 
-  categoryId: string
-
-  createAt: number
+  createTime: string
 
   icon: string
 
-  children: object
-
-  showInMenu: boolean
+  parentId: number
 }

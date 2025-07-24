@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { CreateNavDto } from './dto/create-nav.dto'
 import { UpdateNavDto } from './dto/update-nav.dto'
 import { PrismaService } from '@/prisma.service'
+import { excludeUselessMark, firefoxBookmarkParse, FirefoxMarkItem, getMarkGroup } from '@/utils/firefox-bookmark-parse'
+import { NavCategoryCreateManyInput } from '@/generated/prisma/models'
 
 type PaginationQuery = {
   pageSize:number
@@ -19,17 +21,59 @@ export class NavService {
     return true
   }
 
+  async createMany (jsonFile:string) {
+    const fireFoxMark:FirefoxMarkItem[] = JSON.parse(jsonFile).children
+
+    const navList = firefoxBookmarkParse(fireFoxMark)
+    const pureNavList = excludeUselessMark(navList)
+
+    const groupList = getMarkGroup(navList)
+    console.log('groupList', groupList)
+    const data:NavCategoryCreateManyInput[] = []
+
+    await this.prisma.navCategory.createMany({
+      data: []
+    })
+    // console.log('navList', navList)
+    // const result = await this.prisma.navLink.createMany({
+    //   data: pureNavList.map(item => {
+    //     const result = {
+    //       ...item,
+    //       parent: undefined
+    //     } as CreateNavDto
+    //     return result
+    //   })
+    // })
+    // console.log('result', result)
+    // const savedNav = new this.navLinkModel(createNavDto)
+    return true
+  }
+
   async findAll ({ page, pageSize }:PaginationQuery) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
     let result:any[]
+    let totalLength:number
     try {
       const data = await this.prisma.navLink.findMany({ })
-      const startIndex = (page - 1) * pageSize
-      result = data.splice(startIndex, pageSize)
+      totalLength = await this.prisma.navLink.count()
+      if (!page || !pageSize) {
+        const startIndex = (page - 1) * pageSize
+        result = data.splice(startIndex, pageSize)
+      } else {
+        result = data
+      }
     } catch (err) {
+      totalLength = 0
+      result = []
       console.log('err', err)
     }
-    return result
+    return {
+      code: 200,
+      currentPage: page,
+      pageSize,
+      total: totalLength,
+      data: result
+    }
   }
 
   findOne (id: number) {
@@ -71,5 +115,6 @@ export class NavService {
     //   star,
     //   news
     // }
+    //
   }
 }
