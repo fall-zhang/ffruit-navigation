@@ -8,7 +8,7 @@
 
 一个 typescript 全栈项目，包括以下技术
 
-- 客户端：nuxt，Vue，element-plus，+ tailwindcss，实现 SSR
+- 客户端：nuxt，Vue，element-plus，+ tailwindcss(daisyUI)，实现 SSR
 - 控制台：React + VueRouter + tailwindcss + shadcn
 - 应用后端：nestjs + prisma + postgresql
 
