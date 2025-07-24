@@ -8,12 +8,18 @@
     "commit": "czg",
     "lint": "eslint .",
     "lint:quiet": "eslint . --quiet",
-    "lint:fix": "eslint --fix --ext ./apps"
+    "lint-staged": "lint-staged",
+    "lint:fix": "eslint --fix --ext ./apps",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -35,8 +41,14 @@
     "typescript-eslint": "^8.37.0",
     "vue-eslint-parser": "^10.2.0"
   },
-  "dependencies": {
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.11"
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   }
 }

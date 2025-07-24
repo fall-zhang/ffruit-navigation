@@ -76,28 +76,28 @@ const vueLintConfig = {
   }
 }
 
-const tailwindConfig = {
-  settings: {
-    tailwindcss: {
-      // These are the default values but feel free to customize
-      callees: ['classnames', 'clsx', 'ctl', 'cn'],
-      config: 'index.css', // returned from `loadConfig()` utility if not provided
-      cssFiles: [
-        '**/*.css',
-        '!**/node_modules',
-        '!**/.*',
-        '!**/dist',
-        '!**/build'
-      ],
-      cssFilesRefreshRate: 5_000,
-      removeDuplicates: true,
-      skipClassAttribute: false,
-      whitelist: [],
-      tags: [], // can be set to e.g. ['tw'] for use in tw`bg-blue`
-      classRegex: '^class(Name)?$' // can be modified to support custom attributes. E.g. "^tw$" for `twin.macro`
-    }
-  }
-}
+// const tailwindConfig = {
+//   settings: {
+//     tailwindcss: {
+//       // These are the default values but feel free to customize
+//       // callees: ['classnames', 'clsx', 'ctl', 'cn'],
+//       config: 'index.css', // returned from `loadConfig()` utility if not provided
+//       // cssFiles: [
+//       //   '**/*.css',
+//       //   '!**/node_modules',
+//       //   '!**/.*',
+//       //   '!**/dist',
+//       //   '!**/build'
+//       // ],
+//       // cssFilesRefreshRate: 5_000,
+//       // removeDuplicates: true,
+//       // skipClassAttribute: false,
+//       // whitelist: [],
+//       // tags: [], // can be set to e.g. ['tw'] for use in tw`bg-blue`
+//       // classRegex: '^class(Name)?$' // can be modified to support custom attributes. E.g. "^tw$" for `twin.macro`
+//     }
+//   }
+// }
 export default defineConfig([
   // 只对我修改的部分进行
   // {
@@ -115,7 +115,7 @@ export default defineConfig([
 
   lintReact.configs.flat['jsx-runtime'],
   // ...tailwind.configs['flat/recommended'],
-  tailwindConfig,
+  // tailwindConfig,
   ...pluginVue.configs['flat/essential'],
   ...tslint.configs.recommended,
   defineConfigWithVueTs(vueTsConfigs.recommended),
