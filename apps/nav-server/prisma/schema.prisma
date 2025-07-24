@@ -40,13 +40,37 @@ model NavTag {
   id         Int       @id @default(autoincrement())
   name       String
   createTime DateTime
-  parentTag  DateTime
-  Name       DateTime
   NavLink    NavLink[]
 }
 
-model Group {
-  ip       String @id
+model NavCategory {
+  id       Int    @id @default(autoincrement())
   name     String
   subGroup String
+}
+
+model UserFeedback {
+  id          Int      @id @default(autoincrement())
+  programName String // 项目名称
+  type        String // feature 建议 | error 错误 | suggest 建议 
+  title       String // 错误标题
+  describe    String // 用户输入的详情描述
+  images      String[] // 用户的截图
+  isHandled   Boolean  @default(false)
+  // time        String
+  // handledTime DateTime @default(now())// 处理时间
+  // reportTime  DateTime @default(now())// 提交时间
+  reportUser  String // 提交用户
+  deviceName  String // 设备信息
+}
+
+model UserTrack {
+  id           Int    @id @map("_id")
+  programName  String
+  errorContent String
+}
+
+model User {
+  id   Int    @id @default(autoincrement())
+  name String
 }
