@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common'
 import { NavService } from './nav.service'
 import { CreateNavDto } from './dto/create-nav.dto'
 import { UpdateNavDto } from './dto/update-nav.dto'
 import cheerio from 'cheerio'
 import { warn } from 'console'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { createReadStream, promises as fsPromise } from 'fs'
 
 @Controller('nav')
 export class NavController {
@@ -23,9 +25,33 @@ export class NavController {
     }
   }
 
+  @Post('/uploadFile')
+  @UseInterceptors(FileInterceptor('file'))
+  async createFile (@Body() createNavDto: CreateNavDto, @UploadedFile() uploadFile:Express.Multer.File) {
+    console.log('uploadFile', uploadFile)
+    uploadFile.path
+    console.log('uploadFile.path', uploadFile.path)
+    // URL.createObjectURL(new Blob([]))
+    try {
+      // const fileContent = await fsPromise.readFile(uploadFile.path, 'utf-8')
+      // console.log('fileContent', fileContent)
+      await this.navService.create(createNavDto)
+    } catch (e) {
+      console.warn(e)
+    }
+    return {
+      code: 1,
+      msg: 'ok',
+      data: '创建成功'
+    }
+  }
+
   @Get()
-  async findAll (@Query() findQuery:UpdateNavDto, @Query('keyword') keyword:string) {
-    this.navService.findAll(findQuery, keyword)
+  async findAll (@Query('pageSize') pageSize:number, @Query('page') page:number) {
+    return this.navService.findAll({
+      pageSize,
+      page
+    })
   }
 
   /**

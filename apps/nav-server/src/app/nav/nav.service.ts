@@ -1,34 +1,35 @@
 import { Injectable } from '@nestjs/common'
 import { CreateNavDto } from './dto/create-nav.dto'
 import { UpdateNavDto } from './dto/update-nav.dto'
-import { InjectModel } from '@nestjs/mongoose'
-import { NavigateLink } from './schemas/nav.schema'
-import { Model } from 'mongoose'
+import { PrismaService } from '@/prisma.service'
+
+type PaginationQuery = {
+  pageSize:number
+  page:number
+}
 
 @Injectable()
 export class NavService {
-  // constructor () {
+  constructor (private prisma: PrismaService) {
 
-  // }
+  }
 
   async create (createNavDto: CreateNavDto) {
-    const createTime = new Date()
     // const savedNav = new this.navLinkModel(createNavDto)
     return true
   }
 
-  async findAll (updateNavDto:UpdateNavDto, keyword:string) {
+  async findAll ({ page, pageSize }:PaginationQuery) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
-    const id = updateNavDto.id
-    if (id) {
-      // await this.navLinkModel.findOne({ _id: id })
-    } else if (keyword) {
-      const reg = new RegExp(keyword, 'i')
-      // await this.navLinkModel.find({
-      //   name: { $regex: reg }
-      // }).limit(10)
+    let result:any[]
+    try {
+      const data = await this.prisma.navLink.findMany({ })
+      const startIndex = (page - 1) * pageSize
+      result = data.splice(startIndex, pageSize)
+    } catch (err) {
+      console.log('err', err)
     }
-    return 'This action returns all nav'
+    return result
   }
 
   findOne (id: number) {
