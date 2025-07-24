@@ -28,6 +28,8 @@ const props = defineProps<{
 
 watch(() => props.groupList, () => {
   activeGroupId.value = props.groupList[0].id
+}, {
+  immediate: true
 })
 
 const currentGroup = computed(() => {

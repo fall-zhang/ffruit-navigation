@@ -66,7 +66,7 @@ const loading = ref(false)
 const groupList = ref<LinkGroup[]>([
   {
     id: 'string',
-    name: 'string',
+    name: '搜索导航',
     subGroup: '',
     navList: [{
       name: '64654321',

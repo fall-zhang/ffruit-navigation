@@ -18,7 +18,6 @@
         <el-form-item label="网站名称" prop="name">
           <el-input placeholder="输入网站名称" v-model="form.name" />
         </el-form-item>
-
         <!-- <el-form-item label="网站logo" prop="logo">
           <el-input placeholder="输入网站logo" v-model="form.logo" />
           <img style="max-width: 30px;" :src="form.logo" />
