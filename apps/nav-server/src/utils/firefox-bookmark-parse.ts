@@ -76,6 +76,9 @@ export const getMarkGroup = (markList:RichCreateNavDto[]):CreateCategoryDto[] =>
     if (item.parent.length > 0) {
       let parentName:string = ''
       item.parent.forEach(menuItem => {
+        if (menuItem === 'toolbar') {
+          return
+        }
         if (mapIdObj[menuItem]) {
           parentName = menuItem
           return
@@ -86,12 +89,13 @@ export const getMarkGroup = (markList:RichCreateNavDto[]):CreateCategoryDto[] =>
           id,
           createTime: (new Date()).toISOString(),
           icon: '',
-          parentId: mapIdObj[parentName]
+          parentId: mapIdObj[parentName] || 0
         })
         id += 1
         parentName = menuItem
       })
     }
   })
+
   return categoryList
 }

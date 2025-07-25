@@ -27,26 +27,30 @@ export class NavService {
     const navList = firefoxBookmarkParse(fireFoxMark)
     const pureNavList = excludeUselessMark(navList)
 
-    const groupList = getMarkGroup(navList)
-    console.log('groupList', groupList)
-    const data:NavCategoryCreateManyInput[] = []
-
-    await this.prisma.navCategory.createMany({
-      data: []
-    })
-    // console.log('navList', navList)
-    // const result = await this.prisma.navLink.createMany({
-    //   data: pureNavList.map(item => {
-    //     const result = {
-    //       ...item,
-    //       parent: undefined
-    //     } as CreateNavDto
-    //     return result
-    //   })
-    // })
-    // console.log('result', result)
-    // const savedNav = new this.navLinkModel(createNavDto)
-    return true
+    const categoryList:NavCategoryCreateManyInput[] = getMarkGroup(navList)
+    const dbCategoryList = await this.prisma.navCategory.findMany()
+    const dbNavList = await this.prisma.navLink.findMany()
+    const result = {
+      category: dbCategoryList,
+      nav: dbNavList
+    }
+    if (dbNavList.length === 0) {
+      result.nav = await this.prisma.navLink.createManyAndReturn({
+        data: pureNavList.map(item => {
+          const result = {
+            ...item,
+            parent: undefined
+          } as CreateNavDto
+          return result
+        })
+      })
+    }
+    if (dbCategoryList.length === 0) {
+      result.category = await this.prisma.navCategory.createManyAndReturn({
+        data: categoryList
+      })
+    }
+    return result
   }
 
   async findAll ({ page, pageSize }:PaginationQuery) {

@@ -29,18 +29,27 @@ export class NavController {
   @Post('/uploadFile')
   @UseInterceptors(FileInterceptor('file'))
   async createFile (@Body() createNavDto: CreateNavDto, @UploadedFile() uploadFile:Express.Multer.File) {
+    let res
     // URL.createObjectURL(new Blob([]))
     try {
       const fileContent = await fsPromise.readFile(uploadFile.path, 'utf-8')
       // fsPromise.writeFile('./护犊子.json', JSON.stringify(groupMap))
-      await this.navService.createMany(fileContent)
+      res = await this.navService.createMany(fileContent)
     } catch (e) {
+      res = null
       console.warn(e)
+    }
+    if (res === null) {
+      return {
+        code: 0,
+        msg: 'err',
+        data: null
+      }
     }
     return {
       code: 1,
       msg: 'ok',
-      data: '创建成功'
+      data: res
     }
   }
 
