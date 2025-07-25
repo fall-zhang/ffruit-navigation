@@ -24,6 +24,8 @@ docker-compose up -d
 # mongo
 npx prisma db push
 # 关系型数据库
+pnpm prisma migrate dev
+# 推送并命名
 pnpm prisma migrate dev --name init
 ```
 
