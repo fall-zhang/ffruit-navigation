@@ -20,6 +20,8 @@ import useBaseStore from '@/store'
 import { isMobileSize } from '@/utils/utils'
 import { useDark } from '@vueuse/core'
 import { loadImageFromDB } from '@/utils/image-store'
+import defaultImage from '@/assets/background/lonely.jpg'
+
 const baseStore = useBaseStore()
 defineOptions({
   name: 'default-layout'
@@ -34,9 +36,10 @@ onMounted(() => {
   async function initImage() {
     try {
       const imageData = await loadImageFromDB()
+
       baseStore.bgImageUrl = URL.createObjectURL(imageData)
     } catch(err) {
-      baseStore.bgImageUrl = ''
+      baseStore.bgImageUrl = defaultImage
     }
   }
   initImage()

@@ -1,15 +1,15 @@
 <template>
   <div :class="twMerge(['h-16 items-center px-6 flex sticky top-0 bg-neutral-200 dark:bg-neutral-800 shadow-xl justify-between w-full border-b-neutral-500 border-b backdrop-blur-xl',hasBgImageHeaderClass])">
-    <div class="hidden sm:flex items-center">
+    <div class=" sm:flex items-center">
       <nuxt-link to="/" class="flex items-center">
-        <OrangeIcon  :size="36"/>
+        <OrangeIcon :size="36"/>
         <h1 class="text-2xl mr-4 text-(--text-primary) font-bold">鲜果导航</h1>
       </nuxt-link>
-      <AppSearch />
+      <AppSearch class="not-sm:hidden" />
     </div>
     <div class="grow"></div>
     <div class="tooltip tooltip-bottom" data-tip="更换壁纸">
-      <div tabindex="0" role="button" class="    m-1  mr-2 p-1 rounded cursor-pointer hover:bg-neutral-200/30" @click="onUploadFile">
+      <div tabindex="0" role="button" class="m-1  mr-2 p-1 rounded cursor-pointer hover:bg-neutral-200/30" @click="onUploadFile">
         <ImageIcon class="text-white dark:text-neutral-200" height="26"  width="26"/>
       </div>
       <!-- <div >Hover</div> -->
