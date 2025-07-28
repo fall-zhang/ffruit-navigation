@@ -8,7 +8,9 @@ npx prisma init
 
 # Prisma Client 提供了类型安全，根据你的 Prisma 模型生成类型
 npm install @prisma/client
+
 # 初次安装时会自动执行 prisma generate，根据 prisma 生成 ts 类型
+# 改数据模型后，你需要通过运行 prisma generate 手动重新生成 Prisma 客户端，以确保 node_modules/.prisma/client 中的代码得到更新。
 prisma generate
 
 ```
@@ -64,5 +66,10 @@ generator client {
   provider = "prisma-client-js"
   // 定义输出位置
   output   = "./generated/prisma-client-js"
+}
+
+generator typeGen {
+  provider = "prisma-client"            // v7 将作为默认生成器使用
+  output   = "../src/generated/prisma"
 }
 ```

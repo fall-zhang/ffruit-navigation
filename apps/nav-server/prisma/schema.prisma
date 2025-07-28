@@ -8,13 +8,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typeGen {
+  provider = "prisma-client" // Required
+  output   = "../src/generated/prisma"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_POSTGRES_URL")
 }
 
 model NavLink {
-  id          Int      @id @map("_id")
+  id          Int      @id @default(autoincrement())
   categoryId  String
   name        String
   // 网站url
@@ -23,17 +28,28 @@ model NavLink {
   logo        String
   authorName  String
   authorUrl   String
-  auditTime   DateTime
-  createTime  DateTime
+  auditTime   DateTime @default(now())
+  createTime  DateTime @default(now())
   tag         NavTag[]
   // 页面浏览次数
-  view        Int
-  star        Int
+  view        Int      @default(0)
+  star        Int      @default(0)
   // 审核状态 1 审核中 2 拒绝 3 通过
-  status      Int
+  status      LinkState
   // 访问状态 1 正常访问 2 需要代理 3 网站已停用
-  accessState Int
-  programName String
+  accessState LinkAccessState
+}
+
+enum LinkState {
+  CHECK
+  REJECT
+  PASS
+}
+
+enum LinkAccessState {
+  NORMAL
+  PROXY
+  DEACTIVATE
 }
 
 model NavTag {
@@ -44,9 +60,11 @@ model NavTag {
 }
 
 model NavCategory {
-  id       Int    @id @default(autoincrement())
-  name     String
-  subGroup String
+  id         Int      @id @default(autoincrement())
+  name       String
+  createTime DateTime
+  icon       String
+  parentId   Int
 }
 
 model UserFeedback {
