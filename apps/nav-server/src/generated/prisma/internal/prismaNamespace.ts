@@ -15,10 +15,10 @@
  */
 
 import * as runtime from "@prisma/client/runtime/library"
-import type * as Prisma from "../models"
-import { type PrismaClient } from "./class"
+import type * as Prisma from "../models.js"
+import { type PrismaClient } from "./class.js"
 
-export type * from '../models'
+export type * from '../models.js'
 
 export type DMMF = typeof runtime.DMMF
 
@@ -968,7 +968,11 @@ export type UserTrackScalarFieldEnum = (typeof UserTrackScalarFieldEnum)[keyof t
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  createTime: 'createTime',
+  account: 'account',
+  password: 'password',
+  lastLoginTime: 'lastLoginTime'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1035,6 +1039,34 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LinkState'
+ */
+export type EnumLinkStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LinkState'>
+    
+
+
+/**
+ * Reference to a field of type 'LinkState[]'
+ */
+export type ListEnumLinkStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LinkState[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LinkAccessState'
+ */
+export type EnumLinkAccessStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LinkAccessState'>
+    
+
+
+/**
+ * Reference to a field of type 'LinkAccessState[]'
+ */
+export type ListEnumLinkAccessStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LinkAccessState[]'>
     
 
 

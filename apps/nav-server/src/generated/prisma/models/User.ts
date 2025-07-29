@@ -8,8 +8,8 @@
  * 🟢 You can import this file directly.
  */
 import * as runtime from "@prisma/client/runtime/library"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.js"
+import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model User
@@ -36,16 +36,28 @@ export type UserSumAggregateOutputType = {
 export type UserMinAggregateOutputType = {
   id: number | null
   name: string | null
+  createTime: Date | null
+  account: string | null
+  password: string | null
+  lastLoginTime: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  createTime: Date | null
+  account: string | null
+  password: string | null
+  lastLoginTime: Date | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   name: number
+  createTime: number
+  account: number
+  password: number
+  lastLoginTime: number
   _all: number
 }
 
@@ -61,16 +73,28 @@ export type UserSumAggregateInputType = {
 export type UserMinAggregateInputType = {
   id?: true
   name?: true
+  createTime?: true
+  account?: true
+  password?: true
+  lastLoginTime?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   name?: true
+  createTime?: true
+  account?: true
+  password?: true
+  lastLoginTime?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   name?: true
+  createTime?: true
+  account?: true
+  password?: true
+  lastLoginTime?: true
   _all?: true
 }
 
@@ -163,6 +187,10 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: number
   name: string
+  createTime: Date
+  account: string
+  password: string
+  lastLoginTime: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -191,11 +219,19 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.IntFilter<"User"> | number
   name?: Prisma.StringFilter<"User"> | string
+  createTime?: Prisma.DateTimeFilter<"User"> | Date | string
+  account?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
+  lastLoginTime?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createTime?: Prisma.SortOrder
+  account?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  lastLoginTime?: Prisma.SortOrder
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -204,11 +240,19 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
+  createTime?: Prisma.DateTimeFilter<"User"> | Date | string
+  account?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
+  lastLoginTime?: Prisma.DateTimeFilter<"User"> | Date | string
 }, "id">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createTime?: Prisma.SortOrder
+  account?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  lastLoginTime?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -222,43 +266,79 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
+  createTime?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  account?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  lastLoginTime?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
   name: string
+  createTime: Date | string
+  account: string
+  password: string
+  lastLoginTime: Date | string
 }
 
 export type UserUncheckedCreateInput = {
   id?: number
   name: string
+  createTime: Date | string
+  account: string
+  password: string
+  lastLoginTime: Date | string
 }
 
 export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  lastLoginTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  lastLoginTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCreateManyInput = {
   id?: number
   name: string
+  createTime: Date | string
+  account: string
+  password: string
+  lastLoginTime: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  lastLoginTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  lastLoginTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createTime?: Prisma.SortOrder
+  account?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  lastLoginTime?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -268,11 +348,19 @@ export type UserAvgOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createTime?: Prisma.SortOrder
+  account?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  lastLoginTime?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createTime?: Prisma.SortOrder
+  account?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  lastLoginTime?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -284,24 +372,40 @@ export type UserSumOrderByAggregateInput = {
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  createTime?: boolean
+  account?: boolean
+  password?: boolean
+  lastLoginTime?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  createTime?: boolean
+  account?: boolean
+  password?: boolean
+  lastLoginTime?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  createTime?: boolean
+  account?: boolean
+  password?: boolean
+  lastLoginTime?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   name?: boolean
+  createTime?: boolean
+  account?: boolean
+  password?: boolean
+  lastLoginTime?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createTime" | "account" | "password" | "lastLoginTime", ExtArgs["result"]["user"]>
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
@@ -309,6 +413,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    createTime: Date
+    account: string
+    password: string
+    lastLoginTime: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -734,6 +842,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'Int'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly createTime: Prisma.FieldRef<"User", 'DateTime'>
+  readonly account: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly lastLoginTime: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

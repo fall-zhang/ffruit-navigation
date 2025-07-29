@@ -8,8 +8,8 @@
  * 🟢 You can import this file directly.
  */
 import * as runtime from "@prisma/client/runtime/library"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.js"
+import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model NavLink
@@ -29,16 +29,12 @@ export type NavLinkAvgAggregateOutputType = {
   id: number | null
   view: number | null
   star: number | null
-  status: number | null
-  accessState: number | null
 }
 
 export type NavLinkSumAggregateOutputType = {
   id: number | null
   view: number | null
   star: number | null
-  status: number | null
-  accessState: number | null
 }
 
 export type NavLinkMinAggregateOutputType = {
@@ -54,8 +50,8 @@ export type NavLinkMinAggregateOutputType = {
   createTime: Date | null
   view: number | null
   star: number | null
-  status: number | null
-  accessState: number | null
+  status: $Enums.LinkState | null
+  accessState: $Enums.LinkAccessState | null
 }
 
 export type NavLinkMaxAggregateOutputType = {
@@ -71,8 +67,8 @@ export type NavLinkMaxAggregateOutputType = {
   createTime: Date | null
   view: number | null
   star: number | null
-  status: number | null
-  accessState: number | null
+  status: $Enums.LinkState | null
+  accessState: $Enums.LinkAccessState | null
 }
 
 export type NavLinkCountAggregateOutputType = {
@@ -98,16 +94,12 @@ export type NavLinkAvgAggregateInputType = {
   id?: true
   view?: true
   star?: true
-  status?: true
-  accessState?: true
 }
 
 export type NavLinkSumAggregateInputType = {
   id?: true
   view?: true
   star?: true
-  status?: true
-  accessState?: true
 }
 
 export type NavLinkMinAggregateInputType = {
@@ -261,8 +253,8 @@ export type NavLinkGroupByOutputType = {
   createTime: Date
   view: number
   star: number
-  status: number
-  accessState: number
+  status: $Enums.LinkState
+  accessState: $Enums.LinkAccessState
   _count: NavLinkCountAggregateOutputType | null
   _avg: NavLinkAvgAggregateOutputType | null
   _sum: NavLinkSumAggregateOutputType | null
@@ -301,8 +293,8 @@ export type NavLinkWhereInput = {
   createTime?: Prisma.DateTimeFilter<"NavLink"> | Date | string
   view?: Prisma.IntFilter<"NavLink"> | number
   star?: Prisma.IntFilter<"NavLink"> | number
-  status?: Prisma.IntFilter<"NavLink"> | number
-  accessState?: Prisma.IntFilter<"NavLink"> | number
+  status?: Prisma.EnumLinkStateFilter<"NavLink"> | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFilter<"NavLink"> | $Enums.LinkAccessState
   tag?: Prisma.NavTagListRelationFilter
 }
 
@@ -340,8 +332,8 @@ export type NavLinkWhereUniqueInput = Prisma.AtLeast<{
   createTime?: Prisma.DateTimeFilter<"NavLink"> | Date | string
   view?: Prisma.IntFilter<"NavLink"> | number
   star?: Prisma.IntFilter<"NavLink"> | number
-  status?: Prisma.IntFilter<"NavLink"> | number
-  accessState?: Prisma.IntFilter<"NavLink"> | number
+  status?: Prisma.EnumLinkStateFilter<"NavLink"> | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFilter<"NavLink"> | $Enums.LinkAccessState
   tag?: Prisma.NavTagListRelationFilter
 }, "id">
 
@@ -383,8 +375,8 @@ export type NavLinkScalarWhereWithAggregatesInput = {
   createTime?: Prisma.DateTimeWithAggregatesFilter<"NavLink"> | Date | string
   view?: Prisma.IntWithAggregatesFilter<"NavLink"> | number
   star?: Prisma.IntWithAggregatesFilter<"NavLink"> | number
-  status?: Prisma.IntWithAggregatesFilter<"NavLink"> | number
-  accessState?: Prisma.IntWithAggregatesFilter<"NavLink"> | number
+  status?: Prisma.EnumLinkStateWithAggregatesFilter<"NavLink"> | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateWithAggregatesFilter<"NavLink"> | $Enums.LinkAccessState
 }
 
 export type NavLinkCreateInput = {
@@ -399,8 +391,8 @@ export type NavLinkCreateInput = {
   createTime?: Date | string
   view?: number
   star?: number
-  status: number
-  accessState: number
+  status: $Enums.LinkState
+  accessState: $Enums.LinkAccessState
   tag?: Prisma.NavTagCreateNestedManyWithoutNavLinkInput
 }
 
@@ -417,8 +409,8 @@ export type NavLinkUncheckedCreateInput = {
   createTime?: Date | string
   view?: number
   star?: number
-  status: number
-  accessState: number
+  status: $Enums.LinkState
+  accessState: $Enums.LinkAccessState
   tag?: Prisma.NavTagUncheckedCreateNestedManyWithoutNavLinkInput
 }
 
@@ -434,8 +426,8 @@ export type NavLinkUpdateInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
   tag?: Prisma.NavTagUpdateManyWithoutNavLinkNestedInput
 }
 
@@ -452,8 +444,8 @@ export type NavLinkUncheckedUpdateInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
   tag?: Prisma.NavTagUncheckedUpdateManyWithoutNavLinkNestedInput
 }
 
@@ -470,8 +462,8 @@ export type NavLinkCreateManyInput = {
   createTime?: Date | string
   view?: number
   star?: number
-  status: number
-  accessState: number
+  status: $Enums.LinkState
+  accessState: $Enums.LinkAccessState
 }
 
 export type NavLinkUpdateManyMutationInput = {
@@ -486,8 +478,8 @@ export type NavLinkUpdateManyMutationInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
 }
 
 export type NavLinkUncheckedUpdateManyInput = {
@@ -503,8 +495,8 @@ export type NavLinkUncheckedUpdateManyInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
 }
 
 export type NavLinkCountOrderByAggregateInput = {
@@ -528,8 +520,6 @@ export type NavLinkAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   view?: Prisma.SortOrder
   star?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  accessState?: Prisma.SortOrder
 }
 
 export type NavLinkMaxOrderByAggregateInput = {
@@ -570,8 +560,6 @@ export type NavLinkSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   view?: Prisma.SortOrder
   star?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  accessState?: Prisma.SortOrder
 }
 
 export type NavLinkListRelationFilter = {
@@ -598,6 +586,14 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type EnumLinkStateFieldUpdateOperationsInput = {
+  set?: $Enums.LinkState
+}
+
+export type EnumLinkAccessStateFieldUpdateOperationsInput = {
+  set?: $Enums.LinkAccessState
 }
 
 export type NavLinkCreateNestedManyWithoutTagInput = {
@@ -650,8 +646,8 @@ export type NavLinkCreateWithoutTagInput = {
   createTime?: Date | string
   view?: number
   star?: number
-  status: number
-  accessState: number
+  status: $Enums.LinkState
+  accessState: $Enums.LinkAccessState
 }
 
 export type NavLinkUncheckedCreateWithoutTagInput = {
@@ -667,8 +663,8 @@ export type NavLinkUncheckedCreateWithoutTagInput = {
   createTime?: Date | string
   view?: number
   star?: number
-  status: number
-  accessState: number
+  status: $Enums.LinkState
+  accessState: $Enums.LinkAccessState
 }
 
 export type NavLinkCreateOrConnectWithoutTagInput = {
@@ -708,8 +704,8 @@ export type NavLinkScalarWhereInput = {
   createTime?: Prisma.DateTimeFilter<"NavLink"> | Date | string
   view?: Prisma.IntFilter<"NavLink"> | number
   star?: Prisma.IntFilter<"NavLink"> | number
-  status?: Prisma.IntFilter<"NavLink"> | number
-  accessState?: Prisma.IntFilter<"NavLink"> | number
+  status?: Prisma.EnumLinkStateFilter<"NavLink"> | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFilter<"NavLink"> | $Enums.LinkAccessState
 }
 
 export type NavLinkUpdateWithoutTagInput = {
@@ -724,8 +720,8 @@ export type NavLinkUpdateWithoutTagInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
 }
 
 export type NavLinkUncheckedUpdateWithoutTagInput = {
@@ -741,8 +737,8 @@ export type NavLinkUncheckedUpdateWithoutTagInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
 }
 
 export type NavLinkUncheckedUpdateManyWithoutTagInput = {
@@ -758,8 +754,8 @@ export type NavLinkUncheckedUpdateManyWithoutTagInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   view?: Prisma.IntFieldUpdateOperationsInput | number
   star?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  accessState?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumLinkStateFieldUpdateOperationsInput | $Enums.LinkState
+  accessState?: Prisma.EnumLinkAccessStateFieldUpdateOperationsInput | $Enums.LinkAccessState
 }
 
 
@@ -889,8 +885,8 @@ export type $NavLinkPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     createTime: Date
     view: number
     star: number
-    status: number
-    accessState: number
+    status: $Enums.LinkState
+    accessState: $Enums.LinkAccessState
   }, ExtArgs["result"]["navLink"]>
   composites: {}
 }
@@ -1327,8 +1323,8 @@ export interface NavLinkFieldRefs {
   readonly createTime: Prisma.FieldRef<"NavLink", 'DateTime'>
   readonly view: Prisma.FieldRef<"NavLink", 'Int'>
   readonly star: Prisma.FieldRef<"NavLink", 'Int'>
-  readonly status: Prisma.FieldRef<"NavLink", 'Int'>
-  readonly accessState: Prisma.FieldRef<"NavLink", 'Int'>
+  readonly status: Prisma.FieldRef<"NavLink", 'LinkState'>
+  readonly accessState: Prisma.FieldRef<"NavLink", 'LinkAccessState'>
 }
     
 

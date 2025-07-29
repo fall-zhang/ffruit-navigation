@@ -7,7 +7,19 @@
 *
 * 🟢 You can import this file directly.
 */
+export const LinkState = {
+  CHECK: 'CHECK',
+  REJECT: 'REJECT',
+  PASS: 'PASS'
+} as const
+
+export type LinkState = (typeof LinkState)[keyof typeof LinkState]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const LinkAccessState = {
+  NORMAL: 'NORMAL',
+  PROXY: 'PROXY',
+  DEACTIVATE: 'DEACTIVATE'
+} as const
+
+export type LinkAccessState = (typeof LinkAccessState)[keyof typeof LinkAccessState]

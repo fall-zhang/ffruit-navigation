@@ -10,13 +10,15 @@
 
 import * as process from 'node:process'
 import * as path from 'node:path'
+import { fileURLToPath } from 'node:url'
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 import * as runtime from "@prisma/client/runtime/library"
-import * as $Enums from "./enums"
-import * as $Class from "./internal/class"
-import * as Prisma from "./internal/prismaNamespace"
+import * as $Enums from "./enums.js"
+import * as $Class from "./internal/class.js"
+import * as Prisma from "./internal/prismaNamespace.js"
 
-export * as $Enums from './enums'
+export * as $Enums from './enums.js'
 /**
  * ## Prisma Client
  * 
@@ -70,4 +72,8 @@ export type UserTrack = Prisma.UserTrackModel
  */
 export type User = Prisma.UserModel
 
+export type LinkState = $Enums.LinkState
+export const LinkState = $Enums.LinkState
 
+export type LinkAccessState = $Enums.LinkAccessState
+export const LinkAccessState = $Enums.LinkAccessState
