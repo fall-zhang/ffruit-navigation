@@ -1,0 +1,62 @@
+import type { FC } from 'react'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+
+import { Button } from '@/components/ui/button'
+import { IconLayoutColumns, IconChevronDown } from '@tabler/icons-react'
+import { PlusIcon } from 'lucide-react'
+import type { Table } from '@tanstack/react-table'
+
+const headMap:Record<string, string> = {
+  versionName: '版本名称',
+  publishDateTime: '发布时间',
+  status: '版本状态',
+  lastMonthDownload: '上月下载量',
+  totalDownload: '总计下载量',
+  id: '',
+  filePath: ''
+}
+
+export const CommonTableHeader:FC<{
+  tableInfo:Table<any>
+  onAddNewItem():void
+}> = ({ tableInfo, onAddNewItem }) => {
+  return <div className="flex items-center gap-2 my-4">
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm">
+          <IconLayoutColumns />
+          <span className=" lg:inline">自定义列</span>
+          <IconChevronDown />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        {tableInfo
+          .getAllColumns()
+          .filter((column) =>
+            typeof column.accessorFn !== 'undefined' && column.getCanHide()
+          )
+          .map((column) => {
+            return (<DropdownMenuCheckboxItem
+              key={column.id}
+              className="capitalize"
+              checked={column.getIsVisible()}
+              onCheckedChange={(value) =>
+                column.toggleVisibility(value)
+              }
+            >
+              {headMap[column.id]}
+            </DropdownMenuCheckboxItem>)
+          })}
+      </DropdownMenuContent>
+    </DropdownMenu>
+    <Button variant="outline" size="sm" onClick={onAddNewItem}>
+      <PlusIcon />
+      <span className="hidden lg:inline">新增项</span>
+    </Button>
+  </div>
+}
