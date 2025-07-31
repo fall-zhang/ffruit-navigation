@@ -1,7 +1,7 @@
 import { CreateCategoryDto } from '@/app/category/dto/create-category.dto'
-import { CreateNavDto } from '@/app/nav/dto/create-nav.dto'
+import { LinkAccessState, LinkState } from '@/generated/prisma/enums'
 
-
+import { NavLinkCreateManyInput } from '@/generated/prisma/models'
 export interface FirefoxMarkItem {
   guid: string
   title: string
@@ -17,7 +17,7 @@ export interface FirefoxMarkItem {
   children?:FirefoxMarkItem[]
 }
 
-interface RichCreateNavDto extends CreateNavDto {
+interface RichCreateNavDto extends NavLinkCreateManyInput {
   parent:string[]
 }
 /**
@@ -48,11 +48,10 @@ export function firefoxBookmarkParse (bookmark:FirefoxMarkItem[], parent:string[
         logo: '',
         authorName: 'root',
         authorUrl: 'root',
-        tag: undefined,
         view: 0,
         star: 0,
-        status: 1,
-        accessState: 1
+        status: LinkState.PASS,
+        accessState: LinkAccessState.NORMAL
       }
       result.push(newInfo)
     }

@@ -1,9 +1,7 @@
-import { IsISO8601, IsNumber, IsString } from 'class-validator'
+import { LinkAccessState, LinkState } from '@/generated/prisma/enums'
+import { IsIn, IsISO8601, IsNumber, IsString } from 'class-validator'
 
 export class CreateNavDto {
-  @IsString()
-  categoryId: string
-
   @IsString()
   name: string
 
@@ -25,10 +23,13 @@ export class CreateNavDto {
   view: number
 
   star: number
-  // 审核状态 1 审核中 2 拒绝 3 通过
-  status: number
+  // 审核状态 审核中   拒绝     通过
+  @IsIn(['CHECK', 'REJECT', 'PASS'])
+  status: LinkState
+
   // 访问状态 1 正常访问 2 需要代理 3 网站已停用
-  accessState: number
+  @IsIn(['NORMAL', 'PROXY', 'DEACTIVATE'])
+  accessState: LinkAccessState
 }
 
 

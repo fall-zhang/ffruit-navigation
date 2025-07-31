@@ -3,7 +3,7 @@ import { CreateNavDto } from './dto/create-nav.dto'
 import { UpdateNavDto } from './dto/update-nav.dto'
 import { PrismaService } from '@/prisma.service'
 import { excludeUselessMark, firefoxBookmarkParse, FirefoxMarkItem, getMarkGroup } from '@/utils/firefox-bookmark-parse'
-import { NavCategoryCreateManyInput } from '@/generated/prisma/models'
+import { NavCategoryCreateManyInput, NavLinkCreateManyInput } from '@/generated/prisma/models'
 
 type PaginationQuery = {
   pageSize:number
@@ -40,7 +40,7 @@ export class NavService {
           const result = {
             ...item,
             parent: undefined
-          } as CreateNavDto
+          } as NavLinkCreateManyInput
           return result
         })
       })
@@ -106,19 +106,32 @@ export class NavService {
   }
 
   async findRank () {
-    // const [view, star, news] = await Promise.all([
-    // this.navLinkModel.find().sort({ view: -1 }).limit(1),
-    // this.navLinkModel.find().sort({ star: -1 }).limit(1),
-    // this.navLinkModel.find().sort({ createTime: -1 }).limit(1)
-    // this.findMaxValueList('view'),
-    // this.findMaxValueList('star'),
-    // this.findMaxValueList('createTime')
-    // ])
-    // return {
-    //   view,
-    //   star,
-    //   news
-    // }
-    //
+    try {
+      const [view, star, news] = await Promise.allSettled([
+        this.prisma.navLink.findMany({
+          orderBy: [{
+            star: 'desc'
+          }]
+        }),
+        this.prisma.navLink.findMany({
+          orderBy: [{
+            view: 'desc'
+          }]
+        }),
+        this.prisma.navLink.findMany({
+          orderBy: [{
+            createTime: 'desc'
+          }]
+        })
+      ])
+
+      return {
+        view,
+        star,
+        news
+      }
+    } catch(err) {
+      console.warn(err)
+    }
   }
 }

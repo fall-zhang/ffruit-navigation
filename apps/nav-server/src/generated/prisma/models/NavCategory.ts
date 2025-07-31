@@ -219,6 +219,7 @@ export type NavCategoryWhereInput = {
   createTime?: Prisma.DateTimeFilter<"NavCategory"> | Date | string
   icon?: Prisma.StringFilter<"NavCategory"> | string
   parentId?: Prisma.IntFilter<"NavCategory"> | number
+  NavLink?: Prisma.NavLinkListRelationFilter
 }
 
 export type NavCategoryOrderByWithRelationInput = {
@@ -227,6 +228,7 @@ export type NavCategoryOrderByWithRelationInput = {
   createTime?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
+  NavLink?: Prisma.NavLinkOrderByRelationAggregateInput
 }
 
 export type NavCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -238,6 +240,7 @@ export type NavCategoryWhereUniqueInput = Prisma.AtLeast<{
   createTime?: Prisma.DateTimeFilter<"NavCategory"> | Date | string
   icon?: Prisma.StringFilter<"NavCategory"> | string
   parentId?: Prisma.IntFilter<"NavCategory"> | number
+  NavLink?: Prisma.NavLinkListRelationFilter
 }, "id">
 
 export type NavCategoryOrderByWithAggregationInput = {
@@ -269,6 +272,7 @@ export type NavCategoryCreateInput = {
   createTime: Date | string
   icon: string
   parentId: number
+  NavLink?: Prisma.NavLinkCreateNestedManyWithoutNavCategoryInput
 }
 
 export type NavCategoryUncheckedCreateInput = {
@@ -277,6 +281,7 @@ export type NavCategoryUncheckedCreateInput = {
   createTime: Date | string
   icon: string
   parentId: number
+  NavLink?: Prisma.NavLinkUncheckedCreateNestedManyWithoutNavCategoryInput
 }
 
 export type NavCategoryUpdateInput = {
@@ -284,6 +289,7 @@ export type NavCategoryUpdateInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.IntFieldUpdateOperationsInput | number
+  NavLink?: Prisma.NavLinkUpdateManyWithoutNavCategoryNestedInput
 }
 
 export type NavCategoryUncheckedUpdateInput = {
@@ -292,6 +298,7 @@ export type NavCategoryUncheckedUpdateInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.IntFieldUpdateOperationsInput | number
+  NavLink?: Prisma.NavLinkUncheckedUpdateManyWithoutNavCategoryNestedInput
 }
 
 export type NavCategoryCreateManyInput = {
@@ -315,6 +322,16 @@ export type NavCategoryUncheckedUpdateManyInput = {
   createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type NavCategoryListRelationFilter = {
+  every?: Prisma.NavCategoryWhereInput
+  some?: Prisma.NavCategoryWhereInput
+  none?: Prisma.NavCategoryWhereInput
+}
+
+export type NavCategoryOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type NavCategoryCountOrderByAggregateInput = {
@@ -351,6 +368,143 @@ export type NavCategorySumOrderByAggregateInput = {
   parentId?: Prisma.SortOrder
 }
 
+export type NavCategoryCreateNestedManyWithoutNavLinkInput = {
+  create?: Prisma.XOR<Prisma.NavCategoryCreateWithoutNavLinkInput, Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput> | Prisma.NavCategoryCreateWithoutNavLinkInput[] | Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput[]
+  connectOrCreate?: Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput | Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput[]
+  connect?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+}
+
+export type NavCategoryUncheckedCreateNestedManyWithoutNavLinkInput = {
+  create?: Prisma.XOR<Prisma.NavCategoryCreateWithoutNavLinkInput, Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput> | Prisma.NavCategoryCreateWithoutNavLinkInput[] | Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput[]
+  connectOrCreate?: Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput | Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput[]
+  connect?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+}
+
+export type NavCategoryUpdateManyWithoutNavLinkNestedInput = {
+  create?: Prisma.XOR<Prisma.NavCategoryCreateWithoutNavLinkInput, Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput> | Prisma.NavCategoryCreateWithoutNavLinkInput[] | Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput[]
+  connectOrCreate?: Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput | Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput[]
+  upsert?: Prisma.NavCategoryUpsertWithWhereUniqueWithoutNavLinkInput | Prisma.NavCategoryUpsertWithWhereUniqueWithoutNavLinkInput[]
+  set?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  disconnect?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  delete?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  connect?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  update?: Prisma.NavCategoryUpdateWithWhereUniqueWithoutNavLinkInput | Prisma.NavCategoryUpdateWithWhereUniqueWithoutNavLinkInput[]
+  updateMany?: Prisma.NavCategoryUpdateManyWithWhereWithoutNavLinkInput | Prisma.NavCategoryUpdateManyWithWhereWithoutNavLinkInput[]
+  deleteMany?: Prisma.NavCategoryScalarWhereInput | Prisma.NavCategoryScalarWhereInput[]
+}
+
+export type NavCategoryUncheckedUpdateManyWithoutNavLinkNestedInput = {
+  create?: Prisma.XOR<Prisma.NavCategoryCreateWithoutNavLinkInput, Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput> | Prisma.NavCategoryCreateWithoutNavLinkInput[] | Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput[]
+  connectOrCreate?: Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput | Prisma.NavCategoryCreateOrConnectWithoutNavLinkInput[]
+  upsert?: Prisma.NavCategoryUpsertWithWhereUniqueWithoutNavLinkInput | Prisma.NavCategoryUpsertWithWhereUniqueWithoutNavLinkInput[]
+  set?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  disconnect?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  delete?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  connect?: Prisma.NavCategoryWhereUniqueInput | Prisma.NavCategoryWhereUniqueInput[]
+  update?: Prisma.NavCategoryUpdateWithWhereUniqueWithoutNavLinkInput | Prisma.NavCategoryUpdateWithWhereUniqueWithoutNavLinkInput[]
+  updateMany?: Prisma.NavCategoryUpdateManyWithWhereWithoutNavLinkInput | Prisma.NavCategoryUpdateManyWithWhereWithoutNavLinkInput[]
+  deleteMany?: Prisma.NavCategoryScalarWhereInput | Prisma.NavCategoryScalarWhereInput[]
+}
+
+export type NavCategoryCreateWithoutNavLinkInput = {
+  name: string
+  createTime: Date | string
+  icon: string
+  parentId: number
+}
+
+export type NavCategoryUncheckedCreateWithoutNavLinkInput = {
+  id?: number
+  name: string
+  createTime: Date | string
+  icon: string
+  parentId: number
+}
+
+export type NavCategoryCreateOrConnectWithoutNavLinkInput = {
+  where: Prisma.NavCategoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.NavCategoryCreateWithoutNavLinkInput, Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput>
+}
+
+export type NavCategoryUpsertWithWhereUniqueWithoutNavLinkInput = {
+  where: Prisma.NavCategoryWhereUniqueInput
+  update: Prisma.XOR<Prisma.NavCategoryUpdateWithoutNavLinkInput, Prisma.NavCategoryUncheckedUpdateWithoutNavLinkInput>
+  create: Prisma.XOR<Prisma.NavCategoryCreateWithoutNavLinkInput, Prisma.NavCategoryUncheckedCreateWithoutNavLinkInput>
+}
+
+export type NavCategoryUpdateWithWhereUniqueWithoutNavLinkInput = {
+  where: Prisma.NavCategoryWhereUniqueInput
+  data: Prisma.XOR<Prisma.NavCategoryUpdateWithoutNavLinkInput, Prisma.NavCategoryUncheckedUpdateWithoutNavLinkInput>
+}
+
+export type NavCategoryUpdateManyWithWhereWithoutNavLinkInput = {
+  where: Prisma.NavCategoryScalarWhereInput
+  data: Prisma.XOR<Prisma.NavCategoryUpdateManyMutationInput, Prisma.NavCategoryUncheckedUpdateManyWithoutNavLinkInput>
+}
+
+export type NavCategoryScalarWhereInput = {
+  AND?: Prisma.NavCategoryScalarWhereInput | Prisma.NavCategoryScalarWhereInput[]
+  OR?: Prisma.NavCategoryScalarWhereInput[]
+  NOT?: Prisma.NavCategoryScalarWhereInput | Prisma.NavCategoryScalarWhereInput[]
+  id?: Prisma.IntFilter<"NavCategory"> | number
+  name?: Prisma.StringFilter<"NavCategory"> | string
+  createTime?: Prisma.DateTimeFilter<"NavCategory"> | Date | string
+  icon?: Prisma.StringFilter<"NavCategory"> | string
+  parentId?: Prisma.IntFilter<"NavCategory"> | number
+}
+
+export type NavCategoryUpdateWithoutNavLinkInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type NavCategoryUncheckedUpdateWithoutNavLinkInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type NavCategoryUncheckedUpdateManyWithoutNavLinkInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  icon?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+
+/**
+ * Count Type NavCategoryCountOutputType
+ */
+
+export type NavCategoryCountOutputType = {
+  NavLink: number
+}
+
+export type NavCategoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  NavLink?: boolean | NavCategoryCountOutputTypeCountNavLinkArgs
+}
+
+/**
+ * NavCategoryCountOutputType without action
+ */
+export type NavCategoryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NavCategoryCountOutputType
+   */
+  select?: Prisma.NavCategoryCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * NavCategoryCountOutputType without action
+ */
+export type NavCategoryCountOutputTypeCountNavLinkArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NavLinkWhereInput
+}
 
 
 export type NavCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -359,6 +513,8 @@ export type NavCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createTime?: boolean
   icon?: boolean
   parentId?: boolean
+  NavLink?: boolean | Prisma.NavCategory$NavLinkArgs<ExtArgs>
+  _count?: boolean | Prisma.NavCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["navCategory"]>
 
 export type NavCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -386,10 +542,18 @@ export type NavCategorySelectScalar = {
 }
 
 export type NavCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createTime" | "icon" | "parentId", ExtArgs["result"]["navCategory"]>
+export type NavCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  NavLink?: boolean | Prisma.NavCategory$NavLinkArgs<ExtArgs>
+  _count?: boolean | Prisma.NavCategoryCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type NavCategoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type NavCategoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $NavCategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "NavCategory"
-  objects: {}
+  objects: {
+    NavLink: Prisma.$NavLinkPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
@@ -790,6 +954,7 @@ readonly fields: NavCategoryFieldRefs;
  */
 export interface Prisma__NavCategoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  NavLink<T extends Prisma.NavCategory$NavLinkArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NavCategory$NavLinkArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NavLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -841,6 +1006,10 @@ export type NavCategoryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
+  /**
    * Filter, which NavCategory to fetch.
    */
   where: Prisma.NavCategoryWhereUniqueInput
@@ -859,6 +1028,10 @@ export type NavCategoryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
+  /**
    * Filter, which NavCategory to fetch.
    */
   where: Prisma.NavCategoryWhereUniqueInput
@@ -876,6 +1049,10 @@ export type NavCategoryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the NavCategory
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
   /**
    * Filter, which NavCategory to fetch.
    */
@@ -925,6 +1102,10 @@ export type NavCategoryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
+  /**
    * Filter, which NavCategory to fetch.
    */
   where?: Prisma.NavCategoryWhereInput
@@ -973,6 +1154,10 @@ export type NavCategoryFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
+  /**
    * Filter, which NavCategories to fetch.
    */
   where?: Prisma.NavCategoryWhereInput
@@ -1015,6 +1200,10 @@ export type NavCategoryCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the NavCategory
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
   /**
    * The data needed to create a NavCategory.
    */
@@ -1063,6 +1252,10 @@ export type NavCategoryUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the NavCategory
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
   /**
    * The data needed to update a NavCategory.
    */
@@ -1130,6 +1323,10 @@ export type NavCategoryUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
+  /**
    * The filter to search for the NavCategory to update in case it exists.
    */
   where: Prisma.NavCategoryWhereUniqueInput
@@ -1156,6 +1353,10 @@ export type NavCategoryDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
+  /**
    * Filter which NavCategory to delete.
    */
   where: Prisma.NavCategoryWhereUniqueInput
@@ -1176,6 +1377,30 @@ export type NavCategoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * NavCategory.NavLink
+ */
+export type NavCategory$NavLinkArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NavLink
+   */
+  select?: Prisma.NavLinkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NavLink
+   */
+  omit?: Prisma.NavLinkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavLinkInclude<ExtArgs> | null
+  where?: Prisma.NavLinkWhereInput
+  orderBy?: Prisma.NavLinkOrderByWithRelationInput | Prisma.NavLinkOrderByWithRelationInput[]
+  cursor?: Prisma.NavLinkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NavLinkScalarFieldEnum | Prisma.NavLinkScalarFieldEnum[]
+}
+
+/**
  * NavCategory without action
  */
 export type NavCategoryDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1187,4 +1412,8 @@ export type NavCategoryDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the NavCategory
    */
   omit?: Prisma.NavCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NavCategoryInclude<ExtArgs> | null
 }
