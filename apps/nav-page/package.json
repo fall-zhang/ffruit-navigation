@@ -27,6 +27,8 @@
     "vue-tsc": "^3.0.3"
   },
   "devDependencies": {
+    "nav-types": "workspace:*",
+    "nav-utils": "workspace:*",
     "@tailwindcss/vite": "^4.1.11",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
