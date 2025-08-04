@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react'
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Avatar, Dropdown, Menu, Spin } from 'antd'
 import type { MenuProps } from 'antd'
 import styles from './index.module.css'
 import { Link, useNavigate } from 'react-router-dom'
+import { LogOutIcon, SettingsIcon, UserIcon } from 'lucide-react'
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -14,7 +14,7 @@ const menuItems: MenuProps['items'] = [
   {
     label: (
       <Link to={'user'}>
-        <UserOutlined /> 个人中心
+        <UserIcon /> 个人中心
       </Link>
     ),
     key: '0'
@@ -22,7 +22,7 @@ const menuItems: MenuProps['items'] = [
   {
     label: (
       <Link to={'setting'}>
-        <SettingOutlined />个人设置
+        <SettingsIcon />个人设置
       </Link>
     ),
     key: '7'
@@ -30,7 +30,7 @@ const menuItems: MenuProps['items'] = [
   {
     label: (
       <Link to={'logout'}>
-        <LogoutOutlined />退出登录
+        <LogOutIcon />退出登录
       </Link>
     ),
     key: 'logLinkLinkLinkLinkLink'
