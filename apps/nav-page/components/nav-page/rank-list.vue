@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import RankListCard from './rank-list-card.vue'
-import type { LinkItem } from '@/types/global'
+import type { NavDataType } from 'nav-types'
 defineOptions({
   name: 'NavRankList'
 })
@@ -20,7 +20,7 @@ type CardInfo = {
   subList: string[]
 }
 
-const newsList = ref<LinkItem[]>([
+const newsList = ref<NavDataType[]>([
   {
     id: '',
     logo: 'https://www.zhihu.com/favicon.ico',
@@ -30,11 +30,12 @@ const newsList = ref<LinkItem[]>([
     createTime: '',
     href: '',
     desc: '',
-    creatorUrl: '',
-    creator: '',
-    tags: [],
-    linkGroup: '',
-    linkSubGroup: ''
+    authorName: '',
+    authorUrl: '',
+    auditTime: '',
+    tag: [],
+    status: 'CHECK',
+    accessState: 'NORMAL'
   }
 ])
 

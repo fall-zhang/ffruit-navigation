@@ -17,14 +17,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { LinkItem } from '@/types/global'
 import dayjs from 'dayjs'
 import { EyeIcon, StarIcon } from 'lucide-vue-next'
+import type { NavDataType } from 'nav-types'
 
 const props = withDefaults(defineProps<{
   title:string
   type?:'view' | 'star' | 'createTime'
-  navList:LinkItem[]
+  navList:NavDataType[]
 }>(), {
   type: 'createTime'
 })
