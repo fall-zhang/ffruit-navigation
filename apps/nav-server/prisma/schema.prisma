@@ -4,9 +4,9 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-}
+// generator client {
+//   provider = "prisma-client-js"
+// }
 
 generator typeGen {
   provider = "prisma-client" // Required
@@ -19,7 +19,7 @@ datasource db {
 }
 
 model NavLink {
-  id          Int      @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   categoryId  String
   name        String
   // 网站url
@@ -28,16 +28,17 @@ model NavLink {
   logo        String
   authorName  String
   authorUrl   String
-  auditTime   DateTime @default(now())
-  createTime  DateTime @default(now())
+  auditTime   DateTime        @default(now())
+  createTime  DateTime        @default(now())
   tag         NavTag[]
   // 页面浏览次数
-  view        Int      @default(0)
-  star        Int      @default(0)
+  view        Int             @default(0)
+  star        Int             @default(0)
   // 审核状态 1 审核中 2 拒绝 3 通过
   status      LinkState
   // 访问状态 1 正常访问 2 需要代理 3 网站已停用
   accessState LinkAccessState
+  NavCategory NavCategory[]
 }
 
 enum LinkState {
@@ -60,11 +61,12 @@ model NavTag {
 }
 
 model NavCategory {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
   createTime DateTime
   icon       String
   parentId   Int
+  NavLink    NavLink[]
 }
 
 model UserFeedback {
@@ -86,9 +88,4 @@ model UserTrack {
   id           Int    @id @map("_id")
   programName  String
   errorContent String
-}
-
-model User {
-  id   Int    @id @default(autoincrement())
-  name String
 }
