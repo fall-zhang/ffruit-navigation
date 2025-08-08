@@ -8,8 +8,8 @@
  * 🟢 You can import this file directly.
  */
 import * as runtime from "@prisma/client/runtime/library"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model NavCategory

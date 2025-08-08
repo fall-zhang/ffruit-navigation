@@ -8,8 +8,8 @@
  * 🟢 You can import this file directly.
  */
 import * as runtime from "@prisma/client/runtime/library"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums"
+import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model NavLink
@@ -577,22 +577,6 @@ export type NavLinkListRelationFilter = {
 
 export type NavLinkOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type EnumLinkStateFieldUpdateOperationsInput = {

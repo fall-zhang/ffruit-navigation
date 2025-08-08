@@ -9,8 +9,8 @@
  */
 
 import * as runtime from "@prisma/client/runtime/library"
-import * as $Enums from "./enums.js"
-import type * as Prisma from "./internal/prismaNamespace.js"
+import * as $Enums from "./enums"
+import type * as Prisma from "./internal/prismaNamespace"
 
 
 export type IntFilter<$PrismaModel = never> = {
@@ -48,20 +48,6 @@ export type DateTimeFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeFilter<$PrismaModel> | Date | string
-}
-
-export type EnumLinkStateFilter<$PrismaModel = never> = {
-  equals?: $Enums.LinkState | Prisma.EnumLinkStateFieldRefInput<$PrismaModel>
-  in?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLinkStateFilter<$PrismaModel> | $Enums.LinkState
-}
-
-export type EnumLinkAccessStateFilter<$PrismaModel = never> = {
-  equals?: $Enums.LinkAccessState | Prisma.EnumLinkAccessStateFieldRefInput<$PrismaModel>
-  in?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLinkAccessStateFilter<$PrismaModel> | $Enums.LinkAccessState
 }
 
 export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -110,6 +96,20 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
+}
+
+export type EnumLinkStateFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkState | Prisma.EnumLinkStateFieldRefInput<$PrismaModel>
+  in?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLinkStateFilter<$PrismaModel> | $Enums.LinkState
+}
+
+export type EnumLinkAccessStateFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkAccessState | Prisma.EnumLinkAccessStateFieldRefInput<$PrismaModel>
+  in?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLinkAccessStateFilter<$PrismaModel> | $Enums.LinkAccessState
 }
 
 export type EnumLinkStateWithAggregatesFilter<$PrismaModel = never> = {
@@ -181,20 +181,6 @@ export type NestedDateTimeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDateTimeFilter<$PrismaModel> | Date | string
 }
 
-export type NestedEnumLinkStateFilter<$PrismaModel = never> = {
-  equals?: $Enums.LinkState | Prisma.EnumLinkStateFieldRefInput<$PrismaModel>
-  in?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLinkStateFilter<$PrismaModel> | $Enums.LinkState
-}
-
-export type NestedEnumLinkAccessStateFilter<$PrismaModel = never> = {
-  equals?: $Enums.LinkAccessState | Prisma.EnumLinkAccessStateFieldRefInput<$PrismaModel>
-  in?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumLinkAccessStateFilter<$PrismaModel> | $Enums.LinkAccessState
-}
-
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -251,6 +237,20 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
+}
+
+export type NestedEnumLinkStateFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkState | Prisma.EnumLinkStateFieldRefInput<$PrismaModel>
+  in?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LinkState[] | Prisma.ListEnumLinkStateFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLinkStateFilter<$PrismaModel> | $Enums.LinkState
+}
+
+export type NestedEnumLinkAccessStateFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkAccessState | Prisma.EnumLinkAccessStateFieldRefInput<$PrismaModel>
+  in?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LinkAccessState[] | Prisma.ListEnumLinkAccessStateFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLinkAccessStateFilter<$PrismaModel> | $Enums.LinkAccessState
 }
 
 export type NestedEnumLinkStateWithAggregatesFilter<$PrismaModel = never> = {

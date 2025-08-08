@@ -7,10 +7,10 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/NavLink.js'
-export type * from './models/NavTag.js'
-export type * from './models/NavCategory.js'
-export type * from './models/UserFeedback.js'
-export type * from './models/UserTrack.js'
-export type * from './models/User.js'
-export type * from './commonInputTypes.js'
+export type * from './models/UserInfo'
+export type * from './models/NavLink'
+export type * from './models/NavTag'
+export type * from './models/NavCategory'
+export type * from './models/UserFeedback'
+export type * from './models/UserTrack'
+export type * from './commonInputTypes'

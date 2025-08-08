@@ -10,15 +10,13 @@
 
 import * as process from 'node:process'
 import * as path from 'node:path'
-import { fileURLToPath } from 'node:url'
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 import * as runtime from "@prisma/client/runtime/library"
-import * as $Enums from "./enums.js"
-import * as $Class from "./internal/class.js"
-import * as Prisma from "./internal/prismaNamespace.js"
+import * as $Enums from "./enums"
+import * as $Class from "./internal/class"
+import * as Prisma from "./internal/prismaNamespace"
 
-export * as $Enums from './enums.js'
+export * as $Enums from './enums'
 /**
  * ## Prisma Client
  * 
@@ -26,8 +24,8 @@ export * as $Enums from './enums.js'
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more NavLinks
- * const navLinks = await prisma.navLink.findMany()
+ * // Fetch zero or more UserInfos
+ * const userInfos = await prisma.userInfo.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -41,6 +39,11 @@ export { Prisma }
 path.join(__dirname, "query_engine-windows.dll.node")
 path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
 
+/**
+ * Model UserInfo
+ * 
+ */
+export type UserInfo = Prisma.UserInfoModel
 /**
  * Model NavLink
  * 
@@ -66,11 +69,6 @@ export type UserFeedback = Prisma.UserFeedbackModel
  * 
  */
 export type UserTrack = Prisma.UserTrackModel
-/**
- * Model User
- * 
- */
-export type User = Prisma.UserModel
 
 export type LinkState = $Enums.LinkState
 export const LinkState = $Enums.LinkState

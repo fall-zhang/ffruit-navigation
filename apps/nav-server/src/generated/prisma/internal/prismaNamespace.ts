@@ -15,10 +15,10 @@
  */
 
 import * as runtime from "@prisma/client/runtime/library"
-import type * as Prisma from "../models.js"
-import { type PrismaClient } from "./class.js"
+import type * as Prisma from "../models"
+import { type PrismaClient } from "./class"
 
-export type * from '../models.js'
+export type * from '../models'
 
 export type DMMF = typeof runtime.DMMF
 
@@ -394,12 +394,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  UserInfo: 'UserInfo',
   NavLink: 'NavLink',
   NavTag: 'NavTag',
   NavCategory: 'NavCategory',
   UserFeedback: 'UserFeedback',
-  UserTrack: 'UserTrack',
-  User: 'User'
+  UserTrack: 'UserTrack'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,10 +415,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "navLink" | "navTag" | "navCategory" | "userFeedback" | "userTrack" | "user"
+    modelProps: "userInfo" | "navLink" | "navTag" | "navCategory" | "userFeedback" | "userTrack"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    UserInfo: {
+      payload: Prisma.$UserInfoPayload<ExtArgs>
+      fields: Prisma.UserInfoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserInfoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserInfoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>
+        }
+        findFirst: {
+          args: Prisma.UserInfoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserInfoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>
+        }
+        findMany: {
+          args: Prisma.UserInfoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>[]
+        }
+        create: {
+          args: Prisma.UserInfoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>
+        }
+        createMany: {
+          args: Prisma.UserInfoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserInfoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>[]
+        }
+        delete: {
+          args: Prisma.UserInfoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>
+        }
+        update: {
+          args: Prisma.UserInfoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserInfoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserInfoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserInfoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserInfoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserInfoPayload>
+        }
+        aggregate: {
+          args: Prisma.UserInfoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserInfo>
+        }
+        groupBy: {
+          args: Prisma.UserInfoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserInfoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserInfoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserInfoCountAggregateOutputType> | number
+        }
+      }
+    }
     NavLink: {
       payload: Prisma.$NavLinkPayload<ExtArgs>
       fields: Prisma.NavLinkFieldRefs
@@ -789,80 +863,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    User: {
-      payload: Prisma.$UserPayload<ExtArgs>
-      fields: Prisma.UserFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.UserFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
-        }
-        findFirst: {
-          args: Prisma.UserFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
-        }
-        findMany: {
-          args: Prisma.UserFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
-        }
-        create: {
-          args: Prisma.UserCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
-        }
-        createMany: {
-          args: Prisma.UserCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
-        }
-        delete: {
-          args: Prisma.UserDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
-        }
-        update: {
-          args: Prisma.UserUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
-        }
-        deleteMany: {
-          args: Prisma.UserDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.UserUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
-        }
-        upsert: {
-          args: Prisma.UserUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
-        }
-        aggregate: {
-          args: Prisma.UserAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateUser>
-        }
-        groupBy: {
-          args: Prisma.UserGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UserGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.UserCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -900,6 +900,18 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const UserInfoScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createTime: 'createTime',
+  account: 'account',
+  password: 'password',
+  lastLoginTime: 'lastLoginTime'
+} as const
+
+export type UserInfoScalarFieldEnum = (typeof UserInfoScalarFieldEnum)[keyof typeof UserInfoScalarFieldEnum]
 
 
 export const NavLinkScalarFieldEnum = {
@@ -964,18 +976,6 @@ export const UserTrackScalarFieldEnum = {
 } as const
 
 export type UserTrackScalarFieldEnum = (typeof UserTrackScalarFieldEnum)[keyof typeof UserTrackScalarFieldEnum]
-
-
-export const UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createTime: 'createTime',
-  account: 'account',
-  password: 'password',
-  lastLoginTime: 'lastLoginTime'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1165,12 +1165,12 @@ export interface PrismaClientOptions {
   omit?: GlobalOmitConfig
 }
 export type GlobalOmitConfig = {
+  userInfo?: Prisma.UserInfoOmit
   navLink?: Prisma.NavLinkOmit
   navTag?: Prisma.NavTagOmit
   navCategory?: Prisma.NavCategoryOmit
   userFeedback?: Prisma.UserFeedbackOmit
   userTrack?: Prisma.UserTrackOmit
-  user?: Prisma.UserOmit
 }
 
 /* Types for Logging */
