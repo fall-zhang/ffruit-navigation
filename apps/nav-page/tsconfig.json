@@ -1,11 +1,11 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ES2020",
     "strict": true,
     "module": "ES2020",
+    "composite": true,
     "paths": {
       "@/*": [
         "./*"
@@ -15,6 +15,21 @@
       ]
     },
   },
+  "files": [],
+  "references": [
+    {
+      "path": "./.nuxt/tsconfig.app.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.server.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.shared.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.node.json"
+    }
+  ],
   "vueCompilerOptions": {
     "target": 3.5
   }

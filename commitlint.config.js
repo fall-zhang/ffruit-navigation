@@ -102,7 +102,7 @@ export default {
       // { value: 'types', name: '类型:   💄  类型文件修改', emoji: '💄' }
     ],
     useEmoji: true,
-    scopes: ['nav-admin', 'nav-page', 'nav-server', 'utils', 'asset', 'type', 'global'],
+    scopes: ['nav-admin', 'nav-page', 'nav-server', 'asset', 'type', 'global', 'packages', 'api-doc'],
     customScopesAlign: 'bottom',
     emptyScopesAlias: 'empty',
     customScopesAlias: 'custom',

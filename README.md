@@ -17,22 +17,19 @@
 - bruno-api 使用 [bruno](github.com/usebruno/bruno) 开源软件使用该 API
 
 - nav-admin 应用后端管理页面
-  - 控制 tag
-  - 控制所有导航
-  - 控制所有建议
-  - 控制 nav-page 所有相关数据
+  - 对数据库的内容进行 CRUD
+  - 登录模块
  
 - nav-main 导航应用
   - 提供搜索跳转
 
 - nav-server 后端服务
-  - mongodb 数据库
-  - 获取 tag 等信息
+  - postgresql 数据库
+  - 用户登录
 
 ## 项目部署
 
-一键部署为 docker 
-一键部署为 github-pages
+一键 docker 部署
 
 ## 贡献和支持
 
