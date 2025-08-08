@@ -22,10 +22,10 @@ const relativeList = ref([
     href: '',
     text: '常见问题'
   },
-  {
-    href: '',
-    text: '友情链接'
-  },
+  // {
+  //   href: '',
+  //   text: ''
+  // },
   {
     href: '',
     text: '版权'

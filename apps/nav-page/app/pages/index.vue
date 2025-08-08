@@ -24,11 +24,13 @@ import { useWindowScroll } from '@vueuse/core'
 import { twMerge } from 'tailwind-merge'
 
 const baseStore = useBaseStore()
-axios.get('/api').then(res => {
+$fetch('/api/noe').then(res => {
   console.log(res)
 }).catch(err => {
   console.log(err)
 })
+
+$fetch('/api-hot/')
 const { y } = useWindowScroll()
 watch(() => y, (newVal) => {
   if (newVal.value > 0) {
