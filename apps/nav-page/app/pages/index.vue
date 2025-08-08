@@ -30,7 +30,7 @@ $fetch('/api/noe').then(res => {
   console.log(err)
 })
 
-$fetch('/api-hot/')
+$fetch('/api-hot/bilibili')
 const { y } = useWindowScroll()
 watch(() => y, (newVal) => {
   if (newVal.value > 0) {

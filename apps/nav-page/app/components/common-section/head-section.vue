@@ -42,7 +42,10 @@ function onChangeFile(e:Event) {
   if (!files) return
   const selectFile = files[0]
   // 转换为 Base64 格式
-
+  if (!selectFile) {
+    console.warn('without select file')
+    return
+  }
   const fileUrl = URL.createObjectURL(selectFile)
   baseStore.bgImageUrl = fileUrl
 
