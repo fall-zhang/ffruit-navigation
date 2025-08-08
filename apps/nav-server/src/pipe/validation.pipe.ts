@@ -5,8 +5,6 @@ import { ZodSchema } from 'zod'
 @Injectable()
 export class ParseCodeTypePipe implements PipeTransform {
   transform (value: string, metadata: ArgumentMetadata) {
-    console.log('🚀 ~ ValidationPipe ~ transform ~ value:', metadata)
-
     const isValidate = ['chart', 'table'].includes(value)
     if (isValidate) {
       return value

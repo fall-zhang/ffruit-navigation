@@ -17,7 +17,7 @@ export class NavService {
   }
 
   async create (createNavDto: CreateNavDto) {
-    // const savedNav = new this.navLinkModel(createNavDto)
+    const savedNav = this.create(createNavDto)
     return true
   }
 
@@ -58,7 +58,11 @@ export class NavService {
     let result:any[]
     let totalLength:number
     try {
-      const data = await this.prisma.navLink.findMany({ })
+      const data = await this.prisma.navLink.findMany({
+        where: {
+
+        }
+      })
       totalLength = await this.prisma.navLink.count()
       if (!page || !pageSize) {
         const startIndex = (page - 1) * pageSize
