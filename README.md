@@ -14,6 +14,8 @@
 
 ## 项目结构
 
+- bruno-api 使用 [bruno](github.com/usebruno/bruno) 开源软件使用该 API
+
 - nav-admin 应用后端管理页面
   - 控制 tag
   - 控制所有导航
