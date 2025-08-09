@@ -1,9 +1,10 @@
 <template>
-  <div class="flex h-dvh w-full bg-(--background) text-(--foreground) transition-all">
-    <div class="grow flex flex-col z-100">
-      <HeadSection class="shrink-0"  />
-      <router-view />
-      <div class="grow"></div>
+  <div class="flex flex-col h-dvh w-full bg-(--background) text-(--foreground) transition-all">
+    <HeadSection class="shrink-0 z-10"  />
+    <div class="grow flex flex-col z-100 overflow-hidden">
+      <div class="grow overflow-auto">
+        <router-view />
+      </div>
       <PageFooter></PageFooter>
       <AppFixedButton />
       <LinkJumpNotice/>

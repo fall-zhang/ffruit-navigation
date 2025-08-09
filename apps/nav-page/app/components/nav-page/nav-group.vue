@@ -27,14 +27,14 @@ const props = defineProps<{
 }>()
 
 watch(() => props.groupList, () => {
-  activeGroupId.value = props.groupList[0].id
+  activeGroupId.value = props.groupList[0]?.id || ''
 }, {
   immediate: true
 })
 
 const currentGroup = computed(() => {
   if (props.groupList.length > 0) {
-    return props.groupList[0].navList
+    return props.groupList[0]?.navList || []
   }
   return []
 })
