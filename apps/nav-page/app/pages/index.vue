@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full justify-center flex flex-col items-center ">
+  <div class="w-full justify-center flex flex-col items-center -scroll-mr-60">
     <div class="h-[35vh] flex items-center justify-end flex-col">
       <HourTime @click="onClickTime"/>
       <CenterSearch class="mt-3" />
     </div>
-    <div :class="twMerge('relative max-w-[1536px] h-100vh w-10/12 px-6 transition-all',baseStore.navEnable ? 'opacity-100 translate-1.5':'pointer-events-none opacity-0')">
+    <div :class="twMerge('relative max-w-[1536px] h-100vh w-10/12 px-6 transition-all',baseStore.navEnable ? 'h-full opacity-100 translate-1.5':'h-40 pointer-events-none opacity-0 overflow-hidden')">
       <!-- <RankList /> -->
       <HotListGroup :groupList="hotGroupList" />
       <!-- <NavGroup  :groupList="groupList" /> -->
@@ -28,11 +28,11 @@ import { getApiTitle } from 'nav-types'
 import type { HotApiResType, HotAPIType } from 'nav-types'
 
 const baseStore = useBaseStore()
-$fetch('/api/noe').then(res => {
-  console.log(res)
-}).catch(err => {
-  console.log(err)
-})
+// $fetch('/api/noe').then(res => {
+//   console.log(res)
+// }).catch(err => {
+//   console.log(err)
+// })
 const hotGroupList = ref<Array<{
   title: string;
   icon: string

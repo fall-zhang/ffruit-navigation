@@ -9,7 +9,7 @@
       <AppFixedButton />
       <LinkJumpNotice/>
     </div>
-    <img :src="baseStore.bgImageUrl"  class="backface-hidden object-fit fixed h-screen w-screen left-0 right-0 top-0 bottom-0 object-cover" alt="">
+    <img :src="baseStore.bgImageUrl"  class="backface-hidden select-none object-fit absolute h-screen w-screen left-0 right-0 top-0 bottom-0 object-cover z-0" alt="">
   </div>
 </template>
 
