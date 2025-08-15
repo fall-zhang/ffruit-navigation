@@ -41,13 +41,15 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import type { TableItemType } from './data-schema'
+import type { NavDataType } from 'nav-types'
 import { useEffect, useMemo, useState } from 'react'
 import { FormEditDrawer } from './table-edit-drawer'
 import { CommonTableHeader } from '@/components/table-common/table-header'
 import { CommonTableFooter } from '@/components/table-common/table-footer'
 import * as api from './api/api'
-const initData:TableItemType[] = [{
+import { PlusIcon, UploadIcon } from 'lucide-react'
+import { FormItemUpload } from '@/components/wrapped/Form/FormItemUpload'
+const initData:NavDataType[] = [{
   id: '1321',
   name: '百度',
   href: 'https://www.baidu.com',
@@ -58,18 +60,18 @@ const initData:TableItemType[] = [{
   auditTime: '',
   createTime: '',
   tag: [],
-  status: '',
+  status: 'CHECK',
   view: 0,
   star: 0,
-  accessState: 0
+  accessState: 'NORMAL'
 }]
 
 function getTableColumn ({
   onClickRowCommand
 }:{
-  onClickRowCommand(command:string, rowInfo:TableItemType):void
-}):ColumnDef<TableItemType>[] {
-  const tableColumns: ColumnDef<TableItemType>[] = [
+  onClickRowCommand(command:string, rowInfo:NavDataType):void
+}):ColumnDef<NavDataType>[] {
+  const tableColumns: ColumnDef<NavDataType>[] = [
     {
       id: 'select',
       header: ({ table }) => (
@@ -100,7 +102,7 @@ function getTableColumn ({
       accessorKey: 'name',
       header: '网址名称',
       cell: ({ row }) => {
-        return <div >{row.original.name}</div>
+        return <div className='w-80 text-ellipsis overflow-hidden'>{row.original.name}</div>
       },
       enableHiding: false
     },
@@ -108,8 +110,8 @@ function getTableColumn ({
       accessorKey: 'href',
       header: '网址链接',
       cell: ({ row }) => (
-        <div className="w-32">
-          <a href={row.original.href} className="text-muted-foreground px-1.5">
+        <div className=" w-60 overflow-hidden text-ellipsis">
+          <a href={row.original.href} className=" text-muted-foreground px-1.5">
             {row.original.href}
           </a>
         </div>
@@ -134,20 +136,6 @@ function getTableColumn ({
       )
     },
     {
-      accessorKey: 'totalDownload',
-      header: () => <div className="w-full ">总计下载量</div>,
-      cell: ({ row }) => (
-        <div>
-          {row.original.totalDownload}
-          {/* <Input
-            className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-            defaultValue={row.original.limit}
-            id={`${row.original.id}-limit`}
-          /> */}
-        </div>
-      )
-    },
-    {
       id: 'actions',
       cell: ({ row }) => {
         return (<DropdownMenu>
@@ -162,7 +150,6 @@ function getTableColumn ({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-32">
             <DropdownMenuItem onClick={() => onClickRowCommand('edit', row.original)}>编辑</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onClickRowCommand('upload', row.original)}>上传</DropdownMenuItem>
             <DropdownMenuItem onClick={() => onClickRowCommand('download', row.original)}>下载</DropdownMenuItem>
             <DropdownMenuItem onClick={() => onClickRowCommand('abandon', row.original)}>撤销发布</DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -176,7 +163,7 @@ function getTableColumn ({
   return tableColumns
 }
 
-function TableRowCell ({ row }: { row: Row<TableItemType> }) {
+function TableRowCell ({ row }: { row: Row<NavDataType> }) {
   return (
     <TableRow
       data-state={row.getIsSelected() && 'selected'}
@@ -196,21 +183,21 @@ function TableRowCell ({ row }: { row: Row<TableItemType> }) {
 export default function RichContentTable () {
   const [tableData, setTableData] = useState(initData)
   const [drawerVisible, setDrawerVisible] = useState<boolean>(false)
-  const [drawerEditItem, setDrawerEditItem] = useState<TableItemType>({
-    id: null,
+  const [drawerEditItem, setDrawerEditItem] = useState<NavDataType>({
+    id: '',
     name: '',
     href: '',
     desc: '',
     logo: '',
     authorName: '',
-    status: 1,
+    status: 'CHECK',
     authorUrl: '',
     auditTime: '',
     createTime: '',
     tag: [],
     view: 0,
     star: 0,
-    accessState: 0
+    accessState: 'NORMAL'
   })
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -219,37 +206,25 @@ export default function RichContentTable () {
   )
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 10
+    pageSize: 20
   })
   useEffect(() => {
     // 获取 release 信息
     api.getNavTable({
-      pagination: 1
+      page: pagination.pageIndex + 1,
+      pageSize: pagination.pageSize
     }).then(res => {
-
+      console.log('🚀 ~ RichContentTable ~ res:', res)
+      setTableData(res.data.data)
     }).catch(err => {
       setTableData([
-        {
-          id: '999999999',
-          name: '',
-          href: '',
-          desc: '',
-          logo: '',
-          authorName: '',
-          status: 1,
-          authorUrl: '',
-          auditTime: '',
-          createTime: '',
-          tag: [],
-          view: 0,
-          star: 0,
-          accessState: 0
-        }
+
       ])
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function onSubmit (values: TableItemType) {
+  function onSubmit (values: NavDataType) {
     if (values.id) {
       api.patchNavTable({
         ...values
@@ -271,7 +246,7 @@ export default function RichContentTable () {
     }
   }
   const tableColumns = useMemo(() => {
-    function onClickRowCommand (command:string, rowInfo:TableItemType):void {
+    function onClickRowCommand (command:string, rowInfo:NavDataType):void {
       if (command === 'edit') {
         setDrawerEditItem({
           ...rowInfo
@@ -320,7 +295,7 @@ export default function RichContentTable () {
 
   function onAddNewItem () {
     setDrawerEditItem(() => ({
-      id: null,
+      id: '',
       name: '',
       href: '',
       desc: '',
@@ -333,13 +308,25 @@ export default function RichContentTable () {
       tag: [],
       view: 0,
       star: 0,
-      accessState: 0
+      accessState: 'NORMAL'
     }))
     setDrawerVisible(true)
   }
+  function onUploadFile(fileList:FileList) {
+
+  }
   return (<>
-    <div className="flex items-center justify-between px-4 lg:px-6">
-      <CommonTableHeader tableInfo={tableInfo} onAddNewItem={onAddNewItem}/>
+    <div className="flex items-center  px-4 lg:px-6 my-2 gap-4">
+      <Button variant="outline" size="sm" onClick={onAddNewItem}>
+        <PlusIcon />
+        <span className="hidden lg:inline">新增项</span>
+      </Button>
+      <FormItemUpload onChange={onUploadFile}>
+        <Button variant="outline" size="sm" onClick={onAddNewItem}>
+          <UploadIcon />
+          <span className="hidden lg:inline">上传书签</span>
+        </Button>
+      </FormItemUpload>
     </div>
     <div className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6" >
       <div className="overflow-hidden rounded-lg border">

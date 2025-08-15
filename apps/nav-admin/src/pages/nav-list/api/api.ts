@@ -7,7 +7,9 @@ type ParamData = Record<string, any>
  * 获取表格
  */
 export function getNavTable (param:ParamData) {
-  return http.get('/nav', param)
+  return http.get('/nav', {
+    params: param
+  })
 }
 
 /**

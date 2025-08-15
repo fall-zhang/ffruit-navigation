@@ -25,7 +25,7 @@ export const FormItemUpload:FC<{
     }
     onChange(files)
   }
-  return <div className={cn(' touch-none none', className)} onClick={onUploadFile} aria-disabled={disable} >
+  return <div className={cn('touch-none none', className)} onClick={onUploadFile} aria-disabled={disable} >
     {children}
     <input type="file" className='hidden' ref={uploadButtonRef} onChange={onChangeFile} disabled={disable}/>
   </div>
