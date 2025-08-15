@@ -1,11 +1,10 @@
 <template>
   <dialog  ref="noticeModal" class="modal ">
-    <div class="modal-box bg-neutral-100">
+    <div class="modal-box bg-neutral-100 dark:bg-neutral-800" @click="onClickModal">
       <h3 class="text-lg font-bold flex justify-between">
         跳转提示
       </h3>
       <div class=" flex flex-col justify-center items-center">
-
         <p class="pt-1.5 text-base">即将离开本站，访问第三方网站</p>
         <a class="pt-1.5 link text-[#9e77f8]" :href="curURL" >
           <p>{{ curURL }}</p>
@@ -20,7 +19,7 @@
       </div>
       <div class="footer pb-4 flex justify-center">
         <form method="dialog">
-          <button class="btn rounded-md px-5 py-1.5 mt-3 bg-white" @click="onContinue">继续访问</button>
+          <button class="btn rounded-md px-5 py-1.5 mt-3 bg-white dark:bg-neutral-900" @click="onContinue">继续访问</button>
         </form>
       </div>
     </div>
@@ -44,6 +43,9 @@ function onContinue() {
   modalRef.value?.close()
 }
 
+function onClickModal() {
+  onCloseDialog()
+}
 function onCloseDialog() {
   dialogVisible.value = false
   modalRef.value?.close()

@@ -3,7 +3,7 @@ export type LinkGroup = {
   id:string
   name:string
   // 子分组的 id
-  subGroup:string
+  parent:string | number
   navList:NavDataType[]
 }
 

@@ -14,13 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import RankList from '../components/nav-page/rank-list.vue'
 import HourTime from '../components/home-page/hour-time.vue'
 import CenterSearch from '../components/home-page/center-search.vue'
 import useBaseStore from '@/store/index'
 import axios from 'axios'
-import type { LinkGroup, LinkItem } from '@/types/global'
-import NavGroup from '@/components/nav-page/nav-group.vue'
+import type { LinkGroup } from '@/types/global'
 import { useWindowScroll } from '@vueuse/core'
 import { twMerge } from 'tailwind-merge'
 import HotListGroup from '@/components/hot-page/hot-group.vue'
