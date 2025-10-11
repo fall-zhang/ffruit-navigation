@@ -20,13 +20,13 @@ export class AuthService {
         state: false
       }
     }
-    if (user.password !== pass) {
-      return {
-        msg: '密码错误',
-        data: null,
-        state: false
-      }
-    }
+    // if (user.password !== pass) {
+    //   return {
+    //     msg: '密码错误',
+    //     data: null,
+    //     state: false
+    //   }
+    // }
 
     return {
       msg: '登录成功',

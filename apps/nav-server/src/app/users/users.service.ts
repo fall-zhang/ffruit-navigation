@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { PrismaService } from '@/prisma.service'
-import { User } from '@prisma/client'
+// import { User } from '@prisma/client'
+// import { User } from '@/generated/prisma/client'
+// import { UserFeedback } from '@/generated/prisma/models'
+import { UserFeedback } from '@/generated/prisma/client'
 type LoginRes = {
   msg:string
   state:boolean
@@ -21,10 +24,10 @@ export class UsersService {
     return 'This action returns all users'
   }
 
-  async findOne(name: string):Promise<User> {
-    const user = await this.prisma.user.findFirst({
+  async findOne(name: string):Promise<UserFeedback> {
+    const user = await this.prisma.userFeedback.findFirst({
       where: {
-        name
+        // name
       }
     })
     return user
