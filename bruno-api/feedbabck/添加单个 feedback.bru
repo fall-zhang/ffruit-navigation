@@ -1,0 +1,23 @@
+meta {
+  name: 添加单个 feedback
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:4773/feedback
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "programName":"项目名称",
+    "type":"feature",
+    "title":"正常情况下无法进行保存"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
