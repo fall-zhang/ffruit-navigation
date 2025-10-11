@@ -1,11 +1,13 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
+  "include": ["./*.ts"],
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ES2020",
     "strict": true,
     "module": "ES2020",
     "noEmit": true,
+    "exactOptionalPropertyTypes": true,
     "paths": {},
   },
   "vueCompilerOptions": {

@@ -80,5 +80,3 @@ const markGroupList = getMarkGroup(userMarkList)
 console.log('markGroupList', markGroupList)
 
 // database.push()
-console.log('flatBookmark', flatBookmark.length)
-
