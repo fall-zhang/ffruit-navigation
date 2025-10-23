@@ -2,7 +2,7 @@
   <div class="flex h-dvh w-full bg-(--background) text-(--foreground) transition-all">
     <div class="grow flex flex-col z-100">
       <HeadSection class="shrink-0"  />
-      <router-view />
+      <NuxtPage />
       <div class="grow"></div>
       <PageFooter></PageFooter>
       <AppFixedButton />
