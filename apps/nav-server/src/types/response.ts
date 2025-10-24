@@ -3,10 +3,14 @@ type SuccessRes<T> = {
   msg:string
   data:T
 }
-type FailRes<T> = {
+type FailRes = {
   code:0
   msg:string
-  data:T
+  err:unknown
 }
 
-export type ResponseData<T> = SuccessRes<T> | FailRes<T>
+type ResponseObj<T> = SuccessRes<T> | FailRes
+
+
+// export type ResData extends Promise
+export type ResData<T = unknown> = Promise<ResponseObj<T>>

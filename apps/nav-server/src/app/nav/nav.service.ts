@@ -4,6 +4,8 @@ import { UpdateNavDto } from './dto/update-nav.dto'
 import { PrismaService } from '@/prisma.service'
 import { excludeUselessMark, firefoxBookmarkParse, FirefoxMarkItem, getMarkGroup } from '@/utils/firefox-bookmark-parse'
 import { NavCategoryCreateManyInput, NavLinkCreateManyInput } from '@/generated/prisma/models'
+import { ResData } from '@/types/response'
+import { NavLink } from '@/generated/prisma/client'
 
 type PaginationQuery = {
   pageSize:number
@@ -16,11 +18,23 @@ export class NavService {
 
   }
 
-  async create (createNavDto: CreateNavDto) {
-    const savedNav = this.create(createNavDto)
+  async create (createNavDto: CreateNavDto):ResData<NavLink> {
+    // 查询对应 tag 如果不存在就添加
+    const savedNav = await this.prisma.navLink.create({
+      data: {
+        ...createNavDto,
+        accessState: 'NORMAL',
+        status: 'CHECK',
+        auditTime: new Date().toISOString(),
+        createTime: new Date().toISOString(),
+        tag: undefined,
+        categoryId: createNavDto.categoryId || '0'
+      }
+    })
     return {
-      code: 200,
-      msg: '新增成功'
+      code: 1,
+      msg: '新增成功',
+      data: savedNav
     }
   }
 
@@ -28,6 +42,17 @@ export class NavService {
     const fireFoxMark:FirefoxMarkItem[] = JSON.parse(jsonFile).children
 
     const navList = firefoxBookmarkParse(fireFoxMark)
+    const navCount = await this.prisma.navLink.count()
+    if (navCount < 10) {
+      await this.prisma.navLink.createMany({
+        data: navList.map(item => {
+          return {
+            ...item,
+            parent: undefined
+          }
+        })
+      })
+    }
     const pureNavList = excludeUselessMark(navList)
 
     const categoryList:NavCategoryCreateManyInput[] = getMarkGroup(navList)
@@ -61,20 +86,17 @@ export class NavService {
     let result
     let totalLength:number
     try {
-      const data = await this.prisma.navLink.findMany({
-        where: {
+      const pageInfo = {
+        take: pageSize || 20,
+        skip: page * pageSize || 0
+      }
 
-        }
+      const data = await this.prisma.navLink.findMany({
+        ...pageInfo
       })
       totalLength = await this.prisma.navLink.count()
-      if (!page || !pageSize) {
-        const startIndex = (page - 1) * pageSize
-        result = data.splice(startIndex, pageSize)
-      } else {
-        result = data
-      }
+      result = data
     } catch (err) {
-      totalLength = 0
       result = []
       console.log('err', err)
     }

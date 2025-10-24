@@ -6,6 +6,7 @@ import cheerio from 'cheerio'
 import { warn } from 'console'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { promises as fsPromise } from 'fs'
+import { ResData } from '@/types/response'
 // import { ZodValidatePipe } from '@/pipe/validation.pipe'
 // import { navDataSchema } from 'nav-types'
 
@@ -15,16 +16,21 @@ export class NavController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  async create(@Body() createNavDto: CreateNavDto) {
+  async create(@Body() createNavDto: CreateNavDto):ResData {
     try {
       await this.navService.create(createNavDto)
+      return {
+        code: 1,
+        msg: 'ok',
+        data: '创建成功'
+      }
     } catch (e) {
       warn(e)
-    }
-    return {
-      code: 1,
-      msg: 'ok',
-      data: '创建成功'
+      return {
+        code: 0,
+        msg: 'ok',
+        err: e
+      }
     }
   }
 
@@ -53,6 +59,14 @@ export class NavController {
       msg: 'ok',
       data: res
     }
+  }
+
+  @Get('/homepage')
+  async findHomePage(@Query('pageSize') pageSize: number, @Query('page') page: number) {
+    return await this.navService.findAll({
+      pageSize,
+      page
+    })
   }
 
   @Get()

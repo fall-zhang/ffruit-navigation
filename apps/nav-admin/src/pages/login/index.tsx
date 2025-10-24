@@ -1,5 +1,5 @@
-import { message, Tabs } from 'antd'
-import React, { FormEvent, FormEventHandler, useState } from 'react'
+import { message } from 'antd'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './index.module.less'
 import { login } from '@/apis/api'
@@ -8,7 +8,6 @@ import { CURRENT_USER, SESSION_TOKEN_KEY } from '@/const'
 import { LoginForm } from '@/components/login-form'
 import { FieldValues } from 'react-hook-form'
 import { cn } from '@/lib/utils'
-
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false)

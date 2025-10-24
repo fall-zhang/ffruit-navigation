@@ -5,7 +5,6 @@ import 'dotenv/config'
 
 const connectionString = `${process.env.DATABASE_POSTGRES_URL}`
 
-console.log('⚡️ line:6 ~ pgConnectString: ', connectionString)
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
