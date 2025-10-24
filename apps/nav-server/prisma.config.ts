@@ -1,12 +1,13 @@
 import path from 'node:path'
-import { PrismaConfig } from 'prisma/config'
+import { defineConfig } from 'prisma/config'
 import 'dotenv/config'
 import { PrismaPg } from '@prisma/adapter-pg'
 
 const pgConnectString = process.env.DATABASE_POSTGRES_URL
 
-export default {
-  schema: path.join('prisma', 'schema.prisma'),
+
+export default defineConfig({
+  schema: path.join('prisma'),
   experimental: {
     adapter: true
   },
@@ -15,4 +16,4 @@ export default {
       DATABASE_POSTGRES_URL: pgConnectString
     })
   }
-} satisfies PrismaConfig
+})

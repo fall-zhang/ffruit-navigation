@@ -48,6 +48,7 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 export const ModelName = {
+  UserInfo: 'UserInfo',
   NavLink: 'NavLink',
   NavTag: 'NavTag',
   NavCategory: 'NavCategory',
@@ -69,6 +70,18 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const UserInfoScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createTime: 'createTime',
+  account: 'account',
+  password: 'password',
+  lastLoginTime: 'lastLoginTime'
+} as const
+
+export type UserInfoScalarFieldEnum = (typeof UserInfoScalarFieldEnum)[keyof typeof UserInfoScalarFieldEnum]
 
 
 export const NavLinkScalarFieldEnum = {

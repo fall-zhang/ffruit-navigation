@@ -18,7 +18,10 @@ export class NavService {
 
   async create (createNavDto: CreateNavDto) {
     const savedNav = this.create(createNavDto)
-    return true
+    return {
+      code: 200,
+      msg: '新增成功'
+    }
   }
 
   async createMany (jsonFile:string) {
@@ -55,7 +58,7 @@ export class NavService {
 
   async findAll ({ page, pageSize }:PaginationQuery) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
-    let result:any[]
+    let result
     let totalLength:number
     try {
       const data = await this.prisma.navLink.findMany({

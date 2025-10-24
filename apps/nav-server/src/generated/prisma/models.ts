@@ -7,6 +7,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/UserInfo'
 export type * from './models/NavLink'
 export type * from './models/NavTag'
 export type * from './models/NavCategory'

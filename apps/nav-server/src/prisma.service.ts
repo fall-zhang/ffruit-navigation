@@ -1,9 +1,11 @@
 import { Injectable, OnModuleInit } from '@nestjs/common'
 import { PrismaClient } from '@/generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
+import 'dotenv/config'
 
-const connectionString = `${process.env.DATABASE_URL}`
+const connectionString = `${process.env.DATABASE_POSTGRES_URL}`
 
+console.log('⚡️ line:6 ~ pgConnectString: ', connectionString)
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
