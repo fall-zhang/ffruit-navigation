@@ -81,7 +81,7 @@ export class NavService {
     return result
   }
 
-  async findAll ({ page, pageSize }:PaginationQuery) {
+  async findAll (param:Partial<UpdateNavDto>, { page, pageSize }:PaginationQuery) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
     let result
     let totalLength:number
@@ -92,7 +92,11 @@ export class NavService {
       }
 
       const data = await this.prisma.navLink.findMany({
-        ...pageInfo
+        ...pageInfo,
+        where: {
+          ...param,
+          tag: undefined
+        }
       })
       totalLength = await this.prisma.navLink.count()
       result = data
@@ -109,8 +113,17 @@ export class NavService {
     }
   }
 
-  findOne (id: number) {
-    return `This action returns a #${id} nav`
+  async findOneNavById (id: number):ResData<NavLink> {
+    const navInfo = await this.prisma.navLink.findFirst({
+      where: {
+        id
+      }
+    })
+    return {
+      code: 1,
+      data: navInfo,
+      msg: '请求成功'
+    }
   }
 
   async update (updateNavDto: UpdateNavDto) {
@@ -126,6 +139,9 @@ export class NavService {
   }
 
   async getRandomNav () {
+    const navCount = await this.prisma.navLink.count()
+    Math.random()
+
     // const allData = (await this.navLinkModel.find())
     // this.navLinkModel.
     // const dataLength = allData.length
