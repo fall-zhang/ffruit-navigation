@@ -4,19 +4,12 @@ import { UpdateNavDto } from './dto/update-nav.dto'
 import { PrismaService } from '@/prisma.service'
 import { excludeUselessMark, firefoxBookmarkParse, FirefoxMarkItem, getMarkGroup } from '@/utils/firefox-bookmark-parse'
 import { NavCategoryCreateManyInput, NavLinkCreateManyInput } from '@/generated/prisma/models'
-import { ResData } from '@/types/response'
+import { Pagination, PaginationReq, PaginationRes, ResData } from '@/types/response'
 import { NavLink } from '@/generated/prisma/client'
-
-type PaginationQuery = {
-  pageSize:number
-  page:number
-}
 
 @Injectable()
 export class NavService {
-  constructor (private prisma: PrismaService) {
-
-  }
+  constructor (private prisma: PrismaService) { }
 
   async create (createNavDto: CreateNavDto):ResData<NavLink> {
     // 查询对应 tag 如果不存在就添加
@@ -81,9 +74,9 @@ export class NavService {
     return result
   }
 
-  async findAll (param:Partial<UpdateNavDto>, { page, pageSize }:PaginationQuery) {
+  async findAll (param:Partial<UpdateNavDto>, { page, pageSize }:PaginationReq) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
-    let result
+    let result = []
     let totalLength:number
     try {
       const pageInfo = {
@@ -101,7 +94,6 @@ export class NavService {
       totalLength = await this.prisma.navLink.count()
       result = data
     } catch (err) {
-      result = []
       console.log('err', err)
     }
     return {

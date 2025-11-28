@@ -6,7 +6,7 @@ import cheerio from 'cheerio'
 import { warn } from 'console'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { promises as fsPromise } from 'fs'
-import { Pagination, ResData } from '@/types/response'
+import { Pagination, PaginationReq, PaginationRes, ResData } from '@/types/response'
 // import { ZodValidatePipe } from '@/pipe/validation.pipe'
 // import { navDataSchema } from 'nav-types'
 
@@ -14,7 +14,7 @@ import { Pagination, ResData } from '@/types/response'
 export class NavController {
   constructor(private readonly navService: NavService) { }
   @Get()
-  async findAll(@Query() param: UpdateNavDto & Pagination) {
+  async findAll(@Query() param: UpdateNavDto & PaginationReq) {
     return await this.navService.findAll(param, {
       pageSize: param.pageSize,
       page: param.page
@@ -51,7 +51,7 @@ export class NavController {
 
   @Post('/uploadFile')
   @UseInterceptors(FileInterceptor('file'))
-  async createFile(@Body() createNavDto: CreateNavDto, @UploadedFile() uploadFile: Express.Multer.File) {
+  async createFile(@UploadedFile() uploadFile: Express.Multer.File) {
     let res
     // URL.createObjectURL(new Blob([]))
     try {
@@ -76,7 +76,7 @@ export class NavController {
     }
   }
 
-  @Post('/homepage')
+  @Get('/homepage')
   async findHomePage(@Query('pageSize') pageSize: number, @Query('page') page: number, @Query() param: UpdateNavDto) {
     return await this.navService.findAll(param, {
       pageSize,
@@ -112,7 +112,8 @@ export class NavController {
     }
   }
 
-  @Post('/random')
+  // 获取一个随机的网址
+  @Get('/random')
   async findRandom() {
     const result = await this.navService.getRandomNav()
     return result

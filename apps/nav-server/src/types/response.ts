@@ -11,6 +11,22 @@ type FailRes = {
 
 type ResponseObj<T> = SuccessRes<T> | FailRes
 
-
 // export type ResData extends Promise
 export type ResData<T = unknown> = Promise<ResponseObj<T>>
+
+// pageInfo
+
+export type Pagination = {
+  total:number
+  pageSize:number
+  page:number
+}
+export type PaginationRes = {
+  total:number
+  pageSize:number
+  page:number
+}
+export type PaginationReq = {
+  pageSize:number
+  page:number
+}
