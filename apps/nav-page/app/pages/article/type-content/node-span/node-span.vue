@@ -19,13 +19,7 @@
 
 <script lang="ts" setup>
 import type { WordTypeUnit } from '../../types'
-import immer from 'immer'
 const props = defineProps<WordTypeUnit>()
-// const typedText = ref(props.text)
-// const notTypeText = ref('')
-// const inTypeText = ref('')
-// props.input
-// props.text
 // 计算获取
 const typedWrongList = computed(() => {
   const inputText = props.input || ''

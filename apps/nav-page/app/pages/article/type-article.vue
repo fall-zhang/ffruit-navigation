@@ -59,6 +59,9 @@ function onKeyPress(ev:KeyboardEvent) {
         console.warn('内容已经清空，无法继续删除')
       }
     }
+    if (['Enter'].includes(ev.key)) {
+      // 切换 section
+    }
     return
   }
   const currentEdit = sentence.value[editIndex]
