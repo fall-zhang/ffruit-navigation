@@ -1,25 +1,32 @@
-import type { TypeUnit } from '../types'
+import type { WordTypeUnit } from '../types'
 
-export const structuredList:TypeUnit[] = [
+export const structuredList:WordTypeUnit[] = [
   {
     type: 'word',
     tagName: 'span',
     state: 'typed',
-    text: 'who',
-    input: ''
-  },
-  {
-    type: 'word',
-    state: 'typing',
-    tagName: 'span',
-    text: ' ',
-    input: ' '
+    text: 'Who ',
+    input: 'Who '
   },
   {
     type: 'word',
     state: 'un-type',
     tagName: 'span',
-    text: 'are'
+    text: 'is ',
+    input: ''
+  },
+  {
+    type: 'word',
+    state: 'un-type',
+    tagName: 'span',
+    text: 'your ',
+    input: ''
+  },
+  {
+    type: 'word',
+    state: 'un-type',
+    tagName: 'span',
+    text: 'lover. ',
+    input: ''
   }
 ]
-

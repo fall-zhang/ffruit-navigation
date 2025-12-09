@@ -1,31 +1,58 @@
 <template>
-  <template v-if="props.state==='typing'">
-    <span class="is-typed">{{typedText}}</span>
+  <!-- 用户可能故意输入错误内容 -->
+  <template v-if="props.state!=='un-type'">
+    <!-- <span class="is-typed">{{typedText}}</span>
     <span class="in-type border-b-2 border-b-neutral-500">{{ inTypeText }}</span>
-    <span class="not-type">{{ notTypeText }}</span>
+    <span class="not-type">{{ notTypeText }}</span> -->
+    <template v-for="(text,index) in typedWrongList" :key="index">
+      <span v-if="text.isInput && text.correct" class="typed-right">{{ text.letter }}</span>
+      <span v-else-if="text.isInput"  class="type-wrong">{{ text.letter }}</span>
+      <span v-else class="not-type">{{ text.letter }}</span>
+    </template>
   </template>
   <span v-else :class="{
     'not-type':props.state==='un-type',
-    'is-typed':props.state==='typed',
   }">
     {{ props.text }}
   </span>
 </template>
 
 <script lang="ts" setup>
-import type { TypeUnit } from '../../types'
-const props = defineProps<TypeUnit>()
-const typedText = ref(props.text)
-const notTypeText = ref('')
-const inTypeText = ref('')
-
+import type { WordTypeUnit } from '../../types'
+import immer from 'immer'
+const props = defineProps<WordTypeUnit>()
+// const typedText = ref(props.text)
+// const notTypeText = ref('')
+// const inTypeText = ref('')
+// props.input
+// props.text
+// 计算获取
+const typedWrongList = computed(() => {
+  const inputText = props.input || ''
+  const inputLength = inputText.length || 0
+  const result = props.text.split('').map((letter, index) => {
+    const isInput = inputLength > index
+    const isTyping = inputLength === index
+    return {
+      letter,
+      isInput,
+      isTyping,
+      correct: inputText[index] === letter
+    }
+  })
+  return result
+})
 </script>
 
 <style lang="scss" scoped>
 .not-type {
   color: gray;
 }
-.is-typed{
+.typed-right{
   color: rgb(63, 237, 63);
+}
+.type-wrong{
+  color: rgb(237, 63, 63);
+  border-bottom: 2px solid rgb(237, 63, 63);
 }
 </style>

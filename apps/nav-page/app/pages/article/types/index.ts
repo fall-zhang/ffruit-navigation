@@ -1,26 +1,3 @@
-export type ContentType = 'word' | 'space' | 'punctuation'
+// 分割为文章 `article` 段落 `section`，句子 `sentence`，词语`word`。
 
-export type UnTypeItem = {
-  type: ContentType, // 内容类型
-  tagName: 'span',
-  state: 'un-type', // 该字符的输入状态
-  text: string // 正确内容
-  input?: string // 用户输入的内容
-}
-
-export type TypingItem = {
-  type: ContentType,
-  tagName: 'span',
-  state: 'typing',
-  text: string
-  input: string
-}
-
-export type TypedItem = {
-  type: ContentType,
-  tagName: 'span',
-  state: 'typed',
-  text: string
-  input: string
-}
-export type TypeUnit = UnTypeItem | TypingItem | TypedItem
+export * from './word-type'

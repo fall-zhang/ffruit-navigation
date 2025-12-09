@@ -2,35 +2,96 @@
 <!-- 一个练习打英文的工具 -->
 <template>
   <div class="w-full h-full" @click="onClickTypeApp">
-    {{ inputText }}
     <p class="article-paragraph">
-      <span v-for="(spanInfo,index) in renderList" :key="index">{{spanInfo.text}}</span>
+      <TypeContent :sentence="sentence"></TypeContent>
     </p>
     <input type="text" ref="inputRef" class="opacity-0" v-model="inputText" @keypress="onKeyPress" @keydown="onKeyPress">
   </div>
+  <NuxtPage page-key="static"></NuxtPage>
 </template>
 
 <script lang="ts" setup>
-
+import type { WordTypeUnit } from './types'
+import TypeContent from './type-content/type-content.vue'
 import { structuredList } from './utils/node-list'
-const renderList = ref(structuredList)
+import { produce } from 'immer'
+// const renderList = ref(structuredList)
 const inputText = ref('')
 const inputRef = useTemplateRef('inputRef')
+const sentence = ref<WordTypeUnit[]>(structuredList)
+const typeState = reactive({
+  startTime: 0,
+  errInputCount: 0,
+  totalInputCount: 0,
+  editSpanIndex: 0
+})
+
+const isFocus = ref(false)
 
 function onClickTypeApp () {
   inputRef.value?.focus()
+  isFocus.value = true
 }
 function onKeyPress(ev:KeyboardEvent) {
+  if (sentence.value.length === 0) {
+    console.warn('没有可输入的内容')
+  }
+  let editIndex = sentence.value.findIndex(item => {
+    return (item.state === 'typing') || (item.state === 'un-type')
+  })
+  if (editIndex < 0) {
+    editIndex = sentence.value.length - 1
+  }
+  if (ev.key.length > 1) {
+    if (['ContextMenu', 'Meta', 'Alt', 'Shift', 'Control', 'Tab', 'CapsLock'].includes(ev.key)) {
+      return
+    }
+    if (['Backspace', 'Delete'].includes(ev.key)) {
+      const currentEdit = sentence.value[editIndex]
+      if (currentEdit && currentEdit?.input === '') {
+        const beforeWord = sentence.value[editIndex - 1]
+        if (beforeWord) {
+          sentence.value[editIndex - 1] = withdrawLetter(beforeWord)
+        }
+      } else if (currentEdit) {
+        sentence.value[editIndex] = withdrawLetter(currentEdit)
+      } else {
+        console.warn('内容已经清空，无法继续删除')
+      }
+    }
+    return
+  }
+  const currentEdit = sentence.value[editIndex]
   ev.preventDefault()
-  console.log('⚡️ line:23 ~ ev: ', ev)
+  if (!currentEdit) return
+  sentence.value[editIndex] = addNewLetter(currentEdit, ev.key)
+}
+function withdrawLetter(wordInfo:WordTypeUnit):WordTypeUnit {
+  const newInput = wordInfo.input.slice(0, -1)
+  const isEmpty = newInput.length === 0
+  return {
+    ...wordInfo,
+    state: isEmpty ? 'un-type' : 'typing',
+    input: newInput
+  }
+}
+
+function addNewLetter(wordInfo:WordTypeUnit, inputChar:string):WordTypeUnit {
+  let isFinish = false
+  if (wordInfo.text.length === wordInfo.input.length + 1) {
+    isFinish = true
+  }
+  return {
+    ...wordInfo,
+    state: isFinish ? 'typed' : 'typing',
+    input: wordInfo.input + inputChar
+  } satisfies WordTypeUnit
 }
 onUnmounted(() => {
 
 })
 onMounted(() => {
-  // window.addEventListener('keypress', (ev) => {
-  //   console.log('⚡️ line:31 ~ ev: ', ev)
-  // })
+
 })
 </script>
 
