@@ -12,25 +12,26 @@
   },
   "dependencies": {
     "@element-plus/nuxt": "^1.1.4",
-    "@vueuse/core": "^13.5.0",
-    "axios": "^1.10.0",
-    "daisyui": "^5.0.46",
-    "dayjs": "^1.11.13",
-    "element-plus": "^2.10.4",
-    "lru-cache": "^11.1.0",
+    "@vueuse/core": "^13.9.0",
+    "axios": "^1.13.2",
+    "daisyui": "^5.5.8",
+    "dayjs": "^1.11.19",
+    "element-plus": "^2.12.0",
+    "immer": "^11.0.1",
+    "lru-cache": "^11.2.4",
     "lucide-vue-next": "^0.511.0",
-    "nuxt": "^4.0.3",
-    "pinia": "^3.0.3",
-    "sass-embedded": "^1.89.2",
-    "vue": "^3.5.17",
-    "vue-router": "^4.5.1",
-    "vue-tsc": "^3.0.3"
+    "nuxt": "^4.2.1",
+    "pinia": "^3.0.4",
+    "sass-embedded": "^1.93.3",
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.3",
+    "vue-tsc": "^3.1.7"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.17",
     "nav-types": "workspace:*",
     "nav-utils": "workspace:*",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
   }
 }

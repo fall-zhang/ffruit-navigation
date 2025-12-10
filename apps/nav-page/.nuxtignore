@@ -1,0 +1,6 @@
+# .nuxtignore
+# 忽略 pages/secret-page.vue，不会为其生成路由
+app/pages/article/*.vue
+app/pages/article/*.ts
+!app/pages/article/type-article.vue
+# 也可以忽略整个目录

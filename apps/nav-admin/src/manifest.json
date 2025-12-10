@@ -1,6 +1,5 @@
 {
-  "name": "Nav-Admin",
-  "short_name": "Nav-Admin",
+  "name": "nav-admin",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",
