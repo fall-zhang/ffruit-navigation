@@ -1,9 +1,8 @@
 // 一个单词
-export type ContentType = 'word' | 'punctuation'
 export type TypeStateType = 'typed' | 'typing' | 'un-type'
 
 export type WordTypeUnit = {
-  type: ContentType
+  type: 'word'
   tagName: 'span'
   state: TypeStateType
   text: string

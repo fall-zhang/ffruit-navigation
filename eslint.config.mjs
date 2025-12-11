@@ -1,4 +1,4 @@
-import standard from './eslint-standard.config.mjs'
+import standard from 'eslint-config-standard-new'
 import lintReact from 'eslint-plugin-react'
 import pluginVue from 'eslint-plugin-vue'
 import jslint from '@eslint/js'

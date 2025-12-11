@@ -1,11 +1,11 @@
 // 一句话
 
-import type { WordTypeUnit } from './index'
+import type { TypeStateType, WordTypeUnit } from './index'
 export type SentenceType = {
   words: WordTypeUnit[]
   type:'sentence'
-  state:'un-type' | 'typed' | 'typing'
-  trans:[]
+  state:TypeStateType
+  trans: []
   letterCount:number
   totalLength:number
 }

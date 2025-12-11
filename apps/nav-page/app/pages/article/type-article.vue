@@ -5,17 +5,20 @@
     <p class="article-paragraph">
       <TypeContent :sentence="sentence"></TypeContent>
     </p>
+    <main>
+      <NodeSection v-for="(section,index) in inputArticle" :key="index"/>
+    </main>
     <input type="text" ref="inputRef" class="opacity-0" v-model="inputText" @keypress="onKeyPress" @keydown="onKeyPress">
   </div>
   <NuxtPage page-key="static"></NuxtPage>
 </template>
 
 <script lang="ts" setup>
-import type { WordTypeUnit } from './types'
+import type { ArticleType, WordTypeUnit } from './types'
 import TypeContent from './type-content/type-content.vue'
+import { NodeSection } from './type-content/node-section/node-section'
 import { structuredList } from './utils/node-list'
-import { produce } from 'immer'
-// const renderList = ref(structuredList)
+import { articleParse, testString } from './utils/article-parse'
 const inputText = ref('')
 const inputRef = useTemplateRef('inputRef')
 const sentence = ref<WordTypeUnit[]>(structuredList)
@@ -26,13 +29,31 @@ const typeState = reactive({
   editSpanIndex: 0
 })
 
+const inputArticle = ref<ArticleType>({
+  type: 'article',
+  title: '',
+  sections: articleParse(testString),
+  state: 'typed',
+  startTime: 0,
+  endTime: 0,
+  errInputCount: 0,
+  totalInputCount: 0,
+  editSpanIndex: 0,
+  wordCount: 0,
+  letterCount: 0
+})
+
 const isFocus = ref(false)
+// article 中的章节
+const curSectionIndex = ref(0)
+// 编写完该句后 +1，编写完该段后为 0
+const curSentenceIndex = ref(0)
 
 function onClickTypeApp () {
   inputRef.value?.focus()
   isFocus.value = true
 }
-function onKeyPress(ev:KeyboardEvent) {
+function onKeyPress (ev:KeyboardEvent) {
   if (sentence.value.length === 0) {
     console.warn('没有可输入的内容')
   }
@@ -67,9 +88,9 @@ function onKeyPress(ev:KeyboardEvent) {
   const currentEdit = sentence.value[editIndex]
   ev.preventDefault()
   if (!currentEdit) return
-  sentence.value[editIndex] = addNewLetter(currentEdit, ev.key)
+  sentence.value[editIndex] = addLetterToSentence(currentEdit, ev.key)
 }
-function withdrawLetter(wordInfo:WordTypeUnit):WordTypeUnit {
+function withdrawLetter (wordInfo:WordTypeUnit):WordTypeUnit {
   const newInput = wordInfo.input.slice(0, -1)
   const isEmpty = newInput.length === 0
   return {
@@ -78,8 +99,10 @@ function withdrawLetter(wordInfo:WordTypeUnit):WordTypeUnit {
     input: newInput
   }
 }
-
-function addNewLetter(wordInfo:WordTypeUnit, inputChar:string):WordTypeUnit {
+/**
+ * 将新 letter 添加到句子中
+ */
+function addLetterToSentence (wordInfo:WordTypeUnit, inputChar:string):WordTypeUnit {
   let isFinish = false
   if (wordInfo.text.length === wordInfo.input.length + 1) {
     isFinish = true
@@ -89,6 +112,22 @@ function addNewLetter(wordInfo:WordTypeUnit, inputChar:string):WordTypeUnit {
     state: isFinish ? 'typed' : 'typing',
     input: wordInfo.input + inputChar
   } satisfies WordTypeUnit
+}
+
+function addLetterToArticle (article:ArticleType) {
+  const sectionIndex = curSectionIndex.value
+  const sentenceIndex = curSentenceIndex.value
+  const curSection = article.sections[sectionIndex]
+  if (!curSection) {
+    console.warn('找不到对应的 section')
+    return
+  }
+  const curSentence = curSection.sentences[sentenceIndex]
+  if (!curSentence) {
+    console.warn('找不到对应的 sentence')
+    return
+  }
+  curSentence
 }
 onUnmounted(() => {
 
