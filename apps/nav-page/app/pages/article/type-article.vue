@@ -3,7 +3,7 @@
 <template>
   <div class="w-full h-full" @click="onClickTypeApp">
     <p class="article-paragraph">
-      <TypeContent :sentence="sentence"></TypeContent>
+      <TypeContent :article="inputArticle"></TypeContent>
     </p>
     <main>
       <NodeSection v-for="(section,index) in inputArticle" :key="index"/>
@@ -14,14 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { ArticleType, WordTypeUnit } from './types'
+import type { ArticleType } from './types'
 import TypeContent from './type-content/type-content.vue'
 import { NodeSection } from './type-content/node-section/node-section'
-import { structuredList } from './utils/node-list'
 import { articleParse, testString } from './utils/article-parse'
+import { handleWithdraw, addLetterToArticle } from './utils/article-opt'
 const inputText = ref('')
 const inputRef = useTemplateRef('inputRef')
-const sentence = ref<WordTypeUnit[]>(structuredList)
 const typeState = reactive({
   startTime: 0,
   errInputCount: 0,
@@ -44,91 +43,47 @@ const inputArticle = ref<ArticleType>({
 })
 
 const isFocus = ref(false)
-// article 中的章节
-const curSectionIndex = ref(0)
-// 编写完该句后 +1，编写完该段后为 0
-const curSentenceIndex = ref(0)
 
 function onClickTypeApp () {
   inputRef.value?.focus()
   isFocus.value = true
 }
 function onKeyPress (ev:KeyboardEvent) {
-  if (sentence.value.length === 0) {
-    console.warn('没有可输入的内容')
-  }
-  let editIndex = sentence.value.findIndex(item => {
-    return (item.state === 'typing') || (item.state === 'un-type')
-  })
-  if (editIndex < 0) {
-    editIndex = sentence.value.length - 1
-  }
   if (ev.key.length > 1) {
-    if (['ContextMenu', 'Meta', 'Alt', 'Shift', 'Control', 'Tab', 'CapsLock'].includes(ev.key)) {
+    if (optKeySet.has(ev.key)) {
       return
     }
-    if (['Backspace', 'Delete'].includes(ev.key)) {
-      const currentEdit = sentence.value[editIndex]
-      if (currentEdit && currentEdit?.input === '') {
-        const beforeWord = sentence.value[editIndex - 1]
-        if (beforeWord) {
-          sentence.value[editIndex - 1] = withdrawLetter(beforeWord)
-        }
-      } else if (currentEdit) {
-        sentence.value[editIndex] = withdrawLetter(currentEdit)
-      } else {
-        console.warn('内容已经清空，无法继续删除')
-      }
+    if (removeKeySet.has(ev.key)) {
+      handleWithdraw(inputArticle.value)
     }
     if (['Enter'].includes(ev.key)) {
       // 切换 section
+      const isFinish = isFinishArticle(inputArticle.value)
+      const isCompleteRight = isTotalRight(inputArticle.value)
+      if (isFinish && isCompleteRight) {
+        // const jsConfetti = new JSConfetti()
+        // jsConfetti.addConfetti({
+        //   emojis: ['🌈', '⚡️',  '✨', '💫', '🌸'],
+        // })
+      } else if (isFinish) {
+        // const jsConfetti = new JSConfetti()
+        // jsConfetti.addConfetti({ })
+      }
+      console.log('完成，牛逼')
     }
     return
   }
-  const currentEdit = sentence.value[editIndex]
-  ev.preventDefault()
-  if (!currentEdit) return
-  sentence.value[editIndex] = addLetterToSentence(currentEdit, ev.key)
-}
-function withdrawLetter (wordInfo:WordTypeUnit):WordTypeUnit {
-  const newInput = wordInfo.input.slice(0, -1)
-  const isEmpty = newInput.length === 0
-  return {
-    ...wordInfo,
-    state: isEmpty ? 'un-type' : 'typing',
-    input: newInput
-  }
-}
-/**
- * 将新 letter 添加到句子中
- */
-function addLetterToSentence (wordInfo:WordTypeUnit, inputChar:string):WordTypeUnit {
-  let isFinish = false
-  if (wordInfo.text.length === wordInfo.input.length + 1) {
-    isFinish = true
-  }
-  return {
-    ...wordInfo,
-    state: isFinish ? 'typed' : 'typing',
-    input: wordInfo.input + inputChar
-  } satisfies WordTypeUnit
+  addLetterToArticle(inputArticle.value, ev.key)
 }
 
-function addLetterToArticle (article:ArticleType) {
-  const sectionIndex = curSectionIndex.value
-  const sentenceIndex = curSentenceIndex.value
-  const curSection = article.sections[sectionIndex]
-  if (!curSection) {
-    console.warn('找不到对应的 section')
-    return
-  }
-  const curSentence = curSection.sentences[sentenceIndex]
-  if (!curSentence) {
-    console.warn('找不到对应的 sentence')
-    return
-  }
-  curSentence
+function isFinishArticle (article:ArticleType):boolean {
+  article.sections.at(-1)?.sentences.at(-1)?.words.at(-1)?.state === 'typed'
+  return false
 }
+
+const optKeySet = new Set(['ContextMenu', 'Meta', 'Alt', 'Shift', 'Control', 'Tab', 'CapsLock'])
+const removeKeySet = new Set(['Backspace', 'Delete'])
+
 onUnmounted(() => {
 
 })
