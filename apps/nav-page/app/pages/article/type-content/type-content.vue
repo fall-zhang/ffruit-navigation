@@ -1,15 +1,15 @@
 <template>
-  <template v-for="(word,index) in props.sentence" :key="index">
+  <template v-for="(section,index) in props.article.sections" :key="index">
     <!-- 练习区域 -->
-    <NodeSpan v-bind="word"></NodeSpan>
+
     <!-- 翻译区域 -->
   </template>
 </template>
 
 <script lang="ts" setup>
-import type { WordTypeUnit } from '../types'
+import type { ArticleType } from '../types'
 import NodeSpan from './node-span/node-span.vue'
-const props = defineProps<{ sentence:WordTypeUnit[] }>()
+const props = defineProps<{ article:ArticleType }>()
 
 </script>
 

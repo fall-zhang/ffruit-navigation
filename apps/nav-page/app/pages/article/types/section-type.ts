@@ -8,4 +8,5 @@ export type SectionType = {
   state:TypeStateType
   letterCount:number // 字母数量
   wordCount:number // 单词数量
+  sentenceCount:number // 句子数量
 }

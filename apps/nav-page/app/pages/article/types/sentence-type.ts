@@ -7,5 +7,5 @@ export type SentenceType = {
   state:TypeStateType
   trans: []
   letterCount:number
-  totalLength:number
+  wordCount:number
 }

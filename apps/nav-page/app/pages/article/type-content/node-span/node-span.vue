@@ -1,17 +1,17 @@
 <template>
   <!-- 用户可能故意输入错误内容 -->
-  <template v-if="props.state!=='un-type'">
+  <template v-if="props.state !== 'un-type'">
     <!-- <span class="is-typed">{{typedText}}</span>
     <span class="in-type border-b-2 border-b-neutral-500">{{ inTypeText }}</span>
     <span class="not-type">{{ notTypeText }}</span> -->
-    <template v-for="(text,index) in typedWrongList" :key="index">
-      <span v-if="text.isInput && text.correct" class="typed-right">{{ text.letter }}</span>
-      <span v-else-if="text.isInput"  class="type-wrong">{{ text.letter }}</span>
-      <span v-else class="not-type">{{ text.letter }}</span>
+    <template v-for="(text, index) in typedWrongList" :key="index">
+      <span v-if="text.isInputted && text.correct" class="text-typed-right">{{ text.letter }}</span>
+      <span v-else-if="text.isInputted" class="text-type-wrong">{{ text.letter }}</span>
+      <span v-else class="text-not-type" :class="isTyping ? 'border-b border-neutral-500' : ''">{{ text.letter }}</span>
     </template>
   </template>
   <span v-else :class="{
-    'not-type':props.state==='un-type',
+    'not-type': props.state === 'un-type',
   }">
     {{ props.text }}
   </span>
@@ -25,11 +25,11 @@ const typedWrongList = computed(() => {
   const inputText = props.input || ''
   const inputLength = inputText.length || 0
   const result = props.text.split('').map((letter, index) => {
-    const isInput = inputLength > index
+    const isInputted = inputLength > index
     const isTyping = inputLength === index
     return {
       letter,
-      isInput,
+      isInputted,
       isTyping,
       correct: inputText[index] === letter
     }
@@ -39,13 +39,15 @@ const typedWrongList = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.not-type {
+.text-not-type {
   color: gray;
 }
-.typed-right{
+
+.text-typed-right {
   color: rgb(63, 237, 63);
 }
-.type-wrong{
+
+.text-type-wrong {
   color: rgb(237, 63, 63);
   border-bottom: 2px solid rgb(237, 63, 63);
 }
