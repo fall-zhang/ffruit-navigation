@@ -115,13 +115,13 @@ function isLikelyAbbreviation (sentence:string) {
 
 // 使用示例
 // const text2 = "Dr. Smith is here. Mr. Johnson asked: How are you? I'm Day.js O.K.! Really?? Yes!";
-// const text2 = 'In this tutorial, I’ll guide you through creating a dreamy, interactive particle effect using Three.js, shaders, and the powerful GPGPU technique. Together, we’ll explore how to use GPU computation to bring thousands of particles to life with seamless motion, glowing highlights, and dynamic interactivity.'
+const text2 = 'In this tutorial, I’ll guide you through creating a dreamy, interactive particle effect using Three.js, shaders, and the powerful GPGPU technique. Together, we’ll explore how to use GPU computation to bring thousands of particles to life with seamless motion, glowing highlights, and dynamic interactivity.'
 
-// const sentences2 = splitToSentence(text2)
-// console.log('分割结果:', sentences2)
-// // ["Dr. Smith is here.", "Mr. Johnson asked: How are you?", "I'm O.K.!", "Really??", "Yes!"]
+const sentences2 = splitToSentence(text2)
+console.log('分割结果:', sentences2)
+// ["Dr. Smith is here.", "Mr. Johnson asked: How are you?", "I'm O.K.!", "Really??", "Yes!"]
 
-// const reconstructed2 = sentences2.join(' ')
-// console.log('重新组合:', reconstructed2)
-// console.log('输入内容:', text2)
-// console.log('is equal:', text2 === reconstructed2)
+const reconstructed2 = sentences2.join(' ')
+console.log('重新组合:', reconstructed2)
+console.log('输入内容:', text2)
+console.log('is equal:', text2 === reconstructed2)
