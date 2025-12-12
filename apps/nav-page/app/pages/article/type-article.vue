@@ -80,6 +80,10 @@ function isFinishArticle (article:ArticleType):boolean {
   article.sections.at(-1)?.sentences.at(-1)?.words.at(-1)?.state === 'typed'
   return false
 }
+function isTotalRight (article:ArticleType):boolean {
+  // article.sections.forEach(item => item.sentences)
+  return false
+}
 
 const optKeySet = new Set(['ContextMenu', 'Meta', 'Alt', 'Shift', 'Control', 'Tab', 'CapsLock'])
 const removeKeySet = new Set(['Backspace', 'Delete'])
