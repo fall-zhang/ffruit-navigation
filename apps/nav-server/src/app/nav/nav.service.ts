@@ -4,27 +4,48 @@ import { UpdateNavDto } from './dto/update-nav.dto'
 import { PrismaService } from '@/prisma.service'
 import { excludeUselessMark, firefoxBookmarkParse, FirefoxMarkItem, getMarkGroup } from '@/utils/firefox-bookmark-parse'
 import { NavCategoryCreateManyInput, NavLinkCreateManyInput } from '@/generated/prisma/models'
-
-type PaginationQuery = {
-  pageSize:number
-  page:number
-}
+import { Pagination, PaginationReq, PaginationRes, ResData } from '@/types/response'
+import { NavLink } from '@/generated/prisma/client'
 
 @Injectable()
 export class NavService {
-  constructor (private prisma: PrismaService) {
+  constructor (private prisma: PrismaService) { }
 
-  }
-
-  async create (createNavDto: CreateNavDto) {
-    const savedNav = this.create(createNavDto)
-    return true
+  async create (createNavDto: CreateNavDto):ResData<NavLink> {
+    // 查询对应 tag 如果不存在就添加
+    const savedNav = await this.prisma.navLink.create({
+      data: {
+        ...createNavDto,
+        accessState: 'NORMAL',
+        status: 'CHECK',
+        auditTime: new Date().toISOString(),
+        createTime: new Date().toISOString(),
+        tag: undefined,
+        categoryId: createNavDto.categoryId || '0'
+      }
+    })
+    return {
+      code: 1,
+      msg: '新增成功',
+      data: savedNav
+    }
   }
 
   async createMany (jsonFile:string) {
     const fireFoxMark:FirefoxMarkItem[] = JSON.parse(jsonFile).children
 
     const navList = firefoxBookmarkParse(fireFoxMark)
+    const navCount = await this.prisma.navLink.count()
+    if (navCount < 10) {
+      await this.prisma.navLink.createMany({
+        data: navList.map(item => {
+          return {
+            ...item,
+            parent: undefined
+          }
+        })
+      })
+    }
     const pureNavList = excludeUselessMark(navList)
 
     const categoryList:NavCategoryCreateManyInput[] = getMarkGroup(navList)
@@ -53,26 +74,26 @@ export class NavService {
     return result
   }
 
-  async findAll ({ page, pageSize }:PaginationQuery) {
+  async findAll (param:Partial<UpdateNavDto>, { page, pageSize }:PaginationReq) {
     // table.find(findObj).skip(skipNumber).limit(pageSize).sort({ _id: -1 })
-    let result:any[]
+    let result = []
     let totalLength:number
     try {
-      const data = await this.prisma.navLink.findMany({
-        where: {
+      const pageInfo = {
+        take: pageSize || 20,
+        skip: page * pageSize || 0
+      }
 
+      const data = await this.prisma.navLink.findMany({
+        ...pageInfo,
+        where: {
+          ...param,
+          tag: undefined
         }
       })
       totalLength = await this.prisma.navLink.count()
-      if (!page || !pageSize) {
-        const startIndex = (page - 1) * pageSize
-        result = data.splice(startIndex, pageSize)
-      } else {
-        result = data
-      }
+      result = data
     } catch (err) {
-      totalLength = 0
-      result = []
       console.log('err', err)
     }
     return {
@@ -84,8 +105,17 @@ export class NavService {
     }
   }
 
-  findOne (id: number) {
-    return `This action returns a #${id} nav`
+  async findOneNavById (id: number):ResData<NavLink> {
+    const navInfo = await this.prisma.navLink.findFirst({
+      where: {
+        id
+      }
+    })
+    return {
+      code: 1,
+      data: navInfo,
+      msg: '请求成功'
+    }
   }
 
   async update (updateNavDto: UpdateNavDto) {
@@ -101,6 +131,9 @@ export class NavService {
   }
 
   async getRandomNav () {
+    const navCount = await this.prisma.navLink.count()
+    Math.random()
+
     // const allData = (await this.navLinkModel.find())
     // this.navLinkModel.
     // const dataLength = allData.length

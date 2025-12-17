@@ -1,0 +1,31 @@
+meta {
+  name: 新增导航
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:4773/nav
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "less-process 官网",
+    "href": "http://www.less-process.top",
+    "desc": "less-process",
+    "logo": "",
+    "authorName": "fall",
+    "authorUrl": "fallzhang.top",
+    "auditTime": "",
+    "createTime": "",
+    "tag": [],
+    "status": "CHECK",
+    "accessState": "NORMAL"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

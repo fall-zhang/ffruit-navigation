@@ -15,7 +15,6 @@ generator typeGen {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_POSTGRES_URL")
 }
 
 model NavLink {
@@ -28,6 +27,7 @@ model NavLink {
   logo        String
   authorName  String
   authorUrl   String
+  isFavorite  Boolean         @default(false)
   auditTime   DateTime        @default(now())
   createTime  DateTime        @default(now())
   tag         NavTag[]

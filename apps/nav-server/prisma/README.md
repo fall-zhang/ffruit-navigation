@@ -1,5 +1,9 @@
 ## Prisma 的使用
 
+> 只以 postgres 为例
+
+## 在项目中添加 prisma
+
 ```bash
 # 安装 prisma
 npm install prisma
@@ -20,9 +24,6 @@ prisma generate
 ```bash
 # 关系型数据库
 pnpm prisma migrate dev
-
-# mongo
-pnpm prisma db push
 ```
 
 ### 初始化项目
@@ -72,4 +73,29 @@ generator typeGen {
   provider = "prisma-client"            // v7 将作为默认生成器使用
   output   = "../src/generated/prisma"
 }
+```
+
+## prisma 配置
+
+prisma V7 之后，将统一使用 prisma.config.ts 进行配置
+
+```ts
+import path from 'node:path'
+import { defineConfig } from 'prisma/config'
+import 'dotenv/config'
+import { PrismaPg } from '@prisma/adapter-pg'
+// 从 .env 文件中读取
+const pgConnectString = process.env.DATABASE_POSTGRES_URL
+
+export default defineConfig({
+  schema: path.join('prisma'),
+  experimental: {
+    adapter: true
+  },
+  async adapter() {
+    return new PrismaPg({
+      DATABASE_POSTGRES_URL: pgConnectString
+    })
+  }
+})
 ```

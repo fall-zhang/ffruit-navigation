@@ -128,7 +128,7 @@ export default {
     '@stylistic/no-mixed-spaces-and-tabs': 'error',
     '@stylistic/no-multi-spaces': 'error',
     '@stylistic/no-tabs': 'error',
-    '@stylistic/quotes': ['warn', 'single', { avoidEscape: true, allowTemplateLiterals: false }],
+    '@stylistic/quotes': ['warn', 'single', { avoidEscape: true, allowTemplateLiterals: "never" }],
     '@stylistic/quote-props': ['error', 'as-needed', { numbers: true }],
     '@stylistic/space-before-blocks': ['error', 'always'],
     '@stylistic/no-trailing-spaces': 'error', // 行尾不能有多余空格

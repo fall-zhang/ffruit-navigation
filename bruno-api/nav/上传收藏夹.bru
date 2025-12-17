@@ -1,0 +1,43 @@
+meta {
+  name: 上传收藏夹
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:4773/nav/uploadFile
+  body: multipartForm
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: authorization_code
+  callback_url: 
+  authorization_url: 
+  access_token_url: 
+  refresh_token_url: 
+  client_id: 
+  client_secret: 
+  scope: 
+  state: 
+  pkce: false
+  credentials_placement: body
+  credentials_id: credentials
+  token_placement: header
+  token_header_prefix: Bearer
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+body:multipart-form {
+  file: @file(D:\个人信息\bookmarks\bookmarks-2025-10-24.json)
+}
+
+body:file {
+  file: @file(E:\self-info\bookmarks-2025-07-11.json) @contentType(application/json; charset=utf-8)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

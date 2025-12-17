@@ -6,31 +6,52 @@ import cheerio from 'cheerio'
 import { warn } from 'console'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { promises as fsPromise } from 'fs'
+import { Pagination, PaginationReq, PaginationRes, ResData } from '@/types/response'
 // import { ZodValidatePipe } from '@/pipe/validation.pipe'
 // import { navDataSchema } from 'nav-types'
 
 @Controller('nav')
 export class NavController {
   constructor(private readonly navService: NavService) { }
+  @Get()
+  async findAll(@Query() param: UpdateNavDto & PaginationReq) {
+    return await this.navService.findAll(param, {
+      pageSize: param.pageSize,
+      page: param.page
+    })
+  }
+
+  /**
+   * 取出一级分类下面的所有网站，并且处理返回
+   */
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return await this.navService.findOneNavById(Number(id))
+  }
 
   @Post()
   @UsePipes(new ValidationPipe())
-  async create(@Body() createNavDto: CreateNavDto) {
+  async create(@Body() createNavDto: CreateNavDto):ResData {
     try {
       await this.navService.create(createNavDto)
+      return {
+        code: 1,
+        msg: 'ok',
+        data: '创建成功'
+      }
     } catch (e) {
       warn(e)
-    }
-    return {
-      code: 1,
-      msg: 'ok',
-      data: '创建成功'
+      return {
+        code: 0,
+        msg: 'ok',
+        err: e
+      }
     }
   }
 
   @Post('/uploadFile')
   @UseInterceptors(FileInterceptor('file'))
-  async createFile(@Body() createNavDto: CreateNavDto, @UploadedFile() uploadFile: Express.Multer.File) {
+  async createFile(@UploadedFile() uploadFile: Express.Multer.File) {
     let res
     // URL.createObjectURL(new Blob([]))
     try {
@@ -55,23 +76,15 @@ export class NavController {
     }
   }
 
-  @Get()
-  async findAll(@Query('pageSize') pageSize: number, @Query('page') page: number) {
-    return await this.navService.findAll({
+  @Get('/homepage')
+  async findHomePage(@Query('pageSize') pageSize: number, @Query('page') page: number, @Query() param: UpdateNavDto) {
+    return await this.navService.findAll(param, {
       pageSize,
       page
     })
   }
 
-  /**
-   * 取出一级分类下面的所有网站，并且处理返回
-   */
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.navService.findOne(+id)
-  }
-
-  @Get('/reptile')
+  @Post('/reptile')
   async findReptile(@Param('url') url: string) {
     const res = await new Promise((resolve) => {
       fetch(url).then(res => res.json()).then((res) => {
@@ -99,31 +112,22 @@ export class NavController {
     }
   }
 
+  // 获取一个随机的网址
   @Get('/random')
-  async findRandom(@Param('id') id: string) {
+  async findRandom() {
     const result = await this.navService.getRandomNav()
     return result
   }
 
-  @Get('/find')
-  async findFind(@Param('id') id: string, @Param('categoryId') categoryId: string) {
+  @Post('/find')
+  async findNav(@Param() param: UpdateNavDto) {
     try {
       const resData: any = []
       // 取所有子分类
-      // const categorys = await Category.find({ categoryId })
-      const categorys = []
-      const categoryIds = categorys.reduce((t, v) => [...t, v._id], [])
+      const categoryList = []
 
       const navList = []
-      // const navs = await Nav.find({
-      //   categoryId: { $in: categoryIds },
-      //   $or: [
-      //     { status: { $exists: false } },
-      //     { status: 0 }
-      //   ]
-      // })
-
-      categorys.forEach(category => {
+      categoryList.forEach(category => {
         const nowNaves = navList.filter(nav => nav.categoryId === category._id)
         resData.push({
           _id: category._id,
@@ -134,10 +138,13 @@ export class NavController {
     } catch (error) {
       console.warn(error)
     }
-    return this.navService.findOne(+id)
+    return this.navService.findAll(param, {
+      page: 1,
+      pageSize: undefined
+    })
   }
 
-  @Get('/ranking')
+  @Post('/ranking')
   async findRanking(@Param('id') id: string) {
     await this.navService.findRank()
     return {
