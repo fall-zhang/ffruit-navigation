@@ -9,6 +9,9 @@ export default defineNuxtConfig({
   elementPlus: {
 
   },
+  routeRules: {
+    '/': { cache: { maxAge: 60 } } // 缓存首页 60 秒
+  },
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [
