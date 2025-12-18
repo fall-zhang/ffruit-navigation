@@ -1,5 +1,5 @@
 <template>
-  <div class="h-14  flex flex-col  p-1 text-sm border-t bg-neutral-200/20 border-t-neutral-400 dark:border-t-neutral-500/80  dark:bg-neutral-900/60 backdrop-blur-lg shadow-xl" >
+  <div class="h-14  flex flex-col  p-1 text-sm backdrop-blur-xl shadow-xl  bg-white/30 dark:bg-black/30 " >
     <div class="relative-group flex  justify-center">
       <div class="relative-item mx-4" v-for="item in relativeList" :key="item.text">
         {{item.text}}

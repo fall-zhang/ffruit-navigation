@@ -1,3 +1,5 @@
+<!-- 可以一次性推荐多个网址 -->
+
 <template>
   <div class=" flex justify-center my-6 h-full ">
     <div class="py-8 rounded-3xl bg-neutral-100/70 dark:bg-neutral-700/70 h-full xl:w-1/2 sm:w-3/4 lg:w-2/3 flex justify-center backdrop-blur-2xl px-4">
@@ -53,7 +55,6 @@
 <script lang="ts" setup>
 import axios from 'axios'
 import type { CascaderOption, FormRules } from 'element-plus'
-import { API_NAV, API_NAV_REPTILE, API_TAG_LIST } from '@/server/api'
 import { ElMessage } from 'element-plus'
 import LinkNotice from '@/components/LinkJumpNotice.vue'
 defineOptions({
@@ -136,8 +137,10 @@ async function onAddNav () {
   formRef.value?.validate().then(res => {
     submitLoading.value = true
     // 判断编辑还是更新
-
-    axios.post(API_NAV, toRaw(form)).then(res => {
+    $fetch('/api/nav', {
+      method: 'post',
+      params: form
+    }).then(res => {
       if (res.data.code === 0) {
         ElMessage.error(`${res.data.msg}`)
       } else {
@@ -159,7 +162,7 @@ async function getNavInfo () {
   if (!url) return
   formLoading.value = true
   try {
-    const { data } = await axios.get(API_NAV_REPTILE + `?url=${url}`)
+    const { data } = await $fetch(`/nav/add?url=${url}`)
     form.logo = `https://www.google.com/s2/favicons?domain=${url}`
     form.name = data?.name
     form.desc = data?.desc

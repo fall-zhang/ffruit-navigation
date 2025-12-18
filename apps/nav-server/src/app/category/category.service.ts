@@ -2,6 +2,12 @@ import { Injectable } from '@nestjs/common'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { PrismaService } from '@/prisma.service'
+import { NavCategory } from '@/generated/prisma/client'
+
+type PaginationQuery = {
+  pageSize?:number
+  page?:number
+}
 
 @Injectable()
 export class CategoryService {
@@ -12,15 +18,23 @@ export class CategoryService {
     return 'This action adds a new category'
   }
 
-  async findAll () {
+  async findAll ({ page, pageSize }:PaginationQuery) {
+    let res:NavCategory[]
     try {
-      const params: any = {}
-      const data = await this.prisma.navCategory.findMany()
-
-      const newData = this.formatCategoryList(data)
-      // return newData
+      if (page && pageSize) {
+        res = await this.prisma.navCategory.findMany({
+          take: pageSize,
+          skip: page * pageSize
+        })
+      } else {
+        res = await this.prisma.navCategory.findMany()
+      }
     } catch (error) {
-      return error
+      console.log('CategoryService ~ findAll ~ error:', error)
+    }
+    return {
+      code: 200,
+      data: res
     }
   }
 

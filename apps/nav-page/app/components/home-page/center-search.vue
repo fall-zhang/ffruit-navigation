@@ -1,3 +1,4 @@
+<!-- eslint-disable camelcase -->
 <template>
   <div class="flex flex-col justify-center relative">
     <div class="search-input border border-neutral-300 dark:border-0 rounded-full flex items-center w-100 h-10 text-black">

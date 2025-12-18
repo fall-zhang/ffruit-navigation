@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -24,7 +24,8 @@ const headMap:Record<string, string> = {
 export const CommonTableHeader:FC<{
   tableInfo:Table<any>
   onAddNewItem():void
-}> = ({ tableInfo, onAddNewItem }) => {
+  children?:ReactNode
+}> = ({ tableInfo, onAddNewItem, children }) => {
   return <div className="flex items-center gap-2 my-4">
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -58,5 +59,6 @@ export const CommonTableHeader:FC<{
       <PlusIcon />
       <span className="hidden lg:inline">新增项</span>
     </Button>
+    {children}
   </div>
 }

@@ -100,7 +100,7 @@ function handleSelect (item: Record<string, any>) {
   if (searchType.value === 'station') {
     router.push(`/nav/${item._id}`)
   } else {
-    url = searchGather[searchType.value].root + item.value
+    url = (searchGather[searchType.value]?.root) + item.value
     window.open(url)
   }
 }

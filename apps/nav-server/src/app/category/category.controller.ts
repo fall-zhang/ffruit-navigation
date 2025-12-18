@@ -2,6 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { CategoryService } from './category.service'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
+type PaginationQuery = {
+  pageSize:number
+  page:number
+}
 @Controller('category')
 export class CategoryController {
   constructor (private readonly categoryService: CategoryService) {}
@@ -12,8 +16,8 @@ export class CategoryController {
   }
 
   @Get()
-  findAll (@Query() showInMenu:boolean) {
-    return this.categoryService.findAll()
+  findAll (@Query() query:PaginationQuery) {
+    return this.categoryService.findAll(query)
   }
 
   @Get(':id')
