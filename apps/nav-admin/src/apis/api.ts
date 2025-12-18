@@ -1,6 +1,5 @@
 import { request } from '@/utils/request'
 
-export const API_LOGIN = '/api/login'
 export const API_NAV_LIST = '/api/nav/list'
 export const API_NAV = '/api/nav'
 export const API_NAV_AUDIT = '/api/nav/audit'
@@ -11,7 +10,7 @@ export const API_TAG_LIST = '/api/tag/list'
 
 export async function login (data: { username: string, password: string }) {
   return request({
-    url: API_LOGIN,
+    url: '/api/login',
     method: 'POST',
     data
   })

@@ -5,7 +5,8 @@ import { PrismaService } from '@/prisma.service'
 // import { User } from '@prisma/client'
 // import { User } from '@/generated/prisma/client'
 // import { UserFeedback } from '@/generated/prisma/models'
-import { UserFeedback } from '@/generated/prisma/client'
+import { UserInfo } from '@/generated/prisma/client'
+import { JwtService } from '@nestjs/jwt'
 type LoginRes = {
   msg:string
   state:boolean
@@ -16,28 +17,30 @@ export class UsersService {
 
   }
 
-  create(createUserDto: CreateUserDto) {
+  create (createUserDto: CreateUserDto) {
     return 'This action adds a new user'
   }
 
-  findAll() {
+  findAll () {
     return 'This action returns all users'
   }
 
-  async findOne(name: string):Promise<UserFeedback> {
-    const user = await this.prisma.userFeedback.findFirst({
+  async findOne (name: string):Promise<UserInfo> {
+    const user = await this.prisma.userInfo.findFirst({
       where: {
-        // name
+        name
       }
     })
+
     return user
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+
+  update (id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`
   }
 
-  remove(id: number) {
+  remove (id: number) {
     return `This action removes a #${id} user`
   }
 }
