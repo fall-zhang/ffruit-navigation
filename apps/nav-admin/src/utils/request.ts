@@ -1,6 +1,7 @@
 import { getSessionData } from '@/utils/persistence'
 import { SESSION_TOKEN_KEY } from '@/const'
 import axios from 'axios'
+import { toast } from 'sonner'
 
 // const codeMessage = {
 //   200: '服务器成功返回请求的数据。',
@@ -35,6 +36,12 @@ request.interceptors.request.use(res => {
   // if (res.data.msg) {
   //   message.success(res.data.msg)
   // }
+  return res.data
+})
+request.interceptors.response.use(res => {
+  if (res.data.code === 401) {
+    toast.error(res.data.msg)
+  }
   return res.data
 })
 

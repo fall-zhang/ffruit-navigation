@@ -8,6 +8,7 @@ import { useRoutes, BrowserRouter, RouteObject, Navigate } from 'react-router-do
 // 这里面使用的是 createRoutesFromChildren createBrowserRouter 生成的路由
 // import type { RouteObject } from 'react-router-dom'
 import LoginPage from '@/pages/login'
+import AuthGuard from './AuthGuard'
 
 export const routeList:RouteObject[] = [
   {
@@ -25,7 +26,8 @@ export const routeList:RouteObject[] = [
     path: '/',
     async lazy () {
       const Component = (await import('@/layout/AppLayout')).default
-      return { Component }
+      // wrap layout with AuthGuard so that all children routes are protected
+      return { Component: () => <AuthGuard><Component /></AuthGuard> }
     },
     children: [
       {

@@ -1,13 +1,13 @@
-import { message } from 'antd'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './index.module.less'
-import { login } from '@/apis/api'
-import { setPersistenceData } from '@/utils/persistence'
+import * as api from '@/apis/api'
+import { setPersistenceData, getSessionData } from '@/utils/persistence'
 import { CURRENT_USER, SESSION_TOKEN_KEY } from '@/const'
 import { LoginForm } from '@/components/login-form'
 import { FieldValues } from 'react-hook-form'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false)
@@ -15,6 +15,12 @@ const Login: React.FC = () => {
     currentUser:any
   }>()
   const navigate = useNavigate()
+  React.useEffect(() => {
+    // 如果已经有 token，则跳转回首页
+    if (getSessionData(SESSION_TOKEN_KEY)) {
+      navigate('/')
+    }
+  }, [])
   const goto = () => {
     if (!history) return
     setTimeout(() => {
@@ -31,9 +37,9 @@ const Login: React.FC = () => {
 
     try {
       // 登录
-      const res: any = await login({ username: form.username as string, password: form.password as string })
+      const res: any = await api.login({ username: form.username, password: form.password })
       if (res?.data) {
-        message.success('登录成功！')
+        toast.success('登录成功！')
         setInitialState({
           currentUser: {
             name: form.username,
@@ -41,15 +47,15 @@ const Login: React.FC = () => {
           }
         })
         goto()
-        setPersistenceData(SESSION_TOKEN_KEY, res.data)
+        setPersistenceData(SESSION_TOKEN_KEY, res.data.token)
         setPersistenceData(CURRENT_USER, { name: form.username })
         return
       } // 如果失败去设置用户错误信息
 
-      message.error(res?.msg)
+      toast.error(res?.msg)
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！'
-      message.error(defaultLoginFailureMessage)
+      toast.error(defaultLoginFailureMessage)
     }
 
     setSubmitting(false)
