@@ -9,13 +9,14 @@ import { NavModule } from './nav/nav.module'
 import { HomepageInfoModule } from './homepage-info/homepage-info.module'
 import { UsersModule } from './users/users.module'
 import { NavTagModule } from './nav-tag/nav-tag.module'
+import { QuoteTodayModule } from './quote-today/quote-today.module'
 @Module({
   controllers: [AppController],
   providers: [AppService],
   imports: [ConfigModule.forRoot({
     envFilePath: '.env.local',
     isGlobal: true
-  }), FeedbackModule, BacklogModule, NavModule, HomepageInfoModule, UsersModule, NavTagModule
+  }), FeedbackModule, BacklogModule, NavModule, HomepageInfoModule, UsersModule, NavTagModule, QuoteTodayModule
   ]
 })
 
