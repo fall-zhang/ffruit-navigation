@@ -23,12 +23,19 @@ model NavLink {
   name        String
   // 网站url
   href        String
+  // 网站描述
   desc        String
+  // 网站 logo
   logo        String
+  // 添加人名称
   authorName  String
+  // 添加人地址
   authorUrl   String
+  // 是否为推荐网址
   isFavorite  Boolean         @default(false)
+  // 更新时间
   auditTime   DateTime        @default(now())
+  // 创建时间
   createTime  DateTime        @default(now())
   tag         NavTag[]
   // 页面浏览次数

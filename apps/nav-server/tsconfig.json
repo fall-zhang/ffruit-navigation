@@ -9,9 +9,7 @@
     "target": "ES2021",
     "sourceMap": true,
     "strict": true,
-    "outDir": "./dist",
     "resolveJsonModule": true,
-    "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
@@ -20,9 +18,9 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["./src/*"],
       "@P/*": ["../*"],
-      "@test/*": ["test/*"]
+      "@test/*": ["./test/*"]
     },
   },
   "include": [
