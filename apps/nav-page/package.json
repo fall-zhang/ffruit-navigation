@@ -11,27 +11,27 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@element-plus/nuxt": "^1.1.4",
+    "@element-plus/nuxt": "^1.1.5",
     "@vueuse/core": "^13.9.0",
-    "axios": "^1.13.2",
-    "daisyui": "^5.5.8",
-    "dayjs": "^1.11.19",
-    "element-plus": "^2.12.0",
-    "immer": "^11.0.1",
-    "lru-cache": "^11.2.4",
+    "axios": "^1.15.0",
+    "daisyui": "^5.5.19",
+    "dayjs": "^1.11.20",
+    "element-plus": "^2.13.7",
+    "immer": "^11.1.4",
+    "lru-cache": "^11.3.5",
     "lucide-vue-next": "^0.511.0",
-    "nuxt": "^4.2.1",
+    "nuxt": "^4.4.2",
     "pinia": "^3.0.4",
-    "sass-embedded": "^1.93.3",
-    "vue": "^3.5.25",
-    "vue-router": "^4.6.3",
-    "vue-tsc": "^3.1.7"
+    "sass-embedded": "^1.99.0",
+    "vue": "^3.5.32",
+    "vue-router": "^4.6.4",
+    "vue-tsc": "^3.2.6"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.2.2",
     "nav-types": "workspace:*",
     "nav-utils": "workspace:*",
     "typescript": "^5.9.3",
-    "vite": "^6.4.1"
+    "vite": "^7.0.0"
   }
 }
